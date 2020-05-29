@@ -1,0 +1,84 @@
+app-dynamic-form-component{
+    display: inline-block !important;
+    width: 85%;
+    text-align: right;
+}
+form:first-child{
+    width: 100% !important;
+}
+.search-panel{
+    padding: 0px;
+    padding-top: 12px;
+    margin-bottom: 5px;
+}
+.search-content{
+    margin:0px;
+}
+.search-submit {
+    display: inline-block !important;
+    vertical-align: baseline;
+    width: 10%;
+}
+:host ::ng-deep{
+
+    app-dynamic-form-component form{
+        text-align: left;
+    }
+    // .dynamicFieldDiv{
+    //     display: inline-block;
+    //     width: 28%;
+    // }
+    
+
+    // .dynamicFieldDiv:nth-child(3n+1){
+    //     margin-left: 6%;
+    // }
+
+    // .dynamicFieldDiv:nth-child(3n+2){
+    //     margin-right: 5%;
+    //     margin-left: 5%;
+    // }
+
+    // .dynamicFieldDiv .visual_fieldDiv{
+    //     width: 100%;
+    //     margin-left: 0px;
+    // }
+
+}
+
+
+.new-search-content{
+    margin:0px;
+    padding-left: 10px;
+}
+
+.search .clean .drop_down{
+    background-color: transparent !important;
+}
+.float-search-options-background{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    // background-color: #00000057;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.float-search-options{
+    background-color: white;
+    width: 100%;
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    padding-top: 12px;
+    margin-top: 2px;
+    border: 1px solid rgba(0,0,0,0.17);
+}
+.search-input-wrapper{
+    width: 100% !important;
+    .dynamicFieldDiv{
+        width: 100% !important;
+        margin-left: 0px;
+    }
+}

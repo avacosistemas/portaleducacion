@@ -1,0 +1,48 @@
+{
+ key: 'faqSave',
+ fields: [
+  	{
+ 	 key: 'favourite',
+ 	 type: 'boolean'
+ 	},
+	{
+ 	 key: 'order',
+ 	 type: 'integer',
+ 	 required: true,
+ 	 minValue: 0
+ 	},
+	{
+ 	 key: 'lang',
+ 	 type: 'string',
+ 	 required: true,
+ 	 length: 2,
+ 	 validations: [
+		 {
+	 	    key: 'regex',
+	 	 	input: 'ES',
+	 	 	message: 'El campo {0} debe contener el valor ES'
+	 	 }
+ 	 ]
+ 	},
+ 	{
+ 	 key: 'category',
+ 	 type: 'string',
+ 	 required: true
+ 	},
+ 	{
+ 	 key: 'subcategory',
+ 	 type: 'string',
+ 	 required: true
+ 	},
+ 	{
+ 	 key: 'question',
+ 	 type: 'string',
+ 	 required: true
+ 	},
+ 	{
+ 	 key: 'answer',
+ 	 type: 'string',
+ 	 required: true
+ 	}
+  ]
+}

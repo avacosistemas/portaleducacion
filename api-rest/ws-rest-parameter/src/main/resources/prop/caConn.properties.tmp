@@ -1,0 +1,34 @@
+
+#db.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
+#db.url=jdbc:sqlserver://AZWEB01WD.sofrecom.local:1433;databaseName=Teco_Poc_Desa
+#db.username=poc_desa
+#db.password=sofrecom123
+
+db.driverClassName=org.postgresql.Driver
+db.url=jdbc:postgresql://localhost:5432/unificada
+db.username=postgres
+db.password=admin
+db.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+#db.driverClassName=org.h2.Driver
+#db.url=jdbc:h2:~/testparameter
+#db.username=sa
+#db.password=sa
+#db.dialect=org.hibernate.dialect.H2Dialect
+
+db.schema.location=classpath:WEB-INF/data/schema.sql
+db.data.location=classpath:WEB-INF/data/data.sql
+
+db.create.location=src/main/webapp/WEB-INF/data/create_script.sql
+db.drop.location=src/main/webapp/WEB-INF/data/drop.sql
+
+jpa.entityPack= ar.com.quiron.model
+security.endpoint=http://localhost:8080/ws-rest-authentication/user/
+#security.endpoint=http://192.168.1.89:8080/ws-rest-authentication/user/
+jwt.header=Authorization
+prop.dateHourPattern= dd/MM/yyyy HH:mm
+prop.contactus.template.client=template/contact-us-template-client.html
+prop.contactus.template.system=template/contact-us-template-system.html
+prop.contactus.from=notificaciones-portal@quironasset.com
+prop.contactus.subject.client=Recibimos tu mensaje!
+prop.contactus.subject.system=Alguien se puso en contacto contigo!

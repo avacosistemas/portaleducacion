@@ -1,0 +1,6 @@
+export const PRODUCTO_EXTERNO_SECURITY_DEF = {
+  readAccess: 'PRODUCTO_EXTERNO_READ',
+  updateAccess: 'PRODUCTO_EXTERNO_UPDATE',
+  createAccess: 'PRODUCTO_EXTERNO_CREATE',
+  deleteAccess: 'PRODUCTO_EXTERNO_DELETE'
+};

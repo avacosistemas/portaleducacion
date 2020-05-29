@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans 	xmlns:beans="http://www.springframework.org/schema/beans"
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+				xmlns="http://www.springframework.org/schema/context"
+				xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+				xmlns:tx="http://www.springframework.org/schema/tx"
+				xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+				xsi:schemaLocation="http://www.springframework.org/schema/beans 
+									http://www.springframework.org/schema/beans/spring-beans.xsd
+									http://www.springframework.org/schema/context 
+									http://www.springframework.org/schema/context/spring-context.xsd
+								    http://www.springframework.org/schema/tx
+							        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+							        http://www.springframework.org/schema/data/jpa 
+							        http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
+							        http://www.springframework.org/schema/jdbc 
+							        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	 	<beans:property name="locations">
+	 		<beans:list>
+		 		<beans:value>file:${catalina.home}/conf/connection-admin.properties</beans:value>
+		 		<beans:value>file:${catalina.home}/conf/notificacion.properties</beans:value>
+	 		</beans:list>
+	 	</beans:property>
+	</beans:bean>
+	
+	<tx:annotation-driven/>
+	
+    <beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <beans:property name="entityManagerFactory" ref="entityManagerFactory" />
+        <beans:property name="jpaDialect">
+            <beans:bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+        </beans:property>
+    </beans:bean>
+    
+	<!-- These beans handle database configuration. -->
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<beans:property name="driverClassName" value="${db.driverClassName}" />
+		<beans:property name="url" value="${db.url}" />
+		<beans:property name="username" value="${db.username}" />
+		<beans:property name="password" value="${db.password}" />
+	</beans:bean>
+	
+	<beans:bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <beans:property name="persistenceUnitName" value="myPersistenceUnit" />
+        <beans:property name="packagesToScan">
+	        <beans:array>
+				<beans:value>ar.com.avaco.commons.domain</beans:value>
+				<beans:value>ar.com.avaco.quiron.domain</beans:value>
+			</beans:array>
+   	    </beans:property>
+        <beans:property name="dataSource" ref="${datasourcename}"/>
+        <beans:property name="jpaVendorAdapter">
+            <beans:bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </beans:property>
+        <beans:property name="persistenceProvider">
+            <beans:bean class="org.hibernate.jpa.HibernatePersistenceProvider"/>
+        </beans:property>
+        <beans:property name="jpaProperties">
+            <beans:props>
+                <beans:prop key="hibernate.current_session_context_class">
+                    ar.com.avaco.arc.core.jpa.configuration.EntityManagerSessionUnwrapper
+                </beans:prop>
+                <beans:prop key="javax.persistence.schema-generation.database.action"> 
+                    ${db.generatedatabase}
+                </beans:prop>
+                <beans:prop key="javax.persistence.jdbc.driver"> 
+					${db.driverClassName}
+                </beans:prop>
+                <beans:prop key="hibernate.dialect">${db.dialect}</beans:prop>
+                <beans:prop key="hibernate.show_sql">true</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
+	
+	<beans:bean id="secSF" class="org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean">
+		<beans:property name="entityManagerFactory" ref="entityManagerFactory" />
+	</beans:bean>
+
+	<jpa:repositories base-package="ar.com.avaco.commons.repository"
+			entity-manager-factory-ref="entityManagerFactory"
+			factory-class="ar.com.avaco.arc.core.component.bean.repository.NJRepositoryFactoryBean"
+			transaction-manager-ref="transactionManager"/>
+
+<!-- 	<jpa:repositories 	base-package="ar.com.quiron.repository" -->
+<!-- 						entity-manager-factory-ref="entityManagerFactory"  -->
+<!-- 						transaction-manager-ref="transactionManager"/> -->
+
+
+	<jpa:repositories 	base-package="ar.com.avaco.quiron.repository"
+						entity-manager-factory-ref="entityManagerFactory" 
+						transaction-manager-ref="transactionManager"/>
+	
+</beans:beans>

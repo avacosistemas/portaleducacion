@@ -1,0 +1,32 @@
+@import "src/@fuse/scss/fuse";
+@import "../../content/pages/producto_externo/scss/producto_externo.component.scss";
+
+crud{
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    width: 100%;
+    overflow: hidden;
+}
+
+.mat-list-text {
+    font-size: 12px;
+}
+
+.mat-green-300-bg {
+    background-color: #3400FF !important;
+    color: white !important;
+}
+
+.mat-green-300-bg[disabled] {
+    background-color: #e7e0ff !important;
+    color: rgba(0, 0, 0, 0.26) !important;
+}
+
+.import-image-button {
+    width: 40px!important;
+    min-width: 40px!important;
+    max-width: 40px!important;
+}
+

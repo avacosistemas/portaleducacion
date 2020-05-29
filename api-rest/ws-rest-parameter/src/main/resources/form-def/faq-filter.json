@@ -1,0 +1,34 @@
+{
+ key: 'faqFilter',
+ fields: [
+  {
+    key: 'order',
+    type: 'integer',
+    filterType: 'like',
+    minValue: 0,
+    options: {
+    	matchTo: 'orderFaq'
+    }
+  },
+  {
+    key: 'favourite',
+    type: 'boolean',
+    filterType: 'equals'
+  },
+  {
+    key: 'category',
+    type: 'string',
+    filterType: 'like'
+  },
+  {
+    key: 'subcategory',
+    type: 'string',
+    filterType: 'like'
+  },
+  {
+    key: 'question',
+    type: 'string',
+    filterType: 'like'
+  }
+  ]
+}

@@ -1,0 +1,20 @@
+<form *ngIf="generalFields" #ngformElement="ngForm" (ngSubmit)="onSubmitSearch()" (keyup)="submitOnEnter($event)" name="{{subFormName}}" [formGroup]="form" novalidate>
+  <div class="search-input-wrapper">
+    <button #submitbutton  mat-icon-button class="search" cdkFocusInitial>
+      <mat-icon class="secondary-text">search</mat-icon>  
+    </button>
+    <app-dynamic-form-component [entity]="entity"    
+            [isEdit]="true"
+            [fields]="generalFields"
+            [parentForm]="form"
+            (onChangeEntity)="onChangeEntity($event)">
+    </app-dynamic-form-component>
+    <button mat-icon-button class="clear" (click)="clearForm()">
+      <mat-icon class="secondary-text">clear</mat-icon>  
+    </button>
+    <button *ngIf="hasOptions()" type="button" mat-icon-button class="drop_down" (click)="openOptions()" >
+        <mat-icon *ngIf="userChangeOptions()" style="color: red !important" class="secondary-text">arrow_drop_down</mat-icon>  
+        <mat-icon *ngIf="!userChangeOptions()" class="secondary-text">arrow_drop_down</mat-icon>  
+    </button>
+  </div>
+</form>
