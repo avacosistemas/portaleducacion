@@ -1,0 +1,36 @@
+<mat-table #table [dataSource]="datasource" matSort *ngIf="initOk" class="crud-table">
+    
+  <ng-container *ngIf='hasGeneralActions()' matColumnDef="{{getGeneralActionsColumnName()}}">
+      <mat-header-cell *matHeaderCellDef class="checkbox-cell" > <mat-checkbox [(ngModel)]="selects" class="checkbox-action"></mat-checkbox></mat-header-cell>
+      <mat-cell  *matCellDef="let element" (click)="$event.stopPropagation()" class="checkbox-cell">
+        <mat-checkbox *ngIf="getRow(element).selectable" [(ngModel)]="getRow(element).select" class="checkbox-action"></mat-checkbox>
+      </mat-cell>
+  </ng-container>
+  <ng-container *ngIf='hasActions()' matColumnDef="{{getActionsColumnName()}}">
+      <mat-header-cell *matHeaderCellDef class="action-cell"></mat-header-cell>
+      <mat-cell  *matCellDef="let element" (click)="$event.stopPropagation()" class="action-cell">
+        <button  class="icon-button" *ngFor="let action of getActionsByElement(element)" matTooltip="{{action.actionName}}" mat-mini-fab (click)="submitAction(action, element)" class="icon-button_style-">
+          <span *ngIf="action.icon === undefined" class="actionName_pad">{{action.actionName | slice :0:1}}</span>
+          <mat-icon *ngIf="action.icon" aria-label="icon">{{action.icon}}</mat-icon>
+        </button>
+      </mat-cell>
+  </ng-container>
+  <!-- Definition Columns -->
+  <ng-container *ngFor="let def of grid.columnsDef" matColumnDef="{{def.columnDef}}">
+    <mat-header-cell 
+         *matHeaderCellDef 
+          mat-sort-header="{{def.columnDef}}" 
+          disabled="{{isDisableSort(def.columnDef)}}"
+          start="{{orderStart(def.columnDef)}}" id="{{def.columnDef}}Header"> {{def.columnName}} </mat-header-cell>
+    <mat-cell *matCellDef="let element" id="{{def.columnDef}}Cell"> {{getValue(element,def.columnDef, def)}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="grid.displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: grid.displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == getRowId(row)}" (click)="onClickRowEvent(row)"></mat-row>
+</mat-table>
+
+<mat-paginator #paginator
+               [pageSize]="10"
+               [pageSizeOptions]="[10, 20, 50, 100]"
+               showFirstLastButtons>
+</mat-paginator>
