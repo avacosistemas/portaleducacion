@@ -30,6 +30,7 @@ export const environment = {
     URL_FORMULARIO: 'formulario',
     URL_PUBLICIDAD: 'bannerCampaing',
     URL_PRODUCTO_EXTERNO : 'productoExterno',
+    URL_PARAMETERS : 'parameters',
     URL_LOGOUT_API: PREFIX_DOMAIN_API + 'user/logout',
 };
 

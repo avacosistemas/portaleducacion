@@ -56,6 +56,7 @@ public class ParameterServiceImpl extends NJBaseService<Integer, Parameter, Para
 		}
 		entity.setKey(dto.getKey());
 		entity.setValue(dto.getValue());
+		entity.setDescription(dto.getDescription());
 		return entity;
 	}
 

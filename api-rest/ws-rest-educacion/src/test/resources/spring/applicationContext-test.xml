@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:ctx="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/data/jpa 
+        http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
+        http://www.springframework.org/schema/jdbc 
+        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+	<ctx:property-placeholder location="classpath:conf/conn.properties"/>
+<!-- 	<ctx:property-placeholder location="classpath:conf/notificacion.properties"/> -->
+	
+	<jdbc:embedded-database id="dataSourceH2" type="H2">
+		<jdbc:script location="classpath*:data/1-schema.sql" />
+		<jdbc:script location="classpath*:data/2-initial-data.sql" />
+	</jdbc:embedded-database>
+
+	<import resource="classpath*:spring/applicationContext-endpoint.xml" />
+	<import resource="classpath*:spring/applicationContext-context.xml" />
+	<import resource="classpath*:spring/applicationContext-db.xml" />
+	<import resource="classpath*:spring/applicationContext-service.xml" />
+	<import resource="classpath*:spring/applicationContext-jpa.xml" />
+	<import resource="classpath*:spring/applicationContext-encoder.xml" />
+	<import resource="classpath*:spring/applicationContext-mail.xml" />
+
+</beans>

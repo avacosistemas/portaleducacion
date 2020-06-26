@@ -31,7 +31,7 @@
 	        <beans:array>
 				<beans:value>ar.com.avaco.arc.sec.domain</beans:value>
 				<beans:value>ar.com.avaco.commons.domain</beans:value>
-				<beans:value>ar.com.avaco.quiron.domain</beans:value>
+				<beans:value>ar.com.avaco.educacion.domain</beans:value>
 			</beans:array>
    	    </beans:property>
         <beans:property name="dataSource" ref="${datasourcename}"/>

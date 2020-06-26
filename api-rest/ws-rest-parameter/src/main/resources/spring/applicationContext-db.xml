@@ -47,7 +47,7 @@
         <beans:property name="packagesToScan">
 	        <beans:array>
 				<beans:value>ar.com.avaco.commons.domain</beans:value>
-				<beans:value>ar.com.avaco.quiron.domain</beans:value>
+				<beans:value>ar.com.avaco.educacion.domain</beans:value>
 			</beans:array>
    	    </beans:property>
         <beans:property name="dataSource" ref="${datasourcename}"/>
@@ -88,7 +88,7 @@
 <!-- 						transaction-manager-ref="transactionManager"/> -->
 
 
-	<jpa:repositories 	base-package="ar.com.avaco.quiron.repository"
+	<jpa:repositories 	base-package="ar.com.avaco.educacion.repository"
 						entity-manager-factory-ref="entityManagerFactory" 
 						transaction-manager-ref="transactionManager"/>
 	

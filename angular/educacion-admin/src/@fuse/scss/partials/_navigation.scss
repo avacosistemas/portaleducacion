@@ -64,7 +64,7 @@
             }
 
             &:hover {
-                background-color: rgba(0, 0, 0, 0.30);;
+                background-color: rgba(0, 0, 0, 12);;
             }
 
             .mat-ripple-element {
@@ -72,7 +72,7 @@
             }
 
             &.active {
-                background-color: #3400FF;
+                background-color: transparent; // #3400FF;
 
                 .mat-ripple-element {
                     background-color: mat-color($accent, default-contrast, 0.1);

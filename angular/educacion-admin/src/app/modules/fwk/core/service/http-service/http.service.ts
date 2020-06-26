@@ -60,7 +60,7 @@ export class HttpService extends BaseService {
   }
 
   httpPut(url, data, options): Observable<any> {
-        const urlid = url;
+        const urlid = url + data.id;
         console.log('****** put -> ' + urlid);
         console.log('****** object sended ⬎');
         console.log(data);

@@ -11,13 +11,13 @@
 	<ctx:component-scan base-package="ar.com.avaco.repository" resource-pattern="**/*RepositoryImpl.class"/>
 	<ctx:component-scan base-package="ar.com.avaco.service" resource-pattern="**/*ServiceImpl.class"/>
 
-	<ctx:component-scan base-package="ar.com.avaco.quiron.repository" resource-pattern="**/*RepositoryImpl.class"/>
-	<ctx:component-scan base-package="ar.com.avaco.quiron.service" resource-pattern="**/*ServiceImpl.class"/>
+	<ctx:component-scan base-package="ar.com.avaco.educacion.repository" resource-pattern="**/*RepositoryImpl.class"/>
+	<ctx:component-scan base-package="ar.com.avaco.educacion.service" resource-pattern="**/*ServiceImpl.class"/>
 
 	<ctx:component-scan base-package="ar.com.avaco.commons.repository" resource-pattern="**/*RepositoryImpl.class"/>
 	<ctx:component-scan base-package="ar.com.avaco.commons.service" resource-pattern="**/*ServiceImpl.class"/>
 	
-	<ctx:component-scan base-package="ar.com.avaco.quiron.service.notificacion" resource-pattern="**/*ServiceImpl.class"/>
+	<ctx:component-scan base-package="ar.com.avaco.educacion.service.notificacion" resource-pattern="**/*ServiceImpl.class"/>
 						
 </beans>
 
