@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import ar.com.avaco.educacion.domain.cliente.Cliente;
+import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 import ar.com.avaco.educacion.service.cliente.ClienteService;
 import ar.com.avaco.ws.rest.security.ClienteUserDetailsFactory;
 import ar.com.avaco.ws.rest.security.dto.UpdatePasswordDTO;

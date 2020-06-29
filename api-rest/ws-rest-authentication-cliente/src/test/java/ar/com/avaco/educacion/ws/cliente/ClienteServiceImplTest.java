@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import ar.com.avaco.educacion.domain.cliente.Cliente;
+import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 import ar.com.avaco.educacion.service.cliente.ClienteServiceImpl;
 
 public class ClienteServiceImplTest extends ClienteServiceImpl {

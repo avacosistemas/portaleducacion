@@ -1,7 +1,7 @@
 package ar.com.avaco.educacion.repository.cliente;
 
 import ar.com.avaco.arc.core.component.bean.repository.NJRepository;
-import ar.com.avaco.educacion.domain.cliente.Cliente;
+import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 
 public interface ClienteRepository extends NJRepository<Long, Cliente>, ClienteRepositoryCustom {
 
@@ -15,12 +15,13 @@ public interface ClienteRepository extends NJRepository<Long, Cliente>, ClienteR
 
 	Cliente findByIdentificacionNumeroLikeIgnoreCase(String numero);
 
-	Cliente findByCuentaBancariaAliasEqualsIgnoreCase(String cbu);
+	//TODO No existe cuenta bancaria, revisar
+	//Cliente findByCuentaBancariaAliasEqualsIgnoreCase(String cbu);
 
-	Cliente findByCuentaBancariaCbuEqualsIgnoreCase(String cbu);
+	//Cliente findByCuentaBancariaCbuEqualsIgnoreCase(String cbu);
 
-	Cliente findByCuentaBancariaAliasEqualsIgnoreCaseAndIdNot(String cbu, Long id);
+	//Cliente findByCuentaBancariaAliasEqualsIgnoreCaseAndIdNot(String cbu, Long id);
 	
-	Cliente findByCuentaBancariaCbuEqualsIgnoreCaseAndIdNot(String cbu, Long id);
+	//Cliente findByCuentaBancariaCbuEqualsIgnoreCaseAndIdNot(String cbu, Long id);
 
 }

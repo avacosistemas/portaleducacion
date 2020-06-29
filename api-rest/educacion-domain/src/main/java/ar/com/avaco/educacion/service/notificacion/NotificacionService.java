@@ -1,6 +1,6 @@
 package ar.com.avaco.educacion.service.notificacion;
 
-import ar.com.avaco.educacion.domain.cliente.Cliente;
+import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 
 public interface NotificacionService {
 

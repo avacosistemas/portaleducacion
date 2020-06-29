@@ -11,7 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import ar.com.avaco.arc.core.component.bean.repository.NJBaseRepository;
-import ar.com.avaco.educacion.domain.cliente.Cliente;
+import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 
 /**
  * Repositorio de Clientes

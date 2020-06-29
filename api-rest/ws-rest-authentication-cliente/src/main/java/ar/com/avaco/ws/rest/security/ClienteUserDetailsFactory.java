@@ -1,7 +1,7 @@
 package ar.com.avaco.ws.rest.security;
 
+import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 import ar.com.avaco.model.ClienteUserDetailsDTO;
-import ar.com.avaco.educacion.domain.cliente.Cliente;
 
 public final class ClienteUserDetailsFactory {
 

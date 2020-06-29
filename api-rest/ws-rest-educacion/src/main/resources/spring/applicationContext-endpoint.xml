@@ -13,7 +13,7 @@
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">	    
 	
-	<ctx:component-scan base-package="ar.com.avaco.educacion.ws.educacion.controller" resource-pattern="**/*Controller.class" />
-	<ctx:component-scan base-package="ar.com.avaco.educacion.ws.educacion.service" resource-pattern="**/*EPServiceImpl.class"/>
+	<ctx:component-scan base-package="ar.com.avaco.educacion.ws.controller" resource-pattern="**/*Controller.class" />
+	<ctx:component-scan base-package="ar.com.avaco.educacion.ws.service" resource-pattern="**/*EPServiceImpl.class"/>
 		
 </beans:beans>

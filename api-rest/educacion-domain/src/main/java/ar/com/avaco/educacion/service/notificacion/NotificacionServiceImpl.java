@@ -16,7 +16,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import ar.com.avaco.arc.core.service.MailSenderSMTPService;
-import ar.com.avaco.educacion.domain.cliente.Cliente;
+import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 
 @Service("notificacionService")
 public class NotificacionServiceImpl implements NotificacionService {

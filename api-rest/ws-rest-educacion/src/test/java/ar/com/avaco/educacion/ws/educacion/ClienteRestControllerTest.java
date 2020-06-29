@@ -7,7 +7,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ar.com.avaco.educacion.ws.educacion.controller.ClienteRestController;
+import ar.com.avaco.educacion.ws.controller.ClienteRestController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DirtiesContext

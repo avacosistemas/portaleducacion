@@ -6,8 +6,8 @@ import java.util.List
 import ar.com.avaco.arc.core.component.bean.service.NJService;
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.commons.exception.ErrorValidationException;
-import ar.com.avaco.educacion.domain.cliente.Cliente;
-import ar.com.avaco.educacion.domain.cliente.Contacto;
+import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
+import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
 
 public interface ClienteService extends NJService<Long, Cliente> {
 

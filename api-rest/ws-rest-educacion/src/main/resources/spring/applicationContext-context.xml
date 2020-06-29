@@ -15,6 +15,11 @@
 	<annotation-config />
 	<aop:aspectj-autoproxy />
 	
+	<component-scan base-package="ar.com.avaco.ws.rest.security" resource-pattern="**/*.class" />
+	<component-scan base-package="ar.com.avaco.ws.controller" resource-pattern="**/*Controller.class" />
+	
+	<component-scan base-package="ar.com.avaco.educacion.ws.controller" resource-pattern="**/*Controller.class" />
+	
 	<mvc:annotation-driven />
 	
 	<mvc:default-servlet-handler />
