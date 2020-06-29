@@ -8,4 +8,15 @@ SELECT pg_catalog.setval('public.seg_permiso_seq', 500, true);
 SELECT pg_catalog.setval('public.seg_rol_seq', 500, true);
 SELECT pg_catalog.setval('public.seg_usuario_seq', 500, true);
 SELECT pg_catalog.setval('public.word_seq', 500, false);
-
+--EDUCACION
+select pg_catalog.setval('public.aula_seq', 500, true);
+select pg_catalog.setval('public.cliente_seq', 500, true);
+select pg_catalog.setval('public.comentario_seq', 500, true);
+select pg_catalog.setval('public.compra_seq', 500, true);
+select pg_catalog.setval('public.decidir_seq', 500, true);
+select pg_catalog.setval('public.disp_seq', 500, true);
+select pg_catalog.setval('public.horario_seq', 500, true);
+select pg_catalog.setval('public.institucion_seq', 500, true);
+select pg_catalog.setval('public.materia_seq', 500, true);
+select pg_catalog.setval('public.nivel_seq', 500, true);
+select pg_catalog.setval('public.preg_resp_seq', 500, true);
