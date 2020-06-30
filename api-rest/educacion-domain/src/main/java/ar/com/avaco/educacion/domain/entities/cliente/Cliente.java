@@ -15,6 +15,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -36,6 +38,7 @@ import ar.com.avaco.arc.sec.domain.UserDetailsExtended;
  */
 @Entity
 @Table(name = "CLI_CLIENTE")
+@Inheritance(strategy=InheritanceType.JOINED)
 @SequenceGenerator(name = "CLIENTE_SEQ", sequenceName = "CLIENTE_SEQ", allocationSize = 1)
 public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implements UserDetailsExtended {
 

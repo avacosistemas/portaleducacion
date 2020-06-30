@@ -1,5 +1,7 @@
 package ar.com.avaco.educacion.ws.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -8,12 +10,23 @@ import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Materia;
 import ar.com.avaco.educacion.service.materia.MateriaService;
 import ar.com.avaco.educacion.ws.dto.MateriaDTO;
+import ar.com.avaco.educacion.ws.dto.MateriaProfesorDTO;
 import ar.com.avaco.educacion.ws.service.MateriaEPService;
 import ar.com.avaco.ws.rest.service.CRUDEPBaseService;
 
 @Service("materiaEPService")
 public class MateriaEPServiceImpl extends CRUDEPBaseService<Long, MateriaDTO, Materia, MateriaService> implements MateriaEPService {
 
+
+	@Override
+	public List<MateriaDTO> listByNivel(Integer idNivel) {
+		List<Materia> materias = this.getService().listByNivel(idNivel);
+		List<MateriaDTO> convertToDtos = convertToDtos(materias);
+		materias = null;
+		return convertToDtos;
+	}
+	
+	
 	@Override
 	protected Materia convertToEntity(MateriaDTO dto) {
 		Materia materia = new Materia();
@@ -39,7 +52,7 @@ public class MateriaEPServiceImpl extends CRUDEPBaseService<Long, MateriaDTO, Ma
 		materia = service.createMateria(materia);
 		return new MateriaDTO(materia);
 	}
-
+	
 	@Override
 	public MateriaDTO updateMateria(Long id, MateriaDTO materiaDto) throws BusinessException {
 		Materia materia = materiaDto.toEntity();
@@ -55,6 +68,5 @@ public class MateriaEPServiceImpl extends CRUDEPBaseService<Long, MateriaDTO, Ma
 	protected void setService(MateriaService materiaService) {
 		this.service = materiaService;
 	}
-
 
 }

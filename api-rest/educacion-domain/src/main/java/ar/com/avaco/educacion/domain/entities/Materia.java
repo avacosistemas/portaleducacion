@@ -6,8 +6,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +33,7 @@ public class Materia extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	@Column(name="DESC_MATERIA", nullable=false)
 	private String descripcion;
 	
-    @ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
+    @ManyToOne(fetch= FetchType.EAGER, cascade= CascadeType.MERGE)
     @JoinColumn(name = "ID_NIVEL", insertable = false, updatable = false)
 	private Nivel nivel;
     

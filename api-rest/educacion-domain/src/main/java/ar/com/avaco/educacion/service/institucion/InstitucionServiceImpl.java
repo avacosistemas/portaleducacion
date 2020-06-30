@@ -1,6 +1,7 @@
 package ar.com.avaco.educacion.service.institucion;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -19,6 +20,12 @@ import ar.com.avaco.educacion.repository.institucion.InstitucionRepository;
 @Transactional
 @Service("institucionService")
 public class InstitucionServiceImpl extends NJBaseService<Long, Institucion, InstitucionRepository> implements InstitucionService {
+	
+	
+	@Override
+	public List<Institucion> listByAlumno(Long idAlumno) {
+		return getRepository().findAllByAlumnosId(idAlumno);
+	}
 	
 	@Override
 	public Institucion createInstitucion(Institucion entity) throws BusinessException {

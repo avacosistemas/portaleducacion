@@ -10,7 +10,22 @@ package ar.com.avaco.educacion.domain.entities.cliente;
  */
 public enum Genero {
 
-	MASCULINO, FEMENINO, EMPRESA;
-	
+    M("MASCULINO"),
+    F("FEMENINO"),
+    E("EMPRESA");
+
+    private String descripcion;
+
+    Genero(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 	
 }

@@ -5,4 +5,5 @@ import ar.com.avaco.educacion.domain.entities.Profesor;
 
 public interface ProfesorRepository extends NJRepository<Long, Profesor>, ProfesorRepositoryCustom {
 
+
 }

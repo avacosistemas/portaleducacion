@@ -170,7 +170,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 
 		Map<String, String> errores = new HashMap<String, String>();
 
-		boolean esEmpresa = cliente.getGenero().equals(Genero.EMPRESA);
+		boolean esEmpresa = cliente.getGenero().equals(Genero.E);
 
 		if (!esEmpresa && !Validations.isMayorEdad(cliente.getFechaNacimientoInicioActividades())) {
 			errores.put("fechaNacimiento", "Debe ser mayor de 18 años para registrarse.");
@@ -405,7 +405,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 
 		Map<String, String> errores = new HashMap<String, String>();
 
-		boolean esEmpresa = cliente.getGenero().equals(Genero.EMPRESA);
+		boolean esEmpresa = cliente.getGenero().equals(Genero.E);
 
 		if (!esEmpresa && StringUtils.isBlank(cliente.getNacionalidad())) {
 			errores.put("nacionalidad", "Debe ingresar la nacionalidad");

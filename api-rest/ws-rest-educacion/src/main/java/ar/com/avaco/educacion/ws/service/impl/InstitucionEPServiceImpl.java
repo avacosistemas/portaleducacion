@@ -1,5 +1,7 @@
 package ar.com.avaco.educacion.ws.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -15,6 +17,14 @@ import ar.com.avaco.ws.rest.service.CRUDEPBaseService;
 public class InstitucionEPServiceImpl extends CRUDEPBaseService<Long, InstitucionDTO, Institucion, InstitucionService> implements InstitucionEPService {
 
 
+	@Override
+	public List<InstitucionDTO> listByAlumno(Long idAlumno) {
+		List<Institucion> instituciones = this.getService().listByAlumno(idAlumno);
+		List<InstitucionDTO> convertToDtos = convertToDtos(instituciones);
+		instituciones = null;
+		return convertToDtos;
+	}
+	
 	@Override
 	protected Institucion convertToEntity(InstitucionDTO dto) {
 		Institucion institucion = new Institucion();

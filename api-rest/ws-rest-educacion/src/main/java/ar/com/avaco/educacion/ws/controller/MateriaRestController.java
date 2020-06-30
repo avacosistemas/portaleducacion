@@ -1,5 +1,6 @@
 package ar.com.avaco.educacion.ws.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -33,12 +34,12 @@ public class MateriaRestController extends AbstractDTORestController<MateriaDTO,
 	public ResponseEntity<JSONResponse> get(@PathVariable("id") Long id) throws BusinessException {
 		return super.get(id);
 	}
-
-	@RequestMapping(value = "/materias/", method = RequestMethod.POST)
-	public ResponseEntity<JSONResponse> create(@RequestBody MateriaDTO materia) throws BusinessException {
-		MateriaDTO newMateriaDto = service.createMateria(materia);
-		JSONResponse response = new JSONResponse();
-		response.setData(newMateriaDto);
+	
+	@RequestMapping(value = "/materias/nivel/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> listByNivel(@PathVariable("id") Integer idNivel) throws BusinessException {
+		List<MateriaDTO> listMaterias = this.service.listByNivel(idNivel);
+    	JSONResponse response = new JSONResponse();
+		response.setData(listMaterias);
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}

@@ -17,28 +17,28 @@ create table Usuario_mailsNotificacion (Usuario_ID_SEG_USUARIO int8 not null, ma
 create table WORD (ID_WORD int8 not null, key varchar(255) not null, value varchar(255) not null, i18n_ID_I18N int8 not null, primary key (ID_WORD));
 
 --EDUCACION
-create table CLI_ACCESOS_CLIENTE (ID_ACCESO int8 not null, codigo varchar(255), descripcion varchar(255), primary key (ID_ACCESO));
-create table CLI_ACCESO_PERMISO (ID_ACCESO int8 not null, ID_PERMISO int8 not null, primary key (ID_ACCESO, ID_PERMISO));
-create table CLI_CLIENTE (ID_CLIENTE int8 not null, BLOQUEADO boolean, EMAIL varchar(255) not null, FECHA_ALTA_PASSWORD timestamp, FN_IA timestamp not null, FECHA_REGISTRO timestamp not null, GENERO varchar(255) not null, INTENTOS_FALLIDOS_LOGIN int4, NACIONALIDAD varchar(255) not null, PASSWORD varchar(255) not null, RS_NA varchar(255) not null, REQUIERE_CAMBIO_PASSWORD boolean, USERNAME varchar(255) not null, ID_ACCESOS int8, primary key (ID_CLIENTE));
-create table CLI_CONTACTO (ID_CONTACTO int8 not null, BARRIO varchar(255) not null, CODIGO_POSTAL varchar(255) not null, DOMICILIO varchar(255) not null, LOCALIDAD varchar(255) not null, NOMBRE_CONTACTO varchar(255), PROVINCIA int4 not null, TEL_FIJO varchar(255) not null, TEL_CELULAR varchar(255) not null, primary key (ID_CONTACTO));
-create table CLI_IDENTIFICACION (ID_IDENTIFICACION int8 not null, NUMERO_ID varchar(255) not null, TIPO_ID varchar(255) not null, primary key (ID_IDENTIFICACION));
-create table CLI_PERMISO_CLIENTE (ID_PERMISO int8 not null, codigo varchar(255), descripcion varchar(255), primary key (ID_PERMISO));
-create table INSTITUCION (ID_INSTITUCION int8 not null, NOMBRE varchar(255), primary key (ID_INSTITUCION));
-create table NIVEL (ID_NIVEL int4 not null, DESC_NIVEL varchar(255) not null, primary key (ID_NIVEL));
-create table MATERIA (ID_MATERIA int8 not null, DESC_MATERIA varchar(255) not null, ID_NIVEL int4, primary key (ID_MATERIA));
-create table ALUMNO (ID_CLIENTE int8 not null, primary key (ID_CLIENTE));
-create table PROFESOR (ID_CLIENTE int8 not null, primary key (ID_CLIENTE));
-create table HORARIO (ID_HORARIO int8 not null, HORA bytea not null, ID_PROFESOR int8, primary key (ID_HORARIO));
-create table PREG_RESP (ID_PREG_RESP int8 not null, PREGUNTA varchar(255), RESPUESTA varchar(255), ID_ALUMNO int8, ID_MATERIA int8, ID_PROFESOR int8, primary key (ID_PREG_RESP));
-create table HORAS_DISP (ID_DISP int8 not null, CANT_HORAS_DISP int4, ID_ALUMNO int8, ID_PROFESOR int8, primary key (ID_DISP));
-create table HORAS_COMPRA (ID_COMPRA int8 not null, CANT_HORAS_COMPRA int4, ID_ALUMNO int8, FK_DECIDIR int8 not null, ID_PROFESOR int8, primary key (ID_COMPRA));
-create table AULA (ID_AULA int8 not null, ID_MATERIA int8, primary key (ID_AULA));
-create table COMENTARIO (ID_COMENTARIO int8 not null, DESC_COMENTARIO varchar(280), ID_AULA int8, primary key (ID_COMENTARIO));
-create table ALUMNO_INSTITUCION (id_alumno int8 not null, id_institucion int8 not null, primary key (id_alumno, id_institucion));
-create table AULA_ALUMNO (id_aula int8 not null, id_alumno int8 not null, primary key (id_aula, id_alumno));
-create table AULA_PROFESOR (id_aula int8 not null, id_profesor int8 not null, primary key (id_aula, id_profesor));
-create table PROFESOR_MATERIA (id_profesor int8 not null, id_materia int8 not null, primary key (id_profesor, id_materia));
-create table DECIDIR (ID_DECIDIR int8 not null, primary key (ID_DECIDIR));
+create table ALUMNO (ID_CLIENTE int8 not null, primary key (ID_CLIENTE))
+create table ALUMNO_INSTITUCION (ID_ALUMNO int8 not null, ID_INSTITUCION int8 not null, primary key (ID_ALUMNO, ID_INSTITUCION))
+create table AULA (ID_AULA int8 not null, ID_MATERIA int8, primary key (ID_AULA))
+create table AULA_ALUMNO (ID_AULA int8 not null, ID_ALUMNO int8 not null, primary key (ID_AULA, ID_ALUMNO))
+create table AULA_PROFESOR (ID_AULA int8 not null, ID_PROFESOR int8 not null, primary key (ID_AULA, ID_PROFESOR))
+create table CLI_ACCESOS_CLIENTE (ID_ACCESO int8 not null, codigo varchar(255), descripcion varchar(255), primary key (ID_ACCESO))
+create table CLI_ACCESO_PERMISO (ID_ACCESO int8 not null, ID_PERMISO int8 not null, primary key (ID_ACCESO, ID_PERMISO))
+create table CLI_CLIENTE (ID_CLIENTE int8 not null, BLOQUEADO boolean, EMAIL varchar(255) not null, FECHA_ALTA_PASSWORD timestamp, FN_IA timestamp not null, FECHA_REGISTRO timestamp not null, GENERO varchar(255) not null, INTENTOS_FALLIDOS_LOGIN int4, NACIONALIDAD varchar(255) not null, PASSWORD varchar(255) not null, RS_NA varchar(255) not null, REQUIERE_CAMBIO_PASSWORD boolean, USERNAME varchar(255) not null, ID_ACCESOS int8, primary key (ID_CLIENTE))
+create table CLI_CONTACTO (ID_CONTACTO int8 not null, BARRIO varchar(255) not null, CODIGO_POSTAL varchar(255) not null, DOMICILIO varchar(255) not null, LOCALIDAD varchar(255) not null, NOMBRE_CONTACTO varchar(255), PROVINCIA int4 not null, TEL_FIJO varchar(255) not null, TEL_CELULAR varchar(255) not null, primary key (ID_CONTACTO))
+create table CLI_IDENTIFICACION (ID_IDENTIFICACION int8 not null, NUMERO_ID varchar(255) not null, TIPO_ID varchar(255) not null, primary key (ID_IDENTIFICACION))
+create table CLI_PERMISO_CLIENTE (ID_PERMISO int8 not null, codigo varchar(255), descripcion varchar(255), primary key (ID_PERMISO))
+create table COMENTARIO (ID_COMENTARIO int8 not null, DESC_COMENTARIO varchar(280), ID_AULA int8, primary key (ID_COMENTARIO))
+create table DECIDIR (ID_DECIDIR int8 not null, primary key (ID_DECIDIR))
+create table HORARIO_DISP (ID_HORARIO_DISP int8 not null, DIA_DISPONIBLE int4 not null, HORA_DISPONIBLE varchar(255) not null, ID_PROFESOR int8, primary key (ID_HORARIO_DISP))
+create table HORAS_COMPRA (ID_COMPRA int8 not null, CANT_HORAS_COMPRA int4, ID_ALUMNO int8, FK_DECIDIR int8 not null, ID_PROFESOR int8, primary key (ID_COMPRA))
+create table HORAS_DISP (ID_HORAS_DISP int8 not null, CANT_HORAS_DISP int4, ID_ALUMNO int8, ID_PROFESOR int8, primary key (ID_HORAS_DISP))
+create table INSTITUCION (ID_INSTITUCION int8 not null, NOMBRE varchar(255), primary key (ID_INSTITUCION))
+create table MATERIA (ID_MATERIA int8 not null, DESC_MATERIA varchar(255) not null, ID_NIVEL int4, primary key (ID_MATERIA))
+create table NIVEL (ID_NIVEL int4 not null, DESC_NIVEL varchar(255) not null, primary key (ID_NIVEL))
+create table PREG_RESP (ID_PREG_RESP int8 not null, PREGUNTA varchar(255), RESPUESTA varchar(255), ID_ALUMNO int8, ID_MATERIA int8, ID_PROFESOR int8, primary key (ID_PREG_RESP))
+create table PROFESOR (ID_CLIENTE int8 not null, primary key (ID_CLIENTE))
+create table PROFESOR_MATERIA (ID_PROFESOR int8 not null, ID_MATERIA int8 not null, primary key (ID_PROFESOR, ID_MATERIA))
 
 
 /***** ALTER TABLE  *****/
@@ -60,33 +60,33 @@ alter table Usuario_mailsNotificacion add constraint FK_ng09bhg580o5wjjkoe806wcm
 alter table WORD add constraint I18N_ID_FK foreign key (i18n_ID_I18N) references I18N;
 
 --EDUCACION
-alter table CLI_CLIENTE add constraint UK_dpfngbuw5kyun9v6nkw9qwxw6 unique (EMAIL);
-alter table CLI_CLIENTE add constraint UK_lo3g6pgctqny711lr8wp7f4hr unique (USERNAME);
-alter table ALUMNO add constraint FK_onu2vb0vpp6khi1j94l4ma5j0 foreign key (ID_CLIENTE) references CLI_CLIENTE;
-alter table AULA add constraint FK_elsuqn0pvy1wk75ieydcru8kg foreign key (ID_MATERIA) references MATERIA;
-alter table CLI_ACCESO_PERMISO add constraint FK_30ns7l5f4j4vp8q0snjitmpju foreign key (ID_PERMISO) references CLI_PERMISO_CLIENTE;
-alter table CLI_ACCESO_PERMISO add constraint FK_38ai98wwmvjbajehx5npvc138 foreign key (ID_ACCESO) references CLI_ACCESOS_CLIENTE;
-alter table CLI_CLIENTE add constraint FK_qsndlpgcb9rkjbv2y6r1wh8cu foreign key (ID_ACCESOS) references CLI_ACCESOS_CLIENTE;
-alter table COMENTARIO add constraint FK_t54lfjshjrtkhl383rc37leln foreign key (ID_AULA) references AULA;
-alter table HORARIO add constraint FK_kgfr14qvn3txprcqbpfi2876j foreign key (ID_PROFESOR) references PROFESOR;
-alter table HORAS_COMPRA add constraint FK_ru1x6niuc01sg925snjd9g57q foreign key (ID_ALUMNO) references ALUMNO;
-alter table HORAS_COMPRA add constraint FK_jw5ygmore6kppm8p5jpn7i7we foreign key (FK_DECIDIR) references DECIDIR;
-alter table HORAS_COMPRA add constraint FK_ekf70h25r10235k4l8lrx5khl foreign key (ID_PROFESOR) references PROFESOR;
-alter table HORAS_DISP add constraint FK_1k6wjilp24cahgb2gpd58605u foreign key (ID_ALUMNO) references ALUMNO;
-alter table HORAS_DISP add constraint FK_n3v55jiyrs6kj0ke9m6ni9tr6 foreign key (ID_PROFESOR) references PROFESOR;
-alter table MATERIA add constraint FK_cklyxd4l3o5quvxhni2ihpqvf foreign key (ID_NIVEL) references NIVEL;
-alter table PREG_RESP add constraint FK_kymaa95dohtrwtk52iic02cii foreign key (ID_ALUMNO) references ALUMNO;
-alter table PREG_RESP add constraint FK_a18nbp3ql2stmv6f5wwxlciob foreign key (ID_MATERIA) references MATERIA;
-alter table PREG_RESP add constraint FK_gmd6meaudrv32xay9b1ua301h foreign key (ID_PROFESOR) references PROFESOR;
-alter table PROFESOR add constraint FK_9ap6yqec3lrf54fk8md2kebyf foreign key (ID_CLIENTE) references CLI_CLIENTE;
-alter table ALUMNO_INSTITUCION add constraint FK_k7yc8o3bjgo99i4egkevsf7hu foreign key (ID_INSTITUCION) references INSTITUCION;
-alter table ALUMNO_INSTITUCION add constraint FK_1r30rnfar3or3n04x9noj7ljs foreign key (ID_ALUMNO) references ALUMNO;
-alter table AULA_ALUMNO add constraint FK_2qb4xwy0wm5shk1vanv8we6ar foreign key (ID_ALUMNO) references ALUMNO;
-alter table AULA_ALUMNO add constraint FK_gvirbiv2crisgslwdf6ndeuo1 foreign key (ID_AULA) references AULA;
-alter table AULA_PROFESOR add constraint FK_kix8wuo6vrk8f8yleg2gef46d foreign key (ID_PROFESOR) references PROFESOR;
-alter table AULA_PROFESOR add constraint FK_52o6oxcifj346elm13qbpol3k foreign key (ID_AULA) references AULA;
-alter table PROFESOR_MATERIA add constraint FK_30bt0wwii3axl6wfc59c9bg4f foreign key (ID_MATERIA) references MATERIA;
-alter table PROFESOR_MATERIA add constraint FK_8c75bvp1gnol6a1tla6f32j5b foreign key (ID_PROFESOR) references PROFESOR;
+alter table CLI_CLIENTE add constraint UK_dpfngbuw5kyun9v6nkw9qwxw6  unique (EMAIL)
+alter table CLI_CLIENTE add constraint UK_lo3g6pgctqny711lr8wp7f4hr  unique (USERNAME)
+alter table ALUMNO add constraint FK_onu2vb0vpp6khi1j94l4ma5j0 foreign key (ID_CLIENTE) references CLI_CLIENTE
+alter table ALUMNO_INSTITUCION add constraint FK_tdanh0ryhhmw8ptk1mpxn1fu7 foreign key (ID_INSTITUCION) references INSTITUCION
+alter table ALUMNO_INSTITUCION add constraint FK_6ra3k9d2nhoew0qcu3j9v8rwc foreign key (ID_ALUMNO) references ALUMNO
+alter table AULA add constraint FK_elsuqn0pvy1wk75ieydcru8kg foreign key (ID_MATERIA) references MATERIA
+alter table AULA_ALUMNO add constraint FK_88ecbw3kak98x1yhnjo3w6yq3 foreign key (ID_ALUMNO) references ALUMNO
+alter table AULA_ALUMNO add constraint FK_plo38vtrdb7n9akuqotkl603u foreign key (ID_AULA) references AULA
+alter table AULA_PROFESOR add constraint FK_7lrxnhmo4q0xs8eb9vkjevspr foreign key (ID_PROFESOR) references PROFESOR
+alter table AULA_PROFESOR add constraint FK_51979urj12la2q8eyhlfklw8j foreign key (ID_AULA) references AULA
+alter table CLI_ACCESO_PERMISO add constraint FK_30ns7l5f4j4vp8q0snjitmpju foreign key (ID_PERMISO) references CLI_PERMISO_CLIENTE
+alter table CLI_ACCESO_PERMISO add constraint FK_38ai98wwmvjbajehx5npvc138 foreign key (ID_ACCESO) references CLI_ACCESOS_CLIENTE
+alter table CLI_CLIENTE add constraint FK_qsndlpgcb9rkjbv2y6r1wh8cu foreign key (ID_ACCESOS) references CLI_ACCESOS_CLIENTE
+alter table COMENTARIO add constraint FK_t54lfjshjrtkhl383rc37leln foreign key (ID_AULA) references AULA
+alter table HORARIO_DISP add constraint FK_pawg98rty59ye8sa93q8cgixm foreign key (ID_PROFESOR) references PROFESOR
+alter table HORAS_COMPRA add constraint FK_ru1x6niuc01sg925snjd9g57q foreign key (ID_ALUMNO) references ALUMNO
+alter table HORAS_COMPRA add constraint FK_jw5ygmore6kppm8p5jpn7i7we foreign key (FK_DECIDIR) references DECIDIR
+alter table HORAS_COMPRA add constraint FK_ekf70h25r10235k4l8lrx5khl foreign key (ID_PROFESOR) references PROFESOR
+alter table HORAS_DISP add constraint FK_1k6wjilp24cahgb2gpd58605u foreign key (ID_ALUMNO) references ALUMNO
+alter table HORAS_DISP add constraint FK_n3v55jiyrs6kj0ke9m6ni9tr6 foreign key (ID_PROFESOR) references PROFESOR
+alter table MATERIA add constraint FK_cklyxd4l3o5quvxhni2ihpqvf foreign key (ID_NIVEL) references NIVEL
+alter table PREG_RESP add constraint FK_kymaa95dohtrwtk52iic02cii foreign key (ID_ALUMNO) references ALUMNO
+alter table PREG_RESP add constraint FK_a18nbp3ql2stmv6f5wwxlciob foreign key (ID_MATERIA) references MATERIA
+alter table PREG_RESP add constraint FK_gmd6meaudrv32xay9b1ua301h foreign key (ID_PROFESOR) references PROFESOR
+alter table PROFESOR add constraint FK_9ap6yqec3lrf54fk8md2kebyf foreign key (ID_CLIENTE) references CLI_CLIENTE
+alter table PROFESOR_MATERIA add constraint FK_nx02vgl0ndi18xsl9hkvi9agq foreign key (ID_MATERIA) references MATERIA
+alter table PROFESOR_MATERIA add constraint FK_hq8xc8orf3jmxiv9btktga7mx foreign key (ID_PROFESOR) references PROFESOR
 
 
 /***** CREATE SEQUENCE  *****/
@@ -108,9 +108,10 @@ create sequence AULA_SEQ START WITH 1000;
 create sequence CLIENTE_SEQ START WITH 1000;
 create sequence COMENTARIO_SEQ START WITH 1000;
 create sequence COMPRA_SEQ START WITH 1000;
+create sequence CONTACT_US_SEQ START WITH 1000;
 create sequence DECIDIR_SEQ START WITH 1000;
-create sequence DISP_SEQ START WITH 1000;
-create sequence HORARIO_SEQ START WITH 1000;
+create sequence HORARIO_DISP_SEQ START WITH 1000;
+create sequence HORAS_DISP_SEQ START WITH 1000;
 create sequence INSTITUCION_SEQ START WITH 1000;
 create sequence MATERIA_SEQ START WITH 1000;
 create sequence NIVEL_SEQ START WITH 1000;

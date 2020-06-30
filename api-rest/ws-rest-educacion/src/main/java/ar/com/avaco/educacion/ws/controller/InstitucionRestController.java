@@ -1,5 +1,6 @@
 package ar.com.avaco.educacion.ws.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.ws.dto.InstitucionDTO;
+import ar.com.avaco.educacion.ws.dto.MateriaDTO;
 import ar.com.avaco.educacion.ws.service.InstitucionEPService;
 import ar.com.avaco.ws.rest.controller.AbstractDTORestController;
 import ar.com.avaco.ws.rest.dto.JSONResponse;
@@ -32,6 +34,16 @@ public class InstitucionRestController extends AbstractDTORestController<Institu
 	@RequestMapping(value = "/instituciones/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> get(@PathVariable("id") Long id) throws BusinessException {
 		return super.get(id);
+	}
+	
+
+	@RequestMapping(value = "/instituciones/alumno/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> listByNivel(@PathVariable("id") Long idAlumno) throws BusinessException {
+		List<InstitucionDTO> listAlumnos = this.service.listByAlumno(idAlumno);
+    	JSONResponse response = new JSONResponse();
+		response.setData(listAlumnos);
+		response.setStatus(JSONResponse.OK);	
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/instituciones/", method = RequestMethod.POST)

@@ -7,13 +7,9 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
@@ -34,8 +30,8 @@ public class Alumno extends Cliente {
 	@Column(name = "ID_ALUMNO")
     private Long id;*/
 	
-	@OneToMany(targetEntity= Disponibilidad.class, mappedBy="alumno", cascade=CascadeType.MERGE)
-    private Set<Disponibilidad> disponibilidad = new HashSet<>();
+	@OneToMany(targetEntity= HorasAlumno.class, mappedBy="alumno", cascade=CascadeType.MERGE)
+    private Set<HorasAlumno> horasDispAlumo = new HashSet<>();
 	
 	@OneToMany(targetEntity= Compra.class, mappedBy="alumno", cascade=CascadeType.MERGE)
     private Set<Compra> compras = new HashSet<>();
@@ -55,13 +51,28 @@ public class Alumno extends Cliente {
 
 	public Alumno() {}
 
-
-	public Set<Disponibilidad> getDisponibilidad() {
-		return disponibilidad;
+	public Set<HorasAlumno> getHorasDispAlumo() {
+		return horasDispAlumo;
 	}
 
-	public void setDisponibilidad(Set<Disponibilidad> disponibilidad) {
-		this.disponibilidad = disponibilidad;
+	public void setHorasDispAlumo(Set<HorasAlumno> horasDispAlumo) {
+		this.horasDispAlumo = horasDispAlumo;
+	}
+
+	public Set<Institucion> getInstituciones() {
+		return instituciones;
+	}
+
+	public void setInstituciones(Set<Institucion> instituciones) {
+		this.instituciones = instituciones;
+	}
+
+	public Set<Aula> getAulas() {
+		return aulas;
+	}
+
+	public void setAulas(Set<Aula> aulas) {
+		this.aulas = aulas;
 	}
 
 	public Set<Compra> getCompras() {

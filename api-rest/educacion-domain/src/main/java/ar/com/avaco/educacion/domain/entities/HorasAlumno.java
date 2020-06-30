@@ -15,15 +15,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "HORAS_DISP")
-@SequenceGenerator(name = "DISP_SEQ", sequenceName = "DISP_SEQ", allocationSize = 1)
-public class Disponibilidad extends ar.com.avaco.arc.core.domain.Entity<Long> {
+@SequenceGenerator(name = "HORAS_DISP_SEQ", sequenceName = "HORAS_DISP_SEQ", allocationSize = 1)
+public class HorasAlumno extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	
 	/** serializacion */
 	private static final long serialVersionUID = -6943378044790435321L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DISP_SEQ")
-	@Column(name = "ID_DISP")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "HORAS_DISP_SEQ")
+	@Column(name = "ID_HORAS_DISP")
     private Long id;
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
@@ -37,7 +37,7 @@ public class Disponibilidad extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	@Column(name = "CANT_HORAS_DISP")
 	private Integer horasDisponibles;
 	
-	public Disponibilidad() {}
+	public HorasAlumno() {}
 
 	public Long getId() {
 		return id;

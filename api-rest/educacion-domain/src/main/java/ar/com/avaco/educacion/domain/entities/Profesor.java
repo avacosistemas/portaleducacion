@@ -7,14 +7,10 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
@@ -32,12 +28,12 @@ public class Profesor extends Cliente {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROFESOR_SEQ")
 	@Column(name = "ID_PROFESOR")
     private Long id;*/
-
-	@OneToMany(targetEntity= Horario.class, mappedBy="profesor", cascade=CascadeType.MERGE)
-    private Set<Horario> horarios = new HashSet<>();
 	
-	@OneToMany(targetEntity= Disponibilidad.class, mappedBy="profesor", cascade=CascadeType.MERGE)
-    private Set<Disponibilidad> disponibilidad = new HashSet<>();
+	@OneToMany(targetEntity= HorarioDisponible.class, mappedBy="profesor", cascade=CascadeType.MERGE)
+    private Set<HorarioDisponible> horariosDisp = new HashSet<>();
+	
+	@OneToMany(targetEntity= HorasAlumno.class, mappedBy="profesor", cascade=CascadeType.MERGE)
+    private Set<HorasAlumno> horasDispAlumo = new HashSet<>();
 	
 	@OneToMany(targetEntity= Compra.class, mappedBy="profesor", cascade=CascadeType.MERGE)
     private Set<Compra> compras = new HashSet<>();
@@ -57,53 +53,52 @@ public class Profesor extends Cliente {
 	
 	public Profesor() {}
 
-	public Set<Horario> getHorarios() {
-		return horarios;
+	public Set<HorarioDisponible> getHorariosDisp() {
+		return horariosDisp;
 	}
 
-
-	public void setHorarios(Set<Horario> horarios) {
-		this.horarios = horarios;
+	public void setHorariosDisp(Set<HorarioDisponible> horariosDisp) {
+		this.horariosDisp = horariosDisp;
 	}
 
-
-	public Set<Disponibilidad> getDisponibilidad() {
-		return disponibilidad;
+	public Set<HorasAlumno> getHorasDispAlumo() {
+		return horasDispAlumo;
 	}
 
-
-	public void setDisponibilidad(Set<Disponibilidad> disponibilidad) {
-		this.disponibilidad = disponibilidad;
+	public void setHorasDispAlumo(Set<HorasAlumno> horasDispAlumo) {
+		this.horasDispAlumo = horasDispAlumo;
 	}
-
 
 	public Set<Compra> getCompras() {
 		return compras;
 	}
 
-
 	public void setCompras(Set<Compra> compras) {
 		this.compras = compras;
 	}
-
 
 	public Set<PreguntaRespuesta> getPreguntasRespuestas() {
 		return preguntasRespuestas;
 	}
 
-
 	public void setPreguntasRespuestas(Set<PreguntaRespuesta> preguntasRespuestas) {
 		this.preguntasRespuestas = preguntasRespuestas;
 	}
-
 
 	public Set<Materia> getMaterias() {
 		return materias;
 	}
 
-
 	public void setMaterias(Set<Materia> materias) {
 		this.materias = materias;
+	}
+
+	public Set<Aula> getAulas() {
+		return aulas;
+	}
+
+	public void setAulas(Set<Aula> aulas) {
+		this.aulas = aulas;
 	}
 
 	
