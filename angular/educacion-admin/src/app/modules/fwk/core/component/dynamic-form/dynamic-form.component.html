@@ -62,14 +62,14 @@
           [id]="field.key">{{field.label}}</mat-checkbox>
         </div>
         <div  *ngIf="field.controlType == 'pick-list'">
-          <app-pick-list [elementLabel]="field.options.elementLabel" 
-                        [titleFrom]="field.options.titleFrom" 
+          <app-pick-list [elementLabel]="field.options.elementLabel"
+                        [titleFrom]="field.options.titleFrom"
                         [titleTo]="field.options.titleTo"
                         [fromData]="field.options.fromData"
                         [toData]="field.options.toData"
                         [controlName]="field.key"
                         [compositeKey]="field.options.compositeKey"
-                        (onChangeControl)="onCustomControlChange(field.key,$event)"></app-pick-list>   
+                        (onChangeControl)="onCustomControlChange(field.key,$event)"></app-pick-list>
         </div>
         <div *ngIf="field.controlType == 'autocomplete'">
           <app-autocomplete [config]="field"
@@ -90,7 +90,7 @@
             {{getMessageErrorValidation(field)}}
           </mat-error>
       </mat-form-field>
-      
+
       <div *ngIf="field.controlType == 'color_picker'">
         <app-color-picker [config]="field"
           [formGroup]="form"
@@ -98,7 +98,7 @@
           [name]="field.key">
         </app-color-picker>
       </div>
-      
+
       <div *ngIf="field.controlType == 'tags'">
         <app-tags [config]="field"
                   [formGroup]="form"
@@ -107,12 +107,6 @@
         </app-tags>
       </div>
 
-      <div *ngIf="field.controlType == 'import_image'">
-        <app-import-image [config]="field"
-                          [formGroup]="form"
-                          [formControlName]="field.key"
-                          [name]="field.key">
-        </app-import-image>
-      </div>
-  </div>      
+      
+  </div>
 </form>
