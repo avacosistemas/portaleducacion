@@ -54,7 +54,6 @@ import { FloatComponent } from './component/dynamic-form/float/float.component';
 import { ColorPickerComponent } from './component/color-picker/color-picker.component';
 import { TagsComponent } from './component/tags/tags.component';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { ImportImageComponent } from './component/import-image/Import-Image.component';
 import { BackButtonComponent } from './component/back-button/backbutton.component';
 import { AppCrudComponent } from './shared/view/crud/app-crud.component';
 import { AutocompleteComponent } from './component/autocomplete/autocomplete.component';
@@ -72,7 +71,6 @@ import { AutocompleteService } from './component/autocomplete/autocomplete.servi
   entryComponents: [
                     ColorPickerComponent,
                     BackButtonComponent,
-                    ImportImageComponent,
                     TagsComponent,
                     DynamicFormComponent,
                     DatepickerComponent,
@@ -95,7 +93,6 @@ import { AutocompleteService } from './component/autocomplete/autocomplete.servi
                     FloatComponent],
   declarations: [DynamicFormComponent,
                  CrudModalComponent,
-                 ImportImageComponent,
                  BackButtonComponent,
                  BasicModalComponent,
                  AutocompleteComponent,
@@ -118,10 +115,9 @@ import { AutocompleteService } from './component/autocomplete/autocomplete.servi
                  ColorPickerComponent,
                  TagsComponent,
                  FloatComponent],
-                 
+
   exports: [DynamicFormComponent,
             CrudModalComponent,
-            ImportImageComponent,
             BackButtonComponent,
             BasicModalComponent,
             CrudTableComponent,
