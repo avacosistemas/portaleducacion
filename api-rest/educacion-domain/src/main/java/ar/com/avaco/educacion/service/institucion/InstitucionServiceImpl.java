@@ -22,14 +22,20 @@ import ar.com.avaco.educacion.repository.institucion.InstitucionRepository;
 public class InstitucionServiceImpl extends NJBaseService<Long, Institucion, InstitucionRepository> implements InstitucionService {
 	
 	
+	/**
+	 * @see InstitucionService#listByAlumno(Long)
+	 */
 	@Override
 	public List<Institucion> listByAlumno(Long idAlumno) {
 		return getRepository().findAllByAlumnosId(idAlumno);
 	}
 	
+	/**
+	 * @see InstitucionService#createInstitucion(Institucion)
+	 */
 	@Override
 	public Institucion createInstitucion(Institucion entity) throws BusinessException {
-
+		
 		validateInstitucionNoEmpty(entity);
 		validateInstitucionOnSave(entity);
 
@@ -38,6 +44,9 @@ public class InstitucionServiceImpl extends NJBaseService<Long, Institucion, Ins
 		return entity;
 	}
 	
+	/**
+	 * @see InstitucionService#updateInstitucion(Institucion)
+	 */
 	@Override
 	public Institucion updateInstitucion(Institucion entity) throws BusinessException {
 
@@ -57,7 +66,7 @@ public class InstitucionServiceImpl extends NJBaseService<Long, Institucion, Ins
 	 * Valida que la institucion no sea null
 	 * 
 	 * @param institucion
-	 * @throws BusinessException
+	 * @throws BusinessException error de negocio
 	 */
 	private void validateInstitucionNoEmpty(Institucion institucion) throws BusinessException {
 		if (institucion == null) {
@@ -67,8 +76,9 @@ public class InstitucionServiceImpl extends NJBaseService<Long, Institucion, Ins
 
 	/**
 	 * Valida que la institucion no se encuentre registrada.
-	 * 
-	 * @param institucion a validar.
+	 * @param institucion institucion a validar.
+	 * @throws ErrorValidationException error al validar
+	 * @throws BusinessException error de negocio
 	 */
 	public void validateInstitucionOnSave(Institucion institucion) throws ErrorValidationException, BusinessException {
 

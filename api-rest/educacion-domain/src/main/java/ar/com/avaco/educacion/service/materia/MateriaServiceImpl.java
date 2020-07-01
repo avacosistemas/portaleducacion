@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.avaco.arc.core.component.bean.service.NJBaseService;
@@ -22,18 +23,28 @@ import ar.com.avaco.educacion.service.nivel.NivelService;
 @Service("materiaService")
 public class MateriaServiceImpl extends NJBaseService<Long, Materia, MateriaRepository> implements MateriaService {
 	
+	@Autowired
 	private NivelService nivelService;
 	
+	/**
+	 * @see MateriaService#listByNivel(Integer)
+	 */
 	@Override
 	public List<Materia> listByNivel(Integer idNivel) {
 		return getRepository().findAllByNivelId(idNivel);
 	}
 	
+	/**
+	 * @see MateriaService#listByProfesor(Long)
+	 */
 	@Override
 	public List<Materia> listByProfesor(Long idProfesor) {
 		return getRepository().findAllByProfesoresId(idProfesor);
 	}
 	
+	/**
+	 * @see MateriaService#createMateria(Materia)
+	 */
 	@Override
 	public Materia createMateria(Materia entity) throws BusinessException {
 
@@ -49,6 +60,9 @@ public class MateriaServiceImpl extends NJBaseService<Long, Materia, MateriaRepo
 		return materia;
 	}
 	
+	/**
+	 * @see MateriaService#updateMateria(Materia)
+	 */
 	@Override
 	public Materia updateMateria(Materia entity) throws BusinessException {
 
@@ -101,12 +115,6 @@ public class MateriaServiceImpl extends NJBaseService<Long, Materia, MateriaRepo
 
 	}
 	
-	@Resource(name = "materiaRepository")
-	void setMateriaRepository(MateriaRepository materiaRepository) {
-		this.repository = materiaRepository;
-	}
-	
-
 	@Resource(name = "nivelService")
 	public void setNivelService(NivelService nivelService) {
 		this.nivelService = nivelService;

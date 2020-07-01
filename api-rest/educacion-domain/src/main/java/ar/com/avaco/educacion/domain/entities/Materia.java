@@ -33,7 +33,7 @@ public class Materia extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	@Column(name="DESC_MATERIA", nullable=false)
 	private String descripcion;
 	
-    @ManyToOne(fetch= FetchType.LAZY)
+    @ManyToOne(fetch= FetchType.EAGER)
     @JoinColumn(name = "ID_NIVEL")
 	private Nivel nivel;
     

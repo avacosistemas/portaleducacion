@@ -58,8 +58,8 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 	@Override
 	public Cliente registrarClientePersona(Cliente cliente) throws ErrorValidationException, BusinessException {
 		validarClienteNoVacio(cliente);
-		validarAltaCliente(cliente);
-		validarContacto(cliente.getContacto());
+		validarAltaProfesorAlumno(cliente);
+		validaContactoProfesorAlumno(cliente.getContacto());
 		cliente = registrarCliente(cliente);
 		return cliente;
 	}
@@ -280,6 +280,131 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		}
 
 	}
+	
+	/**
+	 * Valida que el username, email y numero de identificacion no se encuentre
+	 * registrado.
+	 * 
+	 * @param cliente el cliente a validar.
+	 */
+	public void validarAltaProfesorAlumno(Cliente cliente) throws ErrorValidationException, BusinessException {
+
+		Map<String, String> errores = new HashMap<String, String>();
+
+		// Validacion username
+		if (StringUtils.isBlank(cliente.getUsername())) {
+			errores.put("username", "El campo username es requerido.");
+		} else if (cliente.getUsername().length() < 5) {
+			errores.put("username", "El campo username debe tener al menos 5 caracteres.");
+		} else if (!Validations.isUsernameValido(cliente.getUsername())) {
+			errores.put("username",
+					"El campo username debe empezar con una letra y tener al menos 5 caracteres alfanuméricos sin espacios.");
+		} else if (getRepository().findByUsernameEqualsIgnoreCase(cliente.getUsername()) != null) {
+			errores.put("username", "El username no esta disponible. Intente otro diferente.");
+		}
+
+		// Validacion email
+		if (!EmailValidator.getInstance().isValid(cliente.getEmail())) {
+			errores.put("email", "El campo Email no tiene un formato válido.");
+		} else if (getRepository().findByEmailEqualsIgnoreCase(cliente.getEmail()) != null) {
+			errores.put("email", "El Email ingresado ya se encuentra registrado.");
+		}
+
+		// Validacion identificacion
+		validaIdentificacion(cliente.getIdentificacion());
+	
+		if (StringUtils.isBlank(cliente.getRazonSocialNombreApellido())) {
+			errores.put("nombreApellido", "El campo Nombre y Apellido es requerido.");
+		} else if (cliente.getRazonSocialNombreApellido().length() > 60) {
+			errores.put("nombreApellido", "El campo Nombre y Apellido no debe superar los 60 caracteres");
+		}
+
+		if (!errores.isEmpty()) {
+			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
+		}
+
+	}
+	
+	@Override
+	public void validaContactoProfesorAlumno(Contacto contacto) throws ErrorValidationException {
+
+		Map<String, String> errores = new HashMap<String, String>();
+
+		if (StringUtils.isBlank(contacto.getTelefonoMovil())) {
+			errores.put("telefonoMovil", "Debe ingresar al menos un teléfono fijo o celular");
+		} else {
+			
+			if (StringUtils.isBlank(contacto.getTelefonoMovil())
+					&& !Validations.isCelularValido(contacto.getTelefonoMovil())) {
+				errores.put("telefonoMovil",
+						"El campo Telefono movil debe contener exactamente 12 dígitos inclyendo el 15 despues del código de area sin 0. (Ej: 111560001234)");
+			}
+		}
+		
+		if (!errores.isEmpty()) {
+			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
+		}
+
+	}
+	
+	public void validaIdentificacion(Identificacion identificacion) throws ErrorValidationException {
+
+		Map<String, String> errores = new HashMap<String, String>();
+		
+		String numeroIdentificacion = identificacion.getNumero();
+		TipoIdentificacion tipoIdentificacion = identificacion.getTipo();
+
+		switch (tipoIdentificacion) {
+		case DNI:
+
+			if (StringUtils.isBlank(numeroIdentificacion)) {
+				errores.put("numeroIdentificacion", "El campo DNI es requerido.");
+			} else if (!Validations.isDNIValido(numeroIdentificacion)) {
+				errores.put("numeroIdentificacion", "El campo DNI Debe contener 7 u 8 caracteres numéricos");
+			}
+			break;
+		case CUIT:
+			if (StringUtils.isBlank(numeroIdentificacion)) {
+				errores.put("numeroIdentificacion", "El campo CUIT es requerido.");
+			} else if (numeroIdentificacion.length() != 11) {
+				errores.put("numeroIdentificacion", "El campo CUIT Debe tener exactamente 11 dígitos.");
+			} else if (!Validations.isCuitValido(numeroIdentificacion)) {
+				errores.put("numeroIdentificacion", "El campo CUIT debe comenzar con 20, 23, 24, 27, 30, 33 o 34.");
+			} else if (!Validations.isDigitoVerificadorCuitCuilValido(numeroIdentificacion)) {
+				errores.put("numeroIdentificacion", "El campo CUIT tiene el dígito verificador incorrecto.");
+			}
+			break;
+		case CUIL:
+			if (StringUtils.isBlank(numeroIdentificacion)) {
+				errores.put("numeroIdentificacion", "El campo CUIL es requerido.");
+			} else if (numeroIdentificacion.length() != 11) {
+				errores.put("numeroIdentificacion", "El campo CUIL debe tener exactamente 11 dígitos.");
+			} else if (!Validations.isCuilValido(numeroIdentificacion)) {
+				errores.put("numeroIdentificacion", "El campo CUIL debe comenzar con 20, 23, 24 o 27.");
+			} else if (!Validations.isDigitoVerificadorCuitCuilValido(numeroIdentificacion)) {
+				errores.put("numeroIdentificacion", "El campo CUIL tiene el dígito verificador incorrecto.");
+			}
+
+			break;
+		default:
+			break;
+		}
+
+		Cliente porNumero = getRepository().findByIdentificacionNumeroLikeIgnoreCase(numeroIdentificacion);
+		if (porNumero != null) {
+			Identificacion identificacionPorNumeroEncontrado = porNumero.getIdentificacion();
+			if (identificacionPorNumeroEncontrado.getTipo().equals(tipoIdentificacion)
+					|| identificacionPorNumeroEncontrado.getNumero().substring(2, 9).equals(numeroIdentificacion)) {
+				errores.put("numeroIdentificacion", tipoIdentificacion + " ya se encuentra registrado");
+			}
+		}
+
+
+		if (!errores.isEmpty()) {
+			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
+		}
+		
+	}
 
 	@Override
 	public void validarContacto(Contacto contacto) throws ErrorValidationException {
@@ -387,12 +512,57 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 
 		return cliente;
 	}
+	
+	@Override
+	public Cliente updateProfesorAlumno(Cliente entity) throws BusinessException {
+
+		validarClienteNoVacio(entity);
+		validaActualizacionDatosPersonalesProfesorAlumno(entity);
+		validaContactoProfesorAlumno(entity.getContacto());
+
+		Cliente cliente = this.get(entity.getId());
+		cliente.setId(entity.getId());
+		cliente.setRazonSocialNombreApellido(entity.getRazonSocialNombreApellido());
+		cliente.setUsername(entity.getUsername());
+		cliente.setEmail(entity.getEmail());
+		
+		cliente.getIdentificacion().setTipo(entity.getIdentificacion().getTipo());
+		cliente.getIdentificacion().setNumero(entity.getIdentificacion().getNumero());
+		cliente.getContacto().setTelefonoMovil(entity.getContacto().getTelefonoMovil());
+
+		cliente = this.getRepository().save(cliente);
+
+
+		return cliente;
+	}
 
 	@Override
 	public List<Cliente> listClientesListado() {
 		return getRepository().listClientesListado();
 	}
 
+	/**
+	 * Validaciones para actualizar datos de un profesor/alumno.
+	 * 
+	 * @param cliente
+	 * @throws ErrorValidationException
+	 * @throws BusinessException
+	 */
+	public void validaActualizacionDatosPersonalesProfesorAlumno(Cliente cliente)
+			throws ErrorValidationException, BusinessException {
+
+		Map<String, String> errores = new HashMap<String, String>();
+
+		if (StringUtils.isBlank(cliente.getRazonSocialNombreApellido())) {
+			errores.put("nombreApellido", "Debe ingresar su nombre y apellido.");
+		}
+
+		if (!errores.isEmpty()) {
+			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
+		}
+
+	}
+	
 	/**
 	 * Validaciones para actualizar datos de un cliente.
 	 * 
