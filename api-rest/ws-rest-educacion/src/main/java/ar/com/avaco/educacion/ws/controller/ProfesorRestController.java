@@ -1,7 +1,6 @@
 package ar.com.avaco.educacion.ws.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -42,6 +41,24 @@ public class ProfesorRestController extends AbstractDTORestController<ProfesorDT
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/profesores/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<JSONResponse> updateProfesor(@PathVariable("id") Long id, @RequestBody ProfesorDTO profesor) throws BusinessException {
+		ProfesorDTO updateProfesor = service.updateProfesor(id, profesor);
+		JSONResponse response = new JSONResponse();
+		response.setData(updateProfesor);
+		response.setStatus(JSONResponse.OK);	
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/profesores/", method = RequestMethod.POST)
+	public ResponseEntity<JSONResponse> create(@RequestBody ProfesorDTO profesor) throws BusinessException {
+		ProfesorDTO newProfesorDto = service.createProfesor(profesor);
+		JSONResponse response = new JSONResponse();
+		response.setData(newProfesorDto);
+		response.setStatus(JSONResponse.OK);	
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/profesores/habilitar/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<JSONResponse> habilitarProfesor(@PathVariable("id") Long id) throws BusinessException {
 		ProfesorDTO updateProfesor = service.bloquearHabilitarProfesor(id, false);

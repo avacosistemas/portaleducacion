@@ -2,7 +2,6 @@ package ar.com.avaco.educacion.ws.dto;
 
 import ar.com.avaco.educacion.domain.entities.Materia;
 import ar.com.avaco.educacion.domain.entities.Nivel;
-import ar.com.avaco.educacion.domain.entities.Profesor;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class MateriaProfesorDTO extends DTOEntity<Long> {

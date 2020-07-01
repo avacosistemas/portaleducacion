@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -97,20 +95,20 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 	/**
 	 * La fecha de nacimiento del cliente o inicio de actividades si es empresa.
 	 */
-	@Column(name = "FN_IA", nullable = false)
+	@Column(name = "FN_IA")
 	private Date fechaNacimientoInicioActividades;
 
 	/**
 	 * Determina si es masculino, femenino o empresa.
 	 */
 	@Enumerated(EnumType.STRING)
-	@Column(name = "GENERO", nullable = false)
+	@Column(name = "GENERO")
 	private Genero genero;
 
 	/**
 	 * Nacionalidad.
 	 */
-	@Column(name = "NACIONALIDAD", nullable = false)
+	@Column(name = "NACIONALIDAD")
 	private String nacionalidad;
 
 	/**

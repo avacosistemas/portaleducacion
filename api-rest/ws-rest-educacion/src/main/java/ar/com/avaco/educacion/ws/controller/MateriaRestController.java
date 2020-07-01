@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
-import ar.com.avaco.educacion.ws.dto.InstitucionDTO;
 import ar.com.avaco.educacion.ws.dto.MateriaDTO;
 import ar.com.avaco.educacion.ws.service.MateriaEPService;
 import ar.com.avaco.ws.rest.controller.AbstractDTORestController;

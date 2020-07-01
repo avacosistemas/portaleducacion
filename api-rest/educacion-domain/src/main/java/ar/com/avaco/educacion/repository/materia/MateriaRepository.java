@@ -15,6 +15,6 @@ public interface MateriaRepository extends NJRepository<Long, Materia>, MateriaR
 
 	List<Materia> findAllByProfesoresId(Long id);
 	
-	Materia findByDescripcionEqualsIgnoreCase(String descripcion);
+	Materia findByDescripcionEqualsIgnoreCaseAndNivelId(String descripcion, Integer idNivel);
 	
 }

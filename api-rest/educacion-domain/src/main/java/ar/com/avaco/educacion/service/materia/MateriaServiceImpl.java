@@ -91,7 +91,7 @@ public class MateriaServiceImpl extends NJBaseService<Long, Materia, MateriaRepo
 		// Validacion descripcion
 		if (StringUtils.isBlank(materia.getDescripcion())) {
 			errores.put("materia", "El campo materia es requerido.");
-		} else if (getRepository().findByDescripcionEqualsIgnoreCase(materia.getDescripcion()) != null) {
+		} else if (getRepository().findByDescripcionEqualsIgnoreCaseAndNivelId(materia.getDescripcion().trim(), materia.getNivel().getId()) != null) {
 			errores.put("materia", "El materia no esta disponible. Intente otro diferente.");
 		}
 
