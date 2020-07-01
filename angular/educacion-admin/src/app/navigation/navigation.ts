@@ -27,7 +27,7 @@ export const navigation = [
                         'translate': 'NAV.USUARIOS.TITLE',
                         'type' : 'item',
                         'url'  : '/' + environment.URL_PARAMETERS,
-                    },
+                    }                    
                 ]
             },
             {
@@ -50,6 +50,13 @@ export const navigation = [
                 'translate': 'NAV.ALUMNOS.TITLE',
                 'type' : 'item',
                 'url'  : '/' + environment.URL_PARAMETERS,
+            },
+            {
+                'id'   : 'instituciones',
+                'title': 'Instituciones',
+                'translate': 'NAV.INSTITUCIONES.TITLE',
+                'type' : 'item',
+                'url'  : '/' + environment.URL_INSTITUCIONES,
             }
             
         ]
