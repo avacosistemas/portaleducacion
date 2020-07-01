@@ -27,6 +27,14 @@ public class MateriaProfesorDTO extends DTOEntity<Long> {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public Long getIdMateria() {
+		return idMateria;
+	}
+
+	public void setIdMateria(Long idMateria) {
+		this.idMateria = idMateria;
+	}
 
 	public String getDescMateria() {
 		return descMateria;
@@ -67,10 +75,7 @@ public class MateriaProfesorDTO extends DTOEntity<Long> {
 	
 	public void setDTO(Materia materia) {
 		this.setId(materia.getId());
-		this.setDescMateria(materia.getDescripcion());
-		
-		this.setIdNivel(materia.getNivel().getId());
-		this.setDescNivel(materia.getNivel().getDescripcion());
+
 	}
 
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import ar.com.avaco.arc.core.component.bean.service.NJService;
 import ar.com.avaco.commons.exception.BusinessException;
+import ar.com.avaco.educacion.domain.entities.Materia;
 import ar.com.avaco.educacion.domain.entities.Profesor;
 
 public interface ProfesorService extends NJService<Long, Profesor> {
@@ -13,6 +14,8 @@ public interface ProfesorService extends NJService<Long, Profesor> {
 	Profesor getMateriaProfesor(Long id);
 	
 	List<Profesor> listProfesores();
+	
+	Profesor createMateriaProfesor(Long idMateria, Long idProfesor) throws BusinessException;
 
 	Profesor bloquearHabilitarProfesor(Profesor entity, boolean bloquear) throws BusinessException;
 	

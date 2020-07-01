@@ -15,6 +15,7 @@ import ar.com.avaco.educacion.domain.entities.cliente.Identificacion;
 import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
 import ar.com.avaco.educacion.service.profesor.ProfesorService;
 import ar.com.avaco.educacion.ws.dto.ClienteCompletoDTO;
+import ar.com.avaco.educacion.ws.dto.MateriaProfesorDTO;
 import ar.com.avaco.educacion.ws.dto.ProfesorDTO;
 import ar.com.avaco.educacion.ws.service.ProfesorEPService;
 import ar.com.avaco.ws.rest.service.CRUDEPBaseService;
@@ -45,7 +46,8 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 		profesor = service.bloquearHabilitarProfesor(profesor, bloquear);
 		return new ProfesorDTO(profesor);
 	}
-
+	
+	
 	@Override
 	protected Profesor convertToEntity(ProfesorDTO dto) {
 		
@@ -88,6 +90,5 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 	protected void setService(ProfesorService nivelService) {
 		this.service = nivelService;
 	}
-
 
 }

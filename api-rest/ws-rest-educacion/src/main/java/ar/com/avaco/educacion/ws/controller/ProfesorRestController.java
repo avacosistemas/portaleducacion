@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
-import ar.com.avaco.educacion.ws.dto.ClienteCompletoDTO;
 import ar.com.avaco.educacion.ws.dto.ProfesorDTO;
 import ar.com.avaco.educacion.ws.service.ProfesorEPService;
 import ar.com.avaco.ws.rest.controller.AbstractDTORestController;

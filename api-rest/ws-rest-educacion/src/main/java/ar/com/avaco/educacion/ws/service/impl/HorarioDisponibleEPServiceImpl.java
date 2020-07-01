@@ -1,5 +1,6 @@
 package ar.com.avaco.educacion.ws.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -21,9 +22,21 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 	@Override
 	public List<HorarioDisponibleDTO> listHorariosDispProfesor(Long idProfesor) {
 		List<HorarioDisponible> horarios = this.getService().listHorariosDispProfesor(idProfesor);
-		List<HorarioDisponibleDTO> convertToDtos = convertToDtos(horarios);
+		List<HorarioDisponibleDTO> convertToDtos = this.convertToDtos(horarios);
 		horarios = null;
 		return convertToDtos;
+	}
+	
+	public List<HorarioDisponibleDTO> convertToDtos(List<HorarioDisponible> horarios, Long idProfesor) {
+		List<HorarioDisponibleDTO> dtos = new ArrayList<>();
+		
+		HorarioDisponibleDTO disponibilidadDTO;
+		for (HorarioDisponible entity : horarios) {
+			disponibilidadDTO = convertToDto(entity);
+			disponibilidadDTO.setIdProfesor(idProfesor);
+			dtos.add(disponibilidadDTO);
+		}
+		return dtos;
 	}
 
 	@Override

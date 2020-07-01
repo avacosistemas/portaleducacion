@@ -66,7 +66,7 @@ public class InstitucionRestController extends AbstractDTORestController<Institu
 	
 	@RequestMapping(value = "/instituciones/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<JSONResponse> delete(@PathVariable("id") Long id) throws BusinessException {
-		return null;
+		return super.delete(id);
 	}
 
 	@RequestMapping(value = "/instituciones/", method = RequestMethod.DELETE)

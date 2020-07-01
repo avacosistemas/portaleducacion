@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Materia;
+import ar.com.avaco.educacion.domain.entities.Nivel;
 import ar.com.avaco.educacion.service.materia.MateriaService;
 import ar.com.avaco.educacion.ws.dto.MateriaDTO;
-import ar.com.avaco.educacion.ws.dto.MateriaProfesorDTO;
 import ar.com.avaco.educacion.ws.service.MateriaEPService;
 import ar.com.avaco.ws.rest.service.CRUDEPBaseService;
 
@@ -26,29 +26,15 @@ public class MateriaEPServiceImpl extends CRUDEPBaseService<Long, MateriaDTO, Ma
 		return convertToDtos;
 	}
 	
-	
-	@Override
-	protected Materia convertToEntity(MateriaDTO dto) {
-		Materia materia = new Materia();
-		materia.setId(dto.getId());
-		materia.setDescripcion(dto.getDescripcion());
-	
-		return materia;
-	}
-
-	@Override
-	protected MateriaDTO convertToDto(Materia entity) {
-		MateriaDTO materiaDto = new MateriaDTO();
-		
-		materiaDto.setId(entity.getId());
-		materiaDto.setDescripcion(entity.getDescripcion());
-		
-		return materiaDto;
-	}
-	
 	@Override
 	public MateriaDTO createMateria(MateriaDTO materiaDto) throws BusinessException {
-		Materia materia = materiaDto.toEntity();
+		Materia materia = new Materia();
+		
+		Nivel nivel = new Nivel();
+		nivel.setId(materiaDto.getIdNivel());
+		materia.setDescripcion(materiaDto.getDescripcion());
+		materia.setNivel(nivel);
+	
 		materia = service.createMateria(materia);
 		return new MateriaDTO(materia);
 	}
@@ -61,6 +47,30 @@ public class MateriaEPServiceImpl extends CRUDEPBaseService<Long, MateriaDTO, Ma
 		return new MateriaDTO(materia);
 	}
 	
+	@Override
+	protected Materia convertToEntity(MateriaDTO dto) {
+		Materia materia = new Materia();
+		materia.setId(dto.getId());
+		materia.setDescripcion(dto.getDescripcion());
+		
+		Nivel nivel = new Nivel();
+		nivel.setId(dto.getIdNivel());
+		
+		materia.setNivel(nivel);
+	
+		return materia;
+	}
+
+	@Override
+	protected MateriaDTO convertToDto(Materia entity) {
+		MateriaDTO materiaDto = new MateriaDTO();
+		
+		materiaDto.setId(entity.getId());
+		materiaDto.setDescripcion(entity.getDescripcion());
+		materiaDto.setIdNivel(entity.getNivel().getId());
+		
+		return materiaDto;
+	}
 	
 	//Service
 	@Override

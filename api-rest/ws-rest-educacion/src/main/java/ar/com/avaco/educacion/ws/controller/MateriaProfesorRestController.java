@@ -27,7 +27,7 @@ public class MateriaProfesorRestController extends AbstractDTORestController<Mat
 	
 	@RequestMapping(value = "/materiasprofesor/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> listByProfesor(@PathVariable("id") Long idProfesor) throws BusinessException {
-		List<MateriaProfesorDTO> listMateriasProfesor = this.service.listByProfesor(idProfesor);
+		List<MateriaProfesorDTO> listMateriasProfesor = this.service.listMateriasProfesor(idProfesor);
     	JSONResponse response = new JSONResponse();
 		response.setData(listMateriasProfesor);
 		response.setStatus(JSONResponse.OK);

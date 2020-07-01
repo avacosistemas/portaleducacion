@@ -33,12 +33,9 @@ public class InstitucionServiceImpl extends NJBaseService<Long, Institucion, Ins
 		validateInstitucionNoEmpty(entity);
 		validateInstitucionOnSave(entity);
 
-		Institucion institucion = new Institucion();
-		institucion.setNombre(entity.getNombre());
+		entity = this.getRepository().save(entity);
 
-		institucion = this.getRepository().save(institucion);
-
-		return institucion;
+		return entity;
 	}
 	
 	@Override
