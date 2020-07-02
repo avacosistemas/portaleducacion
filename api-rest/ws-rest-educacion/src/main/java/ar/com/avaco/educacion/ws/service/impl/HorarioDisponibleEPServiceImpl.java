@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Dia;
 import ar.com.avaco.educacion.domain.entities.HorarioDisponible;
-import ar.com.avaco.educacion.domain.entities.Profesor;
+
 import ar.com.avaco.educacion.service.disponibilidad.HorarioDisponibleService;
 import ar.com.avaco.educacion.ws.dto.HorarioDisponibleDTO;
 import ar.com.avaco.educacion.ws.dto.HorarioDisponibleFullDTO;
@@ -113,7 +113,6 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 		HorarioDisponibleDTO disponibilidadDTO;
 		for (HorarioDisponible entity : horarios) {
 			disponibilidadDTO = convertToDto(entity);
-			disponibilidadDTO.setIdProfesor(idProfesor);
 			dtos.add(disponibilidadDTO);
 		}
 		return dtos;
@@ -126,10 +125,6 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 		disponibilidad.setId(dto.getId());
 		disponibilidad.setDia(Dia.valueOf(dto.getDia()));
 		disponibilidad.setHora(dto.getHora());
-		
-		Profesor profesor = new Profesor();
-		profesor.setId(dto.getIdProfesor());
-		disponibilidad.setProfesor(profesor);
 	
 		return disponibilidad;
 	}
@@ -139,7 +134,6 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 		
 		HorarioDisponibleDTO disponibilidadDTO = new HorarioDisponibleDTO();
 		disponibilidadDTO.setId(entity.getId());
-		//disponibilidadDTO.setIdProfesor(entity.getProfesor().getId());
 		disponibilidadDTO.setDia(entity.getDia().name());
 		disponibilidadDTO.setHora(entity.getHora());
 		

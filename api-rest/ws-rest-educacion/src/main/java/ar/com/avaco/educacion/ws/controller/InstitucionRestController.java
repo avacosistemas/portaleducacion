@@ -68,11 +68,6 @@ public class InstitucionRestController extends AbstractDTORestController<Institu
 		return super.delete(id);
 	}
 
-	@RequestMapping(value = "/instituciones/", method = RequestMethod.DELETE)
-	public ResponseEntity<JSONResponse> delete(@RequestParam Map<String, String> customQuery) throws BusinessException {
-		return null;
-	}
-	
 	//Service
 	@Resource(name = "institucionEPService")
 	public void setService(InstitucionEPService institucionEPService) {

@@ -2,7 +2,7 @@ package ar.com.avaco.educacion.ws.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 import javax.annotation.Resource;
 
@@ -13,29 +13,37 @@ import ar.com.avaco.educacion.domain.entities.Materia;
 import ar.com.avaco.educacion.domain.entities.Profesor;
 import ar.com.avaco.educacion.service.profesor.ProfesorService;
 import ar.com.avaco.educacion.ws.dto.MateriaProfesorDTO;
+import ar.com.avaco.educacion.ws.dto.MateriaProfesorFullDTO;
 import ar.com.avaco.educacion.ws.service.MateriaProfesorEPService;
 import ar.com.avaco.ws.rest.service.CRUDEPBaseService;
 
 @Service("materiaProfesorEPService")
-public class MateriaProfesorEPServiceImpl extends CRUDEPBaseService<Long, MateriaProfesorDTO, Profesor, ProfesorService> implements MateriaProfesorEPService {
+public class MateriaProfesorEPServiceImpl extends CRUDEPBaseService<Long, MateriaProfesorFullDTO, Profesor, ProfesorService> implements MateriaProfesorEPService {
 
 
 	@Override
-	public List<MateriaProfesorDTO> listMateriasProfesor(Long id) {
+	public List<MateriaProfesorFullDTO> listMateriasProfesor(Long id) {
 		Profesor profesor = this.getService().getMateriaProfesor(id);
 	
-		List<MateriaProfesorDTO> convertToDtos = this.convertToDtos(profesor);
+		List<MateriaProfesorFullDTO> convertToDtos = this.convertToDtos(profesor);
 		profesor = null;
 		return convertToDtos;
 	}
 	
 
 	@Override
-	public MateriaProfesorDTO createMateriaProfesor(Long idMateria, Long idProfesor) throws BusinessException {
+	public MateriaProfesorDTO createMateriaProfesor(MateriaProfesorDTO materiaProfesor) throws BusinessException {
+		
+		Long idMateria = materiaProfesor.getIdMateria();
+		Long idProfesor = materiaProfesor.getIdProfesor();
+		
 		Profesor profesor = service.createMateriaProfesor(idMateria, idProfesor);
 		
 		MateriaProfesorDTO dto = new MateriaProfesorDTO();
-		Optional<Materia> materiaOpt = profesor.getMaterias().stream().filter(mat -> mat.getId().equals(idMateria)).findFirst();
+		dto.setIdMateria(idMateria);
+		dto.setIdProfesor(profesor.getId());
+		
+		/*Optional<Materia> materiaOpt = profesor.getMaterias().stream().filter(mat -> mat.getId().equals(idMateria)).findFirst();
 		
 		if(materiaOpt.isPresent()) {
 			
@@ -46,18 +54,23 @@ public class MateriaProfesorEPServiceImpl extends CRUDEPBaseService<Long, Materi
 			dto.setIdNivel(materia.getNivel().getId());
 			dto.setDescNivel(materia.getNivel().getDescripcion());
 
-		}
+		}*/
 		
 		return dto;
 	}
 	
-	public List<MateriaProfesorDTO> convertToDtos(Profesor profesor) {
+	@Override
+	public void removeMateriaProfesor(Long idProfesor, Long idMateria) throws BusinessException {
+		service.removeMateriaProfesor(idMateria, idProfesor);
+	}
+	
+	public List<MateriaProfesorFullDTO> convertToDtos(Profesor profesor) {
 		
-		MateriaProfesorDTO materiaProfesorDto;
-		List<MateriaProfesorDTO> dtos = new ArrayList<>();
+		MateriaProfesorFullDTO materiaProfesorDto;
+		List<MateriaProfesorFullDTO> dtos = new ArrayList<>();
 		for (Materia entity : profesor.getMaterias()) {
 		
-			materiaProfesorDto = new MateriaProfesorDTO();
+			materiaProfesorDto = new MateriaProfesorFullDTO();
 			
 			materiaProfesorDto.setId(profesor.getId());
 			
@@ -81,13 +94,13 @@ public class MateriaProfesorEPServiceImpl extends CRUDEPBaseService<Long, Materi
 	}
 
 	@Override
-	protected Profesor convertToEntity(MateriaProfesorDTO dto) {
+	protected Profesor convertToEntity(MateriaProfesorFullDTO dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected MateriaProfesorDTO convertToDto(Profesor entity) {
+	protected MateriaProfesorFullDTO convertToDto(Profesor entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}

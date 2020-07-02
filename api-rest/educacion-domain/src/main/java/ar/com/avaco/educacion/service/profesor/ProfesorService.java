@@ -42,6 +42,15 @@ public interface ProfesorService extends NJService<Long, Profesor> {
 	Profesor createMateriaProfesor(Long idMateria, Long idProfesor) throws BusinessException;
 	
 	/**
+	 * Remueve un registro profesor-materia
+	 * 
+	 * @param idMateria Id de la materia 
+	 * @param idProfesor Id del profesor
+	 * @throws BusinessException error de negocio
+	 */
+	void removeMateriaProfesor(Long idMateria, Long idProfesor) throws BusinessException;
+	
+	/**
 	 * Actualiza un profesor
 	 * 
 	 * @param entity Profesor a grabar

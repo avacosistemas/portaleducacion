@@ -62,12 +62,35 @@ public class ProfesorServiceImpl extends NJBaseService<Long, Profesor, ProfesorR
 	public Profesor createMateriaProfesor(Long idMateria, Long idProfesor) throws BusinessException {
 
 		Profesor profesor = this.getRepository().getOne(idProfesor);
-		Materia materia = materiaService.get(idProfesor);
-		materia.getProfesores().add(profesor);
+		Materia materia = materiaService.get(idMateria);
+		
+		if(!profesor.getMaterias().contains(materia)) {
+			
+			profesor.addMateria(materia);
+			materia.addProfesor(profesor);
+
+			profesor = this.getRepository().save(profesor);
+
+		} else {
+			throw new BusinessException("El profesor ya tiene asociada la materia");
+		}
+		
+		return profesor;
+	}
 	
+	/**
+	 * @see ProfesorService#removeMateriaProfesor(Long, Long)
+	 */
+	@Override
+	public void removeMateriaProfesor(Long idMateria, Long idProfesor) throws BusinessException {
+
+		Profesor profesor = this.getRepository().getOne(idProfesor);
+		Materia materia = materiaService.get(idMateria);
+		profesor.removeMateria(materia);
+		materia.removeProfesor(profesor);
+		
 		profesor = this.getRepository().save(profesor);
 
-		return profesor;
 	}
 	
 	/**

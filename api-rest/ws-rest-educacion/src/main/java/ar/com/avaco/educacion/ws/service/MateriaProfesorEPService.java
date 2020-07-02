@@ -4,12 +4,15 @@ import java.util.List;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.ws.dto.MateriaProfesorDTO;
+import ar.com.avaco.educacion.ws.dto.MateriaProfesorFullDTO;
 import ar.com.avaco.ws.rest.service.CRUDEPService;
 
-public interface MateriaProfesorEPService extends CRUDEPService<Long, MateriaProfesorDTO> {
+public interface MateriaProfesorEPService extends CRUDEPService<Long, MateriaProfesorFullDTO> {
 
-	List<MateriaProfesorDTO> listMateriasProfesor(Long idProfesor);
+	List<MateriaProfesorFullDTO> listMateriasProfesor(Long idProfesor);
 	
-	MateriaProfesorDTO createMateriaProfesor(Long idMateria, Long idProfesor) throws BusinessException;
+	MateriaProfesorDTO createMateriaProfesor(MateriaProfesorDTO materiaProfesor) throws BusinessException;
+	
+	void removeMateriaProfesor(Long idProfesor, Long idMateria) throws BusinessException;
 
 }

@@ -1,8 +1,6 @@
 package ar.com.avaco.educacion.ws.controller;
 
 import java.util.List;
-import java.util.Map;
-
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpStatus;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
@@ -67,11 +64,6 @@ public class MateriaRestController extends AbstractDTORestController<MateriaDTO,
 		return super.delete(id);
 	}
 
-	@RequestMapping(value = "/materias/", method = RequestMethod.DELETE)
-	public ResponseEntity<JSONResponse> delete(@RequestParam Map<String, String> customQuery) throws BusinessException {
-		return null;
-	}
-	
 	//Service
 	@Resource(name = "materiaEPService")
 	public void setService(MateriaEPService materiaEPService) {

@@ -49,6 +49,7 @@ public class MateriaServiceImpl extends NJBaseService<Long, Materia, MateriaRepo
 	public Materia createMateria(Materia entity) throws BusinessException {
 
 		validateMateriaNoEmpty(entity);
+		validateMateriaOnSave(entity);
 		
 		Nivel nivel = nivelService.get(entity.getNivel().getId());
 		
@@ -90,7 +91,6 @@ public class MateriaServiceImpl extends NJBaseService<Long, Materia, MateriaRepo
 		} else if (materia.getNivel().getId() == null) {
 			throw new BusinessException("Nivel vacío.");
 		}
-	
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class MateriaServiceImpl extends NJBaseService<Long, Materia, MateriaRepo
 	public void validateMateriaOnSave(Materia materia) throws ErrorValidationException, BusinessException {
 
 		Map<String, String> errores = new HashMap<String, String>();
-
+	
 		// Validacion descripcion
 		if (StringUtils.isBlank(materia.getDescripcion())) {
 			errores.put("materia", "El campo materia es requerido.");
@@ -115,9 +115,10 @@ public class MateriaServiceImpl extends NJBaseService<Long, Materia, MateriaRepo
 
 	}
 	
-	@Resource(name = "nivelService")
-	public void setNivelService(NivelService nivelService) {
-		this.nivelService = nivelService;
+	@Resource(name = "materiaRepository")
+	void setMateriaRepository(MateriaRepository materiaRepository) {
+		this.repository = materiaRepository;
 	}
+
 	
 }
