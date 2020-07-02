@@ -1,0 +1,6 @@
+export const INSTITUCIONES_SECURITY_DEF = {
+  readAccess: 'INSTITUCIONES_READ',
+  updateAccess: 'INSTITUCIONES_UPDATE',
+  createAccess: 'INSTITUCIONES_CREATE',
+  deleteAccess: 'INSTITUCIONES_DELETE'
+};
