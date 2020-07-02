@@ -95,20 +95,20 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 	/**
 	 * La fecha de nacimiento del cliente o inicio de actividades si es empresa.
 	 */
-	@Column(name = "FN_IA", nullable = false)
+	@Column(name = "FN_IA")
 	private Date fechaNacimientoInicioActividades;
 
 	/**
 	 * Determina si es masculino, femenino o empresa.
 	 */
 	@Enumerated(EnumType.STRING)
-	@Column(name = "GENERO", nullable = false)
+	@Column(name = "GENERO")
 	private Genero genero;
 
 	/**
 	 * Nacionalidad.
 	 */
-	@Column(name = "NACIONALIDAD", nullable = false)
+	@Column(name = "NACIONALIDAD")
 	private String nacionalidad;
 
 	/**

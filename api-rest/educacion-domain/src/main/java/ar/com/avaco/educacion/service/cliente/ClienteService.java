@@ -20,12 +20,16 @@ public interface ClienteService extends NJService<Long, Cliente> {
 	void validarAltaCliente(Cliente cliente) throws ErrorValidationException, BusinessException;
 
 	void validarContacto(Contacto contacto) throws ErrorValidationException;
+	
+	void validaContactoProfesorAlumno(Contacto contacto) throws ErrorValidationException;
 
 	Cliente getClienteCompleto(Long id);
 
 	List<Cliente> listClientesListado();
 
 	Cliente updateClienteCompleto(Cliente entity) throws BusinessException;
+	
+	Cliente updateProfesorAlumno(Cliente entity) throws BusinessException;
 
 	void validarActualizacionDatosPersonalesCliente(Cliente cliente) throws ErrorValidationException, BusinessException;
 

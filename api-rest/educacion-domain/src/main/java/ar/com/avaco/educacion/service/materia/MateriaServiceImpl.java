@@ -8,60 +8,62 @@ import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.avaco.arc.core.component.bean.service.NJBaseService;
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.commons.exception.ErrorValidationException;
 import ar.com.avaco.educacion.domain.entities.Materia;
-import ar.com.avaco.educacion.domain.entities.Profesor;
+import ar.com.avaco.educacion.domain.entities.Nivel;
 import ar.com.avaco.educacion.repository.materia.MateriaRepository;
-import ar.com.avaco.educacion.repository.profesor.ProfesorRepository;
-import ar.com.avaco.educacion.service.notificacion.NotificacionService;
-import ar.com.avaco.educacion.service.profesor.ProfesorService;
+import ar.com.avaco.educacion.service.nivel.NivelService;
 
 @Transactional
 @Service("materiaService")
 public class MateriaServiceImpl extends NJBaseService<Long, Materia, MateriaRepository> implements MateriaService {
 	
-	private ProfesorService profesorService;
+	@Autowired
+	private NivelService nivelService;
 	
+	/**
+	 * @see MateriaService#listByNivel(Integer)
+	 */
 	@Override
 	public List<Materia> listByNivel(Integer idNivel) {
 		return getRepository().findAllByNivelId(idNivel);
 	}
 	
+	/**
+	 * @see MateriaService#listByProfesor(Long)
+	 */
 	@Override
 	public List<Materia> listByProfesor(Long idProfesor) {
 		return getRepository().findAllByProfesoresId(idProfesor);
 	}
 	
+	/**
+	 * @see MateriaService#createMateria(Materia)
+	 */
 	@Override
 	public Materia createMateria(Materia entity) throws BusinessException {
 
 		validateMateriaNoEmpty(entity);
 		validateMateriaOnSave(entity);
-
+		
+		Nivel nivel = nivelService.get(entity.getNivel().getId());
+		
 		Materia materia = new Materia();
 		materia.setDescripcion(entity.getDescripcion());
+		materia.setNivel(nivel);
 
 		materia = this.getRepository().save(materia);
-
 		return materia;
 	}
 	
-	@Override
-	public Materia createMateriaProfesor(Long idMateria, Long idProfesor) throws BusinessException {
-
-		Materia materia = this.getRepository().findOne(idMateria);
-		Profesor profesor = profesorService.getProfesor(idProfesor);
-		materia.getProfesores().add(profesor);
-	
-		materia = this.getRepository().save(materia);
-
-		return materia;
-	}
-	
+	/**
+	 * @see MateriaService#updateMateria(Materia)
+	 */
 	@Override
 	public Materia updateMateria(Materia entity) throws BusinessException {
 
@@ -86,6 +88,8 @@ public class MateriaServiceImpl extends NJBaseService<Long, Materia, MateriaRepo
 	private void validateMateriaNoEmpty(Materia materia) throws BusinessException {
 		if (materia == null) {
 			throw new BusinessException("Materia vacía.");
+		} else if (materia.getNivel().getId() == null) {
+			throw new BusinessException("Nivel vacío.");
 		}
 	}
 
@@ -97,11 +101,11 @@ public class MateriaServiceImpl extends NJBaseService<Long, Materia, MateriaRepo
 	public void validateMateriaOnSave(Materia materia) throws ErrorValidationException, BusinessException {
 
 		Map<String, String> errores = new HashMap<String, String>();
-
+	
 		// Validacion descripcion
 		if (StringUtils.isBlank(materia.getDescripcion())) {
 			errores.put("materia", "El campo materia es requerido.");
-		} else if (getRepository().findByDescripcionEqualsIgnoreCase(materia.getDescripcion()) != null) {
+		} else if (getRepository().findByDescripcionEqualsIgnoreCaseAndNivelId(materia.getDescripcion().trim(), materia.getNivel().getId()) != null) {
 			errores.put("materia", "El materia no esta disponible. Intente otro diferente.");
 		}
 
@@ -115,10 +119,6 @@ public class MateriaServiceImpl extends NJBaseService<Long, Materia, MateriaRepo
 	void setMateriaRepository(MateriaRepository materiaRepository) {
 		this.repository = materiaRepository;
 	}
-	
-	@Resource(name = "profesorService")
-	public void setProfesorService(ProfesorService profesorService) {
-		this.profesorService = profesorService;
-	}
+
 	
 }

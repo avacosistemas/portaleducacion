@@ -33,8 +33,8 @@ public class Materia extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	@Column(name="DESC_MATERIA", nullable=false)
 	private String descripcion;
 	
-    @ManyToOne(fetch= FetchType.EAGER, cascade= CascadeType.MERGE)
-    @JoinColumn(name = "ID_NIVEL", insertable = false, updatable = false)
+    @ManyToOne(fetch= FetchType.EAGER)
+    @JoinColumn(name = "ID_NIVEL")
 	private Nivel nivel;
     
 	@ManyToMany(mappedBy = "materias")
@@ -84,6 +84,16 @@ public class Materia extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	public void setAulas(Set<Aula> aulas) {
 		this.aulas = aulas;
 	}
+	
+	public void addProfesor(Profesor profesor) {
+        this.profesores.add(profesor);
+        profesor.getMaterias().add(this);
+    }
+ 
+    public void removeProfesor(Profesor profesor) {
+        this.profesores.remove(profesor);
+        profesor.getMaterias().remove(this);
+    }
 
 	//TODO Agregar hashCode, equals y toString cuando se completen todos los atributos
 	

@@ -13,13 +13,16 @@ import ar.com.avaco.arc.core.component.bean.service.NJBaseService;
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.commons.exception.ErrorValidationException;
 import ar.com.avaco.educacion.domain.entities.Nivel;
-import ar.com.avaco.educacion.repository.institucion.InstitucionRepository;
 import ar.com.avaco.educacion.repository.nivel.NivelRepository;
 
 @Transactional
 @Service("nivelService")
 public class NivelServiceImpl extends NJBaseService<Integer, Nivel, NivelRepository> implements NivelService {
 
+	
+	/**
+	 * @see NivelService#createNivel(Nivel)
+	 */
 	@Override
 	public Nivel createNivel(Nivel entity) throws BusinessException {
 
@@ -34,6 +37,9 @@ public class NivelServiceImpl extends NJBaseService<Integer, Nivel, NivelReposit
 		return nivel;
 	}
 	
+	/**
+	 * @see NivelService#updateNivel(Nivel)
+	 */
 	@Override
 	public Nivel updateNivel(Nivel entity) throws BusinessException {
 
@@ -50,10 +56,10 @@ public class NivelServiceImpl extends NJBaseService<Integer, Nivel, NivelReposit
 	}
 	
 	/**
-	 * Valida que el nivel no sea null
+	 * Valida que el nivel no sea nulo
 	 * 
-	 * @param nivel
-	 * @throws BusinessException
+	 * @param nivel nivel a validar
+	 * @throws BusinessException error de negocio
 	 */
 	private void validateNivelNoEmpty(Nivel nivel) throws BusinessException {
 		if (nivel == null) {

@@ -16,13 +16,37 @@ import ar.com.avaco.ws.rest.service.CRUDEPBaseService;
 @Service("institucionEPService")
 public class InstitucionEPServiceImpl extends CRUDEPBaseService<Long, InstitucionDTO, Institucion, InstitucionService> implements InstitucionEPService {
 
-
 	@Override
 	public List<InstitucionDTO> listByAlumno(Long idAlumno) {
 		List<Institucion> instituciones = this.getService().listByAlumno(idAlumno);
 		List<InstitucionDTO> convertToDtos = convertToDtos(instituciones);
 		instituciones = null;
 		return convertToDtos;
+	}
+		
+	@Override
+	public InstitucionDTO createInstitucion(InstitucionDTO institucionDto) throws BusinessException {
+		Institucion institucion = new Institucion();
+		institucion.setNombre(institucionDto.getNombre());
+
+		institucion = service.createInstitucion(institucion);
+		return new InstitucionDTO(institucion);
+		
+	}
+
+	@Override
+	public InstitucionDTO updateInstitucion(Long id, InstitucionDTO institucionDto) throws BusinessException {
+		Institucion institucion = institucionDto.toEntity();
+		institucion.setId(id);
+		institucion = service.updateInstitucion(institucion);
+		return new InstitucionDTO(institucion);
+	}
+	
+	//Service
+	@Override
+	@Resource(name = "institucionService")
+	protected void setService(InstitucionService institucionService) {
+		this.service = institucionService;
 	}
 	
 	@Override
@@ -42,29 +66,6 @@ public class InstitucionEPServiceImpl extends CRUDEPBaseService<Long, Institucio
 		institucionDto.setNombre(entity.getNombre());
 		
 		return institucionDto;
-	}
-	
-	@Override
-	public InstitucionDTO createInstitucion(InstitucionDTO institucionDto) throws BusinessException {
-		Institucion institucion = institucionDto.toEntity();
-		institucion = service.updateInstitucion(institucion);
-		return new InstitucionDTO(institucion);
-	}
-
-	@Override
-	public InstitucionDTO updateInstitucion(Long id, InstitucionDTO institucionDto) throws BusinessException {
-		Institucion institucion = institucionDto.toEntity();
-		institucion.setId(id);
-		institucion = service.updateInstitucion(institucion);
-		return new InstitucionDTO(institucion);
-	}
-	
-	
-	//Service
-	@Override
-	@Resource(name = "institucionService")
-	protected void setService(InstitucionService institucionService) {
-		this.service = institucionService;
 	}
 	
 }

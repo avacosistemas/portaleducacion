@@ -36,7 +36,7 @@ public class HorarioDisponible extends ar.com.avaco.arc.core.domain.Entity<Long>
 	private String hora;
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
-    @JoinColumn(name = "ID_PROFESOR", insertable = false, updatable = false)
+    @JoinColumn(name = "ID_PROFESOR")
 	private Profesor profesor;
 
 	public HorarioDisponible() {}

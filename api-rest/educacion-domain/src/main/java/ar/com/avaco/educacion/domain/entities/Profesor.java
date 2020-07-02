@@ -100,6 +100,16 @@ public class Profesor extends Cliente {
 	public void setAulas(Set<Aula> aulas) {
 		this.aulas = aulas;
 	}
+	
+	public void addMateria(Materia materia) {
+        this.materias.add(materia);
+        materia.getProfesores().add(this);
+    }
+ 
+    public void removeMateria(Materia materia) {
+        this.materias.remove(materia);
+        materia.getProfesores().remove(this);
+    }
 
 	
 	//TODO Agregar hashCode, equals y toString cuando se completen todos los atributos

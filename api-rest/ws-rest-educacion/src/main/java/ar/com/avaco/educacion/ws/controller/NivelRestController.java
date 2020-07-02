@@ -54,14 +54,9 @@ public class NivelRestController extends AbstractDTORestController<NivelDTO, Int
 	
 	@RequestMapping(value = "/niveles/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<JSONResponse> delete(@PathVariable("id") Integer id) throws BusinessException {
-		return null;
+		return super.delete(id);
 	}
 
-	@RequestMapping(value = "/niveles/", method = RequestMethod.DELETE)
-	public ResponseEntity<JSONResponse> delete(@RequestParam Map<String, String> customQuery) throws BusinessException {
-		return null;
-	}
-	
 	//Service
 	@Resource(name = "nivelEPService")
 	public void setService(NivelEPService nivelEPService) {

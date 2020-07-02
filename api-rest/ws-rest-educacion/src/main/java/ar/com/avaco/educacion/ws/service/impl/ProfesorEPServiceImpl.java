@@ -7,14 +7,11 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import ar.com.avaco.commons.exception.BusinessException;
-import ar.com.avaco.educacion.domain.entities.Materia;
 import ar.com.avaco.educacion.domain.entities.Profesor;
-import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
 import ar.com.avaco.educacion.domain.entities.cliente.Identificacion;
 import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
 import ar.com.avaco.educacion.service.profesor.ProfesorService;
-import ar.com.avaco.educacion.ws.dto.ClienteCompletoDTO;
 import ar.com.avaco.educacion.ws.dto.ProfesorDTO;
 import ar.com.avaco.educacion.ws.service.ProfesorEPService;
 import ar.com.avaco.ws.rest.service.CRUDEPBaseService;
@@ -39,28 +36,46 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 	}
 	
 	@Override
+	public ProfesorDTO updateProfesor(Long id, ProfesorDTO profesorDto) throws BusinessException {
+		Profesor profesor = profesorDto.toEntity();
+		profesor.setId(id);
+		profesor = service.updateProfesor(profesor);
+		return new ProfesorDTO(profesor);
+	}
+	
+	@Override
+	public ProfesorDTO createProfesor(ProfesorDTO profesorDTO) throws BusinessException {
+		Profesor profesor = convertToEntity(profesorDTO);
+		profesor = service.createProfesor(profesor);
+		return new ProfesorDTO(profesor);
+		
+	}
+	
+	@Override
 	public ProfesorDTO bloquearHabilitarProfesor(Long id, boolean bloquear) throws BusinessException {
 		Profesor profesor = new Profesor();
 		profesor.setId(id);
 		profesor = service.bloquearHabilitarProfesor(profesor, bloquear);
 		return new ProfesorDTO(profesor);
 	}
-
+	
 	@Override
 	protected Profesor convertToEntity(ProfesorDTO dto) {
 		
 		Profesor profesor = new Profesor();
 		profesor.setId(dto.getId());
 		profesor.setRazonSocialNombreApellido(dto.getNombreApellido());
+	
 		Identificacion id = new Identificacion();
 		id.setTipo(TipoIdentificacion.valueOf(dto.getTipoIdentificacion()));
+		id.setNumero(dto.getNumeroIdentificacion());
 		id.setCliente(profesor);
 		profesor.setIdentificacion(id);
 		
 		Contacto contacto = new Contacto();
 		contacto.setTelefonoMovil(dto.getTelefonoMovil());
 		contacto.setCliente(profesor);
-		profesor.setIdentificacion(id);
+		profesor.setContacto(contacto);
 	
 		profesor.setUsername(dto.getUsername());
 		profesor.setEmail(dto.getEmail());
@@ -81,13 +96,11 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 		return profesorDTO;
 	}
 
-
 	//Service
 	@Override
 	@Resource(name = "profesorService")
-	protected void setService(ProfesorService nivelService) {
-		this.service = nivelService;
+	protected void setService(ProfesorService profesorService) {
+		this.service = profesorService;
 	}
-
 
 }

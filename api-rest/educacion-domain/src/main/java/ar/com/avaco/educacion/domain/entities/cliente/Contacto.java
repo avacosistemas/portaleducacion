@@ -45,38 +45,38 @@ public class Contacto extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	/**
 	 * El domicilio completo.
 	 */
-	@Column(name = "DOMICILIO", nullable = false)
+	@Column(name = "DOMICILIO")
 	private String domicilio;
 
 	/**
 	 * El codigo postal.
 	 */
-	@Column(name = "CODIGO_POSTAL", nullable = false)
+	@Column(name = "CODIGO_POSTAL")
 	private String codigoPostal;
 
 	/**
 	 * El barrio.
 	 */
-	@Column(name = "BARRIO", nullable = false)
+	@Column(name = "BARRIO")
 	private String barrio;
 
 	/**
 	 * Localidad.
 	 */
-	@Column(name = "LOCALIDAD", nullable = false)
+	@Column(name = "LOCALIDAD")
 	private String localidad;
 
 	/**
 	 * Provincia.
 	 */
 	@Enumerated
-	@Column(name = "PROVINCIA", nullable = false)
+	@Column(name = "PROVINCIA")
 	private Provincia provincia;
 
 	/**
 	 * Telefono fijo.
 	 */
-	@Column(name = "TEL_FIJO", nullable = false)
+	@Column(name = "TEL_FIJO")
 	private String telefonoFijo;
 
 	/**

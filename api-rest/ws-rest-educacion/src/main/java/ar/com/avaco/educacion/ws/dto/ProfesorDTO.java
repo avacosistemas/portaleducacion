@@ -21,8 +21,9 @@ public class ProfesorDTO extends DTOEntity<Long> {
 
 	public ProfesorDTO(Profesor profesor) {
 		this.setDTO(profesor);
-	}
 
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -96,7 +97,7 @@ public class ProfesorDTO extends DTOEntity<Long> {
 		Contacto contacto = new Contacto();
 		contacto.setTelefonoMovil(this.getTelefonoMovil());
 		contacto.setCliente(profesor);
-		profesor.setIdentificacion(id);
+		profesor.setContacto(contacto);
 	
 		return profesor;
 	}

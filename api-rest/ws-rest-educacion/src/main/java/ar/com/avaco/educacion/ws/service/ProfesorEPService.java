@@ -12,7 +12,10 @@ public interface ProfesorEPService extends CRUDEPService<Long, ProfesorDTO> {
 	
 	List<ProfesorDTO> listProfesores();
 	
+	ProfesorDTO updateProfesor(Long id, ProfesorDTO profesorDto) throws BusinessException;
+	
+	ProfesorDTO createProfesor(ProfesorDTO profesorDTO) throws BusinessException;
+	
 	ProfesorDTO bloquearHabilitarProfesor(Long id, boolean bloquear) throws BusinessException;
 
-	
 }
