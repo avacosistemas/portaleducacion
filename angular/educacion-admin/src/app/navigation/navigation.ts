@@ -57,6 +57,13 @@ export const navigation = [
                 'translate': 'NAV.INSTITUCIONES.TITLE',
                 'type' : 'item',
                 'url'  : '/' + environment.URL_INSTITUCIONES,
+            },
+            {
+                'id'   : 'materias',
+                'title': 'Materias',
+                'translate': 'NAV.MATERIAS.TITLE',
+                'type' : 'item',
+                'url'  : '/' + environment.URL_MATERIAS,
             }
             
         ]

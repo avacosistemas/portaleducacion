@@ -6,6 +6,7 @@ import { PRODUCTO_EXTERNO_DEF } from './producto_externo/producto_externo.def';
 import { IntegrationComponent } from '../integration/integration.component';
 import { PARAMETER_DEF } from './parameter/parameter.def';
 import { INSTITUCIONES_DEF } from './instituciones/instituciones.def';
+import { MATERIAS_DEF } from './materias/materias.def';
 
 export const ROUTES: Routes = [  
     { 
@@ -25,6 +26,11 @@ export const ROUTES: Routes = [
     },
     {
       path: INSTITUCIONES_DEF.navigation.url.split('/')[1],
+      component: IntegrationComponent,
+      canActivate: [AuthGuardService]
+    },
+    {
+      path: MATERIAS_DEF.navigation.url.split('/')[1],
       component: IntegrationComponent,
       canActivate: [AuthGuardService]
     }
