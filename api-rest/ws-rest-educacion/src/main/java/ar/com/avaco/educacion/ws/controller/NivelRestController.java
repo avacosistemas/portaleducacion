@@ -1,6 +1,7 @@
 package ar.com.avaco.educacion.ws.controller;
 
 import java.util.Map;
+import java.util.function.Predicate;
 
 import javax.annotation.Resource;
 
@@ -25,7 +26,15 @@ public class NivelRestController extends AbstractDTORestController<NivelDTO, Int
 
 	
 	@RequestMapping(value = "/niveles/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listNiveles() {
+	public ResponseEntity<JSONResponse> listNiveles(@RequestParam(value= "descripcion", required= false ) String descripcion) {
+		if(!descripcion.isEmpty()) {			
+			
+			ResponseEntity<JSONResponse>resp = super.listFiltered(nivel-> nivel.getDescripcion()
+					.toUpperCase().contains(descripcion.toUpperCase()));
+			
+			return resp;
+			
+			}		
 		return super.list();
 	}
 
@@ -33,7 +42,7 @@ public class NivelRestController extends AbstractDTORestController<NivelDTO, Int
 	public ResponseEntity<JSONResponse> get(@PathVariable("id") Integer id) throws BusinessException {
 		return super.get(id);
 	}
-
+	
 	@RequestMapping(value = "/niveles/", method = RequestMethod.POST)
 	public ResponseEntity<JSONResponse> create(@RequestBody NivelDTO nivel) throws BusinessException {
 		NivelDTO newNivelDto = service.createNivel(nivel);

@@ -8,3 +8,4 @@ export const INSTITUCIONES_CREATE_FORM_FIELDS_DEF = [
     controlType: 'textbox'
   }
 ];
+ 

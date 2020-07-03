@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -48,6 +50,23 @@ public abstract class AbstractDTORestController<RDTO extends DTOEntity<ID>, ID e
     			dtos.add(function.apply(es));
 			}
     		response.setData(dtos);
+    	}
+		response.setStatus(JSONResponse.OK);	
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+    }
+    
+    public <R> ResponseEntity<JSONResponse>  listFiltered(Predicate<RDTO> predicate) {
+    	LOGGER.info("Fetching entities list");
+    	JSONResponse response = new JSONResponse();
+    	List<RDTO> entities =  this.service.list();
+    	if(predicate == null) {    		
+    		response.setData(entities);
+    	}else {
+    		List<RDTO> dtos = entities
+    				.stream()    				
+    				.filter(predicate)
+    				.collect(Collectors.toList());    		
+    		response.setData(entities);
     	}
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
