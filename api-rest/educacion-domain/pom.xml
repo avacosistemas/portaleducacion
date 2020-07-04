@@ -39,8 +39,15 @@
 		<dependency>
 			<groupId>ar.com.avaco.commons</groupId>
 			<artifactId>commons-domain</artifactId>
-			<version>0.3</version>
+			<version>0.3</version>		
 		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-text</artifactId>
+			<version>1.8</version>
+		</dependency>
+		
 
 		<dependency>
 			<groupId>ar.com.avaco.ws.rest</groupId>
