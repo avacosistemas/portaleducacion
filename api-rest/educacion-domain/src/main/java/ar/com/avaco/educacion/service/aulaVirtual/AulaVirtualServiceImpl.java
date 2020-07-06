@@ -13,7 +13,7 @@ import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 import ar.com.avaco.educacion.exception.AulaVirtualException;
 import ar.com.avaco.educacion.repository.aula.AulaRepository;
 
-@Service("aulaService")
+@Service("aulaVirtualService")
 public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaRepository> implements AulaVirtualService {
 
 	private BigBlueButtonApi api;
