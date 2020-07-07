@@ -17,4 +17,6 @@ public interface MateriaEPService extends CRUDEPService<Long, MateriaDTO> {
 
 	List<MateriaGridDTO> listGrid();
 
+	MateriaDTO updateGridMateria(Long id, MateriaGridDTO materiaDto) throws BusinessException;
+
 }
