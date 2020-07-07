@@ -1,0 +1,17 @@
+.component-permission {
+    .crud-table{
+        #codeHeader,
+        #codeCell{
+            width: 150px;
+            max-width: 150px;
+            min-width: 150px;
+        }
+
+        #enabledHeader,
+        #enabledCell{
+            width: 100px;
+            min-width: 100px;
+            max-width: 100px;
+        }
+    }
+}

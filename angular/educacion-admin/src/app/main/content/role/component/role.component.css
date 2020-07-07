@@ -1,0 +1,8 @@
+app-esiliva-crud{
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    width: 100%;
+    overflow: hidden;
+}

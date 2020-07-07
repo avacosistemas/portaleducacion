@@ -6,7 +6,7 @@
 export const PREFIX_DOMAIN_API =  'http://localhost:8080/';
 
 export const environment = {
-    localAuth: false,
+    localAuth: true,
     
     production: false,
     hmr       : false,
@@ -16,6 +16,14 @@ export const environment = {
     /** AUTHENTICATION */
     AUTHENTICATION_URL:  PREFIX_DOMAIN_API + '/ws-rest-authentication/auth',
     AUTHENTICATION_REFRESH_TOKEN_URL:  PREFIX_DOMAIN_API + '/ws-rest-authentication/refresh',
+
+    PERMISSION_CRUD_URL: PREFIX_DOMAIN_API + '/ws-rest-authentication/permission',
+    PROFILE_CRUD_URL: PREFIX_DOMAIN_API + '/ws-rest-authentication/profile',
+    ROLE_CRUD_URL :  PREFIX_DOMAIN_API + '/ws-rest-authentication/role',
+    USER_CRUD_URL :  PREFIX_DOMAIN_API + '/ws-rest-authentication/role',
+
+    USER_VALIDATION_ADD_URL : PREFIX_DOMAIN_API + '/ws-rest-authentication/validationAdd',
+    USER_VALIDATION_EDIT_URL  : PREFIX_DOMAIN_API + '/ws-rest-authentication/validationEdit',
 
     /* Config General URl*/
     URL_ROOT: '',
@@ -35,5 +43,10 @@ export const environment = {
     URL_MATERIAS : 'materias',
     URL_PROFESORES : 'profesores',
     URL_LOGOUT_API: PREFIX_DOMAIN_API + 'user/logout',
+    URL_PERMISSION : 'permisos',
+    URL_PROFILE : 'perfiles',
+    URL_ROLE : 'roles',
+    URL_USER : 'usuarios'
+    
 };
 

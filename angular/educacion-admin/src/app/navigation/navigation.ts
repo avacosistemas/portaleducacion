@@ -26,7 +26,7 @@ export const navigation = [
                         'title': 'Usuarios',
                         'translate': 'NAV.USUARIOS.TITLE',
                         'type' : 'item',
-                        'url'  : '/' + environment.URL_PARAMETERS,
+                        'url'  : '/' + environment.URL_USER,
                     }                    
                 ]
             },
