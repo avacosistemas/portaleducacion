@@ -73,6 +73,8 @@ public class MateriaServiceImpl extends NJBaseService<Long, Materia, MateriaRepo
 		Materia materia = this.get(entity.getId());
 		materia.setId(entity.getId());
 		materia.setDescripcion(entity.getDescripcion());
+		
+		materia.setNivel(nivelService.get(entity.getNivel().getId()));		
 
 		materia = this.getRepository().save(materia);
 
@@ -104,9 +106,9 @@ public class MateriaServiceImpl extends NJBaseService<Long, Materia, MateriaRepo
 	
 		// Validacion descripcion
 		if (StringUtils.isBlank(materia.getDescripcion())) {
-			errores.put("materia", "El campo materia es requerido.");
+			errores.put("descripcion", "El campo descripcion es requerido.");
 		} else if (getRepository().findByDescripcionEqualsIgnoreCaseAndNivelId(materia.getDescripcion(), materia.getNivel().getId()) != null) {
-			errores.put("materia", "El materia no esta disponible. Intente otro diferente.");
+			errores.put("descripcion", "La combinación de velores Nivel/Descripción no puede ser duplicada. Intente otro diferente.");
 		}
 
 		if (!errores.isEmpty()) {

@@ -59,6 +59,14 @@ public class MateriaEPServiceImpl extends CRUDEPBaseService<Long, MateriaDTO, Ma
 	}
 	
 	@Override
+	public MateriaDTO updateGridMateria(Long id, MateriaGridDTO materiaDto) throws BusinessException {
+		Materia materia = materiaDto.toEntity();
+		materia.setId(id);
+		materia = service.updateMateria(materia);
+		return new MateriaDTO(materia);
+	}
+	
+	@Override
 	protected Materia convertToEntity(MateriaDTO dto) {
 		Materia materia = new Materia();
 		materia.setId(dto.getId());

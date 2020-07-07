@@ -56,6 +56,7 @@ public class MateriaRestController extends AbstractDTORestController<MateriaDTO,
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 	
+	
 	@RequestMapping(value = "/materias/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<JSONResponse> update(@PathVariable("id") Long id, @RequestBody MateriaDTO materia) throws BusinessException {
 		MateriaDTO materiaDtoToUpdate = service.updateMateria(id, materia);
@@ -64,7 +65,8 @@ public class MateriaRestController extends AbstractDTORestController<MateriaDTO,
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
-	
+		
+
 	@RequestMapping(value = "/materias/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<JSONResponse> delete(@PathVariable("id") Long id) throws BusinessException {
 		return super.delete(id);
