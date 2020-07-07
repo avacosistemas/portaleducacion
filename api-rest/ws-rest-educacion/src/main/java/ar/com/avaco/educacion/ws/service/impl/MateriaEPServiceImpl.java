@@ -1,6 +1,8 @@
 package ar.com.avaco.educacion.ws.service.impl;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -11,12 +13,21 @@ import ar.com.avaco.educacion.domain.entities.Materia;
 import ar.com.avaco.educacion.domain.entities.Nivel;
 import ar.com.avaco.educacion.service.materia.MateriaService;
 import ar.com.avaco.educacion.ws.dto.MateriaDTO;
+import ar.com.avaco.educacion.ws.dto.MateriaGridDTO;
 import ar.com.avaco.educacion.ws.service.MateriaEPService;
 import ar.com.avaco.ws.rest.service.CRUDEPBaseService;
 
 @Service("materiaEPService")
 public class MateriaEPServiceImpl extends CRUDEPBaseService<Long, MateriaDTO, Materia, MateriaService> implements MateriaEPService {
-
+	
+	
+	@Override
+	public List<MateriaGridDTO> listGrid() {
+		List<Materia> list = this.service.list();		
+		return list.stream()
+				.map(m -> new MateriaGridDTO(m))
+				.collect(Collectors.toList());
+	}
 
 	@Override
 	public List<MateriaDTO> listByNivel(Integer idNivel) {

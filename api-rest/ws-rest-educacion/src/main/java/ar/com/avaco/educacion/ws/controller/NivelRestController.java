@@ -34,7 +34,7 @@ public class NivelRestController extends AbstractDTORestController<NivelDTO, Int
 			
 			return resp;
 			
-			}		
+		}		
 		return super.list();
 	}
 

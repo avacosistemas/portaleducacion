@@ -6,7 +6,7 @@ import ar.com.avaco.ws.rest.dto.DTOEntity;
 public class NivelDTO extends DTOEntity<Integer> {
 	
 	private Integer id;
-	private String descripcion;
+	private String descripcion;	
 	
 	public NivelDTO() {}
 

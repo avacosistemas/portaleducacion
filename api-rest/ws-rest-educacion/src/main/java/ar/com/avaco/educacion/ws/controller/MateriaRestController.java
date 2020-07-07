@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.ws.dto.MateriaDTO;
+import ar.com.avaco.educacion.ws.dto.MateriaGridDTO;
 import ar.com.avaco.educacion.ws.service.MateriaEPService;
 import ar.com.avaco.ws.rest.controller.AbstractDTORestController;
 import ar.com.avaco.ws.rest.dto.JSONResponse;
@@ -24,8 +25,13 @@ public class MateriaRestController extends AbstractDTORestController<MateriaDTO,
 	
 	@RequestMapping(value = "/materias/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> list() {
-		return super.list();
-	}
+		List<MateriaGridDTO> listMaterias = this.service.listGrid();
+    	JSONResponse response = new JSONResponse();
+		response.setData(listMaterias);
+		response.setStatus(JSONResponse.OK);	
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}	
+	
 
 	@RequestMapping(value = "/materias/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> get(@PathVariable("id") Long id) throws BusinessException {

@@ -42,7 +42,7 @@ export const navigation = [
                 'title': 'Profesores',
                 'translate': 'NAV.PROFESORES.TITLE',
                 'type' : 'item',
-                'url'  : '/' + environment.URL_PARAMETERS,
+                'url'  : '/' + environment.URL_PROFESORES,
             },
             {
                 'id'   : 'alumnos',
@@ -61,7 +61,7 @@ export const navigation = [
             {
                 'id'   : 'materias',
                 'title': 'Materias',
-                'translate': 'NAV.MATERIAS.TITLE',
+                'translate': 'NAV.INSTITUCIONES.TITLE',
                 'type' : 'item',
                 'url'  : '/' + environment.URL_MATERIAS,
             }

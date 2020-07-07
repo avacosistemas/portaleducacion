@@ -33,6 +33,7 @@ export const environment = {
     URL_PARAMETERS : 'parameters',
     URL_INSTITUCIONES : 'instituciones',
     URL_MATERIAS : 'materias',
+    URL_PROFESORES : 'profesores',
     URL_LOGOUT_API: PREFIX_DOMAIN_API + 'user/logout',
 };
 

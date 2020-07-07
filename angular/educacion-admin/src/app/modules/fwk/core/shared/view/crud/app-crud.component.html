@@ -14,7 +14,7 @@
             <!-- APP TITLE -->
             <div class="logo my-12 m-sm-0"
                   fxLayout="row" fxLayoutAlign="start center">
-                <back-button *ngIf='crudDef.backButton' style= "margin-right: 10px;"></back-button>
+                <back-button *ngIf='crudDef && crudDef.backButton' style= "margin-right: 10px;"></back-button>
                 
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     {{translate('page_title')}}{{getParentTitle()}}
