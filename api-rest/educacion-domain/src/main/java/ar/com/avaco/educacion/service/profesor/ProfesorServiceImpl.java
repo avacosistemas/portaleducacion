@@ -44,7 +44,11 @@ public class ProfesorServiceImpl extends NJBaseService<Long, Profesor, ProfesorR
 	@Override
 	public Profesor getMateriaProfesor(Long id) {
 		List<Profesor> profes = getRepository().selectMateriasProfesor(id);
-		return profes.get(0);
+		Profesor profesor = null;
+		if (!profes.isEmpty()) {
+			profesor = profes.get(0);
+		}
+		return profesor;
 	}
 	
 	/**

@@ -24,7 +24,7 @@ public class MateriaProfesorEPServiceImpl extends CRUDEPBaseService<Long, Materi
 	@Override
 	public List<MateriaProfesorFullDTO> listMateriasProfesor(Long id) {
 		Profesor profesor = this.getService().getMateriaProfesor(id);
-	
+		
 		List<MateriaProfesorFullDTO> convertToDtos = this.convertToDtos(profesor);
 		profesor = null;
 		return convertToDtos;
@@ -68,20 +68,22 @@ public class MateriaProfesorEPServiceImpl extends CRUDEPBaseService<Long, Materi
 		
 		MateriaProfesorFullDTO materiaProfesorDto;
 		List<MateriaProfesorFullDTO> dtos = new ArrayList<>();
-		for (Materia entity : profesor.getMaterias()) {
-		
-			materiaProfesorDto = new MateriaProfesorFullDTO();
+		if (profesor != null) {
+			for (Materia entity : profesor.getMaterias()) {
 			
-			materiaProfesorDto.setId(profesor.getId());
-			
-			materiaProfesorDto.setIdMateria(entity.getId());
-			materiaProfesorDto.setDescMateria(entity.getDescripcion());
-			
-			materiaProfesorDto.setIdNivel(entity.getNivel().getId());
-			materiaProfesorDto.setDescNivel(entity.getNivel().getDescripcion());
-			
-			
-			dtos.add(materiaProfesorDto);
+				materiaProfesorDto = new MateriaProfesorFullDTO();
+				
+				materiaProfesorDto.setId(profesor.getId());
+				
+				materiaProfesorDto.setIdMateria(entity.getId());
+				materiaProfesorDto.setDescMateria(entity.getDescripcion());
+				
+				materiaProfesorDto.setIdNivel(entity.getNivel().getId());
+				materiaProfesorDto.setDescNivel(entity.getNivel().getDescripcion());
+				
+				
+				dtos.add(materiaProfesorDto);
+			}
 		}
 		return dtos;
 	}

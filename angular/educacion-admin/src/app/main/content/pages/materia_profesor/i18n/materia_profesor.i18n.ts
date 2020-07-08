@@ -1,0 +1,33 @@
+export const MATERIA_PROFESOR_I18N_DEF = {
+  name: 'MATERIA_PROFESOR_I18N_DEF',
+  lang: 'es',
+  words: {
+    page_title: 'Materias del Profesor',
+    materia_profesor_nav_def: 'Materias del Profesor',
+    materia_profesor_create_form_fields_def_field_id: 'ID',
+    materia_profesor_create_form_fields_def_field_idmateria: 'idMateria',
+    materia_profesor_create_form_fields_def_field_descmateria: 'Materia',
+    materia_profesor_create_form_fields_def_field_idnivel: 'idNivel',
+    materia_profesor_create_form_fields_def_field_descnivel: 'Nivel',
+    materia_profesor_update_form_fields_def_field_id: 'ID',
+    materia_profesor_update_form_fields_def_field_idmateria: 'idMateria',
+    materia_profesor_update_form_fields_def_field_descmateria: 'Materia',
+    materia_profesor_update_form_fields_def_field_idnivel: 'idNivel',
+    materia_profesor_update_form_fields_def_field_descnivel: 'Nivel',
+    materia_profesor_read_form_fields_def_field_id: 'ID',
+    materia_profesor_read_form_fields_def_field_idmateria: 'idMateria',
+    materia_profesor_read_form_fields_def_field_descmateria: 'Materia',
+    materia_profesor_read_form_fields_def_field_idnivel: 'idNivel',
+    materia_profesor_read_form_fields_def_field_descnivel: 'Nivel',
+    materia_profesor_filter_form_fields_def_field_id: 'ID',
+    materia_profesor_filter_form_fields_def_field_idmateria: 'idMateria',
+    materia_profesor_filter_form_fields_def_field_descmateria: 'Materia',
+    materia_profesor_filter_form_fields_def_field_idnivel: 'idNivel',
+    materia_profesor_filter_form_fields_def_field_descnivel: 'Nivel',
+    materia_profesor_grid_def_column_id: 'ID',
+    materia_profesor_grid_def_column_idmateria: 'idMateria',
+    materia_profesor_grid_def_column_descmateria: 'Materia',
+    materia_profesor_grid_def_column_idnivel: 'idNivel',
+    materia_profesor_grid_def_column_descnivel: 'Nivel'
+  }
+};

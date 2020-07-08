@@ -8,7 +8,8 @@ export const locale = {
             'CLASES' : {'TITLE' : 'Contenidos'},
             'PROFESORES' : {'TITLE' : 'Profesores'},
             'ALUMNOS' : {'TITLE' : 'Productos'},
-            'INSTITUCIONES' : {'TITLE' : 'Instituiciones'}
+            'INSTITUCIONES' : {'TITLE' : 'Instituiciones'},
+            'ADMINISTRATION' : {'TITLE' : 'Menu General'}
         }
     }
 };

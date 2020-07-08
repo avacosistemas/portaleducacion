@@ -1,0 +1,6 @@
+export const MATERIA_PROFESOR_SECURITY_DEF = {
+  readAccess: 'MATERIA_PROFESOR_READ',
+  updateAccess: 'MATERIA_PROFESOR_UPDATE',
+  createAccess: 'MATERIA_PROFESOR_CREATE',
+  deleteAccess: 'MATERIA_PROFESOR_DELETE'
+};

@@ -42,7 +42,7 @@ export const environment = {
     URL_INSTITUCIONES : 'instituciones',
     URL_MATERIAS : 'materias',
     URL_PROFESORES : 'profesores',
-    URL_LOGOUT_API: PREFIX_DOMAIN_API + 'user/logout',
+    URL_LOGOUT_API: PREFIX_DOMAIN_API + 'logout',
     URL_PERMISSION : 'permisos',
     URL_PROFILE : 'perfiles',
     URL_ROLE : 'roles',

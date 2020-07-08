@@ -8,6 +8,7 @@ import { USER_DEF } from '../user/component/user.def';
 import { ROLE_DEF } from '../role/component/role.def';
 import { PROFESORES_DEF } from './profesores/profesores.def';
 import { PERMISSION_DEF } from '../permission/component/permission.def';
+import { MATERIA_PROFESOR_DEF } from './materia_profesor/materia_profesor.def';
 
 export const COMPONENTS: ComponentDef[] = [
   PRODUCTO_EXTERNO_DEF,
@@ -17,6 +18,7 @@ export const COMPONENTS: ComponentDef[] = [
   USER_DEF,
   ROLE_DEF,
   PROFESORES_DEF,
-  PERMISSION_DEF
+  PERMISSION_DEF,
+  MATERIA_PROFESOR_DEF
 ];
 

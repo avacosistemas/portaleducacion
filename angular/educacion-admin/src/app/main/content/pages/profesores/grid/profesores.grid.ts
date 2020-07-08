@@ -42,6 +42,18 @@ export const PROFESORES_GRID_DEF = {
     'telefonoMovil'
   ],
   actions: [
+    {
+      actionNameKey: 'profesores_grid_def_button_action_materia_profesor',
+      actionType: 'redirect',
+      redirect: {
+        url: '/materiaProfesor',
+        querystring: {
+          idProfesor : 'id',
+          parentTitle: 'nombreApellido'
+        }
+      },
+      icon: 'library_books'
+    },
    
     {
       actionNameKey: 'profesores_grid_def_button_action_nuevo_horario',

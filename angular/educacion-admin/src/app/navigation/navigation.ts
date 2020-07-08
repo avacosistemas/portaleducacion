@@ -12,7 +12,7 @@ export const navigation = [
                 'title' : 'Seguridad',
                 'translate': 'NAV.SEGURIDAD.TITLE',
                 'type' : 'collapse',
-                'icon' : 'settings',
+                'icon' : 'lock',
                 'children' : [
                     {
                         'id'   : 'parameters',
@@ -21,18 +21,19 @@ export const navigation = [
                         'type' : 'item',
                         'url'  : '/' + environment.URL_PARAMETERS,
                     },
-                    {
-                        'id'   : 'usuarios',
-                        'title': 'Usuarios',
-                        'translate': 'NAV.USUARIOS.TITLE',
-                        'type' : 'item',
-                        'url'  : '/' + environment.URL_USER,
-                    }                    
+                    // {
+                    //     'id'   : 'usuarios',
+                    //     'title': 'Usuarios',
+                    //     'translate': 'NAV.USUARIOS.TITLE',
+                    //     'type' : 'item',
+                    //     'url'  : '/' + environment.URL_USER,
+                    // }                    
                 ]
             },
             {
                 'id'   : 'clases',
                 'title': 'Clases',
+                'icon' : 'cast_for_education',
                 'translate': 'NAV.CLASES.TITLE',
                 'type' : 'item',
                 'url'  : '/' + environment.URL_PARAMETERS,
@@ -42,6 +43,7 @@ export const navigation = [
                 'title': 'Profesores',
                 'translate': 'NAV.PROFESORES.TITLE',
                 'type' : 'item',
+                'icon' : 'school',
                 'url'  : '/' + environment.URL_PROFESORES,
             },
             {
@@ -49,12 +51,14 @@ export const navigation = [
                 'title': 'Alumnos',
                 'translate': 'NAV.ALUMNOS.TITLE',
                 'type' : 'item',
+                'icon' : 'emoji_people',
                 'url'  : '/' + environment.URL_PARAMETERS,
             },
             {
                 'id'   : 'instituciones',
                 'title': 'Instituciones',
                 'translate': 'NAV.INSTITUCIONES.TITLE',
+                'icon' : 'account_balance',
                 'type' : 'item',
                 'url'  : '/' + environment.URL_INSTITUCIONES,
             },
@@ -62,6 +66,7 @@ export const navigation = [
                 'id'   : 'materias',
                 'title': 'Materias',
                 'translate': 'NAV.INSTITUCIONES.TITLE',
+                'icon' : 'menu_book',
                 'type' : 'item',
                 'url'  : '/' + environment.URL_MATERIAS,
             }
