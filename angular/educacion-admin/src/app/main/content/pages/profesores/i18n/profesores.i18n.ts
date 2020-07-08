@@ -38,6 +38,10 @@ export const PROFESORES_I18N_DEF = {
     profesores_grid_def_column_numeroidentificacion: 'Número de Identificación',
     profesores_grid_def_column_username: 'Usuario',
     profesores_grid_def_column_email: 'Email',
-    profesores_grid_def_column_telefonomovil: 'Celular'
+    profesores_grid_def_column_telefonomovil: 'Celular',
+    profesores_grid_def_button_action_nuevo_horario: 'Agregar horario',
+    profesores_grid_def_button_action_habilitar: 'Habilitar',
+    profesores_grid_def_button_action_bloquear: 'Bloquear'
+
   }
 };

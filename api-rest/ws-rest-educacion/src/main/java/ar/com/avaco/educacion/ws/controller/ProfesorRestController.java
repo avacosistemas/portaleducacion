@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
@@ -57,8 +58,8 @@ public class ProfesorRestController extends AbstractDTORestController<ProfesorDT
 		response.setData(newProfesorDto);
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
-	}
-
+	}	
+		
 	@RequestMapping(value = "/profesores/habilitar/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<JSONResponse> habilitarProfesor(@PathVariable("id") Long id) throws BusinessException {
 		ProfesorDTO updateProfesor = service.bloquearHabilitarProfesor(id, false);
@@ -76,7 +77,7 @@ public class ProfesorRestController extends AbstractDTORestController<ProfesorDT
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
-
+	
 	
 	//Service
 	@Resource(name = "profesorEPService")
