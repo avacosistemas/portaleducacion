@@ -17,7 +17,6 @@ export const INSTITUCIONES_GRID_DEF = {
 
   
   displayedColumns: [
-    'id',
     'nombre'
   ]
 };

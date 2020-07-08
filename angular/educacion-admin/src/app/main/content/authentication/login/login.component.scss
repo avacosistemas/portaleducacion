@@ -79,7 +79,7 @@
             #login-form {
                 padding: 128px 48px 48px 48px;
                 a {
-                    color:#3400FF !important;
+                    color:#001e56 !important;
                 }
                 @include media-breakpoint('xs') {
                     text-align: center;
@@ -143,7 +143,7 @@
                     }
 
                     .btnlogin {
-                        background-color: #3400FF;
+                        background-color: #001e56;
                         color: white;
                         padding: 0px 20px;
                         margin: 8px 0;

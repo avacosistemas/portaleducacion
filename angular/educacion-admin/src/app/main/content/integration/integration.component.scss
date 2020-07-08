@@ -1,5 +1,9 @@
 @import "src/@fuse/scss/fuse";
 @import "../../content/pages/producto_externo/scss/producto_externo.component.scss";
+@import "../../content/pages/instituciones/scss/instituciones.component.scss";
+@import "../../content/pages/materias/scss/materias.component.scss";
+@import "../../content/pages/profesores/scss/profesores.component.scss";
+
 
 crud{
     position: relative;
@@ -15,7 +19,7 @@ crud{
 }
 
 .mat-green-300-bg {
-    background-color: #3400FF !important;
+    background-color: #001e56 !important;
     color: white !important;
 }
 

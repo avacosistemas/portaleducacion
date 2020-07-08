@@ -13,9 +13,15 @@ export const PROFESORES_DEF: CrudDef = {
     name: 'PROFESORES',
     i18n: PROFESORES_I18N_DEF,
     grid: PROFESORES_GRID_DEF, // Si el crud tiene grilla, entonces se agrega su definicion.
+    formsDef: {
+        create: {
+            fields: PROFESORES_CREATE_FORM_FIELDS_DEF,
+            showSubmitContinue: true 
+        }
+    },
     forms: {
         filter: PROFESORES_FILTER_FORM_FIELDS_DEF, // Si el crud tiene campos de busqueda, entonces se agrega su definicion.
-        create: PROFESORES_CREATE_FORM_FIELDS_DEF, // Si el crud tiene formulario de alta, entonces se agrega su definicion.
+        // create: PROFESORES_CREATE_FORM_FIELDS_DEF, // Si el crud tiene formulario de alta, entonces se agrega su definicion.
         update: PROFESORES_UPDATE_FORM_FIELDS_DEF, // Si el crud tiene formulario de modificacion, entonces se agrega su definicion.
         read:  PROFESORES_READ_FORM_FIELDS_DEF // Si existe un formulario de edicion no exite uno de solo lectura
     },
@@ -26,6 +32,6 @@ export const PROFESORES_DEF: CrudDef = {
         url: 'http://localhost:8080/ws-rest-educacion/profesores/'
     },
     dialogConfig: {
-        width: '400px'
+        width: '800px'
     }   
 };

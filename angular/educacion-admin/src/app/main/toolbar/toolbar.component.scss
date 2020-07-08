@@ -110,7 +110,7 @@
 	margin-right:10px;
 }
 .user_online_name i {
-	color: #3400FF !important;
+	color: #001e56 !important;
 	float: left;
 }
 .user_online_name .icon-user_menu {
@@ -128,7 +128,7 @@
 }
 .user_menu {
 	width: 170px;
-    background-color: #3400FF;
+    background-color: #001e56;
     position: absolute;
 	margin-top: 43px;
     z-index: -100;
@@ -284,10 +284,10 @@
 	}
 }
 .custom-nav-list a:hover{
-	color: #3400FF !important;
+	color: #001e56 !important;
 }
 .dropdown-content-scroll a:hover{
-	color: #3400FF !important;
+	color: #001e56 !important;
 }
 
 /* Style the navigation menu */
@@ -306,13 +306,13 @@
 .change .bar1 {
     -webkit-transform: rotate(-43deg) translate(-6px, 5px);
 	transform: rotate(-43deg) translate(-6px, 5px);
-	background-color: #3400FF;
+	background-color: #001e56;
 }
-.change .bar2 {opacity: 0; background-color: #3400FF;}
+.change .bar2 {opacity: 0; background-color: #001e56;}
 .change .bar3 {
     -webkit-transform: rotate(40deg) translate(-5px, -4px);
 	transform: rotate(40deg) translate(-5px, -4px);
-	background-color: #3400FF;
+	background-color: #001e56;
 }
 #menuToggle
 {
@@ -327,7 +327,7 @@
 	cursor: pointer;
 }
 #menuToggle:hover .bar1, #menuToggle:hover .bar2 , #menuToggle:hover .bar3 {
-	background-color: #3400FF;
+	background-color: #001e56;
 }
 #menuToggle input
 {
@@ -416,11 +416,11 @@
 }
 .dropdown-content .selected {
 	font-weight: 800 !important;
-	color: #3400FF !important;
+	color: #001e56 !important;
 }
 .custom-nav-list .selected {
 	font-weight: 800 !important;
-	color: #3400FF !important;
+	color: #001e56 !important;
 }
 .dropdown-content a  div  {
 	vertical-align:middle;display:table-cell;
@@ -494,7 +494,7 @@
     cursor:pointer;
 }
 .dropdown-content-footer .col1-m-foo:hover {
-    color:#3400FF;
+    color:#001e56;
 }
 .dropdown-content-footer .col1-m-foo i {
 	font-weight: 300;
@@ -639,7 +639,7 @@
     width:100%;
 }
 .navbar-fixed  .custom-navbar-width-fixed  .button-login-a {
-    background: #3400FF;
+    background: #001e56;
     color: #f0f1f0 !important;
     display: inline-block;
     letter-spacing: 0px;
@@ -705,7 +705,7 @@ span.psw {
     padding-top: 16px;
 }
 .button-login {
-    background: #3400FF;
+    background: #001e56;
     color: #f0f1f0 !important;
     display: inline-block;
     font-weight: 400;
@@ -756,7 +756,7 @@ span.psw {
 	}
 	.button-login-responsive {
 		display:block;
-		color: #3400FF;
+		color: #001e56;
 	}
 	.user_online_name .button-login-responsive i {
         display: block !important;
@@ -780,7 +780,7 @@ span.psw {
 	}
 	.button-login-responsive i {
 		display:block !important;
-		color: #3400FF;
+		color: #001e56;
 		font-size: 29px !important;
 		padding: 6px 0px;
 	}

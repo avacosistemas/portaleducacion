@@ -21,7 +21,6 @@ export const MATERIAS_GRID_DEF = {
   sortAllColumns: true,
   deleteAction: true, 
   displayedColumns: [
-    'id',
     'nombreNivel',
     'descripcion'
   ]

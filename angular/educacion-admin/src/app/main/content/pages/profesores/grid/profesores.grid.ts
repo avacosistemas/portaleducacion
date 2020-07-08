@@ -34,7 +34,6 @@ export const PROFESORES_GRID_DEF = {
   sortAllColumns: true,
   deleteAction: true, 
   displayedColumns: [
-    'id',
     'nombreApellido',
     'tipoIdentificacion',
     'numeroIdentificacion',

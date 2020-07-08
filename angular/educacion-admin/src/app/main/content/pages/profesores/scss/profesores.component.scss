@@ -1,0 +1,62 @@
+.profesores-modal {
+    // .sectionIdDiv {
+    //     visibility: hidden;
+    //     height: 0px;
+    // }
+    app-dynamic-form-component {
+        overflow: hidden;
+    }
+}
+
+.component-PROFESORES {
+    .crud-table{
+        
+        .action-cell {
+            width: 160px !important;
+            min-width: 160px !important;
+            max-width: 160px !important;
+        }
+
+        #nombreNivelHeader,
+        #nombreNivelCell{
+            width: 220px;
+            min-width: 220px;
+            max-width: 220px;
+        }
+
+        mat-header-cell.checkbox-cell {
+            display: none;
+        }
+        
+        mat-row.mat-row > mat-cell:nth-child(1) {
+            display: none;
+        }
+
+    }
+}
+.control-mat-dialog .dynamicFormDiv[name=subForm]{
+    
+    .juancitoDiv{
+        display: inline-block;
+        width:80%;
+        margin-right: 5%;
+    }
+    
+
+}
+
+#info_title > label:nth-child(1) > div:nth-child(1), #agenda_title > label:nth-child(1) > div:nth-child(1) {
+	display:none;
+}
+
+#info_title > label:nth-child(1) > span:nth-child(2), #agenda_title > label:nth-child(1) > span:nth-child(2) {
+    font-size: 16px;
+    color: gray;
+    font-weight: bolder;
+}
+
+.info_titleDiv > div:nth-child(2), .agenda_titleDiv > div:nth-child(2) {
+    background-color: gainsboro;
+    text-align: center;
+    padding: 3px;
+}

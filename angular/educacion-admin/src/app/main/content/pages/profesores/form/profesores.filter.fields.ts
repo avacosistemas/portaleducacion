@@ -1,12 +1,5 @@
 export const PROFESORES_FILTER_FORM_FIELDS_DEF = [
   {
-    key: 'id',
-    labelKey: 'PROFESORES_FILTER_FORM_FIELDS_DEF_FIELD_id',
-    label: 'ID',
-    type: 'number',
-    controlType: 'number'
-  },
-  {
     key: 'nombreApellido',
     labelKey: 'PROFESORES_FILTER_FORM_FIELDS_DEF_FIELD_nombreapellido',
     label: 'Nombre y Apellido',
