@@ -20,7 +20,6 @@ import ar.com.avaco.educacion.service.materia.MateriaService;
 @Service("profesorService")
 public class ProfesorServiceImpl extends NJBaseService<Long, Profesor, ProfesorRepository> implements ProfesorService {
 
-	
 	private MateriaService materiaService;
 	private ClienteService clienteService;
 	
