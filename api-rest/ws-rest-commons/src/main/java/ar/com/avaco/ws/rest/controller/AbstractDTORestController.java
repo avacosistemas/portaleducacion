@@ -66,7 +66,7 @@ public abstract class AbstractDTORestController<RDTO extends DTOEntity<ID>, ID e
     				.stream()    				
     				.filter(predicate)
     				.collect(Collectors.toList());    		
-    		response.setData(entities);
+    		response.setData(dtos);
     	}
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);

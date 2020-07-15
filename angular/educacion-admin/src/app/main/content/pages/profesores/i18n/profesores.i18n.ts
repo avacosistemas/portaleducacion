@@ -41,7 +41,7 @@ export const PROFESORES_I18N_DEF = {
     profesores_grid_def_column_telefonomovil: 'Celular',
     profesores_grid_def_button_action_nuevo_horario: 'Agregar horario',
     profesores_grid_def_button_action_habilitar: 'Habilitar',
-    profesores_grid_def_button_action_bloquear: 'Bloquear'
-
+    profesores_grid_def_button_action_bloquear: 'Bloquear',
+    profesores_grid_def_button_action_materia_profesor: 'Materias'
   }
 };

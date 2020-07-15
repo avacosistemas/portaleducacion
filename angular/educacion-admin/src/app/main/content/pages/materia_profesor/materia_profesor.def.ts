@@ -29,7 +29,7 @@ export const MATERIA_PROFESOR_DEF: CrudDef = {
     security: MATERIA_PROFESOR_SECURITY_DEF,
     ws: {
         key: 'MATERIA_PROFESOR_CRUD_URL',
-        url: 'http://localhost:8080/ws-rest-educacion/materiasprofesor'
+        url: 'http://localhost:8080/ws-rest-educacion/materiasprofesor/'
     },
     dialogConfig: {
         width: '800px'

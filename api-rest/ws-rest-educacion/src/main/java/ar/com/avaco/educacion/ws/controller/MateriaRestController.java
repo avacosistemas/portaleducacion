@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
@@ -22,7 +23,7 @@ import ar.com.avaco.ws.rest.dto.JSONResponse;
 @RestController
 public class MateriaRestController extends AbstractDTORestController<MateriaDTO, Long, MateriaEPService> {
 
-	
+	/*
 	@RequestMapping(value = "/materias/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> list() {
 		List<MateriaGridDTO> listMaterias = this.service.listGrid();
@@ -31,6 +32,22 @@ public class MateriaRestController extends AbstractDTORestController<MateriaDTO,
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}	
+	*/
+	
+	@RequestMapping(value = "/materias/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> list(@RequestParam(value= "descripcion", required= false) String descripcion) {
+		
+		if(!descripcion.isEmpty()) {			
+			
+			ResponseEntity<JSONResponse>resp = super.listFiltered(materia-> materia.getDescripcion()
+					.toUpperCase().contains(descripcion.toUpperCase()));
+			
+			return resp;
+			
+		}		
+		return super.list();		
+	
+	}
 	
 
 	@RequestMapping(value = "/materias/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

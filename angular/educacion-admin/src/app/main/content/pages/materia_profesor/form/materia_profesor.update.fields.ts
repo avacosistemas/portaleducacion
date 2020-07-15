@@ -3,8 +3,8 @@ export const MATERIA_PROFESOR_UPDATE_FORM_FIELDS_DEF = [
     key: 'id',
     labelKey: 'MATERIA_PROFESOR_UPDATE_FORM_FIELDS_DEF_FIELD_id',
     label: 'ID',
-    type: 'string',
-    controlType: 'textbox'
+    type: 'hidden',
+    controlType: 'hidden'
   },
   {
     key: 'idMateria',

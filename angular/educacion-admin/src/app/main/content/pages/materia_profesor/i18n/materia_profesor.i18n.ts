@@ -28,6 +28,9 @@ export const MATERIA_PROFESOR_I18N_DEF = {
     materia_profesor_grid_def_column_idmateria: 'idMateria',
     materia_profesor_grid_def_column_descmateria: 'Materia',
     materia_profesor_grid_def_column_idnivel: 'idNivel',
-    materia_profesor_grid_def_column_descnivel: 'Nivel'
+    materia_profesor_grid_def_column_descnivel: 'Nivel',
+    materia_profesor_create_form_fields_def_field_idprodfesor: 'Id Profesor',
+    materia_profesor_create_form_fields_def_field_nivel: 'Nivel',
+    materia_profesor_create_form_fields_def_field_materia: 'Materia'
   }
 };
