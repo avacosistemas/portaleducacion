@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import ar.com.avaco.arc.core.component.bean.repository.NJBaseRepository;
 import ar.com.avaco.educacion.domain.entities.Comentario;
 
-@Repository("alumnoRepository")
+@Repository("comentarioRepository")
 public class ComentarioRepositoryImpl extends NJBaseRepository<Long, Comentario> implements ComentarioRepositoryCustom {
 
 	public ComentarioRepositoryImpl(EntityManager entityManager) {
