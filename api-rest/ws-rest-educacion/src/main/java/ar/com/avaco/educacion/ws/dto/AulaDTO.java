@@ -53,13 +53,31 @@ public class AulaDTO extends DTOEntity<Long> {
 		materia.setId(idMateria);
 		aula.setMateria(materia);
 		
-		Institucion institucion=new Institucion();
-		institucion.setId(this.getIdInstitucion());
-		aula.setInstitucion(institucion);
+		if (this.getIdInstitucion()!=null) {
+			Institucion institucion=new Institucion();
+			institucion.setId(this.getIdInstitucion());
+			aula.setInstitucion(institucion);
+		}
 
-		//aula.setAlumnos(this.getAlumnos());
+		if (alumnos!=null && !alumnos.isEmpty()) {
+			HashSet<Alumno> alumnosList=new HashSet<>();
+			for (AlumnoDTO alumnoDTO : alumnos) {
+				Alumno alumno=alumnoDTO.toEntity();
+				alumnosList.add(alumno);
+			}
+			aula.setAlumnos(alumnosList);
+		}
+		
+		if (profesores!=null && !profesores.isEmpty()) {
+			HashSet<Profesor> profesoresList=new HashSet<>();
+			for (ProfesorDTO profesorDTO : profesores) {
+				Profesor profesor=profesorDTO.toEntity();
+				profesoresList.add(profesor);
+			}
+			aula.setProfesores(profesoresList);
+		}
+		
 		//aula.setComentarios(getComentarios());
-		//aula.setProfesores(getProfesores());
 
 		return aula;
 	}
@@ -84,7 +102,6 @@ public class AulaDTO extends DTOEntity<Long> {
 		}
 		
 		//this.setComentarios(aula.getComentarios());
-		//this.setProfesores(aula.getProfesores());
 				
 		this.setIdMateria(aula.getMateria().getId());
 		this.setIdInstitucion(aula.getInstitucion()!=null?aula.getInstitucion().getId():null);

@@ -51,16 +51,18 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
     @JoinColumn(name = "ID_MATERIA", insertable = false, updatable = false)
-	private Materia materia;
+	private Materia materia;	
+	
+	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
+    @JoinColumn(name = "ID_INSTITUCION", insertable = false, updatable = false)
+	private Institucion institucion;
 	
 	@Column(name = "DIA", nullable = false)
 	private Date dia;
 	
 	@Column(name = "HORA", nullable = false)
 	private String hora;
-	
-	@Column(name = "ID_INSTITUCION")
-	private Institucion institucion;
+
 	
 
 	public Aula() {}
