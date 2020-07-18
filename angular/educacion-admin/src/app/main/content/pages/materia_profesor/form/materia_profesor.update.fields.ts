@@ -1,37 +1,64 @@
+import { PREFIX_DOMAIN_API } from "environments/environment";
+
 export const MATERIA_PROFESOR_UPDATE_FORM_FIELDS_DEF = [
+  
   {
-    key: 'id',
-    labelKey: 'MATERIA_PROFESOR_UPDATE_FORM_FIELDS_DEF_FIELD_id',
-    label: 'ID',
-    type: 'hidden',
-    controlType: 'hidden'
-  },
+     key: 'idProfesor',
+     labelKey: 'materia_profesor_update_form_fields_def_field_idprodfesor',
+     label: 'idProfesor',
+     type: 'hidden',
+     mappingQuerystring: true,
+     controlType: 'hidden'
+   },
+ 
+ /*
   {
-    key: 'idMateria',
-    labelKey: 'MATERIA_PROFESOR_UPDATE_FORM_FIELDS_DEF_FIELD_idmateria',
-    label: 'idMateria',
-    type: 'string',
-    controlType: 'textbox'
-  },
-  {
-    key: 'descMateria',
-    labelKey: 'MATERIA_PROFESOR_UPDATE_FORM_FIELDS_DEF_FIELD_descmateria',
-    label: 'Materia',
-    type: 'string',
-    controlType: 'textbox'
-  },
-  {
-    key: 'idNivel',
-    labelKey: 'MATERIA_PROFESOR_UPDATE_FORM_FIELDS_DEF_FIELD_idnivel',
-    label: 'idNivel',
-    type: 'string',
-    controlType: 'textbox'
-  },
-  {
-    key: 'descNivel',
-    labelKey: 'MATERIA_PROFESOR_UPDATE_FORM_FIELDS_DEF_FIELD_descnivel',
-    label: 'Nivel',
-    type: 'string',
-    controlType: 'textbox'
-  }
-];
+     key: 'nivel',
+     labelKey: 'materia_profesor_update_form_fields_def_field_nivel',
+     controlType: 'autocomplete',
+     label: 'Nivel',
+     required: true,
+     options: {
+       transferIdToField: 'idNivel',
+       elementLabel: 'descripcion',
+       elementValue: 'id',
+       useNativeFilter: false,
+       selectElementOrCleanField: 'Debe seleccionar un elemento o limpiar el campo'
+     },
+     apiOptions: {
+       queryString: {
+         descripcion: 'nivel'
+       },
+       url: PREFIX_DOMAIN_API + 'ws-rest-educacion/niveles/'
+     }
+   },
+   { 
+     key: 'idNivel',   
+     controlType: 'hidden'
+   },
+ */
+   {
+     key: 'materia',
+     labelKey: 'materia_profesor_update_form_fields_def_field_materia',
+     controlType: 'autocomplete',
+     label: 'Materia',
+     required: true,
+     options: {
+       transferIdToField: 'idMateria',
+       elementLabel: 'descripcionNivel',
+       elementValue: 'id',
+       useNativeFilter: false,
+       selectElementOrCleanField: 'Debe seleccionar un elemento o limpiar el campo'
+     },
+     apiOptions: {
+       queryString: {
+         descripcion: 'materia'
+       },
+       url: PREFIX_DOMAIN_API + 'ws-rest-educacion/materias/'
+     }
+   },
+   { 
+     key: 'idMateria',   
+     controlType: 'hidden'
+   }
+ ];
