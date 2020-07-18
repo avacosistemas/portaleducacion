@@ -13,6 +13,8 @@ import { PERMISSION_DEF } from '../permission/component/permission.def';
 import { PROFILE_DEF } from '../profile/component/profile.def';
 import { ROLE_DEF } from '../role/component/role.def';
 import { USER_DEF } from '../user/component/user.def';
+import { HORAS_PROFESOR_DEF } from './horas_profesor/horas_profesor.def';
+
 
 export const ROUTES: Routes = [  
     { 
@@ -69,7 +71,14 @@ export const ROUTES: Routes = [
       path: USER_DEF.navigation.url.split('/')[1],
       component: IntegrationComponent,
       canActivate: [AuthGuardService]
+    },
+    {
+      path: HORAS_PROFESOR_DEF.navigation.url.split('/')[1],
+      component: IntegrationComponent,
+      canActivate: [AuthGuardService]
     }
+
+    
 ];
 
 
