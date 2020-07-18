@@ -49,8 +49,8 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 	@Override
 	public Cliente registrarClienteEmpresa(Cliente cliente) throws ErrorValidationException, BusinessException {
 		validarClienteNoVacio(cliente);
-		validarAltaCliente(cliente);
-		validarContacto(cliente.getContacto());
+		//validarAltaCliente(cliente);
+		//validarContacto(cliente.getContacto());
 		cliente = registrarCliente(cliente);
 		return cliente;
 	}
@@ -58,8 +58,8 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 	@Override
 	public Cliente registrarClientePersona(Cliente cliente) throws ErrorValidationException, BusinessException {
 		validarClienteNoVacio(cliente);
-		validarAltaProfesorAlumno(cliente);
-		validaContactoProfesorAlumno(cliente.getContacto());
+		validarAltaModificacionCliente(cliente);
+		validaContactoCliente(cliente.getContacto());
 		cliente = registrarCliente(cliente);
 		return cliente;
 	}
@@ -157,11 +157,13 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 	}
 
 	/**
+	 * TODO Validacion original para el Cliente, solo sirve de rerferencia
+	 * 
 	 * Valida que el username, email y numero de identificacion no se encuentre
 	 * registrado.
 	 * 
 	 * @param cliente el cliente a validar.
-	 */
+	 
 	public void validarAltaCliente(Cliente cliente) throws ErrorValidationException, BusinessException {
 
 		if (cliente.getGenero() == null) {
@@ -279,7 +281,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
 		}
 
-	}
+	}*/
 	
 	/**
 	 * Valida que el username, email y numero de identificacion no se encuentre
@@ -287,7 +289,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 	 * 
 	 * @param cliente el cliente a validar.
 	 */
-	public void validarAltaProfesorAlumno(Cliente cliente) throws ErrorValidationException, BusinessException {
+	public void validarAltaModificacionCliente(Cliente cliente) throws ErrorValidationException, BusinessException {
 
 		Map<String, String> errores = new HashMap<String, String>();
 
@@ -299,19 +301,36 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		} else if (!Validations.isUsernameValido(cliente.getUsername())) {
 			errores.put("username",
 					"El campo username debe empezar con una letra y tener al menos 5 caracteres alfanuméricos sin espacios.");
-		} else if (getRepository().findByUsernameEqualsIgnoreCase(cliente.getUsername()) != null) {
-			errores.put("username", "El username no esta disponible. Intente otro diferente.");
+		} else {
+	
+			Cliente cliByUsername = getRepository().findByUsernameEqualsIgnoreCase(cliente.getUsername());
+			
+			if(cliByUsername!=null && cliente.getId()==null || 
+					cliByUsername!=null && cliente.getId()!=null && !cliente.getId().equals(cliByUsername.getId())) {
+			
+				errores.put("username", "El username no esta disponible. Intente otro diferente.");
+			}
+	
 		}
 
 		// Validacion email
 		if (!EmailValidator.getInstance().isValid(cliente.getEmail())) {
 			errores.put("email", "El campo Email no tiene un formato válido.");
-		} else if (getRepository().findByEmailEqualsIgnoreCase(cliente.getEmail()) != null) {
-			errores.put("email", "El Email ingresado ya se encuentra registrado.");
+		} else {
+			
+			Cliente cliByEmail = getRepository().findByEmailEqualsIgnoreCase(cliente.getEmail());
+			
+			if(cliByEmail!=null && cliente.getId()==null || 
+					cliByEmail!=null && cliente.getId()!=null && !cliente.getId().equals(cliByEmail.getId())) {
+		
+				errores.put("email", "El Email ingresado ya se encuentra registrado.");
+			
+			}
+		
 		}
 
 		// Validacion identificacion
-		validaIdentificacion(cliente.getIdentificacion());
+		validaIdentificacion(cliente.getId(), cliente.getIdentificacion());
 	
 		if (StringUtils.isBlank(cliente.getRazonSocialNombreApellido())) {
 			errores.put("nombreApellido", "El campo Nombre y Apellido es requerido.");
@@ -326,7 +345,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 	}
 	
 	@Override
-	public void validaContactoProfesorAlumno(Contacto contacto) throws ErrorValidationException {
+	public void validaContactoCliente(Contacto contacto) throws ErrorValidationException {
 
 		Map<String, String> errores = new HashMap<String, String>();
 
@@ -347,7 +366,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 
 	}
 	
-	public void validaIdentificacion(Identificacion identificacion) throws ErrorValidationException {
+	public void validaIdentificacion(Long idCliente, Identificacion identificacion) throws ErrorValidationException {
 
 		Map<String, String> errores = new HashMap<String, String>();
 		
@@ -390,9 +409,12 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 			break;
 		}
 
-		Cliente porNumero = getRepository().findByIdentificacionNumeroLikeIgnoreCase(numeroIdentificacion);
-		if (porNumero != null) {
-			Identificacion identificacionPorNumeroEncontrado = porNumero.getIdentificacion();
+		Cliente cli = getRepository().findByIdentificacionNumeroLikeIgnoreCase(numeroIdentificacion);
+		
+		if(cli!=null && idCliente==null || 
+				cli!=null && idCliente!=null && !idCliente.equals(cli.getId())) {
+		
+			Identificacion identificacionPorNumeroEncontrado = cli.getIdentificacion();
 			if (identificacionPorNumeroEncontrado.getTipo().equals(tipoIdentificacion)
 					|| identificacionPorNumeroEncontrado.getNumero().substring(2, 9).equals(numeroIdentificacion)) {
 				errores.put("numeroIdentificacion", tipoIdentificacion + " ya se encuentra registrado");
@@ -406,7 +428,8 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		
 	}
 
-	@Override
+	//TODO Validacion original para el Cliente, solo sirve de rerferencia
+	/*@Override
 	public void validarContacto(Contacto contacto) throws ErrorValidationException {
 
 		Map<String, String> errores = new HashMap<String, String>();
@@ -461,7 +484,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
 		}
 
-	}
+	}*/
 
 	private String generarPasswordAleatorio() {
 		String generateKey = KeyGenerators.string().generateKey();
@@ -488,7 +511,8 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		return getRepository().getClienteCompleto(id);
 	}
 
-	@Override
+	//TODO Validacion original para el Cliente, solo sirve de rerferencia
+	/*@Override
 	public Cliente updateClienteCompleto(Cliente entity) throws BusinessException {
 
 		validarClienteNoVacio(entity);
@@ -511,14 +535,14 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		cliente = this.getRepository().save(cliente);
 
 		return cliente;
-	}
+	}*/
 	
 	@Override
 	public Cliente updateProfesorAlumno(Cliente entity) throws BusinessException {
 
 		validarClienteNoVacio(entity);
-		validaActualizacionDatosPersonalesProfesorAlumno(entity);
-		validaContactoProfesorAlumno(entity.getContacto());
+		validarAltaModificacionCliente(entity);
+		validaContactoCliente(entity.getContacto());
 
 		Cliente cliente = this.get(entity.getId());
 		cliente.setId(entity.getId());

@@ -17,21 +17,24 @@ public interface ClienteService extends NJService<Long, Cliente> {
 
 	Cliente registrarClienteEmpresa(Cliente cliente) throws ErrorValidationException, BusinessException;
 
-	void validarAltaCliente(Cliente cliente) throws ErrorValidationException, BusinessException;
+	//TODO Validacion original para el Cliente, solo sirve de rerferencia
+	//void validarAltaCliente(Cliente cliente) throws ErrorValidationException, BusinessException;
 
-	void validarContacto(Contacto contacto) throws ErrorValidationException;
+	//TODO Validacion original para el Cliente, solo sirve de rerferencia
+	//void validarContacto(Contacto contacto) throws ErrorValidationException;
 	
-	void validaContactoProfesorAlumno(Contacto contacto) throws ErrorValidationException;
+	void validaContactoCliente(Contacto contacto) throws ErrorValidationException;
 
 	Cliente getClienteCompleto(Long id);
 
 	List<Cliente> listClientesListado();
 
-	Cliente updateClienteCompleto(Cliente entity) throws BusinessException;
+	//TODO Validacion original para el Cliente, solo sirve de rerferencia
+	//Cliente updateClienteCompleto(Cliente entity) throws BusinessException;
 	
 	Cliente updateProfesorAlumno(Cliente entity) throws BusinessException;
 
-	void validarActualizacionDatosPersonalesCliente(Cliente cliente) throws ErrorValidationException, BusinessException;
+	//void validarActualizacionDatosPersonalesCliente(Cliente cliente) throws ErrorValidationException, BusinessException;
 
 	void resetPassword(Long id);
 	
