@@ -9,6 +9,7 @@ public class MateriaDTO extends DTOEntity<Long> {
 	private Long id;
 	private String descripcion;
 	private Integer idNivel;
+	private String descripcionNivel;	
 	
 	public MateriaDTO() {}
 
@@ -39,6 +40,15 @@ public class MateriaDTO extends DTOEntity<Long> {
 
 	public void setIdNivel(Integer idNivel) {
 		this.idNivel = idNivel;
+	}	
+	
+
+	public String getDescripcionNivel() {
+		return descripcionNivel;
+	}
+
+	public void setDescripcionNivel(String descripcionNivel) {
+		this.descripcionNivel = descripcionNivel;
 	}
 
 	//Converter
@@ -59,7 +69,7 @@ public class MateriaDTO extends DTOEntity<Long> {
 		this.setId(materia.getId());
 		this.setDescripcion(materia.getDescripcion());	
 		this.setIdNivel(materia.getNivel().getId());
-		
+		this.setDescripcionNivel(materia.getDescripcion() + "(Nivel: "+ materia.getNivel().getDescripcion() +")");
 	}
 	
 

@@ -87,6 +87,8 @@ public class MateriaEPServiceImpl extends CRUDEPBaseService<Long, MateriaDTO, Ma
 		materiaDto.setId(entity.getId());
 		materiaDto.setDescripcion(entity.getDescripcion());
 		materiaDto.setIdNivel(entity.getNivel().getId());
+		materiaDto.setDescripcionNivel(entity.getDescripcion() + " (Nivel: "+ entity.getNivel().getDescripcion() +")");
+		
 		
 		return materiaDto;
 	}

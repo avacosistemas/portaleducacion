@@ -1,8 +1,5 @@
 package ar.com.avaco.educacion.ws.controller;
 
-import java.util.Map;
-import java.util.function.Predicate;
-
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpStatus;

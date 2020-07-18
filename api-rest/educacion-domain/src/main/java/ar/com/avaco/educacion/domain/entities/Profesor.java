@@ -111,6 +111,17 @@ public class Profesor extends Cliente {
         materia.getProfesores().remove(this);
     }
 
+	public void addAula(Aula aula) {
+		this.aulas.add(aula);
+		aula.getProfesores().add(this);
+	}
+
+	public void removeAula(Aula aula) {
+		this.aulas.remove(aula);
+		aula.getProfesores().remove(this);
+		
+	}
+
 	
 	//TODO Agregar hashCode, equals y toString cuando se completen todos los atributos
 	
