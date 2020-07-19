@@ -163,7 +163,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 	 * registrado.
 	 * 
 	 * @param cliente el cliente a validar.
-	 
+	 */
 	public void validarAltaCliente(Cliente cliente) throws ErrorValidationException, BusinessException {
 
 		if (cliente.getGenero() == null) {
@@ -281,7 +281,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
 		}
 
-	}*/
+	}
 	
 	/**
 	 * Valida que el username, email y numero de identificacion no se encuentre
@@ -429,7 +429,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 	}
 
 	//TODO Validacion original para el Cliente, solo sirve de rerferencia
-	/*@Override
+	@Override
 	public void validarContacto(Contacto contacto) throws ErrorValidationException {
 
 		Map<String, String> errores = new HashMap<String, String>();
@@ -484,7 +484,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
 		}
 
-	}*/
+	}
 
 	private String generarPasswordAleatorio() {
 		String generateKey = KeyGenerators.string().generateKey();
@@ -512,7 +512,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 	}
 
 	//TODO Validacion original para el Cliente, solo sirve de rerferencia
-	/*@Override
+	@Override
 	public Cliente updateClienteCompleto(Cliente entity) throws BusinessException {
 
 		validarClienteNoVacio(entity);
@@ -535,7 +535,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		cliente = this.getRepository().save(cliente);
 
 		return cliente;
-	}*/
+	}
 	
 	@Override
 	public Cliente updateProfesorAlumno(Cliente entity) throws BusinessException {
@@ -641,5 +641,6 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 	public void setNotificacionService(NotificacionService notificacionService) {
 		this.notificacionService = notificacionService;
 	}
+
 
 }
