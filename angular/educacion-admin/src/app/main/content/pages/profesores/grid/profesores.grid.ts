@@ -61,7 +61,7 @@ export const PROFESORES_GRID_DEF = {
       redirect: {
         url: '/horasProfersor',
         querystring: {
-          idProfesor : 'id',
+          id : 'id',
           parentTitle: 'nombreApellido'
         }
       },

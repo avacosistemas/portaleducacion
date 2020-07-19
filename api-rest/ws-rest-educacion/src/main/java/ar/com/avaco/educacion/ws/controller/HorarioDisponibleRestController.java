@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
@@ -32,10 +33,25 @@ public class HorarioDisponibleRestController extends AbstractDTORestController<H
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 	
+	
 	@RequestMapping(value = "/horariosdisponibles/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listHorariosDisponibles() {
-		return super.list();
+	public ResponseEntity<JSONResponse> listHorariosDisponibles(@RequestParam Long id) {
+		
+		if(id != null) {
+			List<HorarioDisponibleDTO> horariosDisponibles = this.service.listHorariosDispProfesor(id);
+			JSONResponse response = new JSONResponse();
+			response.setData(horariosDisponibles);
+			response.setStatus(JSONResponse.OK);	
+	        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+		}else {
+			return super.list();
+		}
+		
+		
+		
 	}
+	
+	
 	
 	@RequestMapping(value = "/horariosdisponibles/", method = RequestMethod.POST)
 	public ResponseEntity<JSONResponse> addHorariosDisponibles(@RequestBody HorarioDisponibleFullDTO horariosDisp) throws BusinessException {

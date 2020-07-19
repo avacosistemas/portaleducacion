@@ -4,7 +4,7 @@ import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class HorarioDisponibleFullDTO extends DTOEntity<Long> {
 	
-	private Long id;
+	private Long id;	
 	private boolean lunes;
 	private boolean martes;
 	private boolean miercoles;
@@ -97,6 +97,6 @@ public class HorarioDisponibleFullDTO extends DTOEntity<Long> {
 
 	public void setHoraHasta(Integer horaHasta) {
 		this.horaHasta = horaHasta;
-	}
+	}		
 
 }

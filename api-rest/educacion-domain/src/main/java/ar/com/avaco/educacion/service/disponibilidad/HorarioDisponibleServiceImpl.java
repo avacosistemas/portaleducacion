@@ -57,7 +57,7 @@ public class HorarioDisponibleServiceImpl extends NJBaseService<Long, HorarioDis
 		Map<String, String> errores = new HashMap<String, String>();
 
 		if (getRepository().findByDiaAndHoraAndProfesorId(horarioDisp.getDia(), horarioDisp.getHora(), horarioDisp.getProfesor().getId()) != null) {
-			errores.put("horarioDisponible", "Hay horarios disponibles para el profesor que ya se encuentran registrados");
+			errores.put("horaDesde", "Hay horarios disponibles para el profesor que ya se encuentran registrados");
 		}
 
 		if (!errores.isEmpty()) {

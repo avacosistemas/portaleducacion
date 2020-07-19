@@ -18,6 +18,15 @@ export const HORAS_PROFESOR_I18N_DEF = {
     horas_profesor_filter_form_fields_def_field_hora: 'Hora',
     horas_profesor_grid_def_column_id: 'ID',
     horas_profesor_grid_def_column_dia: 'Día',
-    horas_profesor_grid_def_column_hora: 'Hora'
+    horas_profesor_grid_def_column_hora: 'Hora',
+    seccion_create_form_fields_def_field_horaDesde: 'Hora Desde',
+    seccion_create_form_fields_def_field_horaHasta: 'Hora Hasta',
+    seccion_create_form_fields_def_field_lunes: 'LUNES',
+    seccion_create_form_fields_def_field_martes: 'MARTES',
+    seccion_create_form_fields_def_field_miercoles: 'MIERCOLES',
+    seccion_create_form_fields_def_field_jueves: 'JUEVES',
+    seccion_create_form_fields_def_field_viernes: 'VIERNES',
+    seccion_create_form_fields_def_field_sabado: 'SABADO',
+    seccion_create_form_fields_def_field_domingo: 'DOMINGO',
   }
 };
