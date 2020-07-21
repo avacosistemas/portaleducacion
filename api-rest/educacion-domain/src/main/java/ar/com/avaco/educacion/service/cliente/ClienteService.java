@@ -18,10 +18,10 @@ public interface ClienteService extends NJService<Long, Cliente> {
 	Cliente registrarClienteEmpresa(Cliente cliente) throws ErrorValidationException, BusinessException;
 
 	//TODO Validacion original para el Cliente, solo sirve de rerferencia
-	void validarAltaCliente(Cliente cliente) throws ErrorValidationException, BusinessException;
+	//void validarAltaCliente(Cliente cliente) throws ErrorValidationException, BusinessException;
 
 	//TODO Validacion original para el Cliente, solo sirve de rerferencia
-	void validarContacto(Contacto contacto) throws ErrorValidationException;
+	//void validarContacto(Contacto contacto) throws ErrorValidationException;
 	
 	void validaContactoCliente(Contacto contacto) throws ErrorValidationException;
 
@@ -30,12 +30,12 @@ public interface ClienteService extends NJService<Long, Cliente> {
 	List<Cliente> listClientesListado();
 
 	//TODO Validacion original para el Cliente, solo sirve de rerferencia
-	Cliente updateClienteCompleto(Cliente entity) throws BusinessException;
+	//Cliente updateClienteCompleto(Cliente entity) throws BusinessException;
 	
 	Cliente updateProfesorAlumno(Cliente entity) throws BusinessException;
 
 	//TODO Validacion original para el Cliente, solo sirve de rerferencia
-	void validarActualizacionDatosPersonalesCliente(Cliente cliente) throws ErrorValidationException, BusinessException;
+	//void validarActualizacionDatosPersonalesCliente(Cliente cliente) throws ErrorValidationException, BusinessException;
 
 	void resetPassword(Long id);
 	

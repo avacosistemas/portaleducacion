@@ -3,6 +3,7 @@ package ar.com.avaco.educacion.ws.utils;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class DateUtils {
@@ -21,4 +22,10 @@ public class DateUtils {
 		return dateFormat.format(fecha);
 	}
 
+	public static String toString(LocalDate fecha) {
+		SimpleDateFormat dateFormat=(SimpleDateFormat) DateFormat.getInstance();
+		dateFormat.applyPattern(FORMAT_PATTERN);
+		return dateFormat.format(fecha);
+	}
+	
 }

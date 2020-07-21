@@ -2,6 +2,8 @@ package ar.com.avaco.educacion.ws.dto;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
@@ -21,6 +23,10 @@ public class ClienteCompletoDTO extends DTOEntity<Long> {
 	private String tipoIdentificacion;
 
 	private String numeroIdentificacion;
+	
+	private String nombre;
+	
+	private String apellido;
 
 	private String razonSocial;
 
@@ -107,6 +113,22 @@ public class ClienteCompletoDTO extends DTOEntity<Long> {
 
 	public void setNumeroIdentificacion(String numeroIdentificacion) {
 		this.numeroIdentificacion = numeroIdentificacion;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public String getRazonSocial() {
@@ -239,29 +261,33 @@ public class ClienteCompletoDTO extends DTOEntity<Long> {
 	}
 
 	public Cliente toEntity() {
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
 		Cliente cliente = new Cliente();
 		cliente.setEmail(this.getEmail());
 		cliente.setGenero(Genero.valueOf(this.genero));
 		try {
-			cliente.setFechaNacimientoInicioActividades(df.parse(this.getFechaNacimiento()));
+			cliente.setFechaNacimiento(LocalDate.parse(this.getFechaNacimiento(), formatter));
 		} catch (Exception e1) {
 			// No hacer nada. Dejar null.
 		}
-		try {
+		/*try {
 			cliente.setFechaNacimientoInicioActividades(df.parse(this.getInicioActividades()));
 		} catch (Exception e1) {
 			// No hacer nada. Dejar null.
-		}
+		}*/
 		cliente.setId(this.getId());
 		cliente.setNacionalidad(this.getNacionalidad());
-		cliente.setRazonSocialNombreApellido(this.getRazonSocial());
+		//cliente.setRazonSocialNombreApellido(this.getRazonSocial());
+		cliente.setNombre(this.getNombre());
+		cliente.setApellido(this.getApellido());
 
 		Contacto contacto = this.contactoDTO.toEntity();
 		contacto.setCliente(cliente);
 		cliente.setContacto(contacto);
 
-		df = null;
+		formatter = null;
 
 		return cliente;
 
@@ -273,15 +299,17 @@ public class ClienteCompletoDTO extends DTOEntity<Long> {
 		this.setEmail(cliente.getEmail());
 		this.setFechaAltaPassword(
 				cliente.getFechaAltaPassword() != null ? df.format(cliente.getFechaAltaPassword()) : null);
-		this.setFechaNacimiento(df.format(cliente.getFechaNacimientoInicioActividades()));
-		this.setInicioActividades(df.format(cliente.getFechaNacimientoInicioActividades()));
+		this.setFechaNacimiento(df.format(cliente.getFechaNacimiento()));
+		//this.setInicioActividades(df.format(cliente.getFechaNacimientoInicioActividades()));
 		this.setFechaRegistro(df.format(cliente.getFechaRegistro()));
 		this.setGenero(cliente.getGenero().name());
 		this.setId(cliente.getId());
 		this.setIntentosFallidosLogin(cliente.getIntentosFallidosLogin());
 		this.setNacionalidad(cliente.getNacionalidad());
 		this.setNumeroIdentificacion(cliente.getIdentificacion().getNumero());
-		this.setRazonSocial(cliente.getRazonSocialNombreApellido());
+		this.setNombre(cliente.getNombre());
+		this.setApellido(cliente.getApellido());
+		//this.setRazonSocial(cliente.getRazonSocialNombreApellido());
 		this.setRequiereCambioPassword(cliente.isRequiereCambioPassword());
 		this.setTipoIdentificacion(cliente.getIdentificacion().getTipo().name());
 		this.setUsername(cliente.getUsername());

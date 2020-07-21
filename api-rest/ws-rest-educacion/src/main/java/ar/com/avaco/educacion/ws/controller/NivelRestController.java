@@ -24,7 +24,7 @@ public class NivelRestController extends AbstractDTORestController<NivelDTO, Int
 	
 	@RequestMapping(value = "/niveles/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> listNiveles(@RequestParam(value= "descripcion", required= false ) String descripcion) {
-		if(!descripcion.isEmpty()) {			
+		if(descripcion!=null && !descripcion.isEmpty()) {			
 			
 			ResponseEntity<JSONResponse>resp = super.listFiltered(nivel-> nivel.getDescripcion()
 					.toUpperCase().contains(descripcion.toUpperCase()));
