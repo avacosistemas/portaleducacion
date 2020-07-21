@@ -1,5 +1,5 @@
 import { USER_SEARCH_FIELDS } from '../form/search.fields';
-import { PREFIX_DOMAIN_API, environment } from 'environments/environment';
+import { environment, PREFIX_DOMAIN_API_AUTHENTICATION } from 'environments/environment';
 import { CrudDef } from 'app/modules/fwk/core/model/component-def/crud-def';
 import { REGEX_KEY_USER } from 'app/modules/fwk/core/service/dynamic-form/form.validator.service';
 const PROFILES_COMPONENT_KEY = 'profiles';
@@ -163,7 +163,7 @@ export const USER_DEF: CrudDef = {
         url: environment.USER_CRUD_URL
     },
     test: [{
-      url: PREFIX_DOMAIN_API + 'ws-rest-authentication/user',
+      url: PREFIX_DOMAIN_API_AUTHENTICATION + '/user',
       dataset: [{
         authorities: [
           {authority: 'PERFIL_CREATE'},

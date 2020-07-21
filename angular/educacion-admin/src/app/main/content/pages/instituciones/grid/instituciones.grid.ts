@@ -1,4 +1,3 @@
-import { PREFIX_DOMAIN_API } from "environments/environment";
 
 export const INSTITUCIONES_GRID_DEF = {
   columnsDef: [

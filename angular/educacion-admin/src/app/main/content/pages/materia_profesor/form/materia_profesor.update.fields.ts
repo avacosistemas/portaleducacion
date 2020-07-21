@@ -1,4 +1,4 @@
-import { PREFIX_DOMAIN_API } from "environments/environment";
+import { PREFIX_DOMAIN_API_EDUCACION } from "environments/environment";
 
 export const MATERIA_PROFESOR_UPDATE_FORM_FIELDS_DEF = [
   
@@ -54,7 +54,7 @@ export const MATERIA_PROFESOR_UPDATE_FORM_FIELDS_DEF = [
        queryString: {
          descripcion: 'materia'
        },
-       url: PREFIX_DOMAIN_API + 'ws-rest-educacion/materias/'
+       url: PREFIX_DOMAIN_API_EDUCACION + '/materias/'
      }
    },
    { 

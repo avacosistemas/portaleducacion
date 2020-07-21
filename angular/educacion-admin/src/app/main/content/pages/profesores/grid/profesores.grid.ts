@@ -1,4 +1,4 @@
-import { PREFIX_DOMAIN_API } from "environments/environment";
+import { PREFIX_DOMAIN_API_EDUCACION } from "environments/environment";
 
 export const PROFESORES_GRID_DEF = {
   columnsDef: [
@@ -74,7 +74,7 @@ export const PROFESORES_GRID_DEF = {
       icon: 'thumb_up',
       ws: {
         key: 'profesores_grid_def_button_action_habilitar',
-        url: PREFIX_DOMAIN_API + 'ws-rest-educacion/profesores/habilitar/',
+        url: PREFIX_DOMAIN_API_EDUCACION + '/profesores/habilitar/',
         method: 'PUT',
         querystring: {
           id : 'id'
@@ -87,7 +87,7 @@ export const PROFESORES_GRID_DEF = {
       icon: 'thumb_down',
       ws: {
         key: 'profesores_grid_def_button_action_bloquear',
-        url: PREFIX_DOMAIN_API + 'ws-rest-educacion/profesores/bloquear/',
+        url: PREFIX_DOMAIN_API_EDUCACION + '/profesores/bloquear/',
         method: 'PUT',
         querystring: {
           id : 'id'

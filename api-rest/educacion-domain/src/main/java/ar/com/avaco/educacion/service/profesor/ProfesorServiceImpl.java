@@ -1,12 +1,19 @@
 package ar.com.avaco.educacion.service.profesor;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import ar.com.avaco.arc.core.component.bean.service.NJBaseService;
 import ar.com.avaco.commons.exception.BusinessException;
@@ -42,12 +49,12 @@ public class ProfesorServiceImpl extends NJBaseService<Long, Profesor, ProfesorR
 	 */
 	@Override
 	public Profesor getMateriaProfesor(Long id) {
-		List<Profesor> profes = getRepository().selectMateriasProfesor(id);
-		Profesor profesor = null;
-		if (!profes.isEmpty()) {
-			profesor = profes.get(0);
-		}
-		return profesor;
+		return getRepository().findProfesorConMaterias(id);
+		//Profesor profesor = null;
+		//if (!profes.isEmpty()) {
+		//	profesor = profes.get(0);
+		//}
+		//return profesor;
 	}
 	
 	/**
@@ -126,6 +133,62 @@ public class ProfesorServiceImpl extends NJBaseService<Long, Profesor, ProfesorR
 		profesor = this.getRepository().save(profesor);
 
 		return profesor;
+	}
+	
+	@Override
+	public Profesor uploadFotoPerfil(Long id, MultipartFile foto) {
+		
+		Profesor profesor = this.get(id);
+		try {
+			
+		
+			byte [] byteArr=foto.getBytes();
+			//byte[] bFile = new byte[(int) foto.length()];
+			//byte[] imageData = new byte[(int) foto.length()];
+			//InputStream inputStream = new ByteArrayInputStream(byteArr);
+	
+			/*
+			byte[] byteObjects = new byte[foto.getBytes().length];
+		    int i = 0;
+
+		    for (byte b : foto.getBytes()){
+		        byteObjects[i++] = b;
+		    }
+			 */
+	    	//profesor.setImagenPerfil(byteArr);
+
+	    	profesor.setFoto(byteArr);
+	    	
+		} catch (IOException  e) {
+		    //todo handle better
+			//log.error("Error occurred", e);
+	
+		    e.printStackTrace();
+		}
+		
+		
+
+		//CatalogImage img = new CatalogImage();
+	    /*byte[] imageData = new byte[(int) ((CharSequence) foto).length()];
+	    try {
+		    FileInputStream fileInputStream = new FileInputStream(foto);
+		    fileInputStream.read(imageData);
+		    fileInputStream.close();
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    }
+	    
+	    profesor.setFoto(imageData);*/
+	  
+	    profesor = this.getRepository().save(profesor);
+
+		return profesor;
+	}
+
+	
+	@Override
+	public byte[] downloadFotoPerfil(Long id) {
+		return repository.getFotoPerfil(id);
 	}
 
 	@Resource(name = "profesorRepository")

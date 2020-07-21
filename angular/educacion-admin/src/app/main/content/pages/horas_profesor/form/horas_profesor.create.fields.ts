@@ -1,5 +1,3 @@
-import { PREFIX_DOMAIN_API } from "environments/environment";
-
 export const HORAS_PROFESOR_CREATE_FORM_FIELDS_DEF = [
   
           

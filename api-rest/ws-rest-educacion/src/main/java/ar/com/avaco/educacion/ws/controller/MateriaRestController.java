@@ -24,21 +24,11 @@ import ar.com.avaco.ws.rest.dto.JSONResponse;
 @RestController
 public class MateriaRestController extends AbstractDTORestController<MateriaDTO, Long, MateriaEPService> {
 
-	/*
-	@RequestMapping(value = "/materias/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> list() {
-		List<MateriaGridDTO> listMaterias = this.service.listGrid();
-    	JSONResponse response = new JSONResponse();
-		response.setData(listMaterias);
-		response.setStatus(JSONResponse.OK);	
-        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
-	}	
-	*/
 	
 	@RequestMapping(value = "/materias/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> list(@RequestParam(value= "descripcion", required= false) String descripcion) {
 		
-		if(!StringUtils.isBlank(descripcion)) {			
+		if(!StringUtils.isBlank(descripcion)) {
 			
 			ResponseEntity<JSONResponse>resp = super.listFiltered(materia-> materia.getDescripcion()
 					.toUpperCase().contains(descripcion.toUpperCase()));

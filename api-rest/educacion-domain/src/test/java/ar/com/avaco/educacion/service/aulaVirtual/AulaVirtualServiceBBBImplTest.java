@@ -34,7 +34,8 @@ public class AulaVirtualServiceBBBImplTest {
 		
 		Profesor profesor=new Profesor();
 		profesor.setId(new Long(543));
-		profesor.setRazonSocialNombreApellido("Gluten Morgen");
+		profesor.setNombre("Gluten");
+		profesor.setApellido("Morgen");
 		
 		Aula aula=new Aula();
 		aula.setMateria(materia);
@@ -62,7 +63,8 @@ public class AulaVirtualServiceBBBImplTest {
 		
 		Alumno alumno=new Alumno();
 		alumno.setId(new Long(123));
-		alumno.setRazonSocialNombreApellido("Alberto Magno");
+		alumno.setNombre("Alberto");
+		alumno.setApellido("Magno");
 		
 		try {
 			String url=aulaVirtualServiceImpl.unirseAlumnoClase(clase.getIdClase(), alumno);

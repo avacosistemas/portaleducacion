@@ -59,22 +59,22 @@ public class ClienteEPServiceImpl extends CRUDEPBaseService<Long, ClienteListado
 		
 		clienteDTO.setFechaIngreso(fechaIngreso);
 		clienteDTO.setTelefono(entity.getContacto().getTelefonoMovil());
-		clienteDTO.setNombreApellido(entity.getRazonSocialNombreApellido());
+		clienteDTO.setNombreApellido(entity.getNombreApellido());
 		clienteDTO.setTipo(entity.getIdentificacion().getTipo().toString());
 		clienteDTO.setNumero(entity.getIdentificacion().getNumero());
 		return clienteDTO;
 	}
 
 	public ClienteCompletoDTO updateClienteCompleto(Long id, ClienteCompletoDTO clienteDTO) throws BusinessException {
-		Cliente cliente = clienteDTO.toEntity();
+		return null;
+		/*Cliente cliente = clienteDTO.toEntity();
 		cliente.setId(id);
 //		cliente = service.updateClienteCompleto(cliente);
-		return new ClienteCompletoDTO(cliente);
+		return new ClienteCompletoDTO(cliente);*/
 	}
 
 	@Override
 	public void validarActualizacionCliente(ClienteCompletoDTO clienteDTO) throws ErrorValidationException, BusinessException {
-//		this.service.validarActualizacionDatosPersonalesCliente(clienteDTO.toEntity());
 	}
 
 	@Override
@@ -84,7 +84,6 @@ public class ClienteEPServiceImpl extends CRUDEPBaseService<Long, ClienteListado
 	
 	@Override
 	public void validarContacto(ContactoDTO contactoDTO) throws ErrorValidationException {
-//		this.service.validarContacto(contactoDTO.toEntity());
 	}
 
 	@Override

@@ -1,9 +1,11 @@
 package ar.com.avaco.educacion.domain.entities;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,12 +28,13 @@ public class HorarioDisponible extends ar.com.avaco.arc.core.domain.Entity<Long>
 	@Column(name = "ID_HORARIO_DISP")
     private Long id;
 
-	@Enumerated
+	//@Enumerated
 	@Column(name = "DIA_DISPONIBLE", nullable = false)
-	private Dia dia;
+	//@Convert(converter = DayOfWeekIntegerConverter.class)
+	private DayOfWeek dia;
 	
 	@Column(name = "HORA_DISPONIBLE", nullable = false)
-	private String hora;
+	private LocalTime hora;
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
     @JoinColumn(name = "ID_PROFESOR")
@@ -47,19 +50,19 @@ public class HorarioDisponible extends ar.com.avaco.arc.core.domain.Entity<Long>
 		this.id = id;
 	}
 
-	public Dia getDia() {
+	public DayOfWeek getDia() {
 		return dia;
 	}
 
-	public void setDia(Dia dia) {
+	public void setDia(DayOfWeek dia) {
 		this.dia = dia;
 	}
 
-	public String getHora() {
+	public LocalTime getHora() {
 		return hora;
 	}
 
-	public void setHora(String hora) {
+	public void setHora(LocalTime hora) {
 		this.hora = hora;
 	}
 

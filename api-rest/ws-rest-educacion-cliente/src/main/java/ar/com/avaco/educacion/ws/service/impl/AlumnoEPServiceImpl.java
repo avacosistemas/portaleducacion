@@ -64,7 +64,8 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		
 		Alumno alumno = new Alumno();
 		alumno.setId(dto.getId());
-		alumno.setRazonSocialNombreApellido(dto.getNombreApellido());
+		alumno.setNombre(dto.getNombre());
+		alumno.setApellido(dto.getApellido());
 		Identificacion id = new Identificacion();
 		id.setTipo(TipoIdentificacion.valueOf(dto.getTipoIdentificacion()));
 		id.setNumero(dto.getNumeroIdentificacion());
@@ -87,7 +88,8 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 	protected AlumnoDTO convertToDto(Alumno entity) {
 		AlumnoDTO alumnoDTO = new AlumnoDTO();
 		alumnoDTO.setId(entity.getId());
-		alumnoDTO.setNombreApellido(entity.getRazonSocialNombreApellido());
+		alumnoDTO.setNombre(entity.getNombre());
+		alumnoDTO.setApellido(entity.getApellido());
 		alumnoDTO.setTipoIdentificacion(entity.getIdentificacion().getTipo().name());
 		alumnoDTO.setNumeroIdentificacion(entity.getIdentificacion().getNumero());
 		alumnoDTO.setUsername(entity.getUsername());

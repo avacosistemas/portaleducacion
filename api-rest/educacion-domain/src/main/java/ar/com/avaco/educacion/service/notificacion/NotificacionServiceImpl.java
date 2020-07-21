@@ -244,7 +244,7 @@ public class NotificacionServiceImpl implements NotificacionService {
 	@Override
 	public void notificarResetoPassword(Cliente cliente, String tmppass) {
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("cliente", cliente.getRazonSocialNombreApellido());
+		params.put("cliente", cliente.getNombreApellido());
 		params.put("usuario", cliente.getUsername());
 		params.put("password", tmppass);
 		mailSenderSMTPService.sendMail(from, cliente.getEmail(), subjectResetoPasswordCliente,
@@ -255,7 +255,7 @@ public class NotificacionServiceImpl implements NotificacionService {
 	@Override
 	public void notificarRegistroClienteNuevoPassword(Cliente cliente, String tmpass) {
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("cliente", cliente.getRazonSocialNombreApellido());
+		params.put("cliente", cliente.getNombreApellido());
 		params.put("usuario", cliente.getUsername());
 		params.put("password", tmpass);
 		mailSenderSMTPService.sendMail(from, cliente.getEmail(), subjectRegistroClienteNuevoPassword,

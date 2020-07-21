@@ -13,6 +13,7 @@ export const INSTITUCIONES_UPDATE_FORM_FIELDS_DEF = [
     type: 'string',
     controlType: 'textbox',
     required:true,
+    maxLength: 100
   }
 ];
 

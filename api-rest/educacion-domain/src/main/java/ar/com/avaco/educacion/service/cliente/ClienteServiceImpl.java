@@ -24,7 +24,6 @@ import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.commons.exception.ErrorValidationException;
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
-import ar.com.avaco.educacion.domain.entities.cliente.Genero;
 import ar.com.avaco.educacion.domain.entities.cliente.Identificacion;
 import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
 import ar.com.avaco.educacion.repository.cliente.ClienteRepository;
@@ -163,7 +162,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 	 * registrado.
 	 * 
 	 * @param cliente el cliente a validar.
-	 */
+	 
 	public void validarAltaCliente(Cliente cliente) throws ErrorValidationException, BusinessException {
 
 		if (cliente.getGenero() == null) {
@@ -281,8 +280,8 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
 		}
 
-	}
-	
+	}*/
+
 	/**
 	 * Valida que el username, email y numero de identificacion no se encuentre
 	 * registrado.
@@ -332,10 +331,12 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		// Validacion identificacion
 		validaIdentificacion(cliente.getId(), cliente.getIdentificacion());
 	
-		if (StringUtils.isBlank(cliente.getRazonSocialNombreApellido())) {
+		if (StringUtils.isBlank(cliente.getNombre()) || StringUtils.isBlank(cliente.getApellido())) {
 			errores.put("nombreApellido", "El campo Nombre y Apellido es requerido.");
-		} else if (cliente.getRazonSocialNombreApellido().length() > 60) {
-			errores.put("nombreApellido", "El campo Nombre y Apellido no debe superar los 60 caracteres");
+		} else if (cliente.getNombre().length() > 30) {
+			errores.put("nombre", "El campo Nombre no debe superar los 30 caracteres");
+		} else if (cliente.getApellido().length() > 30) {
+			errores.put("apellido", "El campo Apellido no debe superar los 30 caracteres");
 		}
 
 		if (!errores.isEmpty()) {
@@ -429,7 +430,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 	}
 
 	//TODO Validacion original para el Cliente, solo sirve de rerferencia
-	@Override
+	/*@Override
 	public void validarContacto(Contacto contacto) throws ErrorValidationException {
 
 		Map<String, String> errores = new HashMap<String, String>();
@@ -484,7 +485,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
 		}
 
-	}
+	}*/
 
 	private String generarPasswordAleatorio() {
 		String generateKey = KeyGenerators.string().generateKey();
@@ -512,7 +513,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 	}
 
 	//TODO Validacion original para el Cliente, solo sirve de rerferencia
-	@Override
+	/*@Override
 	public Cliente updateClienteCompleto(Cliente entity) throws BusinessException {
 
 		validarClienteNoVacio(entity);
@@ -520,7 +521,8 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		validarContacto(entity.getContacto());
 
 		Cliente cliente = this.get(entity.getId());
-		cliente.setFechaNacimientoInicioActividades(entity.getFechaNacimientoInicioActividades());
+		cliente.setFechaNacimiento(entity.getFechaNacimiento());
+
 		cliente.setId(entity.getId());
 		cliente.setNacionalidad(entity.getNacionalidad());
 
@@ -535,7 +537,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		cliente = this.getRepository().save(cliente);
 
 		return cliente;
-	}
+	}*/
 	
 	@Override
 	public Cliente updateProfesorAlumno(Cliente entity) throws BusinessException {
@@ -546,7 +548,8 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 
 		Cliente cliente = this.get(entity.getId());
 		cliente.setId(entity.getId());
-		cliente.setRazonSocialNombreApellido(entity.getRazonSocialNombreApellido());
+		cliente.setNombre(entity.getNombre());
+		cliente.setApellido(entity.getApellido());
 		cliente.setUsername(entity.getUsername());
 		cliente.setEmail(entity.getEmail());
 		
@@ -577,7 +580,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 
 		Map<String, String> errores = new HashMap<String, String>();
 
-		if (StringUtils.isBlank(cliente.getRazonSocialNombreApellido())) {
+		if (StringUtils.isBlank(cliente.getNombre()) || StringUtils.isBlank(cliente.getApellido())) {
 			errores.put("nombreApellido", "Debe ingresar su nombre y apellido.");
 		}
 
@@ -593,7 +596,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 	 * @param cliente
 	 * @throws ErrorValidationException
 	 * @throws BusinessException
-	 */
+	
 	public void validarActualizacionDatosPersonalesCliente(Cliente cliente)
 			throws ErrorValidationException, BusinessException {
 
@@ -625,7 +628,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
 		}
 
-	}
+	} */
 
 
 	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {

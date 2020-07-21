@@ -47,7 +47,7 @@ public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaReposi
 	public Clase crearClase(Profesor profesor, Aula aula ) throws AulaVirtualException {
 		String idMeeting;
 		try {
-			idMeeting = api.createMeeting("Aula "+aula.getMateria().getDescripcion()+" / Prof: "+profesor.getRazonSocialNombreApellido(), 
+			idMeeting = api.createMeeting("Aula "+aula.getMateria().getDescripcion()+" / Prof: "+profesor.getNombreApellido(), 
 					welcomeMessage, null, null, null, null, null);
 			String urlSala=api.getJoinMeetingURL("Matcito10", idMeeting, "mp", null, profesor.getId());
 			Clase clase=new Clase();
@@ -73,7 +73,7 @@ public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaReposi
 	}
 	
 	protected String unirseClase(String idClase, Cliente cliente, String password ) throws AulaVirtualException {
-		return api.getJoinMeetingURL(cliente.getRazonSocialNombreApellido(), idClase, password, null, cliente.getId());
+		return api.getJoinMeetingURL(cliente.getNombreApellido(), idClase, password, null, cliente.getId());
 	}
 
 	

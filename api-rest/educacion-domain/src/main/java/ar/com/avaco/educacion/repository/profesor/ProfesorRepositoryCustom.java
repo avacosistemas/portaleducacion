@@ -11,5 +11,7 @@ public interface ProfesorRepositoryCustom {
 	Profesor getMateriaProfesor(Long id);
 	
 	List<Profesor> listProfesores();
+
+	List<Profesor> listCatalogoDocente(String campo, boolean desc);
 	
 }

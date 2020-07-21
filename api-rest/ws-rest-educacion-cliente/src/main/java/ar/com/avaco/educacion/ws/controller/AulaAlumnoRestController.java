@@ -22,7 +22,6 @@ import ar.com.avaco.ws.rest.dto.JSONResponse;
 @RestController
 public class AulaAlumnoRestController extends AbstractDTORestController<AulaAlumnoDTO, Long, AulaAlumnoEPService> {
 
-	
 	@RequestMapping(value = "/aulaAlumno/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> listByAula(@PathVariable("id") Long idAula) throws BusinessException {
 		List<AulaAlumnoDTO> listaulaAlumno = this.service.listAulaAlumno(idAula);
@@ -32,24 +31,6 @@ public class AulaAlumnoRestController extends AbstractDTORestController<AulaAlum
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/aulaAlumno/", method = RequestMethod.POST)
-	public ResponseEntity<JSONResponse> addAlumno(@RequestBody AulaAlumnoDTO aulaAlumnoDTO) throws BusinessException {
-		AulaAlumnoDTO aulaDtoToUpdate = service.addAlumno(aulaAlumnoDTO);
-		JSONResponse response = new JSONResponse();
-		response.setData(aulaDtoToUpdate);
-		response.setStatus(JSONResponse.OK);	
-        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
-	}
-	
-	@RequestMapping(path = "/aulaAlumno/aula/{idAula}/alumno/{idAlumno}", method = RequestMethod.DELETE)
-	public ResponseEntity<JSONResponse> removeaulaAlumno(@PathVariable("idAula") Long idAula, @PathVariable("idAlumno") Long idAlumno) throws BusinessException {
-		service.removeAulaAlumno(idAula,idAlumno);
-		JSONResponse response = new JSONResponse();
-		response.setData(null);
-		response.setStatus(JSONResponse.OK);	
-        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
-	}
-	
 	//Service
 	@Resource(name = "aulaAlumnoEPService")
 	public void setService(AulaAlumnoEPService aulaAlumnoEPService) {

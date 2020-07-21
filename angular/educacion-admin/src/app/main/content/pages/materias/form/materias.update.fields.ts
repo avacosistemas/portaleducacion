@@ -1,4 +1,4 @@
-import { PREFIX_DOMAIN_API } from "environments/environment";
+import { PREFIX_DOMAIN_API_EDUCACION } from "environments/environment";
 
 export const MATERIAS_UPDATE_FORM_FIELDS_DEF = [
   {
@@ -38,7 +38,7 @@ export const MATERIAS_UPDATE_FORM_FIELDS_DEF = [
     queryString: {
       descripcion: 'nivel'
     },
-    url: PREFIX_DOMAIN_API + 'ws-rest-educacion/niveles/'
+    url: PREFIX_DOMAIN_API_EDUCACION + '/niveles/'
   }
 },
 

@@ -1,5 +1,7 @@
 package ar.com.avaco.educacion.domain.entities;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -58,12 +60,13 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	private Institucion institucion;
 	
 	@Column(name = "DIA", nullable = false)
-	private Date dia;
+	private LocalDate dia;
 	
 	@Column(name = "HORA", nullable = false)
-	private String hora;
+	private LocalTime hora;
 
-	
+	@Column(name = "CALIFICACION", nullable = false)
+	private Integer calificacion;
 
 	public Aula() {}
 
@@ -107,19 +110,33 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 		this.materia = materia;
 	}
 
-	public Date getDia() {
+	public LocalDate getDia() {
 		return dia;
 	}
 
-	public void setDia(Date dia) {
+	public void setDia(LocalDate dia) {
 		this.dia = dia;
 	}
 
-	public String getHora() {
+	public LocalTime getHora() {
 		return hora;
 	}
 
-	public void setHora(String hora) {
+	public void LocalTime(LocalTime hora) {
+		this.hora = hora;
+	}
+	
+	
+
+	public Integer getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(Integer calificacion) {
+		this.calificacion = calificacion;
+	}
+
+	public void setHora(LocalTime hora) {
 		this.hora = hora;
 	}
 

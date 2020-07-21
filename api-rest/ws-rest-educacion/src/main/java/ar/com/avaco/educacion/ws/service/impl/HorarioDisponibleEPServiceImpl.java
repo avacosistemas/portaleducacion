@@ -1,5 +1,7 @@
 package ar.com.avaco.educacion.ws.service.impl;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import ar.com.avaco.commons.exception.BusinessException;
-import ar.com.avaco.educacion.domain.entities.Dia;
 import ar.com.avaco.educacion.domain.entities.HorarioDisponible;
 
 import ar.com.avaco.educacion.service.disponibilidad.HorarioDisponibleService;
@@ -40,15 +41,15 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 			if(horariosDispDto.isLunes()) {
 				horarioDisp = new HorarioDisponible();
 			
-				horarioDisp.setDia(Dia.LUNES);
-				horarioDisp.setHora(String.valueOf(i));
+				horarioDisp.setDia(DayOfWeek.MONDAY);
+				horarioDisp.setHora(LocalTime.of(i, 0));
 				horariosToAdd.add(horarioDisp);
 			}
 			
 			if(horariosDispDto.isMartes()) {
 				horarioDisp = new HorarioDisponible();
-				horarioDisp.setDia(Dia.MARTES);
-				horarioDisp.setHora(String.valueOf(i));
+				horarioDisp.setDia(DayOfWeek.TUESDAY);
+				horarioDisp.setHora(LocalTime.of(i, 0));
 				horariosToAdd.add(horarioDisp);
 		
 			}
@@ -56,8 +57,8 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 			if(horariosDispDto.isMiercoles()) {
 				horarioDisp = new HorarioDisponible();
 			
-				horarioDisp.setDia(Dia.MIERCOLES);
-				horarioDisp.setHora(String.valueOf(i));
+				horarioDisp.setDia(DayOfWeek.WEDNESDAY);
+				horarioDisp.setHora(LocalTime.of(i, 0));
 				horariosToAdd.add(horarioDisp);
 		
 			}
@@ -65,8 +66,8 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 			if(horariosDispDto.isJueves()) {
 				horarioDisp = new HorarioDisponible();
 			
-				horarioDisp.setDia(Dia.JUEVES);
-				horarioDisp.setHora(String.valueOf(i));
+				horarioDisp.setDia(DayOfWeek.THURSDAY);
+				horarioDisp.setHora(LocalTime.of(i, 0));
 				horariosToAdd.add(horarioDisp);
 		
 			}
@@ -74,8 +75,8 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 			if(horariosDispDto.isViernes()) {
 				horarioDisp = new HorarioDisponible();
 		
-				horarioDisp.setDia(Dia.VIERNES);
-				horarioDisp.setHora(String.valueOf(i));
+				horarioDisp.setDia(DayOfWeek.FRIDAY);
+				horarioDisp.setHora(LocalTime.of(i, 0));
 				horariosToAdd.add(horarioDisp);
 		
 			}
@@ -83,8 +84,8 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 			if(horariosDispDto.isSabado()) {
 				horarioDisp = new HorarioDisponible();
 		
-				horarioDisp.setDia(Dia.SABADO);
-				horarioDisp.setHora(String.valueOf(i));
+				horarioDisp.setDia(DayOfWeek.SATURDAY);
+				horarioDisp.setHora(LocalTime.of(i, 0));
 				horariosToAdd.add(horarioDisp);
 		
 			}
@@ -92,8 +93,8 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 			if(horariosDispDto.isDomingo()) {
 				horarioDisp = new HorarioDisponible();
 			
-				horarioDisp.setDia(Dia.DOMINGO);
-				horarioDisp.setHora(String.valueOf(i));
+				horarioDisp.setDia(DayOfWeek.SUNDAY);
+				horarioDisp.setHora(LocalTime.of(i, 0));
 				horariosToAdd.add(horarioDisp);
 		
 			}
@@ -123,7 +124,7 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 				
 		HorarioDisponible disponibilidad = new HorarioDisponible();
 		disponibilidad.setId(dto.getId());
-		disponibilidad.setDia(Dia.valueOf(dto.getDia()));
+		disponibilidad.setDia(DayOfWeek.of(dto.getDia()));
 		disponibilidad.setHora(dto.getHora());
 	
 		return disponibilidad;
@@ -134,7 +135,7 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 		
 		HorarioDisponibleDTO disponibilidadDTO = new HorarioDisponibleDTO();
 		disponibilidadDTO.setId(entity.getId());
-		disponibilidadDTO.setDia(entity.getDia().name());
+		disponibilidadDTO.setDia(entity.getDia().getValue());
 		disponibilidadDTO.setHora(entity.getHora());
 		
 		return disponibilidadDTO;

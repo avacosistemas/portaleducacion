@@ -1,14 +1,16 @@
 package ar.com.avaco.educacion.ws.dto;
 
-import ar.com.avaco.educacion.domain.entities.Dia;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+
 import ar.com.avaco.educacion.domain.entities.HorarioDisponible;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class HorarioDisponibleDTO extends DTOEntity<Long> {
 	
 	private Long id;
-	private String dia;
-	private String hora;
+	private Integer dia;
+	private LocalTime hora;
 
 	public HorarioDisponibleDTO() {
 	}
@@ -25,19 +27,19 @@ public class HorarioDisponibleDTO extends DTOEntity<Long> {
 		this.id = id;
 	}
 
-	public String getDia() {
+	public Integer getDia() {
 		return dia;
 	}
 
-	public void setDia(String dia) {
+	public void setDia(Integer dia) {
 		this.dia = dia;
 	}
 
-	public String getHora() {
+	public LocalTime getHora() {
 		return hora;
 	}
 
-	public void setHora(String hora) {
+	public void setHora(LocalTime hora) {
 		this.hora = hora;
 	}
 
@@ -45,7 +47,7 @@ public class HorarioDisponibleDTO extends DTOEntity<Long> {
 
 		HorarioDisponible disponibilidad = new HorarioDisponible();
 		disponibilidad.setId(this.getId());
-		disponibilidad.setDia(Dia.valueOf(this.getDia()));
+		disponibilidad.setDia(DayOfWeek.of(this.getDia()));
 		disponibilidad.setHora(this.getHora());
 
 		return disponibilidad;
@@ -54,7 +56,7 @@ public class HorarioDisponibleDTO extends DTOEntity<Long> {
 	public void setDTO(HorarioDisponible disponibilidad) {
 		this.setId(disponibilidad.getId());
 	
-		this.setDia(disponibilidad.getDia().name());
+		this.setDia(disponibilidad.getDia().getValue());
 		this.setHora(disponibilidad.getHora());
 	}
 

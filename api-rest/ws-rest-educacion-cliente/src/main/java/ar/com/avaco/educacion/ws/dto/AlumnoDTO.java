@@ -17,7 +17,8 @@ public class AlumnoDTO extends ClienteDTO {
 
 		Alumno alumno = new Alumno();
 		alumno.setId(this.getId());
-		alumno.setRazonSocialNombreApellido(this.getNombreApellido());
+		alumno.setNombre(this.getNombre());
+		alumno.setApellido(this.getApellido());
 		alumno.setUsername(this.getUsername());
 		alumno.setEmail(this.getEmail());
 		
@@ -38,7 +39,8 @@ public class AlumnoDTO extends ClienteDTO {
 	public void setDTO(Alumno alumno) {
 	
 		this.setId(alumno.getId());
-		this.setNombreApellido(alumno.getRazonSocialNombreApellido());
+		this.setNombre(alumno.getNombre());
+		this.setApellido(alumno.getApellido());
 		this.setTipoIdentificacion(alumno.getIdentificacion().getTipo().name());
 		this.setNumeroIdentificacion(alumno.getIdentificacion().getNumero());
 		this.setUsername(alumno.getUsername());

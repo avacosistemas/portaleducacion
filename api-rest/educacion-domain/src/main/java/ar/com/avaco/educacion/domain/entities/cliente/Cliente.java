@@ -1,5 +1,6 @@
 package ar.com.avaco.educacion.domain.entities.cliente;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -88,16 +89,25 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 
 	/**
 	 * La razon social de la empresa o el nombre y apellido del cliente.
-	 */
+
 	@Column(name = "RS_NA", nullable = false)
-	private String razonSocialNombreApellido;
+	private String razonSocialNombreApellido; */
+	
+	@Column(name = "NOMBRE", nullable = false)
+	private String nombre;
+	
+	@Column(name = "APELLIDO", nullable = false)
+	private String apellido;
 
 	/**
 	 * La fecha de nacimiento del cliente o inicio de actividades si es empresa.
-	 */
+	 
 	@Column(name = "FN_IA")
-	private Date fechaNacimientoInicioActividades;
+	private Date fechaNacimientoInicioActividades;*/
 
+	@Column(name = "FECHA_NAC")
+	private LocalDate fechaNacimiento;
+	
 	/**
 	 * Determina si es masculino, femenino o empresa.
 	 */
@@ -170,21 +180,23 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 		this.identificacion = identificacion;
 	}
 
+	/*
 	public String getRazonSocialNombreApellido() {
 		return razonSocialNombreApellido;
 	}
 
 	public void setRazonSocialNombreApellido(String razonSocialNombreApellido) {
 		this.razonSocialNombreApellido = razonSocialNombreApellido;
-	}
+	}*/
 
+	/*
 	public Date getFechaNacimientoInicioActividades() {
 		return fechaNacimientoInicioActividades;
 	}
 
 	public void setFechaNacimientoInicioActividades(Date fechaNacimientoInicioActividades) {
 		this.fechaNacimientoInicioActividades = fechaNacimientoInicioActividades;
-	}
+	}*/
 
 	public Genero getGenero() {
 		return genero;
@@ -323,8 +335,38 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 		this.accesos = accesos;
 	}
 
+	
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public LocalDate getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
 	public String getIdString() {
 		return "CLI" + StringUtils.leftPad(id.toString(), 10, "0");
+	}
+	
+	public String getNombreApellido() {
+		return this.getNombre() + " " +this.getApellido();
 	}
 
 }

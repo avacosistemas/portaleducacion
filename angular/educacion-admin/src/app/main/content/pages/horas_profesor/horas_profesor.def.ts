@@ -7,7 +7,7 @@ import { HORAS_PROFESOR_GRID_DEF } from './grid/horas_profesor.grid';
 import { HORAS_PROFESOR_I18N_DEF } from './i18n/horas_profesor.i18n';
 import { HORAS_PROFESOR_NAV_DEF } from './navigation/horas_profesor.nav';
 import { CrudDef } from 'app/modules/fwk/core/model/component-def/crud-def';
-import { PREFIX_DOMAIN_API } from "environments/environment";
+import { PREFIX_DOMAIN_API_EDUCACION } from 'environments/environment';
 
 // Definicion de un template crud(Create,Read,Update and Delete)
 export const HORAS_PROFESOR_DEF: CrudDef = { 
@@ -24,8 +24,7 @@ export const HORAS_PROFESOR_DEF: CrudDef = {
     security: HORAS_PROFESOR_SECURITY_DEF,
     ws: {
         key: 'HORAS_PROFESOR_CRUD_URL',
-        url: 'http://localhost:8080/ws-rest-educacion/horariosdisponibles/'
-        //url: PREFIX_DOMAIN_API + 'ws-rest-educacion/horariosdisponibles/'
+        url: PREFIX_DOMAIN_API_EDUCACION + '/horariosdisponibles/'
     },
     dialogConfig: {
         width: '400px'

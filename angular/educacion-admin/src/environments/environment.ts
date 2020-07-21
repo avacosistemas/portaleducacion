@@ -3,7 +3,11 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-export const PREFIX_DOMAIN_API =  'http://localhost:8080/';
+// export const PREFIX_DOMAIN_API =  'http://localhost:8080/';
+
+
+export const PREFIX_DOMAIN_API_EDUCACION =  'http://localhost:8080/ws-rest-educacion';
+export const PREFIX_DOMAIN_API_AUTHENTICATION =  'http://localhost:8080/ws-rest-authentication';
 
 export const environment = {
     localAuth: true,
@@ -14,35 +18,25 @@ export const environment = {
     /** URLs of Services **/
 
     /** AUTHENTICATION */
-    AUTHENTICATION_URL:  PREFIX_DOMAIN_API + '/ws-rest-authentication/auth',
-    AUTHENTICATION_REFRESH_TOKEN_URL:  PREFIX_DOMAIN_API + '/ws-rest-authentication/refresh',
+    AUTHENTICATION_URL:  PREFIX_DOMAIN_API_AUTHENTICATION + '/auth',
+    AUTHENTICATION_REFRESH_TOKEN_URL:  PREFIX_DOMAIN_API_AUTHENTICATION + '/refresh',
+    PERMISSION_CRUD_URL: PREFIX_DOMAIN_API_AUTHENTICATION + '/permission',
 
-    PERMISSION_CRUD_URL: PREFIX_DOMAIN_API + '/ws-rest-authentication/permission',
-    PROFILE_CRUD_URL: PREFIX_DOMAIN_API + '/ws-rest-authentication/profile',
-    ROLE_CRUD_URL :  PREFIX_DOMAIN_API + '/ws-rest-authentication/role',
-    USER_CRUD_URL :  PREFIX_DOMAIN_API + '/ws-rest-authentication/role',
-
-    USER_VALIDATION_ADD_URL : PREFIX_DOMAIN_API + '/ws-rest-authentication/validationAdd',
-    USER_VALIDATION_EDIT_URL  : PREFIX_DOMAIN_API + '/ws-rest-authentication/validationEdit',
+    PROFILE_CRUD_URL: PREFIX_DOMAIN_API_AUTHENTICATION + '/profile',
+    ROLE_CRUD_URL :  PREFIX_DOMAIN_API_AUTHENTICATION + '/role',
+    USER_CRUD_URL :  PREFIX_DOMAIN_API_AUTHENTICATION + '/user',
+    USER_VALIDATION_ADD_URL : PREFIX_DOMAIN_API_AUTHENTICATION + '/validationAdd',
+    USER_VALIDATION_EDIT_URL  : PREFIX_DOMAIN_API_AUTHENTICATION + '/validationEdit',
 
     /* Config General URl*/
     URL_ROOT: '',
     URL_LOGIN: '/auth/login',
     // Business
-    URL_SECCIONES: 'seccion',
-    URL_CONTENIDOS: 'contenido',
-    URL_IMAGEN: 'imagen',
-    URL_BOLETIN: 'boletin',
-    URL_INDICE: 'indice',
-    URL_MAILING: 'mailing',
-    URL_FORMULARIO: 'formulario',
-    URL_PUBLICIDAD: 'bannerCampaing',
-    URL_PRODUCTO_EXTERNO : 'productoExterno',
     URL_PARAMETERS : 'parameters',
     URL_INSTITUCIONES : 'instituciones',
     URL_MATERIAS : 'materias',
     URL_PROFESORES : 'profesores',
-    URL_LOGOUT_API: PREFIX_DOMAIN_API + 'logout',
+    URL_LOGOUT_API: PREFIX_DOMAIN_API_AUTHENTICATION + '/logout',
     URL_PERMISSION : 'permisos',
     URL_PROFILE : 'perfiles',
     URL_ROLE : 'roles',

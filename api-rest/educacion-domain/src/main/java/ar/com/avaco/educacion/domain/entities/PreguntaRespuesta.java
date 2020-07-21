@@ -1,5 +1,7 @@
 package ar.com.avaco.educacion.domain.entities;
 
+import java.time.LocalTime;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,6 +45,9 @@ public class PreguntaRespuesta extends ar.com.avaco.arc.core.domain.Entity<Long>
 	
 	@Column(name = "RESPUESTA")
 	private String respuesta;
+	
+	@Column(name = "HORA_PREGUNTA")
+	private LocalTime horaPregunta;
 	
 	public PreguntaRespuesta() {}
 
@@ -94,6 +99,15 @@ public class PreguntaRespuesta extends ar.com.avaco.arc.core.domain.Entity<Long>
 		this.respuesta = respuesta;
 	}
 
+	public LocalTime getHoraPregunta() {
+		return horaPregunta;
+	}
+
+	public void setHoraPregunta(LocalTime horaPregunta) {
+		this.horaPregunta = horaPregunta;
+	}
+
+	
 
 	//TODO Agregar hashCode, equals y toString cuando se completen todos los atributos
 
