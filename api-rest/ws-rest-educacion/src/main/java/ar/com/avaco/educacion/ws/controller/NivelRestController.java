@@ -2,6 +2,7 @@ package ar.com.avaco.educacion.ws.controller;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +25,11 @@ public class NivelRestController extends AbstractDTORestController<NivelDTO, Int
 	
 	@RequestMapping(value = "/niveles/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> listNiveles(@RequestParam(value= "descripcion", required= false ) String descripcion) {
-		if(!descripcion.isEmpty()) {			
-			
+		if(!StringUtils.isBlank(descripcion)) {			
 			ResponseEntity<JSONResponse>resp = super.listFiltered(nivel-> nivel.getDescripcion()
 					.toUpperCase().contains(descripcion.toUpperCase()));
 			
 			return resp;
-			
 		}		
 		return super.list();
 	}

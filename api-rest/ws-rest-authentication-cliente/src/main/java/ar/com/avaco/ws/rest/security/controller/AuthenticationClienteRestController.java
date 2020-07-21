@@ -38,7 +38,7 @@ public class AuthenticationClienteRestController {
 
 	private ClienteEPService clienteEPService;
 
-	@RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
+	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
 			throws AuthenticationException {
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -51,7 +51,7 @@ public class AuthenticationClienteRestController {
 		return ResponseEntity.ok(new JwtAuthenticationResponse(token));
 	}
 
-	@RequestMapping(value = "${jwt.route.authentication.refresh}", method = RequestMethod.GET)
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
 	public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
 		String authToken = request.getHeader(tokenHeader);
 		final String token = authToken.substring(7);
@@ -66,20 +66,13 @@ public class AuthenticationClienteRestController {
 		}
 	}
 
-	@RequestMapping(value = "${jwt.route.authentication.cliente}", method = RequestMethod.GET)
+	@RequestMapping(value = "/cliente", method = RequestMethod.GET)
 	public ResponseEntity<?> userAuthenticationToken(HttpServletRequest request) {
 		String authToken = request.getHeader(tokenHeader);
 		final String token = authToken.substring(7);
 		String username = jwtTokenUtil.getUsernameFromToken(token);
 		UserDetails loadUserByUsername = clienteEPService.loadUserByUsername(username);
 		ClienteUserDetailsDTO clienteUDDTO = (ClienteUserDetailsDTO) loadUserByUsername; //ClienteUserDetailsFactory.create((Cliente)loadUserByUsername);
-//		UserAuthorised userAutho = new UserAuthorised();
-//		userAutho.setUsername(clienteUDDTO.getNombreApellido());
-//		userAutho.setAuthorities(clienteUDDTO.getAuthorities());
-//		userAutho.setAccountNoExpired(clienteUDDTO.isAccountNonExpired());
-//		userAutho.setAccountNonLocked(clienteUDDTO.isAccountNonLocked());
-//		userAutho.setCredentialsNonExpired(clienteUDDTO.isCredentialsNonExpired());
-//		userAutho.setEnabled(clienteUDDTO.isEnabled());
 		return ResponseEntity.ok(clienteUDDTO);
 	}
 

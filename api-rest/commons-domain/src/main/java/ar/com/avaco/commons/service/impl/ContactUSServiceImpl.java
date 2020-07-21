@@ -14,7 +14,6 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,19 +36,19 @@ public class ContactUSServiceImpl extends NJBaseService<Long, ContactUS, Contact
 	private static final String CLIENT = "client";
 	private static final String ISO_8859_1 = "ISO-8859-1";
 
-	@Value("${prop.contactus.subject.client}")
+//	@Value("${prop.contactus.subject.client}")
 	private String contactUSSubjetClient;
 
-	@Value("${prop.contactus.subject.system}")
+//	@Value("${prop.contactus.subject.system}")
 	private String contactUSSubjetSystem;
 	
-	@Value("${prop.contactus.template.client}")
+//	@Value("${prop.contactus.template.client}")
 	private String contactUSTemplateClient;
 	
-	@Value("${prop.contactus.template.system}")
+//	@Value("${prop.contactus.template.system}")
 	private String contactUSTemplateSystem;
 	
-	@Value("${prop.contactus.from}")
+//	@Value("${prop.contactus.from}")
 	private String contactUSFrom;
 	
 	@Resource(name = "mailSenderSMTPService")

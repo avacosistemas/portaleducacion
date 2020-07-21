@@ -10,6 +10,9 @@
 	  http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<http entry-point-ref="restAuthenticationEntryPoint">
+		<intercept-url pattern="/contact-us/send/*" access="permitAll" />
+		<intercept-url pattern="/portal/faqs/**" access="permitAll" />
+		<intercept-url pattern="/parametrosPortal/**" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 		<csrf disabled="true" />
 		<custom-filter before="BASIC_AUTH_FILTER" ref="tokenFilter" />

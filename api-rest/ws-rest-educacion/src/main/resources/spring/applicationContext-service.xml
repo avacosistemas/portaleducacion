@@ -13,6 +13,12 @@
 	<ctx:component-scan base-package="ar.com.avaco.educacion.service" 
 						resource-pattern="**/*ServiceImpl.class"/>
 						
+	<ctx:component-scan	base-package="ar.com.avaco.commons.service"
+						resource-pattern="**/*ServiceImpl.class"/>
+
+	<ctx:component-scan base-package="ar.com.avaco.commons.service" 
+						resource-pattern="**/*RepositoryImpl.class" />
+						
     <ctx:component-scan base-package="ar.com.avaco.educacion.ws.service" 
 						resource-pattern="**/*ServiceImpl.class"/>
 
