@@ -12,7 +12,7 @@ public final class ClienteUserDetailsFactory {
         return new ClienteUserDetailsDTO(
                 cliente.getId(),
                 cliente.getUsername(),
-                cliente.getRazonSocialNombreApellido(),
+                cliente.getNombreApellido(),
                 cliente.getEmail(),
                 cliente.getPassword(),
                 cliente.getAuthorities(),

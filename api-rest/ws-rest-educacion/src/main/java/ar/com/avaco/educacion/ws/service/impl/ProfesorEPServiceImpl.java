@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Profesor;
@@ -44,6 +45,16 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 	}
 	
 	@Override
+	public void updateFotoPerfil(Long id, MultipartFile file) throws BusinessException {
+		service.uploadFotoPerfil(id, file);
+	}
+	
+	@Override
+	public byte[] downloadFotoPerfil(Long id) throws BusinessException {
+		return service.downloadFotoPerfil(id);
+	}
+	
+	@Override
 	public ProfesorDTO createProfesor(ProfesorDTO profesorDTO) throws BusinessException {
 		Profesor profesor = convertToEntity(profesorDTO);
 		profesor = service.createProfesor(profesor);
@@ -64,7 +75,8 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 		
 		Profesor profesor = new Profesor();
 		profesor.setId(dto.getId());
-		profesor.setRazonSocialNombreApellido(dto.getNombreApellido());
+		profesor.setNombre(dto.getNombre());
+		profesor.setApellido(dto.getApellido());
 	
 		Identificacion id = new Identificacion();
 		id.setTipo(TipoIdentificacion.valueOf(dto.getTipoIdentificacion()));
@@ -87,7 +99,8 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 	protected ProfesorDTO convertToDto(Profesor entity) {
 		ProfesorDTO profesorDTO = new ProfesorDTO();
 		profesorDTO.setId(entity.getId());
-		profesorDTO.setNombreApellido(entity.getRazonSocialNombreApellido());
+		profesorDTO.setNombre(entity.getNombre());
+		profesorDTO.setApellido(entity.getApellido());
 		profesorDTO.setTipoIdentificacion(entity.getIdentificacion().getTipo().name());
 		profesorDTO.setNumeroIdentificacion(entity.getIdentificacion().getNumero());
 		profesorDTO.setUsername(entity.getUsername());

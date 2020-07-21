@@ -5,7 +5,8 @@ import ar.com.avaco.ws.rest.dto.DTOEntity;
 public class ClienteDTO extends DTOEntity<Long> {
 	
 	private Long id;
-	private String nombreApellido;
+	private String nombre;
+	private String apellido;
 	private String tipoIdentificacion;
 	private String numeroIdentificacion;
 	private String username;
@@ -23,12 +24,20 @@ public class ClienteDTO extends DTOEntity<Long> {
 		this.id = id;
 	}
 
-	public String getNombreApellido() {
-		return nombreApellido;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNombreApellido(String nombreApellido) {
-		this.nombreApellido = nombreApellido;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public String getTipoIdentificacion() {

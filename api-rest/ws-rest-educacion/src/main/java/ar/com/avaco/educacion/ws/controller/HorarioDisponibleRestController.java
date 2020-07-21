@@ -35,8 +35,8 @@ public class HorarioDisponibleRestController extends AbstractDTORestController<H
 	
 	
 	@RequestMapping(value = "/horariosdisponibles/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listHorariosDisponibles(@RequestParam Long id) {
-		
+	public ResponseEntity<JSONResponse> listHorariosDisponibles(@RequestParam(value= "id", required= false) Long id) {
+	
 		if(id != null) {
 			List<HorarioDisponibleDTO> horariosDisponibles = this.service.listHorariosDispProfesor(id);
 			JSONResponse response = new JSONResponse();
@@ -47,11 +47,7 @@ public class HorarioDisponibleRestController extends AbstractDTORestController<H
 			return super.list();
 		}
 		
-		
-		
 	}
-	
-	
 	
 	@RequestMapping(value = "/horariosdisponibles/", method = RequestMethod.POST)
 	public ResponseEntity<JSONResponse> addHorariosDisponibles(@RequestBody HorarioDisponibleFullDTO horariosDisp) throws BusinessException {

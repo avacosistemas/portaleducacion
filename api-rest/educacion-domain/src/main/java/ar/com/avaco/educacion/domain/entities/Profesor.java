@@ -1,5 +1,6 @@
 package ar.com.avaco.educacion.domain.entities;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,12 +14,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 
 @Entity
 @Table(name = "PROFESOR")
 @AttributeOverride(name = "id", column = @Column(name = "ID_PROFESOR"))
-public class Profesor extends Cliente {
+public class Profesor extends Cliente implements Serializable {
 	
 	/** serializacion */
 	private static final long serialVersionUID = 1206370224660296393L;
@@ -50,6 +53,18 @@ public class Profesor extends Cliente {
 	
 	@ManyToMany(mappedBy = "profesores")
 	Set<Aula> aulas;
+	
+	@Column(name = "VALOR_HORA", nullable = true)
+	private Double valoreHora;
+	
+    //@Column(name = "IMAGE_PERFIL", nullable = true)
+    //@Lob
+    //private byte[] imagenPerfil;
+    
+    @Column(name = "FOTO", nullable = true)
+    @Type(type="org.hibernate.type.BinaryType")
+    private byte foto[];
+    
 	
 	public Profesor() {}
 
@@ -122,6 +137,29 @@ public class Profesor extends Cliente {
 		
 	}
 
+	public Double getValoreHora() {
+		return valoreHora;
+	}
+
+	public void setValoreHora(Double valoreHora) {
+		this.valoreHora = valoreHora;
+	}
+	/*
+	public byte[] getImagenPerfil() {
+		return imagenPerfil;
+	}
+
+	public void setImagenPerfil(byte[] imagenPerfil) {
+		this.imagenPerfil = imagenPerfil;
+	}*/
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
 	
 	//TODO Agregar hashCode, equals y toString cuando se completen todos los atributos
 	

@@ -19,7 +19,8 @@ public class ProfesorDTO extends ClienteDTO {
 
 		Profesor profesor = new Profesor();
 		profesor.setId(this.getId());
-		profesor.setRazonSocialNombreApellido(this.getNombreApellido());
+		profesor.setNombre(this.getNombre());
+		profesor.setApellido(this.getApellido());
 		profesor.setUsername(this.getUsername());
 		profesor.setEmail(this.getEmail());
 		
@@ -40,7 +41,8 @@ public class ProfesorDTO extends ClienteDTO {
 	public void setDTO(Profesor profesor) {
 	
 		this.setId(profesor.getId());
-		this.setNombreApellido(profesor.getRazonSocialNombreApellido());
+		this.setNombre(profesor.getNombre());
+		this.setApellido(profesor.getApellido());
 		this.setTipoIdentificacion(profesor.getIdentificacion().getTipo().name());
 		this.setNumeroIdentificacion(profesor.getIdentificacion().getNumero());
 		this.setUsername(profesor.getUsername());
