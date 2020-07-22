@@ -2,12 +2,13 @@ package ar.com.avaco.educacion.ws.dto;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
+import org.apache.commons.lang3.StringUtils;
 
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
 import ar.com.avaco.educacion.domain.entities.cliente.Genero;
+import ar.com.avaco.utils.DateUtils;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class ClienteCompletoDTO extends DTOEntity<Long> {
@@ -262,13 +263,13 @@ public class ClienteCompletoDTO extends DTOEntity<Long> {
 
 	public Cliente toEntity() {
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	
 		Cliente cliente = new Cliente();
 		cliente.setEmail(this.getEmail());
 		cliente.setGenero(Genero.valueOf(this.genero));
 		try {
-			cliente.setFechaNacimiento(LocalDate.parse(this.getFechaNacimiento(), formatter));
+			if (!StringUtils.isBlank(this.getFechaNacimiento())) {
+				cliente.setFechaNacimiento(DateUtils.toDate(this.getFechaNacimiento(), "dd/MM/yyyy"));
+			}
 		} catch (Exception e1) {
 			// No hacer nada. Dejar null.
 		}
@@ -286,8 +287,6 @@ public class ClienteCompletoDTO extends DTOEntity<Long> {
 		Contacto contacto = this.contactoDTO.toEntity();
 		contacto.setCliente(cliente);
 		cliente.setContacto(contacto);
-
-		formatter = null;
 
 		return cliente;
 

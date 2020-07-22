@@ -7,8 +7,12 @@ export const PROFESORES_GRID_DEF = {
       columnNameKey: 'profesores_grid_def_column_id'
     },
     {
-      columnDef: 'nombreApellido',
-      columnNameKey: 'profesores_grid_def_column_nombreapellido'
+      columnDef: 'nombre',
+      columnNameKey: 'profesores_grid_def_column_nombre'
+    },
+    {
+      columnDef: 'apellido',
+      columnNameKey: 'profesores_grid_def_column_apellido'
     },
     {
       columnDef: 'tipoIdentificacion',
@@ -34,7 +38,8 @@ export const PROFESORES_GRID_DEF = {
   sortAllColumns: true,
   deleteAction: true, 
   displayedColumns: [
-    'nombreApellido',
+    'nombre',
+    'apellido',
     'tipoIdentificacion',
     'numeroIdentificacion',
     'username',

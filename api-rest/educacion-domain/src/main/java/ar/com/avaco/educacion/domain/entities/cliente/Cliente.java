@@ -39,7 +39,7 @@ import ar.com.avaco.arc.sec.domain.UserDetailsExtended;
  */
 @Entity
 @Table(name = "CLI_CLIENTE")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 @SequenceGenerator(name = "CLIENTE_SEQ", sequenceName = "CLIENTE_SEQ", allocationSize = 1)
 public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implements UserDetailsExtended {
 
@@ -89,25 +89,26 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 
 	/**
 	 * La razon social de la empresa o el nombre y apellido del cliente.
+	 * 
+	 * @Column(name = "RS_NA", nullable = false) private String
+	 *              razonSocialNombreApellido;
+	 */
 
-	@Column(name = "RS_NA", nullable = false)
-	private String razonSocialNombreApellido; */
-	
 	@Column(name = "NOMBRE", nullable = false)
 	private String nombre;
-	
+
 	@Column(name = "APELLIDO", nullable = false)
 	private String apellido;
 
 	/**
 	 * La fecha de nacimiento del cliente o inicio de actividades si es empresa.
-	 
-	@Column(name = "FN_IA")
-	private Date fechaNacimientoInicioActividades;*/
+	 * 
+	 * @Column(name = "FN_IA") private Date fechaNacimientoInicioActividades;
+	 */
 
 	@Column(name = "FECHA_NAC")
-	private LocalDate fechaNacimiento;
-	
+	private Date fechaNacimiento;
+
 	/**
 	 * Determina si es masculino, femenino o empresa.
 	 */
@@ -181,22 +182,21 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 	}
 
 	/*
-	public String getRazonSocialNombreApellido() {
-		return razonSocialNombreApellido;
-	}
-
-	public void setRazonSocialNombreApellido(String razonSocialNombreApellido) {
-		this.razonSocialNombreApellido = razonSocialNombreApellido;
-	}*/
+	 * public String getRazonSocialNombreApellido() { return
+	 * razonSocialNombreApellido; }
+	 * 
+	 * public void setRazonSocialNombreApellido(String razonSocialNombreApellido) {
+	 * this.razonSocialNombreApellido = razonSocialNombreApellido; }
+	 */
 
 	/*
-	public Date getFechaNacimientoInicioActividades() {
-		return fechaNacimientoInicioActividades;
-	}
-
-	public void setFechaNacimientoInicioActividades(Date fechaNacimientoInicioActividades) {
-		this.fechaNacimientoInicioActividades = fechaNacimientoInicioActividades;
-	}*/
+	 * public Date getFechaNacimientoInicioActividades() { return
+	 * fechaNacimientoInicioActividades; }
+	 * 
+	 * public void setFechaNacimientoInicioActividades(Date
+	 * fechaNacimientoInicioActividades) { this.fechaNacimientoInicioActividades =
+	 * fechaNacimientoInicioActividades; }
+	 */
 
 	public Genero getGenero() {
 		return genero;
@@ -213,7 +213,6 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 	public void setNacionalidad(String nacionalidad) {
 		this.nacionalidad = nacionalidad;
 	}
-
 
 	public Contacto getContacto() {
 		return contacto;
@@ -335,8 +334,6 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 		this.accesos = accesos;
 	}
 
-	
-	
 	public String getNombre() {
 		return nombre;
 	}
@@ -353,20 +350,20 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 		this.apellido = apellido;
 	}
 
-	public LocalDate getFechaNacimiento() {
+	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	public String getIdString() {
 		return "CLI" + StringUtils.leftPad(id.toString(), 10, "0");
 	}
-	
+
 	public String getNombreApellido() {
-		return this.getNombre() + " " +this.getApellido();
+		return this.getNombre() + " " + this.getApellido();
 	}
 
 }

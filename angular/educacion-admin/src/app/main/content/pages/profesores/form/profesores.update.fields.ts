@@ -7,51 +7,73 @@ export const PROFESORES_UPDATE_FORM_FIELDS_DEF = [
     controlType: 'hidden'
   },
   {
-    key: 'nombreApellido',
-    labelKey: 'PROFESORES_UPDATE_FORM_FIELDS_DEF_FIELD_nombreapellido',
+    key: 'nombre',
+    labelKey: 'profesores_create_form_fields_def_field_nombre',
     label: 'Nombre y Apellido',
     type: 'string',
     controlType: 'textbox',
-    required:true
+    required:true,
+    maxLength: 100
+  },
+  {
+    key: 'apellido',
+    labelKey: 'profesores_create_form_fields_def_field_apellido',
+    label: 'Nombre y Apellido',
+    type: 'string',
+    controlType: 'textbox',
+    required:true,
+    maxLength: 100
   },
   {
     key: 'tipoIdentificacion',
-    labelKey: 'PROFESORES_UPDATE_FORM_FIELDS_DEF_FIELD_tipoidentificacion',
+    labelKey: 'profesores_create_form_fields_def_field_tipoidentificacion',
     label: 'Tipo de Identificación',
-    type: 'string',
-    controlType: 'textbox',
-    required:true
+    required:true,
+    controlType: 'select',
+    options: {
+      handlerSourceData: false,
+      elementLabel: 'nombre',
+      elementValue: 'id',
+      fromData: [{id: 'DNI', nombre: 'DNI'},
+                 {id: 'CUIT', nombre: 'CUIT'},
+                 {id: 'CUIL', nombre: 'CUIL'}
+                 ]
+    }
   },
   {
     key: 'numeroIdentificacion',
-    labelKey: 'PROFESORES_UPDATE_FORM_FIELDS_DEF_FIELD_numeroidentificacion',
+    labelKey: 'profesores_create_form_fields_def_field_numeroidentificacion',
     label: 'Número de Identificación',
     type: 'string',
     controlType: 'textbox',
-    required:true
+    required:true,
+    maxLength: 12
   },
   {
     key: 'username',
-    labelKey: 'PROFESORES_UPDATE_FORM_FIELDS_DEF_FIELD_username',
+    labelKey: 'profesores_create_form_fields_def_field_username',
     label: 'Usuario',
     type: 'string',
     controlType: 'textbox',
-    required:true
+    required:true,
+    maxLength: 100
   },
   {
     key: 'email',
-    labelKey: 'PROFESORES_UPDATE_FORM_FIELDS_DEF_FIELD_email',
+    labelKey: 'profesores_create_form_fields_def_field_email',
     label: 'Email',
     type: 'string',
     controlType: 'textbox',
-    required:true
+    required:true,
+    maxLength: 250
   },
   {
     key: 'telefonoMovil',
-    labelKey: 'PROFESORES_UPDATE_FORM_FIELDS_DEF_FIELD_telefonomovil',
+    labelKey: 'profesores_create_form_fields_def_field_telefonomovil',
     label: 'Celular',
     type: 'string',
     controlType: 'textbox',
-    required:true
+    required:true,
+    maxLength: 15
   }
 ];

@@ -13,7 +13,7 @@ import ar.com.avaco.educacion.domain.entities.Comentario;
 import ar.com.avaco.educacion.domain.entities.Institucion;
 import ar.com.avaco.educacion.domain.entities.Materia;
 import ar.com.avaco.educacion.domain.entities.Profesor;
-import ar.com.avaco.educacion.ws.utils.DateUtils;
+import ar.com.avaco.utils.DateUtils;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class AulaDTO extends DTOEntity<Long> {

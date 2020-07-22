@@ -1,19 +1,37 @@
 export const PROFESORES_CREATE_FORM_FIELDS_DEF = [
   {
-    key: 'nombreApellido',
-    labelKey: 'profesores_create_form_fields_def_field_nombreapellido',
+    key: 'nombre',
+    labelKey: 'profesores_create_form_fields_def_field_nombre',
     label: 'Nombre y Apellido',
     type: 'string',
     controlType: 'textbox',
-    required:true
+    required:true,
+    maxLength: 100
+  },
+  {
+    key: 'apellido',
+    labelKey: 'profesores_create_form_fields_def_field_apellido',
+    label: 'Nombre y Apellido',
+    type: 'string',
+    controlType: 'textbox',
+    required:true,
+    maxLength: 100
   },
   {
     key: 'tipoIdentificacion',
     labelKey: 'profesores_create_form_fields_def_field_tipoidentificacion',
     label: 'Tipo de Identificación',
-    type: 'string',
-    controlType: 'textbox',
-    required:true
+    required:true,
+    controlType: 'select',
+    options: {
+      handlerSourceData: false,
+      elementLabel: 'nombre',
+      elementValue: 'id',
+      fromData: [{id: 'DNI', nombre: 'DNI'},
+                 {id: 'CUIT', nombre: 'CUIT'},
+                 {id: 'CUIL', nombre: 'CUIL'}
+                 ]
+    }
   },
   {
     key: 'numeroIdentificacion',
@@ -21,7 +39,8 @@ export const PROFESORES_CREATE_FORM_FIELDS_DEF = [
     label: 'Número de Identificación',
     type: 'string',
     controlType: 'textbox',
-    required:true
+    required:true,
+    maxLength: 12
   },
   {
     key: 'username',
@@ -29,7 +48,8 @@ export const PROFESORES_CREATE_FORM_FIELDS_DEF = [
     label: 'Usuario',
     type: 'string',
     controlType: 'textbox',
-    required:true
+    required:true,
+    maxLength: 100
   },
   {
     key: 'email',
@@ -37,7 +57,8 @@ export const PROFESORES_CREATE_FORM_FIELDS_DEF = [
     label: 'Email',
     type: 'string',
     controlType: 'textbox',
-    required:true
+    required:true,
+    maxLength: 250
   },
   {
     key: 'telefonoMovil',
@@ -45,6 +66,7 @@ export const PROFESORES_CREATE_FORM_FIELDS_DEF = [
     label: 'Celular',
     type: 'string',
     controlType: 'textbox',
-    required:true
+    required:true,
+    maxLength: 15
   }
 ];
