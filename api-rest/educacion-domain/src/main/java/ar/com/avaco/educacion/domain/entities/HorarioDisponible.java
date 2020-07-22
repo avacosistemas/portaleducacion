@@ -1,6 +1,7 @@
 package ar.com.avaco.educacion.domain.entities;
 
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.persistence.CascadeType;
@@ -34,7 +35,7 @@ public class HorarioDisponible extends ar.com.avaco.arc.core.domain.Entity<Long>
 	private DayOfWeek dia;
 	
 	@Column(name = "HORA_DISPONIBLE", nullable = false)
-	private LocalTime hora;
+	private Integer hora;
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
     @JoinColumn(name = "ID_PROFESOR")
@@ -58,11 +59,11 @@ public class HorarioDisponible extends ar.com.avaco.arc.core.domain.Entity<Long>
 		this.dia = dia;
 	}
 
-	public LocalTime getHora() {
+	public Integer getHora() {
 		return hora;
 	}
 
-	public void setHora(LocalTime hora) {
+	public void setHora(Integer hora) {
 		this.hora = hora;
 	}
 
