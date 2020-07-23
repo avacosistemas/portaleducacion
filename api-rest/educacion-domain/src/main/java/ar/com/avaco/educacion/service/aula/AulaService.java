@@ -1,5 +1,6 @@
 package ar.com.avaco.educacion.service.aula;
 
+import java.util.Date;
 import java.util.List;
 
 import ar.com.avaco.arc.core.component.bean.service.NJService;
@@ -80,4 +81,16 @@ public interface AulaService extends NJService<Long, Aula> {
 	 */
 	void removeAulaAlumno(Long idAula, Long idAlumno)  throws BusinessException;
 	
+	
+	/**
+	 * Alumno compra una clase
+	 * 
+	 * @param idAlumno
+	 * @param idProfesor
+	 * @param idMateria
+	 * @param dia
+	 * @param hora
+	 * @return
+	 */
+	Aula comprarClase(Long idAlumno, Long idProfesor, Long idMateria, Date dia, String hora) throws BusinessException;
 }

@@ -23,7 +23,8 @@ public class AulaRepositoryImpl extends NJBaseRepository<Long, Aula> implements 
 	public Aula getAula(Long id) {
 		Criteria criteria = getCurrentSession().createCriteria(getHandledClass());
 		criteria.add(Restrictions.eq("id", id));
-		criteria.setFetchMode("materia", FetchMode.JOIN); 
+		criteria.setFetchMode("materia", FetchMode.JOIN);
+		criteria.setFetchMode("institucion", FetchMode.JOIN); 
 		criteria.setFetchMode("comentarios", FetchMode.JOIN);
 		criteria.setFetchMode("profesores", FetchMode.JOIN);
 		criteria.setFetchMode("alumnos", FetchMode.JOIN); 
@@ -37,6 +38,7 @@ public class AulaRepositoryImpl extends NJBaseRepository<Long, Aula> implements 
 		criteria.setFetchMode("materia", FetchMode.JOIN); 
 		criteria.setFetchMode("comentarios", FetchMode.JOIN);
 		criteria.setFetchMode("profesores", FetchMode.JOIN);
+		criteria.setFetchMode("institucion", FetchMode.JOIN);
 		criteria.setFetchMode("alumnos", FetchMode.JOIN); 
 		return criteria.list();
 	}

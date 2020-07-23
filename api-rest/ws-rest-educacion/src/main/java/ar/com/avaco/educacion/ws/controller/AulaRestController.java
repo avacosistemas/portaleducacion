@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.ws.dto.AulaDTO;
+import ar.com.avaco.educacion.ws.dto.CompraAulaDTO;
 import ar.com.avaco.educacion.ws.service.AulaEPService;
 import ar.com.avaco.ws.rest.controller.AbstractDTORestController;
 import ar.com.avaco.ws.rest.dto.JSONResponse;
@@ -64,6 +65,16 @@ public class AulaRestController extends AbstractDTORestController<AulaDTO, Long,
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/comprarAula/", method = RequestMethod.POST)
+	public ResponseEntity<JSONResponse> comprarClase(@RequestBody CompraAulaDTO compraAulaDTO) throws BusinessException {
+		AulaDTO newAulaDto = service.comprarClase(compraAulaDTO);
+		JSONResponse response = new JSONResponse();
+		response.setData(newAulaDto);
+		response.setStatus(JSONResponse.OK);	
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}
+	
 	
 	
 	//Service

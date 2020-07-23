@@ -1,7 +1,5 @@
 package ar.com.avaco.educacion.domain.entities;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,31 +37,31 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	  name = "AULA_ALUMNO", 
 	  joinColumns = @JoinColumn(name = "ID_AULA"), 
 	  inverseJoinColumns = @JoinColumn(name = "ID_ALUMNO"))
-	Set<Alumno> alumnos;
+	Set<Alumno> alumnos = new HashSet<>();
 	
 	@ManyToMany
 	@JoinTable(
 	  name = "AULA_PROFESOR", 
 	  joinColumns = @JoinColumn(name = "ID_AULA"), 
 	  inverseJoinColumns = @JoinColumn(name = "ID_PROFESOR"))
-	Set<Profesor> profesores;
+	Set<Profesor> profesores = new HashSet<>();
 	
 	@OneToMany(targetEntity= Comentario.class, mappedBy="aula", cascade=CascadeType.MERGE)
     private Set<Comentario> comentarios = new HashSet<>();
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
-    @JoinColumn(name = "ID_MATERIA", insertable = false, updatable = false)
+    @JoinColumn(name = "ID_MATERIA")
 	private Materia materia;	
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
-    @JoinColumn(name = "ID_INSTITUCION", insertable = false, updatable = false)
+    @JoinColumn(name = "ID_INSTITUCION")
 	private Institucion institucion;
 	
 	@Column(name = "DIA", nullable = false)
-	private LocalDate dia;
+	private Date dia;
 	
 	@Column(name = "HORA", nullable = false)
-	private LocalTime hora;
+	private String hora;
 
 	@Column(name = "CALIFICACION", nullable = false)
 	private Integer calificacion;
@@ -110,23 +108,21 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 		this.materia = materia;
 	}
 
-	public LocalDate getDia() {
-		return dia;
-	}
-
-	public void setDia(LocalDate dia) {
-		this.dia = dia;
-	}
-
-	public LocalTime getHora() {
+	public String getHora() {
 		return hora;
 	}
 
-	public void LocalTime(LocalTime hora) {
+	public void setHora(String hora) {
 		this.hora = hora;
 	}
+
+	public void setDia(Date dia) {
+		this.dia = dia;
+	}
 	
-	
+	public Date getDia() {
+		return dia;
+	}
 
 	public Integer getCalificacion() {
 		return calificacion;
@@ -136,9 +132,6 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 		this.calificacion = calificacion;
 	}
 
-	public void setHora(LocalTime hora) {
-		this.hora = hora;
-	}
 
 	public void addProfesor(Profesor profesor) {
 		this.getProfesores().add(profesor);

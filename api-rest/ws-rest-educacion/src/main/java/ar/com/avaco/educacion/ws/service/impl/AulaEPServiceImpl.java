@@ -1,5 +1,6 @@
 package ar.com.avaco.educacion.ws.service.impl;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,7 +11,10 @@ import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Aula;
 import ar.com.avaco.educacion.service.aula.AulaService;
 import ar.com.avaco.educacion.ws.dto.AulaDTO;
+import ar.com.avaco.educacion.ws.dto.CompraAulaDTO;
 import ar.com.avaco.educacion.ws.service.AulaEPService;
+import ar.com.avaco.utils.DateUtils;
+import ar.com.avaco.ws.rest.security.util.ClienteUtils;
 import ar.com.avaco.ws.rest.service.CRUDEPBaseService;
 
 @Service("aulaEPService")
@@ -59,6 +63,26 @@ public class AulaEPServiceImpl extends CRUDEPBaseService<Long, AulaDTO, Aula, Au
 		Aula aula= convertToEntity(aulaDTO);
 		aula.setId(id);
 		aula = service.updateAula(aula);
+		return new AulaDTO(aula);
+	}
+	
+	@Override
+	public AulaDTO comprarClase(CompraAulaDTO compraAulaDTO) throws BusinessException {
+		
+		Long idAlumno = ClienteUtils.getClienteLogueadoId();
+		
+		//FIXME BORRAR 
+		if (idAlumno==null) {
+			idAlumno=new Long(5); 
+		}
+		
+		Aula aula;
+		try {
+			aula = service.comprarClase(idAlumno, compraAulaDTO.getIdProfesor(), compraAulaDTO.getIdMateria(), DateUtils.toDate(compraAulaDTO.getDia()), compraAulaDTO.getHora());
+		} catch (ParseException e) {
+			throw new BusinessException("Dia invalido");
+		}
+				
 		return new AulaDTO(aula);
 	}
 	
