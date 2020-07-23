@@ -7,6 +7,7 @@ import { PROFESORES_GRID_DEF } from './grid/profesores.grid';
 import { PROFESORES_I18N_DEF } from './i18n/profesores.i18n';
 import { PROFESORES_NAV_DEF } from './navigation/profesores.nav';
 import { CrudDef } from 'app/modules/fwk/core/model/component-def/crud-def';
+import { PREFIX_DOMAIN_API_EDUCACION } from 'environments/environment';
 
 // Definicion de un template crud(Create,Read,Update and Delete)
 export const PROFESORES_DEF: CrudDef = { 
@@ -29,7 +30,7 @@ export const PROFESORES_DEF: CrudDef = {
     security: PROFESORES_SECURITY_DEF,
     ws: {
         key: 'PROFESORES_CRUD_URL',
-        url: 'http://localhost:8080/ws-rest-educacion/profesores/'
+        url: PREFIX_DOMAIN_API_EDUCACION + '/profesores/'
     },
     dialogConfig: {
         width: '800px'

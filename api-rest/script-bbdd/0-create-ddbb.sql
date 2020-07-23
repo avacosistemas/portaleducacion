@@ -19,7 +19,7 @@ create table WORD (ID_WORD int8 not null, key varchar(255) not null, value varch
 --EDUCACION
 create table ALUMNO (ID_CLIENTE int8 not null, primary key (ID_CLIENTE));
 create table ALUMNO_INSTITUCION (ID_ALUMNO int8 not null, ID_INSTITUCION int8 not null, primary key (ID_ALUMNO, ID_INSTITUCION));
-create table AULA (ID_AULA int8 not null, CALIFICACION int4 not null, DIA date, HORA time without time zone, ID_INSTITUCION int8, ID_MATERIA int8, primary key (ID_AULA));
+create table AULA (ID_AULA int8 not null, CALIFICACION int4 not null, DIA date not null, HORA int8 not null, ID_INSTITUCION int8, ID_MATERIA int8 not null, primary key (ID_AULA));
 create table AULA_ALUMNO (ID_AULA int8 not null, ID_ALUMNO int8 not null, primary key (ID_AULA, ID_ALUMNO));
 create table AULA_PROFESOR (ID_AULA int8 not null, ID_PROFESOR int8 not null, primary key (ID_AULA, ID_PROFESOR));
 create table CLI_ACCESOS_CLIENTE (ID_ACCESO int8 not null, codigo varchar(255), descripcion varchar(255), primary key (ID_ACCESO));

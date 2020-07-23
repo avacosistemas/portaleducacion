@@ -22,7 +22,7 @@ public class DateUtils {
 	
 	public static String toString(Date fecha) {
 		SimpleDateFormat dateFormat=(SimpleDateFormat) DateFormat.getInstance();
-		dateFormat.applyPattern(FORMAT_PATTERN);
+		dateFormat.applyPattern("dd/MM/yyyy");
 		return dateFormat.format(fecha);
 	}
 	

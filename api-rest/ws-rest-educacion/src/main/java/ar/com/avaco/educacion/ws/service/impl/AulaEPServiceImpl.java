@@ -1,5 +1,7 @@
 package ar.com.avaco.educacion.ws.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,6 +12,7 @@ import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Aula;
 import ar.com.avaco.educacion.service.aula.AulaService;
 import ar.com.avaco.educacion.ws.dto.AulaDTO;
+import ar.com.avaco.educacion.ws.dto.AulaListadoDTO;
 import ar.com.avaco.educacion.ws.service.AulaEPService;
 import ar.com.avaco.ws.rest.service.CRUDEPBaseService;
 
@@ -34,9 +37,13 @@ public class AulaEPServiceImpl extends CRUDEPBaseService<Long, AulaDTO, Aula, Au
 	}
 	
 	@Override
-	public List<AulaDTO> listAulas() {		
+	public List<AulaListadoDTO> listAulas() {		
 		List<Aula> aulas=this.service.getAulas();
-		List<AulaDTO> aulasDTOS=convertToDtos(aulas);
+		List<AulaListadoDTO> aulasDTOS = new ArrayList<>();
+		for (Aula aula : aulas) {
+			aulasDTOS.add(new AulaListadoDTO(aula));
+			
+		}
 		return aulasDTOS;
 	}
 

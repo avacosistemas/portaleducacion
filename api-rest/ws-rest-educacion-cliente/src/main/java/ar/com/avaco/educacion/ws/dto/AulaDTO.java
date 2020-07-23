@@ -1,6 +1,7 @@
 package ar.com.avaco.educacion.ws.dto;
 
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -43,14 +44,14 @@ public class AulaDTO extends DTOEntity<Long> {
 
 	public Aula toEntity() {
 
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalTime time= LocalTime.parse(getHora(), DateTimeFormatter.ofPattern("H:mm"));
-		
 		Aula aula = new Aula();
 		aula.setId(this.getId());
-		aula.setDia(LocalDate.parse(getDia(), formatter));
-		//aula.setDia(DateUtils.toDate(getDia()));
-		aula.setHora(time);
+		try {
+			aula.setDia(DateUtils.toDate(getDia(), "dd/MM/yyyy"));
+		} catch (ParseException e) {
+			// Nada no deberia llegar aca
+		}
+		aula.setHora(Integer.parseInt(getHora()));
 
 		Materia materia = new Materia();
 		materia.setId(idMateria);
@@ -80,8 +81,6 @@ public class AulaDTO extends DTOEntity<Long> {
 			aula.setProfesores(profesoresList);
 		}
 		
-		//aula.setComentarios(getComentarios());
-
 		return aula;
 	}
 

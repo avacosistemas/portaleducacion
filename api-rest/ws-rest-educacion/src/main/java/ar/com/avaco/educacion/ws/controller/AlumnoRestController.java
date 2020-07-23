@@ -23,7 +23,7 @@ import ar.com.avaco.ws.rest.dto.JSONResponse;
 public class AlumnoRestController extends AbstractDTORestController<AlumnoDTO, Long, AlumnoEPService> {
 
 	
-	@RequestMapping(value = "/alumnos/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/alumnos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> listAlumnos() throws Exception  {
 		List<AlumnoDTO> listAlumnos = this.service.listAlumnos();
     	JSONResponse response = new JSONResponse();
@@ -50,7 +50,7 @@ public class AlumnoRestController extends AbstractDTORestController<AlumnoDTO, L
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/alumnos/", method = RequestMethod.POST)
+	@RequestMapping(value = "/alumnos", method = RequestMethod.POST)
 	public ResponseEntity<JSONResponse> create(@RequestBody AlumnoDTO alumno) throws BusinessException {
 		AlumnoDTO newAlumnoDto = service.createAlumno(alumno);
 		JSONResponse response = new JSONResponse();

@@ -7,6 +7,7 @@ import { PARAMETER_GRID_DEF } from './grid/parameter.grid';
 import { PARAMETER_I18N_DEF } from './i18n/parameter.i18n';
 import { PARAMETER_NAV_DEF } from './navigation/parameter.nav';
 import { CrudDef } from 'app/modules/fwk/core/model/component-def/crud-def';
+import { PREFIX_DOMAIN_API_EDUCACION } from 'environments/environment';
 
 // Definicion de un template crud(Create,Read,Update and Delete)
 export const PARAMETER_DEF: CrudDef = { 
@@ -23,7 +24,7 @@ export const PARAMETER_DEF: CrudDef = {
     security: PARAMETER_SECURITY_DEF,
     ws: {
         key: 'PARAMETER_CRUD_URL',
-        url: 'http://localhost:8080/ws-rest-parameter/parameters/'
+        url: PREFIX_DOMAIN_API_EDUCACION + '/parameters/'
     },
     dialogConfig: {
         width: '400px'

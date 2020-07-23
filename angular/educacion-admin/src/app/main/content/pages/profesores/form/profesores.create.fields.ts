@@ -55,8 +55,7 @@ export const PROFESORES_CREATE_FORM_FIELDS_DEF = [
     key: 'email',
     labelKey: 'profesores_create_form_fields_def_field_email',
     label: 'Email',
-    type: 'string',
-    controlType: 'textbox',
+    controlType: 'email',
     required:true,
     maxLength: 250
   },

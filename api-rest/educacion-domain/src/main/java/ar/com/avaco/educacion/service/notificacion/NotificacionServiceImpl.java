@@ -32,7 +32,6 @@ public class NotificacionServiceImpl implements NotificacionService {
 	@Value("teachonline@teachonline.com.ar")
 	private String from;
 
-
 	@Value("TeachOnline - Restablecimiento de contraseña")
 	private String subjectResetoPasswordCliente;
 

@@ -22,31 +22,46 @@ export const MATERIAS_CREATE_FORM_FIELDS_DEF = [
   },
   */
   
-  {
-    key: 'nivel',
-    labelKey: 'materias_create_form_fields_def_field_idnivel',
-    controlType: 'autocomplete',
-    label: 'Nivel',
-    required: true,
-    options: {
-      transferIdToField: 'idNivel',
+ {
+  key: 'idNivel',
+  labelKey: 'materias_create_form_fields_def_field_idnivel',
+  required: true,
+  controlType: 'select',
+  options: {
       elementLabel: 'descripcion',
       elementValue: 'id',
-      useNativeFilter: false,
-      selectElementOrCleanField: 'Debe seleccionar un elemento o limpiar el campo'
-    },
-    apiOptions: {
-      queryString: {
-        descripcion: 'nivel'
-      },
-      url: PREFIX_DOMAIN_API_EDUCACION + '/niveles/'
-    }
-  },
+      fromWs: {
+        key: 'materias_create_form_fields_def_field_idnivel',
+        url: PREFIX_DOMAIN_API_EDUCACION + '/niveles/'
+      }
+  }
+},
 
-  { 
-    key: 'idNivel',   
-    controlType: 'hidden'
-  },
+  // {
+  //   key: 'nivel',
+  //   labelKey: 'materias_create_form_fields_def_field_idnivel',
+  //   controlType: 'autocomplete',
+  //   label: 'Nivel',
+  //   required: true,
+  //   options: {
+  //     transferIdToField: 'idNivel',
+  //     elementLabel: 'descripcion',
+  //     elementValue: 'id',
+  //     useNativeFilter: false,
+  //     selectElementOrCleanField: 'Debe seleccionar un elemento o limpiar el campo'
+  //   },
+  //   apiOptions: {
+  //     queryString: {
+  //       descripcion: 'nivel'
+  //     },
+  //     url: PREFIX_DOMAIN_API_EDUCACION + '/niveles/'
+  //   }
+  // },
+
+  // { 
+  //   key: 'idNivel',   
+  //   controlType: 'hidden'
+  // },
 
   {
     key: 'descripcion',
@@ -54,7 +69,8 @@ export const MATERIAS_CREATE_FORM_FIELDS_DEF = [
     label: 'Descripcion',
     type: 'string',
     controlType: 'textbox',
-    required:true
+    required:true,
+    maxLenght: 100
   }, 
 
 

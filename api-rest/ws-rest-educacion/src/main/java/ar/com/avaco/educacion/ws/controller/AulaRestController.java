@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.ws.dto.AulaDTO;
+import ar.com.avaco.educacion.ws.dto.AulaListadoDTO;
 import ar.com.avaco.educacion.ws.service.AulaEPService;
 import ar.com.avaco.ws.rest.controller.AbstractDTORestController;
 import ar.com.avaco.ws.rest.dto.JSONResponse;
@@ -25,7 +26,7 @@ public class AulaRestController extends AbstractDTORestController<AulaDTO, Long,
 	
 	@RequestMapping(value = "/aulas/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> listProfesores() throws Exception  {
-		List<AulaDTO> listAulas = this.service.listAulas();
+		List<AulaListadoDTO> listAulas = this.service.listAulas();
     	JSONResponse response = new JSONResponse();
 		response.setData(listAulas);
 		response.setStatus(JSONResponse.OK);	

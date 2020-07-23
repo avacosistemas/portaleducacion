@@ -1,0 +1,50 @@
+export const ALUMNO_I18N_DEF = {
+  name: 'ALUMNO_I18N_DEF',
+  lang: 'es',
+  words: {
+    page_title: 'Alumnos',
+    alumno_nav_def: 'Alumnos',
+    alumno_create_form_fields_def_field_id: 'ID',
+    alumno_create_form_fields_def_field_nombre: 'Nombre',
+    alumno_create_form_fields_def_field_apellido: 'Apellido',
+    alumno_create_form_fields_def_field_idinstitucion: 'Institución',
+    alumno_create_form_fields_def_field_username: 'Username',
+    alumno_create_form_fields_def_field_tipoidentificacion: 'Tipo de Identificación',
+    alumno_create_form_fields_def_field_numeroidentificacion: 'Número de Identificación',
+    alumno_create_form_fields_def_field_telefonomovil: 'Celular',
+    alumno_create_form_fields_def_field_email: 'Email',
+    
+    alumno_update_form_fields_def_field_id: 'ID',
+    alumno_update_form_fields_def_field_nombre: 'Nombre',
+    alumno_update_form_fields_def_field_apellido: 'Apellido',
+    alumno_update_form_fields_def_field_idinstitucion: 'Institución',
+    alumno_update_form_fields_def_field_username: 'Username',
+    alumno_update_form_fields_def_field_tipoidentificacion: 'Tipo de Identificación',
+    alumno_update_form_fields_def_field_numeroidentificacion: 'Número de Identificación',
+    alumno_update_form_fields_def_field_telefonomovil: 'Celular',
+    alumno_update_form_fields_def_field_email: 'Email',
+    
+    alumno_filter_form_fields_def_field_id: 'ID',
+    alumno_filter_form_fields_def_field_nombre: 'Nombre',
+    alumno_filter_form_fields_def_field_apellido: 'Apellido',
+    alumno_filter_form_fields_def_field_idinstitucion: 'Institución',
+    alumno_filter_form_fields_def_field_username: 'Username',
+    alumno_filter_form_fields_def_field_tipoidentificacion: 'Tipo de Identificación',
+    alumno_filter_form_fields_def_field_numeroidentificacion: 'Número de Identificación',
+    alumno_filter_form_fields_def_field_telefonomovil: 'Celular',
+    alumno_filter_form_fields_def_field_email: 'Email',
+    
+    alumno_grid_def_column_id: 'ID',
+    alumno_grid_def_column_nombre: 'Nombre',
+    alumno_grid_def_column_apellido: 'Apellido',
+    alumno_grid_def_column_idinstitucion: 'Institución',
+    alumno_grid_def_column_username: 'Username',
+    alumno_grid_def_column_tipoidentificacion: 'Tipo de Identificación',
+    alumno_grid_def_column_numeroidentificacion: 'Número de Identificación',
+    alumno_grid_def_column_telefonomovil: 'Celular',
+    alumno_grid_def_column_email: 'Email',
+    
+    alumno_grid_def_button_action_habilitar: 'Habilitar',
+    alumno_grid_def_button_action_bloquear: 'Bloquear'
+  }
+};

@@ -1,7 +1,5 @@
 package ar.com.avaco.educacion.domain.entities;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,50 +23,45 @@ import javax.persistence.Table;
 @Table(name = "AULA")
 @SequenceGenerator(name = "AULA_SEQ", sequenceName = "AULA_SEQ", allocationSize = 1)
 public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
-	
+
 	/** serializacion */
 	private static final long serialVersionUID = 939136778257772228L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AULA_SEQ")
 	@Column(name = "ID_AULA")
-    private Long id;
-	
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(
-	  name = "AULA_ALUMNO", 
-	  joinColumns = @JoinColumn(name = "ID_AULA"), 
-	  inverseJoinColumns = @JoinColumn(name = "ID_ALUMNO"))
+	private Long id;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "AULA_ALUMNO", joinColumns = @JoinColumn(name = "ID_AULA"), inverseJoinColumns = @JoinColumn(name = "ID_ALUMNO"))
 	Set<Alumno> alumnos;
-	
-	@ManyToMany
-	@JoinTable(
-	  name = "AULA_PROFESOR", 
-	  joinColumns = @JoinColumn(name = "ID_AULA"), 
-	  inverseJoinColumns = @JoinColumn(name = "ID_PROFESOR"))
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "AULA_PROFESOR", joinColumns = @JoinColumn(name = "ID_AULA"), inverseJoinColumns = @JoinColumn(name = "ID_PROFESOR"))
 	Set<Profesor> profesores;
-	
-	@OneToMany(targetEntity= Comentario.class, mappedBy="aula", cascade=CascadeType.MERGE)
-    private Set<Comentario> comentarios = new HashSet<>();
-	
-	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
-    @JoinColumn(name = "ID_MATERIA", insertable = false, updatable = false)
-	private Materia materia;	
-	
-	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
-    @JoinColumn(name = "ID_INSTITUCION", insertable = false, updatable = false)
+
+	@OneToMany(targetEntity = Comentario.class, mappedBy = "aula", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	private Set<Comentario> comentarios = new HashSet<>();
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "ID_MATERIA", insertable = false, updatable = true)
+	private Materia materia;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "ID_INSTITUCION", insertable = false, updatable = false)
 	private Institucion institucion;
-	
+
 	@Column(name = "DIA", nullable = false)
-	private LocalDate dia;
-	
+	private Date dia;
+
 	@Column(name = "HORA", nullable = false)
-	private LocalTime hora;
+	private Integer hora;
 
 	@Column(name = "CALIFICACION", nullable = false)
 	private Integer calificacion;
 
-	public Aula() {}
+	public Aula() {
+	}
 
 	public Long getId() {
 		return id;
@@ -110,23 +103,21 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 		this.materia = materia;
 	}
 
-	public LocalDate getDia() {
+	public Date getDia() {
 		return dia;
 	}
 
-	public void setDia(LocalDate dia) {
+	public void setDia(Date dia) {
 		this.dia = dia;
 	}
 
-	public LocalTime getHora() {
+	public Integer getHora() {
 		return hora;
 	}
 
-	public void LocalTime(LocalTime hora) {
+	public void setHora(Integer hora) {
 		this.hora = hora;
 	}
-	
-	
 
 	public Integer getCalificacion() {
 		return calificacion;
@@ -136,31 +127,27 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 		this.calificacion = calificacion;
 	}
 
-	public void setHora(LocalTime hora) {
-		this.hora = hora;
-	}
-
 	public void addProfesor(Profesor profesor) {
 		this.getProfesores().add(profesor);
 		profesor.getAulas().add(this);
-		
+
 	}
 
 	public void removeProfesor(Profesor profesor) {
 		this.getProfesores().remove(profesor);
 		profesor.getAulas().remove(this);
-		
+
 	}
 
 	public void removeAlumno(Alumno alumno) {
 		this.getAlumnos().remove(alumno);
 		alumno.getAulas().remove(this);
-		
+
 	}
 
 	public void addAlumno(Alumno alumno) {
 		this.getAlumnos().add(alumno);
-		alumno.getAulas().add(this);		
+		alumno.getAulas().add(this);
 	}
 
 	public Institucion getInstitucion() {
@@ -171,8 +158,7 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 		this.institucion = institucion;
 	}
 
-	
-	
-	//TODO Agregar hashCode, equals y toString cuando se completen todos los atributos
-	
+	// TODO Agregar hashCode, equals y toString cuando se completen todos los
+	// atributos
+
 }

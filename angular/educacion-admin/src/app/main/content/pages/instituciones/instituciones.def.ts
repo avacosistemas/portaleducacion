@@ -7,6 +7,7 @@ import { INSTITUCIONES_GRID_DEF } from './grid/instituciones.grid';
 import { INSTITUCIONES_I18N_DEF } from './i18n/instituciones.i18n';
 import { INSTITUCIONES_NAV_DEF } from './navigation/instituciones.nav';
 import { CrudDef } from 'app/modules/fwk/core/model/component-def/crud-def';
+import { PREFIX_DOMAIN_API_EDUCACION } from 'environments/environment';
 
 // Definicion de un template crud(Create,Read,Update and Delete)
 export const INSTITUCIONES_DEF: CrudDef = { 
@@ -29,7 +30,7 @@ export const INSTITUCIONES_DEF: CrudDef = {
     security: INSTITUCIONES_SECURITY_DEF,
     ws: {
         key: 'INSTITUCIONES_CRUD_URL',
-        url: 'http://localhost:8080/ws-rest-educacion/instituciones/'
+        url: PREFIX_DOMAIN_API_EDUCACION + '/instituciones'
     },
     dialogConfig: {
         width: '800px'

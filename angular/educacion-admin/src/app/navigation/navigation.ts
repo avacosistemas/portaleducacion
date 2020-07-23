@@ -31,12 +31,12 @@ export const navigation = [
                 ]
             },
             {
-                'id'   : 'clases',
-                'title': 'Clases',
+                'id'   : 'aulas',
+                'title': 'Aulas',
                 'icon' : 'cast_for_education',
-                'translate': 'NAV.CLASES.TITLE',
+                'translate': 'NAV.AULAS.TITLE',
                 'type' : 'item',
-                'url'  : '/' + environment.URL_PARAMETERS,
+                'url'  : '/' + environment.URL_AULAS,
             },
             {
                 'id'   : 'profesores',
@@ -52,7 +52,7 @@ export const navigation = [
                 'translate': 'NAV.ALUMNOS.TITLE',
                 'type' : 'item',
                 'icon' : 'emoji_people',
-                'url'  : '/' + environment.URL_PARAMETERS,
+                'url'  : '/' + environment.URL_ALUMNOS,
             },
             {
                 'id'   : 'instituciones',

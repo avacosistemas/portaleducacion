@@ -5,6 +5,7 @@ import java.util.List;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.ws.dto.AulaDTO;
+import ar.com.avaco.educacion.ws.dto.AulaListadoDTO;
 import ar.com.avaco.ws.rest.service.CRUDEPService;
 
 public interface AulaEPService extends CRUDEPService<Long, AulaDTO> {
@@ -13,7 +14,7 @@ public interface AulaEPService extends CRUDEPService<Long, AulaDTO> {
 	
 	AulaDTO crearAula(AulaDTO aulaDTO) throws BusinessException;
 	
-	List<AulaDTO> listAulas();
+	List<AulaListadoDTO> listAulas();
 
 	AulaDTO updateAula(Long id, AulaDTO aulaDTO) throws BusinessException;
 	

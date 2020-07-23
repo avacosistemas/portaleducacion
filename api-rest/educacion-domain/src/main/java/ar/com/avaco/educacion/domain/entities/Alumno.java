@@ -24,12 +24,6 @@ public class Alumno extends Cliente {
 	/** serializacion */
 	private static final long serialVersionUID = 939136778257772228L;
 	
-	/*
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ALUMNO_SEQ")
-	@Column(name = "ID_ALUMNO")
-    private Long id;*/
-	
 	@OneToMany(targetEntity= HorasAlumno.class, mappedBy="alumno", cascade=CascadeType.MERGE)
     private Set<HorasAlumno> horasDispAlumo = new HashSet<>();
 	
@@ -44,10 +38,10 @@ public class Alumno extends Cliente {
 	  name = "ALUMNO_INSTITUCION", 
 	  joinColumns = @JoinColumn(name = "ID_ALUMNO"), 
 	  inverseJoinColumns = @JoinColumn(name = "ID_INSTITUCION"))
-	Set<Institucion> instituciones;
+	Set<Institucion> instituciones = new HashSet<>();
 	
 	@ManyToMany(mappedBy = "alumnos")
-	Set<Aula> aulas;
+	Set<Aula> aulas = new HashSet<>();
 
 	public Alumno() {}
 

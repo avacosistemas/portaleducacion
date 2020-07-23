@@ -5,7 +5,7 @@ export const locale = {
             'PARAMETERS' : {'TITLE' : 'Parámetros'},
             'USUARIOS' : {'TITLE' : 'Usuarios'},
             'SEGURIDAD' : {'TITLE' : 'Seguridad'},
-            'CLASES' : {'TITLE' : 'Contenidos'},
+            'AULAS' : {'TITLE' : 'Aulas'},
             'PROFESORES' : {'TITLE' : 'Profesores'},
             'ALUMNOS' : {'TITLE' : 'Productos'},
             'INSTITUCIONES' : {'TITLE' : 'Instituiciones'},

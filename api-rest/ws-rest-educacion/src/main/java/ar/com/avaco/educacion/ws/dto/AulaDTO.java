@@ -1,6 +1,7 @@
 package ar.com.avaco.educacion.ws.dto;
 
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -31,6 +32,7 @@ public class AulaDTO extends DTOEntity<Long> {
 	protected Long idInstitucion;
 
 	protected String dia;
+	
 	protected String hora;
 
 	public AulaDTO() {
@@ -43,44 +45,23 @@ public class AulaDTO extends DTOEntity<Long> {
 
 	public Aula toEntity() {
 
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalTime time= LocalTime.parse(getHora(), DateTimeFormatter.ofPattern("H:mm"));
 		
 		Aula aula = new Aula();
 		aula.setId(this.getId());
-		aula.setDia(LocalDate.parse(getDia(), formatter));
-		//aula.setDia(DateUtils.toDate(getDia()));
-		aula.setHora(time);
+		try {
+			aula.setDia(DateUtils.toDate(getDia(), "dd/MM/yyyy"));
+		} catch (ParseException e) {
+			// No deberia llegar aca
+		}
+		aula.setHora(Integer.parseInt(getHora()));
 
 		Materia materia = new Materia();
 		materia.setId(idMateria);
 		aula.setMateria(materia);
 		
-		if (this.getIdInstitucion()!=null) {
-			Institucion institucion=new Institucion();
-			institucion.setId(this.getIdInstitucion());
-			aula.setInstitucion(institucion);
-		}
-
-		if (alumnos!=null && !alumnos.isEmpty()) {
-			HashSet<Alumno> alumnosList=new HashSet<>();
-			for (AlumnoDTO alumnoDTO : alumnos) {
-				Alumno alumno=alumnoDTO.toEntity();
-				alumnosList.add(alumno);
-			}
-			aula.setAlumnos(alumnosList);
-		}
-		
-		if (profesores!=null && !profesores.isEmpty()) {
-			HashSet<Profesor> profesoresList=new HashSet<>();
-			for (ProfesorDTO profesorDTO : profesores) {
-				Profesor profesor=profesorDTO.toEntity();
-				profesoresList.add(profesor);
-			}
-			aula.setProfesores(profesoresList);
-		}
-		
-		//aula.setComentarios(getComentarios());
+		Institucion institucion=new Institucion();
+		institucion.setId(this.getIdInstitucion());
+		aula.setInstitucion(institucion);
 
 		return aula;
 	}
@@ -104,8 +85,6 @@ public class AulaDTO extends DTOEntity<Long> {
 			this.setProfesores(profesoresDTOs);
 		}
 		
-		//this.setComentarios(aula.getComentarios());
-				
 		this.setIdMateria(aula.getMateria().getId());
 		this.setIdInstitucion(aula.getInstitucion()!=null?aula.getInstitucion().getId():null);
 		this.setDia(DateUtils.toString(aula.getDia()));
@@ -175,8 +154,5 @@ public class AulaDTO extends DTOEntity<Long> {
 	public void setIdInstitucion(Long idInstitucion) {
 		this.idInstitucion = idInstitucion;
 	}
-
-	
-	
 	
 }

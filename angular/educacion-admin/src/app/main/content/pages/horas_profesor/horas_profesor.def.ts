@@ -24,7 +24,7 @@ export const HORAS_PROFESOR_DEF: CrudDef = {
     security: HORAS_PROFESOR_SECURITY_DEF,
     ws: {
         key: 'HORAS_PROFESOR_CRUD_URL',
-        url: PREFIX_DOMAIN_API_EDUCACION + '/horariosdisponibles/'
+        url: PREFIX_DOMAIN_API_EDUCACION + '/horariosdisponibles'
     },
     dialogConfig: {
         width: '400px'

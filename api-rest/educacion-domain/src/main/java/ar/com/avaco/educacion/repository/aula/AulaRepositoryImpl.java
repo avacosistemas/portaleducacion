@@ -34,10 +34,10 @@ public class AulaRepositoryImpl extends NJBaseRepository<Long, Aula> implements 
 	@Override
 	public List<Aula> listAulas() {
 		Criteria criteria = getCurrentSession().createCriteria(getHandledClass());
-		criteria.setFetchMode("materia", FetchMode.JOIN); 
-		criteria.setFetchMode("comentarios", FetchMode.JOIN);
-		criteria.setFetchMode("profesores", FetchMode.JOIN);
-		criteria.setFetchMode("alumnos", FetchMode.JOIN); 
+//		criteria.setFetchMode("materia", FetchMode.JOIN); 
+//		criteria.setFetchMode("comentarios", FetchMode.JOIN);
+//		criteria.setFetchMode("profesores", FetchMode.JOIN);
+//		criteria.setFetchMode("alumnos", FetchMode.JOIN); 
 		return criteria.list();
 	}
 	
