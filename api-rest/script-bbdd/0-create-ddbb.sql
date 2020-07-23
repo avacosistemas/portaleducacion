@@ -30,7 +30,7 @@ create table CLI_IDENTIFICACION (ID_IDENTIFICACION int8 not null, NUMERO_ID varc
 create table CLI_PERMISO_CLIENTE (ID_PERMISO int8 not null, codigo varchar(255), descripcion varchar(255), primary key (ID_PERMISO));
 create table COMENTARIO (ID_COMENTARIO int8 not null, DESC_COMENTARIO varchar(280), ID_AULA int8, primary key (ID_COMENTARIO));
 create table DECIDIR (ID_DECIDIR int8 not null, primary key (ID_DECIDIR));
-create table HORARIO_DISP (ID_HORARIO_DISP int8 not null, DIA_DISPONIBLE int4 not null, HORA_DISPONIBLE varchar(255) not null, ID_PROFESOR int8, primary key (ID_HORARIO_DISP));
+create table HORARIO_DISP (ID_HORARIO_DISP int8 not null, DIA_DISPONIBLE int4 not null, HORA_DISPONIBLE int4 not null, ID_PROFESOR int8, primary key (ID_HORARIO_DISP));
 create table HORAS_COMPRA (ID_COMPRA int8 not null, CANT_HORAS_COMPRA int4, ID_ALUMNO int8, FK_DECIDIR int8 not null, ID_PROFESOR int8, primary key (ID_COMPRA));
 create table HORAS_DISP (ID_HORAS_DISP int8 not null, CANT_HORAS_DISP int4, ID_ALUMNO int8, ID_PROFESOR int8, primary key (ID_HORAS_DISP));
 create table INSTITUCION (ID_INSTITUCION int8 not null, NOMBRE varchar(255), primary key (ID_INSTITUCION));

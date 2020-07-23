@@ -47,18 +47,5 @@ public class ProfesorRepositoryImpl extends NJBaseRepository<Long, Profesor> imp
 		return criteria.list();
 	}
 	
-	@Override
-	public List<Profesor> listCatalogoDocente(String campo, boolean desc) {
-		Criteria criteria = getCurrentSession().createCriteria(getHandledClass());
-		criteria.setFetchMode("materias", FetchMode.JOIN); 
-		
-		if(desc) {
-			criteria.addOrder(Order.desc(campo));
-		} else {
-			criteria.addOrder(Order.asc(campo));
-		}
-		
-		return criteria.list();
-	}
-
+	
 }

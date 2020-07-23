@@ -1,7 +1,6 @@
 package ar.com.avaco.educacion.repository.disponibilidad;
 
 import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +14,7 @@ public interface HorarioDisponibleRepository extends NJRepository<Long, HorarioD
 
 	List<HorarioDisponible> findAllByProfesorId(Long idProfesor);
 
-	HorarioDisponible findByDiaAndHoraAndProfesorId(DayOfWeek dia, LocalTime hora, Long id);
+	HorarioDisponible findByDiaAndHoraAndProfesorId(DayOfWeek dia, Integer hora, Long id);
 	
 
    @Query(value = "SELECT hd FROM HorarioDisponible hd WHERE hd.dia = :dia and hd.id = :id")

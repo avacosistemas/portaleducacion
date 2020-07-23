@@ -1,6 +1,6 @@
 package ar.com.avaco.educacion.domain.entities;
 
-import java.time.LocalTime;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,15 +29,15 @@ public class PreguntaRespuesta extends ar.com.avaco.arc.core.domain.Entity<Long>
     private Long id;
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
-    @JoinColumn(name = "ID_ALUMNO", insertable = false, updatable = false)
+    @JoinColumn(name = "ID_ALUMNO", insertable = true, updatable = false)
 	private Alumno alumno;
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
-    @JoinColumn(name = "ID_PROFESOR", insertable = false, updatable = false)
+    @JoinColumn(name = "ID_PROFESOR", insertable = true, updatable = false)
 	private Profesor profesor;
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
-    @JoinColumn(name = "ID_MATERIA", insertable = false, updatable = false)
+    @JoinColumn(name = "ID_MATERIA", insertable = true, updatable = false)
 	private Materia materia;
 	
 	@Column(name = "PREGUNTA")
@@ -46,8 +46,8 @@ public class PreguntaRespuesta extends ar.com.avaco.arc.core.domain.Entity<Long>
 	@Column(name = "RESPUESTA")
 	private String respuesta;
 	
-	@Column(name = "HORA_PREGUNTA")
-	private LocalTime horaPregunta;
+	@Column(name = "FECHA_PREGUNTA")
+	private Date fechaPregunta;
 	
 	public PreguntaRespuesta() {}
 
@@ -99,12 +99,12 @@ public class PreguntaRespuesta extends ar.com.avaco.arc.core.domain.Entity<Long>
 		this.respuesta = respuesta;
 	}
 
-	public LocalTime getHoraPregunta() {
-		return horaPregunta;
+	public Date getFechaPregunta() {
+		return fechaPregunta;
 	}
 
-	public void setHoraPregunta(LocalTime horaPregunta) {
-		this.horaPregunta = horaPregunta;
+	public void setFechaPregunta(Date fechaPregunta) {
+		this.fechaPregunta = fechaPregunta;
 	}
 
 	

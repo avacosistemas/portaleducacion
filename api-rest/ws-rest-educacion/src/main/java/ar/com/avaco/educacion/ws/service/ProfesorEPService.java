@@ -15,13 +15,13 @@ public interface ProfesorEPService extends CRUDEPService<Long, ProfesorDTO> {
 	List<ProfesorDTO> listProfesores();
 	
 	ProfesorDTO updateProfesor(Long id, ProfesorDTO profesorDto) throws BusinessException;
-	
-	void updateFotoPerfil(Long id, MultipartFile file) throws BusinessException;
 
 	ProfesorDTO createProfesor(ProfesorDTO profesorDTO) throws BusinessException;
 	
 	ProfesorDTO bloquearHabilitarProfesor(Long id, boolean bloquear) throws BusinessException;
 
+	ProfesorDTO updateFotoPerfil(Long id, MultipartFile file) throws BusinessException;
+	
 	byte[] downloadFotoPerfil(Long id) throws BusinessException;
 
 }

@@ -2,6 +2,7 @@ package ar.com.avaco.educacion.ws.controller;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -9,6 +10,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,6 +32,7 @@ import ar.com.avaco.educacion.ws.service.ProfesorEPService;
 import ar.com.avaco.ws.rest.controller.AbstractDTORestController;
 import ar.com.avaco.ws.rest.dto.JSONResponse;
 
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamResource;
 
 
@@ -91,37 +96,30 @@ public class ProfesorRestController extends AbstractDTORestController<ProfesorDT
 	
 
 	@RequestMapping(value = "/profesores/uploadFotoPerfil/", method = RequestMethod.POST)
-	public ResponseEntity<String> updateFotoPerfil(@RequestParam("id") Long id, @RequestParam("foto") MultipartFile foto) throws BusinessException {
+	public ResponseEntity<JSONResponse> updateFotoPerfil(@RequestParam("id") Long id, @RequestParam("foto") MultipartFile foto) throws BusinessException {
 		
-
-		 String message = "";
+		JSONResponse response = new JSONResponse();
+		String message = "";
 	    try {
-	
-	      service.updateFotoPerfil(id, foto);
+	      ProfesorDTO newProfesorDto = service.updateFotoPerfil(id, foto);
+	      response.setData(newProfesorDto);
+	      response.setStatus(JSONResponse.OK);	
+	      return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 
-	      message = "Uploaded the file successfully: " + foto.getOriginalFilename();
-	      return ResponseEntity.status(HttpStatus.OK).body(message);
 	    } catch (Exception e) {
-	      message = "Could not upload the file: " + foto.getOriginalFilename() + "!";
-	      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
+	      message = "No se puedo subir la foto de perfil: " + foto.getOriginalFilename() + "!";
+	      response.setData(message);
+	      response.setStatus(JSONResponse.OK);	
+	
+	      return new ResponseEntity<JSONResponse>(response, HttpStatus.EXPECTATION_FAILED);
 	    }
 
 	}
 
-	
 	@RequestMapping(value = "/profesores/downloadFotoPerfil/{id}", method = RequestMethod.GET)
 	public ResponseEntity<org.springframework.core.io.Resource> downloadFotoPerfil(@PathVariable("id") Long id) throws BusinessException, IOException {
 		
 		byte[] foto = service.downloadFotoPerfil(id);
-		
-		/*
-        HttpHeaders headers = new HttpHeaders();
-        InputStream in = new ByteArrayInputStream(foto);
-        byte[] media = IOUtils.toByteArray(in);
-	
-        headers.setCacheControl(CacheControl.noCache().getHeaderValue());
-        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
-        return responseEntity;*/
   
         InputStream is = new BufferedInputStream(new ByteArrayInputStream(foto));
         
@@ -132,6 +130,34 @@ public class ProfesorRestController extends AbstractDTORestController<ProfesorDT
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(isr);
         
+	}
+	
+	@RequestMapping(value = "/profesores/downloadFotoPerfil2/{id}", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> downloadFotoPerfil2(@PathVariable("id") Long id) throws BusinessException, IOException {
+	    HttpHeaders headers = new HttpHeaders();
+	    
+	    byte[] foto = service.downloadFotoPerfil(id);
+	 
+	    headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+	    
+	    ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(foto, headers, HttpStatus.OK);
+	    return responseEntity;
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "/profesores/downloadFotoPerfil3/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<org.springframework.core.io.Resource> downloadFotoPerfil3(@PathVariable("id") Long id) throws BusinessException, IOException {
+		 HttpHeaders headers = new HttpHeaders();
+		 byte[] foto = service.downloadFotoPerfil(id);
+		
+		ByteArrayResource resource = new ByteArrayResource(foto);
+	    return ResponseEntity.ok()
+	            .headers(headers)
+	            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+	            .body(resource);
 	}
 	
 	//Service

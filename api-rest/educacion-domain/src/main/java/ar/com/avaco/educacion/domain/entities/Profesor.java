@@ -55,11 +55,10 @@ public class Profesor extends Cliente implements Serializable {
 	Set<Aula> aulas;
 	
 	@Column(name = "VALOR_HORA", nullable = true)
-	private Double valoreHora;
+	private Double valorHora;
 	
-    //@Column(name = "IMAGE_PERFIL", nullable = true)
-    //@Lob
-    //private byte[] imagenPerfil;
+	@Column(name = "CALIFICACION")
+	private Double calificacion;
     
     @Column(name = "FOTO", nullable = true)
     @Type(type="org.hibernate.type.BinaryType")
@@ -137,21 +136,13 @@ public class Profesor extends Cliente implements Serializable {
 		
 	}
 
-	public Double getValoreHora() {
-		return valoreHora;
+	public Double getValorHora() {
+		return valorHora;
 	}
 
 	public void setValoreHora(Double valoreHora) {
-		this.valoreHora = valoreHora;
+		this.valorHora = valoreHora;
 	}
-	/*
-	public byte[] getImagenPerfil() {
-		return imagenPerfil;
-	}
-
-	public void setImagenPerfil(byte[] imagenPerfil) {
-		this.imagenPerfil = imagenPerfil;
-	}*/
 
 	public byte[] getFoto() {
 		return foto;
