@@ -1,6 +1,6 @@
 package ar.com.avaco.educacion.ws.dto;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import ar.com.avaco.educacion.domain.entities.PreguntaRespuesta;
 import ar.com.avaco.educacion.domain.entities.Profesor;
@@ -12,8 +12,7 @@ public class PreguntaRespuestaDTO extends DTOEntity<Long> {
 	private Long idProfesor;
 	private String pregunta;
 	private String respuesta;
-	private String fecha;
-	private String hora;
+	private Date fechaPregunta;
 	
 	public PreguntaRespuestaDTO() {
 	}
@@ -38,20 +37,12 @@ public class PreguntaRespuestaDTO extends DTOEntity<Long> {
 		this.idProfesor = idProfesor;
 	}
 
-	public String getFecha() {
-		return fecha;
+	public Date getFechaPregunta() {
+		return fechaPregunta;
 	}
 
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
-
-	public String getHora() {
-		return hora;
-	}
-
-	public void setHora(String hora) {
-		this.hora = hora;
+	public void setFechaPregunta(Date fechaPregunta) {
+		this.fechaPregunta = fechaPregunta;
 	}
 
 	public String getPregunta() {
@@ -89,9 +80,8 @@ public class PreguntaRespuestaDTO extends DTOEntity<Long> {
 		this.setIdProfesor(preguntaRta.getProfesor().getId());
 		this.setPregunta(preguntaRta.getPregunta());
 		this.setRespuesta(preguntaRta.getRespuesta());
-		this.setFecha(LocalDate.now().toString());
-		this.setHora(preguntaRta.getHoraPregunta()!=null ? preguntaRta.getHoraPregunta().toString():"");
-		
+		this.setFechaPregunta(preguntaRta.getFechaPregunta());
+	
 	}
 
 }

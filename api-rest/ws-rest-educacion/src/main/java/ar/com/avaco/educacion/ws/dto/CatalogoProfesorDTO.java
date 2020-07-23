@@ -67,7 +67,7 @@ public class CatalogoProfesorDTO extends DTOEntity<Long> {
 		this.setNombreApellido(profesor.getNombreApellido());
 		
 		this.setFoto(profesor.getFoto());
-		this.setValorHora(profesor.getValoreHora());
+		this.setValorHora(profesor.getValorHora());
 		
 		List<MateriaDTO> materias = new ArrayList<>();
 		MateriaDTO materia = new MateriaDTO();

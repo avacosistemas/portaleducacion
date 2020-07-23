@@ -7,6 +7,7 @@ import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
 
 public class ProfesorDTO extends ClienteDTO {
 
+	private byte[] foto;
 
 	public ProfesorDTO() {}
 
@@ -14,7 +15,15 @@ public class ProfesorDTO extends ClienteDTO {
 		this.setDTO(profesor);
 
 	}
-	
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
 	public Profesor toEntity() {
 
 		Profesor profesor = new Profesor();
@@ -43,6 +52,7 @@ public class ProfesorDTO extends ClienteDTO {
 		this.setId(profesor.getId());
 		this.setNombre(profesor.getNombre());
 		this.setApellido(profesor.getApellido());
+		this.setFoto(profesor.getFoto());
 		this.setTipoIdentificacion(profesor.getIdentificacion().getTipo().name());
 		this.setNumeroIdentificacion(profesor.getIdentificacion().getNumero());
 		this.setUsername(profesor.getUsername());

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.avaco.commons.exception.BusinessException;
+import ar.com.avaco.educacion.domain.entities.FiltroCatalogo;
 import ar.com.avaco.educacion.domain.entities.HorarioDisponible;
 import ar.com.avaco.educacion.domain.entities.PreguntaRespuesta;
 import ar.com.avaco.educacion.domain.entities.Profesor;
@@ -29,9 +30,9 @@ public class CatalogoProfesorEPServiceImpl implements CatalogoProfesorEPService 
 	}
 
 	@Override
-	public List<CatalogoProfesorDTO> listCatalogoProfesor(String campo, boolean desc, Long idMateria, Integer idNivel) {
+	public List<CatalogoProfesorDTO> listCatalogoProfesor(FiltroCatalogo filtro, Long idMateria, Integer idNivel) {
 
-		List<Profesor> entities = catalogoService.listCatalogoProfesor(campo, desc, idMateria, idNivel);
+		List<Profesor> entities = catalogoService.listCatalogoProfesor(filtro, idMateria, idNivel);
 		
 		List<CatalogoProfesorDTO> dtos = new ArrayList<CatalogoProfesorDTO>();
 		for (Profesor entity : entities) {
@@ -85,11 +86,11 @@ public class CatalogoProfesorEPServiceImpl implements CatalogoProfesorEPService 
 		Profesor profesor = new Profesor();
 		PreguntaRespuesta consulta = new PreguntaRespuesta();
 		
-		profesor.setId(consultaDto.getId());
+		profesor.setId(consultaDto.getIdProfesor());
 		
 		consulta.setPregunta(consultaDto.getConsulta());
 		consulta.setProfesor(profesor);
-
+		
 		consulta = catalogoService.createCatalogoConsulta(consulta);
 		return new ConsultaDTO(consulta);
 		

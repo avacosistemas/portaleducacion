@@ -29,7 +29,7 @@
         <app-float *ngIf="field.controlType == 'float'" [field]="field" [parentForm]="form"></app-float>
         <mat-form-field *ngIf="field.controlType == 'number'" [floatLabel]="getFloatLabel(field)">
             <mat-label *ngIf="field.options && field.options.matLabel">{{field.options.matLabel}}</mat-label>
-            <input matInput restrictionKeys="{{getRestrictionKeys(field)}}" min="{{field.minValue}}" placeholder="{{field.label}}"  [formControlName]="field.key"
+            <input matInput restrictionKeys="{{getRestrictionKeys(field)}}" min="{{field.minValue}}" max="{{field.maxValue}}" placeholder="{{field.label}}"  [formControlName]="field.key"
                     [id]="field.key" [type]="field.controlType">
             <span *ngIf="field.options && field.options.prefix" matPrefix>{{field.options.prefix}}&nbsp;</span>
             <mat-error id="{{field.key}}Error" *ngIf="form.controls[field.key].invalid ">

@@ -42,6 +42,10 @@ export const PROFESORES_I18N_DEF = {
     profesores_grid_def_button_action_nuevo_horario: 'Agregar horario',
     profesores_grid_def_button_action_habilitar: 'Habilitar',
     profesores_grid_def_button_action_bloquear: 'Bloquear',
-    profesores_grid_def_button_action_materia_profesor: 'Materias'
+    profesores_grid_def_button_action_materia_profesor: 'Materias',
+    profesores_create_form_fields_def_field_nombre: 'Nombre',
+    profesores_create_form_fields_def_field_apellido: 'Apellido',
+    profesores_grid_def_column_nombre: 'Nombre',
+    profesores_grid_def_column_apellido: 'Apellido'
   }
 };
