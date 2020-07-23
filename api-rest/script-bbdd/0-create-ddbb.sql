@@ -36,8 +36,8 @@ create table HORAS_DISP (ID_HORAS_DISP int8 not null, CANT_HORAS_DISP int4, ID_A
 create table INSTITUCION (ID_INSTITUCION int8 not null, NOMBRE varchar(255), primary key (ID_INSTITUCION));
 create table MATERIA (ID_MATERIA int8 not null, DESC_MATERIA varchar(255) not null, ID_NIVEL int4, primary key (ID_MATERIA));
 create table NIVEL (ID_NIVEL int4 not null, DESC_NIVEL varchar(255) not null, primary key (ID_NIVEL));
-create table PREG_RESP (ID_PREG_RESP int8 not null, HORA_PREGUNTA time without time zone, PREGUNTA varchar(255), RESPUESTA varchar(255), ID_ALUMNO int8, ID_MATERIA int8, ID_PROFESOR int8, primary key (ID_PREG_RESP));
-create table PROFESOR (FOTO bytea, VALOR_HORA float8, ID_CLIENTE int8 not null, primary key (ID_CLIENTE));
+create table PREG_RESP (ID_PREG_RESP int8 not null, FECHA_PREGUNTA timestamp, PREGUNTA varchar(255), RESPUESTA varchar(255), ID_ALUMNO int8, ID_MATERIA int8, ID_PROFESOR int8, primary key (ID_PREG_RESP));
+create table PROFESOR (FOTO bytea, VALOR_HORA float8, CALIFICACION float8. ID_CLIENTE int8 not null, primary key (ID_CLIENTE));
 create table PROFESOR_MATERIA (ID_PROFESOR int8 not null, ID_MATERIA int8 not null, primary key (ID_PROFESOR, ID_MATERIA));
 
 
