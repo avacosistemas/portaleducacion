@@ -54,7 +54,7 @@ export const MATERIA_PROFESOR_CREATE_FORM_FIELDS_DEF = [
       queryString: {
         descripcion: 'materia'
       },
-      url: PREFIX_DOMAIN_API_EDUCACION + '/materias'
+      url: PREFIX_DOMAIN_API_EDUCACION + '/materias/'
     }
   },
   { 

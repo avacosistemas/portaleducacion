@@ -14,9 +14,10 @@ export const HORAS_PROFESOR_CREATE_FORM_FIELDS_DEF = [
           key: 'horaDesde',
           labelKey: 'seccion_create_form_fields_def_field_horaDesde',
           label: 'Hora Desde',
-          controlType: 'textbox',
-          type: 'text',
-          maxLength: 200,
+          controlType: 'number',
+          type: 'number',
+          minValue:0,
+          maxValue:24,          
           required: true,
         },
 
@@ -24,12 +25,13 @@ export const HORAS_PROFESOR_CREATE_FORM_FIELDS_DEF = [
           key: 'horaHasta',
           labelKey: 'seccion_create_form_fields_def_field_horaHasta',
           label: 'Hora Hasta',
-          controlType: 'textbox',
-          type: 'text',
-          maxLength: 200,
+          controlType: 'number',
+          type: 'number',          
+          minValue:0,
+          maxValue:24,
           required: true
-        },          
-
+        },      
+      
         {
           key: 'lunes',
           labelKey: 'seccion_create_form_fields_def_field_lunes',
