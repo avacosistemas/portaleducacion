@@ -12,6 +12,5 @@ public interface ProfesorRepositoryCustom {
 	
 	List<Profesor> listProfesores();
 
-	List<Profesor> listCatalogoDocente(String campo, boolean desc);
 	
 }

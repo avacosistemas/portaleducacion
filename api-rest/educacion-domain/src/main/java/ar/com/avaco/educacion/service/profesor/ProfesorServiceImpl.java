@@ -135,45 +135,15 @@ public class ProfesorServiceImpl extends NJBaseService<Long, Profesor, ProfesorR
 		
 		Profesor profesor = this.get(id);
 		try {
-			
 		
 			byte [] byteArr=foto.getBytes();
-			//byte[] bFile = new byte[(int) foto.length()];
-			//byte[] imageData = new byte[(int) foto.length()];
-			//InputStream inputStream = new ByteArrayInputStream(byteArr);
-	
-			/*
-			byte[] byteObjects = new byte[foto.getBytes().length];
-		    int i = 0;
-
-		    for (byte b : foto.getBytes()){
-		        byteObjects[i++] = b;
-		    }
-			 */
-	    	//profesor.setImagenPerfil(byteArr);
 
 	    	profesor.setFoto(byteArr);
 	    	
 		} catch (IOException  e) {
-		    //todo handle better
-			//log.error("Error occurred", e);
 	
 		    e.printStackTrace();
 		}
-		
-		
-
-		//CatalogImage img = new CatalogImage();
-	    /*byte[] imageData = new byte[(int) ((CharSequence) foto).length()];
-	    try {
-		    FileInputStream fileInputStream = new FileInputStream(foto);
-		    fileInputStream.read(imageData);
-		    fileInputStream.close();
-	    } catch (Exception e) {
-	    	e.printStackTrace();
-	    }
-	    
-	    profesor.setFoto(imageData);*/
 	  
 	    profesor = this.getRepository().save(profesor);
 

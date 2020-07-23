@@ -1,7 +1,6 @@
 package ar.com.avaco.educacion.ws.service.impl;
 
 import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;

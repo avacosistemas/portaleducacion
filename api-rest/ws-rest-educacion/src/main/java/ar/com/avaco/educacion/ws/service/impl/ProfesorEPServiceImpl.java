@@ -45,8 +45,11 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 	}
 	
 	@Override
-	public void updateFotoPerfil(Long id, MultipartFile file) throws BusinessException {
-		service.uploadFotoPerfil(id, file);
+	public ProfesorDTO updateFotoPerfil(Long id, MultipartFile file) throws BusinessException {
+		Profesor profesor = service.uploadFotoPerfil(id, file);
+		profesor = service.createProfesor(profesor);
+	
+		return new ProfesorDTO(profesor);
 	}
 	
 	@Override

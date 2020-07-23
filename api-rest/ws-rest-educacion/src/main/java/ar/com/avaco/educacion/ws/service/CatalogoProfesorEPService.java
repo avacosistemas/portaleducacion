@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import ar.com.avaco.commons.exception.BusinessException;
+import ar.com.avaco.educacion.domain.entities.FiltroCatalogo;
 import ar.com.avaco.educacion.ws.dto.CatalogoProfesorDTO;
 import ar.com.avaco.educacion.ws.dto.ConsultaDTO;
 import ar.com.avaco.educacion.ws.dto.HorarioDisponibleDTO;
@@ -22,6 +23,6 @@ public interface CatalogoProfesorEPService {
 
 	ConsultaDTO createCatalogoConsulta(ConsultaDTO consultaDto) throws BusinessException;
 
-	List<CatalogoProfesorDTO> listCatalogoProfesor(String campo, boolean desc, Long idMateria, Integer idNivel);
+	List<CatalogoProfesorDTO> listCatalogoProfesor(FiltroCatalogo filtro, Long idMateria, Integer idNivel);
 
 }
