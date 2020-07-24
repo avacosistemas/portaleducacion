@@ -7,6 +7,7 @@ import { MATERIA_PROFESOR_GRID_DEF } from './grid/materia_profesor.grid';
 import { MATERIA_PROFESOR_I18N_DEF } from './i18n/materia_profesor.i18n';
 import { MATERIA_PROFESOR_NAV_DEF } from './navigation/materia_profesor.nav';
 import { CrudDef } from 'app/modules/fwk/core/model/component-def/crud-def';
+import { PREFIX_DOMAIN_API_EDUCACION } from 'environments/environment';
 
 // Definicion de un template crud(Create,Read,Update and Delete)
 export const MATERIA_PROFESOR_DEF: CrudDef = { 
@@ -29,10 +30,10 @@ export const MATERIA_PROFESOR_DEF: CrudDef = {
     security: MATERIA_PROFESOR_SECURITY_DEF,
     ws: {
         key: 'MATERIA_PROFESOR_CRUD_URL',
-        url: 'http://localhost:8080/ws-rest-educacion/materiasprofesor/'
+        url: PREFIX_DOMAIN_API_EDUCACION + '/materiasprofesor/'
     },
     dialogConfig: {
-        width: '800px'
+        width: '500px'
     },
     filterInMemory: false,
     backButton: true

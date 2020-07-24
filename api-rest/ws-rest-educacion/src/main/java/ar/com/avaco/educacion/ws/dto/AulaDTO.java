@@ -2,9 +2,6 @@ package ar.com.avaco.educacion.ws.dto;
 
 
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,8 +41,6 @@ public class AulaDTO extends DTOEntity<Long> {
 	}
 
 	public Aula toEntity() {
-
-		
 		Aula aula = new Aula();
 		aula.setId(this.getId());
 		try {
@@ -54,7 +49,6 @@ public class AulaDTO extends DTOEntity<Long> {
 			// No deberia llegar aca
 		}
 		aula.setHora(Integer.parseInt(getHora()));
-
 		Materia materia = new Materia();
 		materia.setId(idMateria);
 		aula.setMateria(materia);

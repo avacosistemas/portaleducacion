@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import ar.com.avaco.arc.core.domain.filter.AbstractFilter;
 import ar.com.avaco.commons.exception.BusinessException;
@@ -135,11 +136,19 @@ public abstract class AbstractDTORestController<RDTO extends DTOEntity<ID>, ID e
 	//@RequestMapping(value = "/entities/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<JSONResponse> delete(ID id) throws BusinessException {
     	LOGGER.info("Fetching & Deleting Entity with id " + id);
-        this.service.remove(id);
+        try {
+        	this.service.remove(id);
+        } catch (Exception e) {
+        	e.printStackTrace();
+        	JSONResponse response = new JSONResponse();
+            response.setData("No se puede borrar el elemento seleccionado. Es probable que esté asociado por otra sección de la aplicación.");
+       		response.setStatus(JSONResponse.OK);
+       		return new ResponseEntity<JSONResponse>(response, HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<JSONResponse>(getResponseOK(null),HttpStatus.OK);
     }
     
-	//@RequestMapping(value = "/entities/{id}", method = RequestMethod.DELETE)
+//	@RequestMapping(value = "/entities/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<JSONResponse> deleteAll(Map<String, String> customQuery) throws BusinessException {
     	String ids = customQuery.get("ids");
     	LOGGER.info("Fetching & Deleting Entity with ids " + ids);

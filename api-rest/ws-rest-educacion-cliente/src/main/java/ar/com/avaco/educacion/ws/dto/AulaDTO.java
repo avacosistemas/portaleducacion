@@ -3,8 +3,6 @@ package ar.com.avaco.educacion.ws.dto;
 
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,6 +30,7 @@ public class AulaDTO extends DTOEntity<Long> {
 	protected Long idInstitucion;
 
 	protected String dia;
+
 	protected String hora;
 
 	public AulaDTO() {
@@ -43,8 +42,8 @@ public class AulaDTO extends DTOEntity<Long> {
 	}
 
 	public Aula toEntity() {
-
 		Aula aula = new Aula();
+		aula.setId(this.getId());
 		aula.setId(this.getId());
 		try {
 			aula.setDia(DateUtils.toDate(getDia(), "dd/MM/yyyy"));
@@ -52,7 +51,6 @@ public class AulaDTO extends DTOEntity<Long> {
 			// Nada no deberia llegar aca
 		}
 		aula.setHora(Integer.parseInt(getHora()));
-
 		Materia materia = new Materia();
 		materia.setId(idMateria);
 		aula.setMateria(materia);

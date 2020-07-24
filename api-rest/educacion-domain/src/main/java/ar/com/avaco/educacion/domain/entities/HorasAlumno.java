@@ -27,11 +27,11 @@ public class HorasAlumno extends ar.com.avaco.arc.core.domain.Entity<Long> {
     private Long id;
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
-    @JoinColumn(name = "ID_PROFESOR", insertable = false, updatable = false)
+    @JoinColumn(name = "ID_PROFESOR")
 	private Profesor profesor;
 	
 	@ManyToOne(fetch= FetchType.LAZY, cascade= CascadeType.MERGE)
-    @JoinColumn(name = "ID_ALUMNO", insertable = false, updatable = false)
+    @JoinColumn(name = "ID_ALUMNO")
 	private Alumno alumno;
 	
 	@Column(name = "CANT_HORAS_DISP")

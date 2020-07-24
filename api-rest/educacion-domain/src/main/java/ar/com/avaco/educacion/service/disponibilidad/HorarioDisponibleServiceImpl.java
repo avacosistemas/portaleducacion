@@ -28,7 +28,7 @@ public class HorarioDisponibleServiceImpl extends NJBaseService<Long, HorarioDis
 
 	@Override
 	public List<HorarioDisponible> listHorariosDispProfesor(Long idProfesor) {
-		return getRepository().findAllByProfesorId(idProfesor);
+		return getRepository().findAllByProfesorIdOrderByDiaAscHoraAsc(idProfesor);
 	}
 	
 	/**

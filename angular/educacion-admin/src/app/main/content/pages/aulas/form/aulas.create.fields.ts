@@ -1,51 +1,74 @@
+import { PREFIX_DOMAIN_API_EDUCACION } from "environments/environment";
+
 export const AULAS_CREATE_FORM_FIELDS_DEF = [
-  {
-    key: 'id',
-    labelKey: 'aulas_create_form_fields_def_field_id',
-    label: 'ID',
-    type: 'string',
-    controlType: 'textbox'
-  },
+  // {
+  //   key: 'materia',
+  //   labelKey: 'aulas_create_form_fields_def_field_nombremateria',
+  //   controlType: 'autocomplete',
+  //   label: 'Materia',
+  //   required: true,
+  //   options: {
+  //     transferIdToField: 'idMateria',
+  //     elementLabel: 'descripcionNivel',
+  //     elementValue: 'id',
+  //     useNativeFilter: false,
+  //     selectElementOrCleanField: 'Debe seleccionar un elemento o limpiar el campo'
+  //   },
+  //   apiOptions: {
+  //     queryString: {
+  //       descripcion: 'materia'
+  //     },
+  //     url: PREFIX_DOMAIN_API_EDUCACION + '/materias/'
+  //   }
+  // },
+  // { 
+  //   key: 'idMateria',   
+  //   controlType: 'hidden'
+  // },
+  
   {
     key: 'idMateria',
-    labelKey: 'aulas_create_form_fields_def_field_idmateria',
-    label: 'idMateria',
-    type: 'string',
-    controlType: 'textbox'
-  },
-  {
-    key: 'nombreMateria',
     labelKey: 'aulas_create_form_fields_def_field_nombremateria',
-    label: 'Materia',
-    type: 'string',
-    controlType: 'textbox'
+    required: false,
+    controlType: 'select',
+    options: {
+        elementLabel: 'descripcionNivel',
+        elementValue: 'id',
+        fromWs: {
+          key: 'alumno_create_form_fields_def_field_idinstitucion',
+          url: PREFIX_DOMAIN_API_EDUCACION + '/materias'
+        }
+    }
   },
+  
+  
   {
     key: 'idInstitucion',
-    labelKey: 'aulas_create_form_fields_def_field_idinstitucion',
-    label: 'Institución',
-    type: 'string',
-    controlType: 'textbox'
-  },
-  {
-    key: 'nombreInstitucion',
     labelKey: 'aulas_create_form_fields_def_field_nombreinstitucion',
-    label: 'Institución',
-    type: 'string',
-    controlType: 'textbox'
+    required: false,
+    controlType: 'select',
+    options: {
+        elementLabel: 'nombre',
+        elementValue: 'id',
+        fromWs: {
+          key: 'alumno_create_form_fields_def_field_idinstitucion',
+          url: PREFIX_DOMAIN_API_EDUCACION + '/instituciones'
+        }
+    }
   },
   {
-    key: 'fecha',
+    key: 'dia',
     labelKey: 'aulas_create_form_fields_def_field_fecha',
-    label: 'Fecha',
-    type: 'string',
-    controlType: 'textbox'
+    type: 'date',
+    controlType: 'datepicker',
+    required: true
   },
   {
     key: 'hora',
     labelKey: 'aulas_create_form_fields_def_field_hora',
     label: 'Hora',
     type: 'string',
-    controlType: 'textbox'
+    controlType: 'number',
+    required: true
   }
 ];

@@ -30,9 +30,9 @@ export const INSTITUCIONES_DEF: CrudDef = {
     security: INSTITUCIONES_SECURITY_DEF,
     ws: {
         key: 'INSTITUCIONES_CRUD_URL',
-        url: PREFIX_DOMAIN_API_EDUCACION + '/instituciones'
+        url: PREFIX_DOMAIN_API_EDUCACION + '/instituciones/'
     },
     dialogConfig: {
-        width: '800px'
+        width: '500px'
     }
 };

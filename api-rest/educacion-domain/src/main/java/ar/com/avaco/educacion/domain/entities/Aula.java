@@ -24,26 +24,42 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "AULA_SEQ", sequenceName = "AULA_SEQ", allocationSize = 1)
 public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 
+
+	public Date getDia() {
+		return dia;
+	}
+
+	public void setDia(Date dia) {
+		this.dia = dia;
+	}
+
+	public Integer getHora() {
+		return hora;
+	}
+
+	public void setHora(Integer hora) {
+		this.hora = hora;
+	}
+
 	/** serializacion */
 	private static final long serialVersionUID = 939136778257772228L;
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AULA_SEQ")
 	@Column(name = "ID_AULA")
 	private Long id;
-
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "AULA_ALUMNO", joinColumns = @JoinColumn(name = "ID_AULA"), inverseJoinColumns = @JoinColumn(name = "ID_ALUMNO"))
-	Set<Alumno> alumnos;
+	Set<Alumno> alumnos = new HashSet<>();
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "AULA_PROFESOR", joinColumns = @JoinColumn(name = "ID_AULA"), inverseJoinColumns = @JoinColumn(name = "ID_PROFESOR"))
-	Set<Profesor> profesores;
-
+	Set<Profesor> profesores = new HashSet<>();
+	
 	@OneToMany(targetEntity = Comentario.class, mappedBy = "aula", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	private Set<Comentario> comentarios = new HashSet<>();
-
-	@ManyToOne(optional = false)
+	private Set<Comentario> comentarios = new HashSet<>();	@ManyToOne(optional = false)
 	@JoinColumn(name = "ID_MATERIA", insertable = false, updatable = true)
 	private Materia materia;
 
@@ -53,7 +69,7 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 
 	@Column(name = "DIA", nullable = false)
 	private Date dia;
-
+	
 	@Column(name = "HORA", nullable = false)
 	private Integer hora;
 
@@ -101,22 +117,6 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 
 	public void setMateria(Materia materia) {
 		this.materia = materia;
-	}
-
-	public Date getDia() {
-		return dia;
-	}
-
-	public void setDia(Date dia) {
-		this.dia = dia;
-	}
-
-	public Integer getHora() {
-		return hora;
-	}
-
-	public void setHora(Integer hora) {
-		this.hora = hora;
 	}
 
 	public Integer getCalificacion() {

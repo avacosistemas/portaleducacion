@@ -7,10 +7,10 @@ import ar.com.avaco.educacion.domain.entities.HorarioDisponible;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class HorarioDisponibleDTO extends DTOEntity<Long> {
-	
+
 	private Long id;
 	private Integer dia;
-	private LocalTime hora;
+	private Integer hora;
 
 	public HorarioDisponibleDTO() {
 	}
@@ -35,11 +35,11 @@ public class HorarioDisponibleDTO extends DTOEntity<Long> {
 		this.dia = dia;
 	}
 
-	public LocalTime getHora() {
+	public Integer getHora() {
 		return hora;
 	}
 
-	public void setHora(LocalTime hora) {
+	public void setHora(Integer hora) {
 		this.hora = hora;
 	}
 
@@ -55,7 +55,7 @@ public class HorarioDisponibleDTO extends DTOEntity<Long> {
 
 	public void setDTO(HorarioDisponible disponibilidad) {
 		this.setId(disponibilidad.getId());
-	
+
 		this.setDia(disponibilidad.getDia().getValue());
 		this.setHora(disponibilidad.getHora());
 	}

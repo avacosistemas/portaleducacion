@@ -12,7 +12,7 @@ import ar.com.avaco.educacion.domain.entities.HorarioDisponible;
 
 public interface HorarioDisponibleRepository extends NJRepository<Long, HorarioDisponible>, HorarioDisponibleRepositoryCustom {
 
-	List<HorarioDisponible> findAllByProfesorId(Long idProfesor);
+	List<HorarioDisponible> findAllByProfesorIdOrderByDiaAscHoraAsc(Long idProfesor);
 
 	HorarioDisponible findByDiaAndHoraAndProfesorId(DayOfWeek dia, Integer hora, Long id);
 	

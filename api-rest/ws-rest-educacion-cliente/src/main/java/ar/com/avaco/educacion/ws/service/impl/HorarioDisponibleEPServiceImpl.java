@@ -42,14 +42,14 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 				horarioDisp = new HorarioDisponible();
 			
 				horarioDisp.setDia(DayOfWeek.MONDAY);
-				horarioDisp.setHora(LocalTime.of(i, 0));
+				horarioDisp.setHora(i);
 				horariosToAdd.add(horarioDisp);
 			}
 			
 			if(horariosDispDto.isMartes()) {
 				horarioDisp = new HorarioDisponible();
 				horarioDisp.setDia(DayOfWeek.TUESDAY);
-				horarioDisp.setHora(LocalTime.of(i, 0));
+				horarioDisp.setHora(i);
 				horariosToAdd.add(horarioDisp);
 		
 			}
@@ -58,7 +58,7 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 				horarioDisp = new HorarioDisponible();
 			
 				horarioDisp.setDia(DayOfWeek.WEDNESDAY);
-				horarioDisp.setHora(LocalTime.of(i, 0));
+				horarioDisp.setHora(i);
 				horariosToAdd.add(horarioDisp);
 		
 			}
@@ -67,7 +67,7 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 				horarioDisp = new HorarioDisponible();
 			
 				horarioDisp.setDia(DayOfWeek.THURSDAY);
-				horarioDisp.setHora(LocalTime.of(i, 0));
+				horarioDisp.setHora(i);
 				horariosToAdd.add(horarioDisp);
 		
 			}
@@ -76,7 +76,7 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 				horarioDisp = new HorarioDisponible();
 		
 				horarioDisp.setDia(DayOfWeek.FRIDAY);
-				horarioDisp.setHora(LocalTime.of(i, 0));
+				horarioDisp.setHora(i);
 				horariosToAdd.add(horarioDisp);
 		
 			}
@@ -85,7 +85,7 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 				horarioDisp = new HorarioDisponible();
 		
 				horarioDisp.setDia(DayOfWeek.SATURDAY);
-				horarioDisp.setHora(LocalTime.of(i, 0));
+				horarioDisp.setHora(i);
 				horariosToAdd.add(horarioDisp);
 		
 			}
@@ -94,7 +94,7 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 				horarioDisp = new HorarioDisponible();
 			
 				horarioDisp.setDia(DayOfWeek.SUNDAY);
-				horarioDisp.setHora(LocalTime.of(i, 0));
+				horarioDisp.setHora(i);
 				horariosToAdd.add(horarioDisp);
 		
 			}

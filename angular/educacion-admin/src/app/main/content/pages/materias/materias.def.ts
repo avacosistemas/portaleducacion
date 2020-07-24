@@ -7,6 +7,7 @@ import { MATERIAS_GRID_DEF } from './grid/materias.grid';
 import { MATERIAS_I18N_DEF } from './i18n/materias.i18n';
 import { MATERIAS_NAV_DEF } from './navigation/materias.nav';
 import { CrudDef } from 'app/modules/fwk/core/model/component-def/crud-def';
+import { PREFIX_DOMAIN_API_EDUCACION } from 'environments/environment';
 
 // Definicion de un template crud(Create,Read,Update and Delete)
 export const MATERIAS_DEF: CrudDef = { 
@@ -29,9 +30,9 @@ export const MATERIAS_DEF: CrudDef = {
     security: MATERIAS_SECURITY_DEF,
     ws: {
         key: 'MATERIAS_CRUD_URL',
-        url: 'http://localhost:8080/ws-rest-educacion/materias/'
+        url: PREFIX_DOMAIN_API_EDUCACION + '/materias/'
     },
     dialogConfig: {
-        width: '800px'
+        width: '500px'
     }   
 };

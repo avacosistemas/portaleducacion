@@ -78,7 +78,7 @@ export const HORAS_PROFESOR_CREATE_FORM_FIELDS_DEF = [
           value: false
         },
         {
-          key: 'sabado ',
+          key: 'sabado',
           labelKey: 'seccion_create_form_fields_def_field_sabado',
           label: 'Sabado ',
           controlType: 'checkbox',            

@@ -9,11 +9,12 @@ public class ProfesorDTO extends ClienteDTO {
 
 	private byte[] foto;
 
+	private String nombreApellido;
+	
 	public ProfesorDTO() {}
 
 	public ProfesorDTO(Profesor profesor) {
 		this.setDTO(profesor);
-
 	}
 
 	public byte[] getFoto() {
@@ -58,7 +59,18 @@ public class ProfesorDTO extends ClienteDTO {
 		this.setUsername(profesor.getUsername());
 		this.setEmail(profesor.getEmail());
 		this.setTelefonoMovil(profesor.getContacto().getTelefonoMovil());
+		this.setNombreApellido(profesor.getNombre() + " " + profesor.getApellido());
 
 	}
 
+	public String getNombreApellido() {
+		return nombreApellido;
+	}
+
+	public void setNombreApellido(String nombreApellido) {
+		this.nombreApellido = nombreApellido;
+	}
+
+	
+	
 }

@@ -14,11 +14,17 @@ export const HORAS_PROFESOR_DEF: CrudDef = {
     name: 'HORAS_PROFESOR',
     i18n: HORAS_PROFESOR_I18N_DEF,
     grid: HORAS_PROFESOR_GRID_DEF, // Si el crud tiene grilla, entonces se agrega su definicion.
+    formsDef: {
+        create: {
+            fields:HORAS_PROFESOR_CREATE_FORM_FIELDS_DEF,
+            showSubmitContinue: true
+        }
+    },
     forms: {
         filter: HORAS_PROFESOR_FILTER_FORM_FIELDS_DEF, // Si el crud tiene campos de busqueda, entonces se agrega su definicion.
-        create: HORAS_PROFESOR_CREATE_FORM_FIELDS_DEF, // Si el crud tiene formulario de alta, entonces se agrega su definicion.
-        update: HORAS_PROFESOR_UPDATE_FORM_FIELDS_DEF, // Si el crud tiene formulario de modificacion, entonces se agrega su definicion.
-        read:  HORAS_PROFESOR_READ_FORM_FIELDS_DEF // Si existe un formulario de edicion no exite uno de solo lectura
+        // create: HORAS_PROFESOR_CREATE_FORM_FIELDS_DEF, // Si el crud tiene formulario de alta, entonces se agrega su definicion.
+        // update: HORAS_PROFESOR_UPDATE_FORM_FIELDS_DEF, // Si el crud tiene formulario de modificacion, entonces se agrega su definicion.
+        // read:  HORAS_PROFESOR_READ_FORM_FIELDS_DEF // Si existe un formulario de edicion no exite uno de solo lectura
     },
     navigation: HORAS_PROFESOR_NAV_DEF,
     security: HORAS_PROFESOR_SECURITY_DEF,
@@ -27,7 +33,7 @@ export const HORAS_PROFESOR_DEF: CrudDef = {
         url: PREFIX_DOMAIN_API_EDUCACION + '/horariosdisponibles'
     },
     dialogConfig: {
-        width: '400px'
+        width: '500px'
     },
     filterInMemory: false,
     backButton: true   

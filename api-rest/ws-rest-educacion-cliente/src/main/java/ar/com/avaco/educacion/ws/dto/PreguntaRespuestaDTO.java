@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import ar.com.avaco.educacion.domain.entities.PreguntaRespuesta;
 import ar.com.avaco.educacion.domain.entities.Profesor;
+import ar.com.avaco.utils.DateUtils;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class PreguntaRespuestaDTO extends DTOEntity<Long> {
@@ -89,8 +90,8 @@ public class PreguntaRespuestaDTO extends DTOEntity<Long> {
 		this.setIdProfesor(preguntaRta.getProfesor().getId());
 		this.setPregunta(preguntaRta.getPregunta());
 		this.setRespuesta(preguntaRta.getRespuesta());
-		this.setFecha(LocalDate.now().toString());
-		this.setHora(preguntaRta.getHoraPregunta()!=null ? preguntaRta.getHoraPregunta().toString():"");
+		this.setFecha(DateUtils.toString(preguntaRta.getFechaPregunta()));
+		//this.setHora(preguntaRta.getHoraPregunta()!=null ? preguntaRta.getHoraPregunta().toString():"");
 		
 	}
 

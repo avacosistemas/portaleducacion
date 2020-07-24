@@ -7,6 +7,11 @@ export const PROFESORES_GRID_DEF = {
       columnNameKey: 'profesores_grid_def_column_id'
     },
     {
+      columnDef: 'nombreApellido',
+      columnNameKey: 'profesores_grid_def_column_nombreApellido',
+      querystring: true
+    },
+    {
       columnDef: 'nombre',
       columnNameKey: 'profesores_grid_def_column_nombre'
     },
