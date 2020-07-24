@@ -26,6 +26,7 @@ public class AlumnoRepositoryImpl extends NJBaseRepository<Long, Alumno> impleme
 		criteria.add(Restrictions.eq("id", id));
 		criteria.setFetchMode("identificacion", FetchMode.JOIN); 
 		criteria.setFetchMode("contacto", FetchMode.JOIN); 
+		criteria.setFetchMode("institucion", FetchMode.JOIN); 
 		return (Alumno) criteria.uniqueResult();
 	}
 	
@@ -34,6 +35,7 @@ public class AlumnoRepositoryImpl extends NJBaseRepository<Long, Alumno> impleme
 		Criteria criteria = getCurrentSession().createCriteria(getHandledClass());
 		criteria.setFetchMode("identificacion", FetchMode.JOIN); 
 		criteria.setFetchMode("contacto", FetchMode.JOIN); 
+		criteria.setFetchMode("institucion", FetchMode.JOIN); 
 		criteria.addOrder(Order.asc("username"));
 		return criteria.list();
 	}

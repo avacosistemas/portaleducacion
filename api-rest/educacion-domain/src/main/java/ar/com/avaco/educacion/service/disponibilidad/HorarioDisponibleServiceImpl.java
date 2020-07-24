@@ -41,7 +41,7 @@ public class HorarioDisponibleServiceImpl extends NJBaseService<Long, HorarioDis
 
 		for(HorarioDisponible entity: entities) {
 			entity.setProfesor(profesor);
-			this.validaDuplicado(entity);
+			//this.validaDuplicado(entity);
 		}
 
 		List<HorarioDisponible> horariosDisponibles = this.getRepository().save(entities);

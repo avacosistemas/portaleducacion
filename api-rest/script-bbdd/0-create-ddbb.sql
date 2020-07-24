@@ -17,8 +17,7 @@ create table Usuario_mailsNotificacion (Usuario_ID_SEG_USUARIO int8 not null, ma
 create table WORD (ID_WORD int8 not null, key varchar(255) not null, value varchar(255) not null, i18n_ID_I18N int8 not null, primary key (ID_WORD));
 
 --EDUCACION
-create table ALUMNO (ID_CLIENTE int8 not null, primary key (ID_CLIENTE));
-create table ALUMNO_INSTITUCION (ID_ALUMNO int8 not null, ID_INSTITUCION int8 not null, primary key (ID_ALUMNO, ID_INSTITUCION));
+create table ALUMNO (ID_CLIENTE int8 not null, ID_INSTITUCION int8, primary key (ID_CLIENTE));
 create table AULA (ID_AULA int8 not null, CALIFICACION int4 not null, DIA date not null, HORA int8 not null, ID_INSTITUCION int8, ID_MATERIA int8 not null, primary key (ID_AULA));
 create table AULA_ALUMNO (ID_AULA int8 not null, ID_ALUMNO int8 not null, primary key (ID_AULA, ID_ALUMNO));
 create table AULA_PROFESOR (ID_AULA int8 not null, ID_PROFESOR int8 not null, primary key (ID_AULA, ID_PROFESOR));
@@ -63,12 +62,8 @@ alter table WORD add constraint I18N_ID_FK foreign key (i18n_ID_I18N) references
 alter table CLI_CLIENTE add constraint UK_dpfngbuw5kyun9v6nkw9qwxw6  unique (EMAIL);
 alter table CLI_CLIENTE add constraint UK_lo3g6pgctqny711lr8wp7f4hr  unique (USERNAME);
 alter table ALUMNO add constraint FK_onu2vb0vpp6khi1j94l4ma5j0 foreign key (ID_CLIENTE) references CLI_CLIENTE;
-alter table ALUMNO_INSTITUCION add constraint FK_tdanh0ryhhmw8ptk1mpxn1fu7 foreign key (ID_INSTITUCION) references INSTITUCION;
-alter table ALUMNO_INSTITUCION add constraint FK_6ra3k9d2nhoew0qcu3j9v8rwc foreign key (ID_ALUMNO) references ALUMNO;
 alter table AULA add constraint FK_3msu564l6s2iae9hjnkkkmgdt foreign key (ID_INSTITUCION) references INSTITUCION;
 alter table AULA add constraint FK_elsuqn0pvy1wk75ieydcru8kg foreign key (ID_MATERIA) references MATERIA;
-alter table AULA_ALUMNO add constraint FK_88ecbw3kak98x1yhnjo3w6yq3 foreign key (ID_ALUMNO) references ALUMNO;
-alter table AULA_ALUMNO add constraint FK_plo38vtrdb7n9akuqotkl603u foreign key (ID_AULA) references AULA;
 alter table AULA_PROFESOR add constraint FK_7lrxnhmo4q0xs8eb9vkjevspr foreign key (ID_PROFESOR) references PROFESOR;
 alter table AULA_PROFESOR add constraint FK_51979urj12la2q8eyhlfklw8j foreign key (ID_AULA) references AULA;
 alter table CLI_ACCESO_PERMISO add constraint FK_30ns7l5f4j4vp8q0snjitmpju foreign key (ID_PERMISO) references CLI_PERMISO_CLIENTE;

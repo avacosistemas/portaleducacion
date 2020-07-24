@@ -120,7 +120,7 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 		if (alumno==null)
 			throw new BusinessException("El alumno id "+idAlumno+" no existe");
 		
-		if (aula.getInstitucion()!=null && !alumno.getInstituciones().contains(aula.getInstitucion())) 
+		if (aula.getInstitucion()!=null && !alumno.getInstitucion().equals(aula.getInstitucion())) 
 			throw new BusinessException("El alumno no pertenece a la Institucion del aula");
 		
 		

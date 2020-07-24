@@ -3,18 +3,9 @@ package ar.com.avaco.educacion.domain.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
-
-import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "ALUMNO")
@@ -23,7 +14,7 @@ public class Alumno extends Cliente {
 	
 	/** serializacion */
 	private static final long serialVersionUID = 939136778257772228L;
-	
+
 	@OneToMany(targetEntity= HorasAlumno.class, mappedBy="alumno", cascade=CascadeType.MERGE)
     private Set<HorasAlumno> horasDispAlumo = new HashSet<>();
 	
@@ -32,16 +23,13 @@ public class Alumno extends Cliente {
 	
 	@OneToMany(targetEntity= PreguntaRespuesta.class, mappedBy="alumno", cascade=CascadeType.MERGE)
     private Set<PreguntaRespuesta> preguntasRespuestas = new HashSet<>();
-	
-	@ManyToMany
-	@JoinTable(
-	  name = "ALUMNO_INSTITUCION", 
-	  joinColumns = @JoinColumn(name = "ID_ALUMNO"), 
-	  inverseJoinColumns = @JoinColumn(name = "ID_INSTITUCION"))
-	Set<Institucion> instituciones = new HashSet<>();
-	
+
+	@ManyToOne(optional = false, cascade=CascadeType.MERGE)
+    @JoinColumn(name = "ID_INSTITUCION")
+	private Institucion institucion;
+
 	@ManyToMany(mappedBy = "alumnos")
-	Set<Aula> aulas = new HashSet<>();
+	Set<Aula> aulas;
 
 	public Alumno() {}
 
@@ -53,12 +41,12 @@ public class Alumno extends Cliente {
 		this.horasDispAlumo = horasDispAlumo;
 	}
 
-	public Set<Institucion> getInstituciones() {
-		return instituciones;
+	public Institucion getInstitucion() {
+		return institucion;
 	}
 
-	public void setInstituciones(Set<Institucion> instituciones) {
-		this.instituciones = instituciones;
+	public void setInstitucion(Institucion institucion) {
+		this.institucion = institucion;
 	}
 
 	public Set<Aula> getAulas() {

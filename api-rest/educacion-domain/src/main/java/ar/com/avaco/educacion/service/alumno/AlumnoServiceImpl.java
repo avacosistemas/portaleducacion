@@ -1,18 +1,19 @@
 package ar.com.avaco.educacion.service.alumno;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.transaction.Transactional;
+import ar.com.avaco.arc.core.component.bean.service.NJBaseService;
+import ar.com.avaco.commons.exception.BusinessException;
+import ar.com.avaco.educacion.domain.entities.Alumno;
+import ar.com.avaco.educacion.domain.entities.Institucion;
+import ar.com.avaco.educacion.repository.alumno.AlumnoRepository;
+import ar.com.avaco.educacion.service.cliente.ClienteService;
+import ar.com.avaco.educacion.service.institucion.InstitucionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.com.avaco.arc.core.component.bean.service.NJBaseService;
-import ar.com.avaco.commons.exception.BusinessException;
-import ar.com.avaco.educacion.domain.entities.Alumno;
-import ar.com.avaco.educacion.repository.alumno.AlumnoRepository;
-import ar.com.avaco.educacion.service.cliente.ClienteService;
+import javax.annotation.Resource;
+import javax.transaction.Transactional;
+import java.util.List;
 
 
 @Transactional
@@ -20,11 +21,13 @@ import ar.com.avaco.educacion.service.cliente.ClienteService;
 public class AlumnoServiceImpl extends NJBaseService<Long, Alumno, AlumnoRepository> implements AlumnoService {
 
 	private ClienteService clienteService;
+	private InstitucionService institucionService;
 	
 	@Autowired
-	public AlumnoServiceImpl(ClienteService clienteService) {
+	public AlumnoServiceImpl(ClienteService clienteService, InstitucionService institucionService) {
 
 		this.clienteService = clienteService;
+		this.institucionService = institucionService;
 	}
 
 	/**
@@ -36,7 +39,7 @@ public class AlumnoServiceImpl extends NJBaseService<Long, Alumno, AlumnoReposit
 	}
 	
 	/**
-	 * @see AlumnoService#listProfesores()
+	 * @see AlumnoService#listAlumnos()
 	 */
 	@Override
 	public List<Alumno> listAlumnos() {
@@ -48,6 +51,8 @@ public class AlumnoServiceImpl extends NJBaseService<Long, Alumno, AlumnoReposit
 	 */
 	@Override
 	public Alumno createAlumno(Alumno alumno) throws BusinessException {
+		Institucion institucion = institucionService.get(alumno.getInstitucion().getId());
+		alumno.setInstitucion(institucion);
 		Alumno newAlumno = (Alumno) clienteService.registrarClientePersona(alumno);
 		return newAlumno;
 	}
@@ -57,8 +62,15 @@ public class AlumnoServiceImpl extends NJBaseService<Long, Alumno, AlumnoReposit
 	 */
 	@Override
 	public Alumno updateAlumno(Alumno entity) throws BusinessException {
-		Alumno alumno = (Alumno) clienteService.updateProfesorAlumno(entity);
-		return alumno;
+
+		Alumno alumno = (Alumno) this.clienteService.validaUpdateProfesorAlumno(entity);
+
+		Institucion institucion = institucionService.get(entity.getInstitucion().getId());
+		
+		alumno.setInstitucion(institucion);
+		//alumno.getInstitucion().setNombre(entity.getInstitucion().getNombre());
+
+		return this.getRepository().save(alumno);
 	}
 
 	/**

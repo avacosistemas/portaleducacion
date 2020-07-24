@@ -140,8 +140,8 @@ public class Profesor extends Cliente implements Serializable {
 		return valorHora;
 	}
 
-	public void setValoreHora(Double valoreHora) {
-		this.valorHora = valoreHora;
+	public void setValorHora(Double valorHora) {
+		this.valorHora = valorHora;
 	}
 
 	public byte[] getFoto() {

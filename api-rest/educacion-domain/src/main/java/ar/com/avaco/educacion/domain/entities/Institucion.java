@@ -1,15 +1,9 @@
 package ar.com.avaco.educacion.domain.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "INSTITUCION")
@@ -26,9 +20,9 @@ public class Institucion extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	
 	@Column(name = "NOMBRE")
 	private String nombre;
-	
-	@ManyToMany(mappedBy = "instituciones")
-	Set<Alumno> alumnos;
+
+	@OneToMany(targetEntity= Alumno.class, mappedBy="institucion", cascade=CascadeType.MERGE)
+	private Set<Alumno> alumnos = new HashSet<>();
 	
 	public Institucion() {}
 
@@ -46,6 +40,18 @@ public class Institucion extends ar.com.avaco.arc.core.domain.Entity<Long> {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public Set<Alumno> getAlumnos() {
+		return alumnos;
+	}
+
+	public void setAlumnos(Set<Alumno> alumnos) {
+		this.alumnos = alumnos;
 	}
 
 	//TODO Agregar hashCode, equals y toString cuando se completen todos los atributos

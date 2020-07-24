@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import ar.com.avaco.educacion.domain.entities.Institucion;
 import org.springframework.stereotype.Service;
 
 import ar.com.avaco.commons.exception.BusinessException;
@@ -37,7 +38,7 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 	
 	@Override
 	public AlumnoDTO updateAlumno(Long id, AlumnoDTO alumnoDto) throws BusinessException {
-		Alumno alumno = (Alumno) alumnoDto.toEntity();
+		Alumno alumno = alumnoDto.toEntity();
 		alumno.setId(id);
 		alumno = service.updateAlumno(alumno);
 		return new AlumnoDTO(alumno);
@@ -66,6 +67,7 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		alumno.setId(dto.getId());
 		alumno.setNombre(dto.getNombre());
 		alumno.setApellido(dto.getApellido());
+
 		Identificacion id = new Identificacion();
 		id.setTipo(TipoIdentificacion.valueOf(dto.getTipoIdentificacion()));
 		id.setNumero(dto.getNumeroIdentificacion());
@@ -77,10 +79,15 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		contacto.setCliente(alumno);
 		alumno.setIdentificacion(id);
 		alumno.setContacto(contacto);
-	
 		alumno.setUsername(dto.getUsername());
 		alumno.setEmail(dto.getEmail());
-	
+
+		Institucion institucion = new Institucion();
+		institucion.setId(dto.getIdInstitucion());
+		institucion.setNombre(dto.getNombre());
+
+		alumno.setInstitucion(institucion);
+
 		return alumno;
 	}
 
