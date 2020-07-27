@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.ws.dto.AlumnoDTO;
+import ar.com.avaco.educacion.ws.dto.RegistroAlumnoDTO;
 import ar.com.avaco.educacion.ws.service.AlumnoEPService;
 import ar.com.avaco.ws.rest.controller.AbstractDTORestController;
 import ar.com.avaco.ws.rest.dto.JSONResponse;
@@ -53,6 +54,15 @@ public class AlumnoRestController extends AbstractDTORestController<AlumnoDTO, L
 	@RequestMapping(value = "/alumnos", method = RequestMethod.POST)
 	public ResponseEntity<JSONResponse> create(@RequestBody AlumnoDTO alumno) throws BusinessException {
 		AlumnoDTO newAlumnoDto = service.createAlumno(alumno);
+		JSONResponse response = new JSONResponse();
+		response.setData(newAlumnoDto);
+		response.setStatus(JSONResponse.OK);	
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/alumnos/registrar/", method = RequestMethod.POST)
+	public ResponseEntity<JSONResponse> registrar(@RequestBody RegistroAlumnoDTO alumno) throws BusinessException {
+		AlumnoDTO newAlumnoDto = service.registrarAlumno(alumno);
 		JSONResponse response = new JSONResponse();
 		response.setData(newAlumnoDto);
 		response.setStatus(JSONResponse.OK);	

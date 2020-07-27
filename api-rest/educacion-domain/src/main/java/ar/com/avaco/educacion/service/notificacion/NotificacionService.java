@@ -8,4 +8,6 @@ public interface NotificacionService {
 
 	void notificarRegistroClienteNuevoPassword(Cliente cliente, String tmpass);
 
+	void notificarAlumnoNuevo(Cliente cliente);
+
 }

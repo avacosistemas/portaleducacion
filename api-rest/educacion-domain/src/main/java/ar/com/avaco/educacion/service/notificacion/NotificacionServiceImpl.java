@@ -32,6 +32,7 @@ public class NotificacionServiceImpl implements NotificacionService {
 	@Value("teachonline@teachonline.com.ar")
 	private String from;
 
+
 	@Value("TeachOnline - Restablecimiento de contraseña")
 	private String subjectResetoPasswordCliente;
 
@@ -43,6 +44,9 @@ public class NotificacionServiceImpl implements NotificacionService {
 
 	@Value("template/registro-cliente-nuevo-password.html")
 	private String bodyRegistroClienteNuevoPassword;
+	
+	@Value("template/registro-alumno-nuevo.html")
+	private String bodyRegistroAlumnoNuevo;
 
 	@Value("template/header-general.html")
 	private String headerGeneral;
@@ -108,8 +112,17 @@ public class NotificacionServiceImpl implements NotificacionService {
 		mailSenderSMTPService.sendMail(from, cliente.getEmail(), subjectRegistroClienteNuevoPassword,
 				getBody(params, bodyRegistroClienteNuevoPassword), null);
 	}
-
 	
+	@Override
+	public void notificarAlumnoNuevo(Cliente cliente) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("cliente", cliente.getNombreApellido());
+		params.put("usuario", cliente.getUsername());
+		mailSenderSMTPService.sendMail(from, cliente.getEmail(), subjectRegistroClienteNuevoPassword,
+				getBody(params, bodyRegistroAlumnoNuevo), null);
+		
+	}
+
 	@Resource(name = "mailSenderSMTPService")
 	public void setMailSenderSMTPService(MailSenderSMTPService mailSenderSMTPService) {
 		this.mailSenderSMTPService = mailSenderSMTPService;
