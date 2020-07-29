@@ -38,6 +38,7 @@ export const ALUMNO_I18N_DEF = {
     alumno_grid_def_column_nombre: 'Nombre',
     alumno_grid_def_column_apellido: 'Apellido',
     alumno_grid_def_column_idinstitucion: 'Institución',
+    alumno_grid_def_column_nombreinstitucion: 'Institución',
     alumno_grid_def_column_username: 'Username',
     alumno_grid_def_column_tipoidentificacion: 'Tipo de Identificación',
     alumno_grid_def_column_numeroidentificacion: 'Número de Identificación',
@@ -45,6 +46,7 @@ export const ALUMNO_I18N_DEF = {
     alumno_grid_def_column_email: 'Email',
     
     alumno_grid_def_button_action_habilitar: 'Habilitar',
-    alumno_grid_def_button_action_bloquear: 'Bloquear'
+    alumno_grid_def_button_action_bloquear: 'Bloquear',
+    alumno_grid_def_column_nombreapellido: 'Nombre y Apellido'
   }
 };

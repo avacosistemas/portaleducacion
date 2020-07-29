@@ -82,6 +82,7 @@
           <mat-form-field *ngIf="field.controlType == 'select'" [floatLabel]="getFloatLabel(field)">
           <mat-label *ngIf="field.options && field.options.matLabel">{{field.options.matLabel}}</mat-label>
           <mat-select (change)="onChangeSelect($event)" placeholder="{{field.label}}" [formControlName]="field.key">
+            <mat-option [value]=""></mat-option>
             <mat-option *ngFor="let data of field.options.fromData" [value]="field.options.elementValue ? data[field.options.elementValue] : data">
               {{ field.options.elementLabel ? data[field.options.elementLabel] :  data}}
             </mat-option>

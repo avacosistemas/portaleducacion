@@ -10,7 +10,7 @@ import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public interface CRUDEPService<ID extends Serializable, DTO extends DTOEntity<ID>> {
 
-	DTO save(DTO entity);
+	DTO save(DTO entity) throws BusinessException;
 
 	DTO update(DTO entity) throws BusinessException ;
 
@@ -20,7 +20,7 @@ public interface CRUDEPService<ID extends Serializable, DTO extends DTOEntity<ID
 
 	List<DTO> list();
 
-	void remove(ID id);
+	void remove(ID id) throws BusinessException;
 
 	int listCount(AbstractFilter abstractFilter);
 

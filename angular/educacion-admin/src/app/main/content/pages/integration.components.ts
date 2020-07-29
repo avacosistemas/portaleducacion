@@ -11,6 +11,7 @@ import { MATERIA_PROFESOR_DEF } from './materia_profesor/materia_profesor.def';
 import { HORAS_PROFESOR_DEF } from './horas_profesor/horas_profesor.def';
 import { ALUMNO_DEF } from './alumno/alumno.def';
 import { AULAS_DEF } from './aulas/aulas.def';
+import { AULA_ALUMNO_DEF } from './aula_alumno/aula_alumno.def';
 
 export const COMPONENTS: ComponentDef[] = [
   PARAMETER_DEF,
@@ -23,6 +24,7 @@ export const COMPONENTS: ComponentDef[] = [
   MATERIA_PROFESOR_DEF,
   HORAS_PROFESOR_DEF,
   ALUMNO_DEF,
-  AULAS_DEF
+  AULAS_DEF, 
+  AULA_ALUMNO_DEF
 ];
 

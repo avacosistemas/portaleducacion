@@ -15,6 +15,7 @@ import { USER_DEF } from '../user/component/user.def';
 import { HORAS_PROFESOR_DEF } from './horas_profesor/horas_profesor.def';
 import { ALUMNO_DEF } from './alumno/alumno.def';
 import { AULAS_DEF } from './aulas/aulas.def';
+import { AULA_ALUMNO_DEF } from './aula_alumno/aula_alumno.def';
 
 
 export const ROUTES: Routes = [  
@@ -80,6 +81,11 @@ export const ROUTES: Routes = [
     },
     {
       path: AULAS_DEF.navigation.url.split('/')[1],
+      component: IntegrationComponent,
+      canActivate: [AuthGuardService]
+    },
+    {
+      path: AULA_ALUMNO_DEF.navigation.url.split('/')[1],
       component: IntegrationComponent,
       canActivate: [AuthGuardService]
     }

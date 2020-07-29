@@ -38,6 +38,11 @@ export const AULAS_I18N_DEF = {
     aulas_grid_def_column_idinstitucion: 'Institución',
     aulas_grid_def_column_nombreinstitucion: 'Institución',
     aulas_grid_def_column_fecha: 'Fecha',
-    aulas_grid_def_column_hora: 'Hora'
+    aulas_grid_def_column_hora: 'Hora',
+    aulas_grid_def_column_calificacion: 'Calificación',
+    aulas_grid_def_column_nombreProfesor: 'Profesor',
+    aulas_create_form_fields_def_field_nombreProfesor: 'Profesor',
+    aulas_grid_def_button_action_alumnos: 'Gestionar Alumnos',
+    aulas_grid_def_column_estado: 'Estado'
   }
 };

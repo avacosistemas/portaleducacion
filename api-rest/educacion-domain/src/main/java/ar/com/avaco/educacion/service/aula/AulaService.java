@@ -62,24 +62,24 @@ public interface AulaService extends NJService<Long, Aula> {
 	 */
 	void removeAulaProfesor(Long idAula, Long idProfesor) throws BusinessException;
 
-	/**
-	 * Agrega un alumno al aula
-	 * 
-	 * @param idAula
-	 * @param idAlumno
-	 * @return
-	 * @throws BusinessException 
-	 */
-	Aula addAlumnoAula(Long idAula, Long idAlumno) throws BusinessException;
+//	/**
+//	 * Agrega un alumno al aula
+//	 * 
+//	 * @param idAula
+//	 * @param idAlumno
+//	 * @return
+//	 * @throws BusinessException 
+//	 */
+//	Aula addAlumnoAula(Long idAula, Long idAlumno) throws BusinessException;
 
 	
-	/**
-	 * Quita un alumno del aula
-	 * 
-	 * @param idAula
-	 * @param idAlumno
-	 */
-	void removeAulaAlumno(Long idAula, Long idAlumno)  throws BusinessException;
+//	/**
+//	 * Quita un alumno del aula
+//	 * 
+//	 * @param idAula
+//	 * @param idAlumno
+//	 */
+//	void removeAulaAlumno(Long idAula, Long idAlumno)  throws BusinessException;
 	
 	
 	/**

@@ -4,7 +4,8 @@ export const ALUMNO_GRID_DEF = {
   columnsDef: [
     {
       columnDef: 'id',
-      columnNameKey: 'alumno_grid_def_column_id'
+      columnNameKey: 'alumno_grid_def_column_id',
+      id: true
     },
     {
       columnDef: 'nombre',
@@ -17,6 +18,10 @@ export const ALUMNO_GRID_DEF = {
     {
       columnDef: 'idInstitucion',
       columnNameKey: 'alumno_grid_def_column_idinstitucion'
+    },
+    {
+      columnDef: 'nombreInstitucion',
+      columnNameKey: 'alumno_grid_def_column_nombreinstitucion'
     },
     {
       columnDef: 'username',
@@ -37,13 +42,16 @@ export const ALUMNO_GRID_DEF = {
     {
       columnDef: 'email',
       columnNameKey: 'alumno_grid_def_column_email'
+    },
+    {
+      columnDef: 'nombreApellido',
+      columnNameKey: 'alumno_grid_def_column_nombreapellido'
     }
   ],
   sortAllColumns: true,
   displayedColumns: [
-    'nombre',
-    'apellido',
-    'idInstitucion',
+    'nombreApellido',
+    'nombreInstitucion',
     'username',
     'tipoIdentificacion',
     'numeroIdentificacion',

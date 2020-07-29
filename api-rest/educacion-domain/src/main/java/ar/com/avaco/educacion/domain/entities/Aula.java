@@ -24,7 +24,6 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "AULA_SEQ", sequenceName = "AULA_SEQ", allocationSize = 1)
 public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 
-
 	public Date getDia() {
 		return dia;
 	}
@@ -44,37 +43,41 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	/** serializacion */
 	private static final long serialVersionUID = 939136778257772228L;
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AULA_SEQ")
 	@Column(name = "ID_AULA")
 	private Long id;
-	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "AULA_ALUMNO", joinColumns = @JoinColumn(name = "ID_AULA"), inverseJoinColumns = @JoinColumn(name = "ID_ALUMNO"))
-	Set<Alumno> alumnos = new HashSet<>();
+
+	@OneToMany(targetEntity = AulaAlumno.class, mappedBy = "aula", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	Set<AulaAlumno> alumnos = new HashSet<>();
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "AULA_PROFESOR", joinColumns = @JoinColumn(name = "ID_AULA"), inverseJoinColumns = @JoinColumn(name = "ID_PROFESOR"))
 	Set<Profesor> profesores = new HashSet<>();
 	
 	@OneToMany(targetEntity = Comentario.class, mappedBy = "aula", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	private Set<Comentario> comentarios = new HashSet<>();	@ManyToOne(optional = false)
-	@JoinColumn(name = "ID_MATERIA", insertable = false, updatable = true)
+	private Set<Comentario> comentarios = new HashSet<>();
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "ID_MATERIA")
 	private Materia materia;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "ID_INSTITUCION", insertable = false, updatable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "ID_INSTITUCION")
 	private Institucion institucion;
 
 	@Column(name = "DIA", nullable = false)
 	private Date dia;
-	
+
 	@Column(name = "HORA", nullable = false)
 	private Integer hora;
 
 	@Column(name = "CALIFICACION", nullable = false)
-	private Integer calificacion;
+	private Integer calificacion = 0;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "ID_PROFESOR")
+	private Profesor profesor;
 
 	public Aula() {
 	}
@@ -87,11 +90,11 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 		this.id = id;
 	}
 
-	public Set<Alumno> getAlumnos() {
+	public Set<AulaAlumno> getAlumnos() {
 		return alumnos;
 	}
 
-	public void setAlumnos(Set<Alumno> alumnos) {
+	public void setAlumnos(Set<AulaAlumno> alumnos) {
 		this.alumnos = alumnos;
 	}
 
@@ -139,17 +142,6 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 
 	}
 
-	public void removeAlumno(Alumno alumno) {
-		this.getAlumnos().remove(alumno);
-		alumno.getAulas().remove(this);
-
-	}
-
-	public void addAlumno(Alumno alumno) {
-		this.getAlumnos().add(alumno);
-		alumno.getAulas().add(this);
-	}
-
 	public Institucion getInstitucion() {
 		return institucion;
 	}
@@ -158,6 +150,14 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 		this.institucion = institucion;
 	}
 
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
+	
 	// TODO Agregar hashCode, equals y toString cuando se completen todos los
 	// atributos
 

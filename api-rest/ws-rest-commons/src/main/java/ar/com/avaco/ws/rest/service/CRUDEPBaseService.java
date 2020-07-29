@@ -19,7 +19,7 @@ public abstract class CRUDEPBaseService<ID extends Serializable, DTO extends DTO
 	protected S service;
 	
 	@Override
-	public DTO save(DTO dto){
+	public DTO save(DTO dto) throws BusinessException {
 		validationSave(dto);
 		T entity = convertToEntity(dto);
 		entity = service.save(entity);

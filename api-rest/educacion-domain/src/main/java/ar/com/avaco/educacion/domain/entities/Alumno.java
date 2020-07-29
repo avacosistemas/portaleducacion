@@ -24,11 +24,11 @@ public class Alumno extends Cliente {
 	@OneToMany(targetEntity= PreguntaRespuesta.class, mappedBy="alumno", cascade=CascadeType.MERGE)
     private Set<PreguntaRespuesta> preguntasRespuestas = new HashSet<>();
 
-	@ManyToOne(optional = false, cascade=CascadeType.MERGE)
+	@ManyToOne(optional = true)
     @JoinColumn(name = "ID_INSTITUCION")
 	private Institucion institucion;
 
-	@ManyToMany(mappedBy = "alumnos")
+	@ManyToMany(mappedBy = "alumnos", fetch = FetchType.LAZY)
 	Set<Aula> aulas;
 
 	public Alumno() {}
@@ -73,18 +73,6 @@ public class Alumno extends Cliente {
 		this.preguntasRespuestas = preguntasRespuestas;
 	}
 
-	public void removeAula(Aula aula) {
-		this.getAulas().remove(aula);
-		aula.getAlumnos().remove(this);		
-	}
-
-	public void addAula(Aula aula) {
-		this.getAulas().add(aula);
-		aula.getAlumnos().add(this);
-		
-	}
-
-	
 	//TODO Agregar hashCode, equals y toString cuando se completen todos los atributos
 	
 }

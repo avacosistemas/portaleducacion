@@ -28,18 +28,17 @@ public class InstitucionEPServiceImpl extends CRUDEPBaseService<Long, Institucio
 	public InstitucionDTO createInstitucion(InstitucionDTO institucionDto) throws BusinessException {
 		Institucion institucion = new Institucion();
 		institucion.setNombre(institucionDto.getNombre());
-
 		institucion = service.createInstitucion(institucion);
-		return new InstitucionDTO(institucion);
+		return convertToDto(institucion);
 		
 	}
 
 	@Override
 	public InstitucionDTO updateInstitucion(Long id, InstitucionDTO institucionDto) throws BusinessException {
-		Institucion institucion = institucionDto.toEntity();
+		Institucion institucion = convertToEntity(institucionDto);
 		institucion.setId(id);
 		institucion = service.updateInstitucion(institucion);
-		return new InstitucionDTO(institucion);
+		return convertToDto(institucion);
 	}
 	
 	//Service
@@ -61,10 +60,8 @@ public class InstitucionEPServiceImpl extends CRUDEPBaseService<Long, Institucio
 	@Override
 	protected InstitucionDTO convertToDto(Institucion entity) {
 		InstitucionDTO institucionDto = new InstitucionDTO();
-		
 		institucionDto.setId(entity.getId());
 		institucionDto.setNombre(entity.getNombre());
-		
 		return institucionDto;
 	}
 	

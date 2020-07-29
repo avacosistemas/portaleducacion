@@ -2,7 +2,16 @@ export const AULAS_GRID_DEF = {
   columnsDef: [
     {
       columnDef: 'id',
-      columnNameKey: 'aulas_grid_def_column_id'
+      columnNameKey: 'aulas_grid_def_column_id',
+      id: true
+    },
+    {
+      columnDef: 'idProfesor',
+      columnNameKey: 'aulas_grid_def_column_idprofesor'
+    },
+    {
+      columnDef: 'nombreProfesor',
+      columnNameKey: 'aulas_grid_def_column_nombreProfesor'
     },
     {
       columnDef: 'idMateria',
@@ -27,27 +36,41 @@ export const AULAS_GRID_DEF = {
     {
       columnDef: 'hora',
       columnNameKey: 'aulas_grid_def_column_hora'
+    },
+    {
+      columnDef: 'calificacion',
+      columnNameKey: 'aulas_grid_def_column_calificacion'
+    },
+    {
+      columnDef: 'horaString',
+      columnNameKey: 'aulas_grid_def_column_hora'
+    },
+    {
+      columnDef: 'estado',
+      columnNameKey: 'aulas_grid_def_column_estado'
     }
   ],
   sortAllColumns: true,
   displayedColumns: [
+    'nombreProfesor',
     'nombreMateria',
     'nombreInstitucion',
     'dia',
-    'hora'
+    'horaString',
+    'estado'
   ],
   actions: [
     {
       actionNameKey: 'aulas_grid_def_button_action_alumnos',
       actionType: 'redirect',
       redirect: {
-        url: '/aulaAlumnos',
+        url: '/aulaAlumno',
         querystring: {
-          idProfesor : 'id',
-          parentTitle: 'nombreApellido'
+          idAula : 'id',
+          parentTitle: 'idString'
         }
       },
-      icon: 'library_books'
+      icon: 'group'
     }
   ]
 };

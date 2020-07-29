@@ -12,7 +12,7 @@ export const PREFIX_DOMAIN_API_AUTHENTICATION =  'http://localhost:8080/ws-rest-
 export const environment = {
     localAuth: true,
     
-    production: false,
+    production: true,
     hmr       : false,
     // pasar a true para evitar ws
     /** URLs of Services **/

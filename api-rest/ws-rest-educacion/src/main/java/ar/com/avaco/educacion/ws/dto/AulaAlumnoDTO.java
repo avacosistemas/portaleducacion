@@ -4,33 +4,60 @@ import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class AulaAlumnoDTO extends DTOEntity<Long> {
 
-	protected Long idAula;
-	protected Long idAlumno;
+	private Long id;
+	private String idAula;
+	private String idAlumno;
 
-	public Long getIdAula() {
+	private String nombreAlumno;
+	private String calificacion;
+	private String comentario;
+
+	public String getIdAula() {
 		return idAula;
 	}
 
-	public void setIdAula(Long idAula) {
+	public void setIdAula(String idAula) {
 		this.idAula = idAula;
 	}
 
-	public Long getIdAlumno() {
+	public String getIdAlumno() {
 		return idAlumno;
 	}
 
-	public void setIdAlumno(Long idAlumno) {
+	public void setIdAlumno(String idAlumno) {
 		this.idAlumno = idAlumno;
 	}
 
-	@Override
-	public void setId(Long id) {
-
+	public Long getId() {
+		return id;
 	}
 
-	@Override
-	public Long getId() {
-		return null;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNombreAlumno() {
+		return nombreAlumno;
+	}
+
+	public void setNombreAlumno(String nombreAlumno) {
+		this.nombreAlumno = nombreAlumno;
+	}
+
+	public String getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(String calificacion) {
+		this.calificacion = calificacion;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 
 }

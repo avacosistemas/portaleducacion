@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
@@ -23,9 +24,11 @@ import ar.com.avaco.ws.rest.dto.JSONResponse;
 public class AulaAlumnoRestController extends AbstractDTORestController<AulaAlumnoDTO, Long, AulaAlumnoEPService> {
 
 	
-	@RequestMapping(value = "/aulaAlumno/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listByAula(@PathVariable("id") Long idAula) throws BusinessException {
-		List<AulaAlumnoDTO> listaulaAlumno = this.service.listAulaAlumno(idAula);
+	@RequestMapping(value = "/aulaAlumno/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<JSONResponse> listByAula(@RequestParam("idAula") Long idAula) throws BusinessException {
+	public ResponseEntity<JSONResponse> listByAula() throws BusinessException {
+		List<AulaAlumnoDTO> listaulaAlumno = this.service.listAulaAlumno(null);
+//		List<AulaAlumnoDTO> listaulaAlumno = this.service.list();
     	JSONResponse response = new JSONResponse();
 		response.setData(listaulaAlumno);
 		response.setStatus(JSONResponse.OK);
@@ -34,16 +37,16 @@ public class AulaAlumnoRestController extends AbstractDTORestController<AulaAlum
 
 	@RequestMapping(value = "/aulaAlumno/", method = RequestMethod.POST)
 	public ResponseEntity<JSONResponse> addAlumno(@RequestBody AulaAlumnoDTO aulaAlumnoDTO) throws BusinessException {
-		AulaAlumnoDTO aulaDtoToUpdate = service.addAlumno(aulaAlumnoDTO);
+		AulaAlumnoDTO aulaDtoToUpdate = service.save(aulaAlumnoDTO);
 		JSONResponse response = new JSONResponse();
 		response.setData(aulaDtoToUpdate);
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 	
-	@RequestMapping(path = "/aulaAlumno/aula/{idAula}/alumno/{idAlumno}", method = RequestMethod.DELETE)
-	public ResponseEntity<JSONResponse> removeaulaAlumno(@PathVariable("idAula") Long idAula, @PathVariable("idAlumno") Long idAlumno) throws BusinessException {
-		service.removeAulaAlumno(idAula,idAlumno);
+	@RequestMapping(path = "/aulaAlumno/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<JSONResponse> removeaulaAlumno(@PathVariable("id") Long id) throws BusinessException {
+		service.remove(id);
 		JSONResponse response = new JSONResponse();
 		response.setData(null);
 		response.setStatus(JSONResponse.OK);	

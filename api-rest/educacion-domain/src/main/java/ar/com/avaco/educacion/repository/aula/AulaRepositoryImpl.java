@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -35,6 +36,7 @@ public class AulaRepositoryImpl extends NJBaseRepository<Long, Aula> implements 
 	@Override
 	public List<Aula> listAulas() {
 		Criteria criteria = getCurrentSession().createCriteria(getHandledClass());
+		criteria.addOrder(Order.desc("dia")).addOrder(Order.desc("hora"));
 //		criteria.setFetchMode("materia", FetchMode.JOIN); 
 //		criteria.setFetchMode("comentarios", FetchMode.JOIN);
 //		criteria.setFetchMode("profesores", FetchMode.JOIN);

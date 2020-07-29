@@ -1,7 +1,6 @@
 package ar.com.avaco.educacion.ws.dto;
 
 import java.time.DayOfWeek;
-import java.time.LocalTime;
 
 import ar.com.avaco.educacion.domain.entities.HorarioDisponible;
 import ar.com.avaco.ws.rest.dto.DTOEntity;

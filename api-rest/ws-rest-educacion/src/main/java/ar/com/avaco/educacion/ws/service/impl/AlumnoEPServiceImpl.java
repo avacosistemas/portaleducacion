@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import ar.com.avaco.educacion.domain.entities.Institucion;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import ar.com.avaco.commons.exception.BusinessException;
@@ -24,7 +26,7 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 	@Override
 	public AlumnoDTO getAlumno(Long id) {
 		Alumno alumno = this.getService().getAlumno(id);
-		AlumnoDTO alumnoDTO = new AlumnoDTO(alumno);
+		AlumnoDTO alumnoDTO = convertToDto(alumno);
 		return alumnoDTO;
 	}
 	
@@ -38,17 +40,17 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 	
 	@Override
 	public AlumnoDTO updateAlumno(Long id, AlumnoDTO alumnoDto) throws BusinessException {
-		Alumno alumno = alumnoDto.toEntity();
+		Alumno alumno = convertToEntity(alumnoDto);
 		alumno.setId(id);
 		alumno = service.updateAlumno(alumno);
-		return new AlumnoDTO(alumno);
+		return convertToDto(alumno);
 	}
 	
 	@Override
 	public AlumnoDTO createAlumno(AlumnoDTO alumnoDto) throws BusinessException {
 		Alumno alumno = convertToEntity(alumnoDto);
 		alumno = service.createAlumno(alumno);
-		return new AlumnoDTO(alumno);
+		return convertToDto(alumno);
 		
 	}
 	
@@ -57,7 +59,7 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		Alumno alumno = new Alumno();
 		alumno.setId(id);
 		alumno = service.bloquearHabilitarAlumno(alumno, bloquear);
-		return new AlumnoDTO(alumno);
+		return convertToDto(alumno);
 	}
 
 	@Override
@@ -82,11 +84,12 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		alumno.setUsername(dto.getUsername());
 		alumno.setEmail(dto.getEmail());
 
-		Institucion institucion = new Institucion();
-		institucion.setId(dto.getIdInstitucion());
-		institucion.setNombre(dto.getNombre());
+		if (dto.getIdInstitucion() != null && dto.getIdInstitucion() > 0) {
+			Institucion institucion = new Institucion();
+			institucion.setId(dto.getIdInstitucion());
+			alumno.setInstitucion(institucion);
+		}
 
-		alumno.setInstitucion(institucion);
 
 		return alumno;
 	}
@@ -102,6 +105,11 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		alumnoDTO.setUsername(entity.getUsername());
 		alumnoDTO.setEmail(entity.getEmail());
 		alumnoDTO.setTelefonoMovil(entity.getContacto().getTelefonoMovil());
+		alumnoDTO.setNombreApellido(entity.getNombreApellido());
+		if (entity.getInstitucion() != null) {
+			alumnoDTO.setIdInstitucion(entity.getInstitucion().getId());
+			alumnoDTO.setNombreInstitucion(entity.getInstitucion().getNombre());
+		}
 		return alumnoDTO;
 	}
 

@@ -33,6 +33,6 @@ export const ALUMNO_DEF: CrudDef = {
         url: PREFIX_DOMAIN_API_EDUCACION + '/alumnos/'
     },
     dialogConfig: {
-        width: '800px'
+        width: '500px'
     }
 };

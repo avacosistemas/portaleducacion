@@ -26,7 +26,7 @@ public class AulaRestController extends AbstractDTORestController<AulaDTO, Long,
 
 	
 	@RequestMapping(value = "/aulas/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listProfesores() throws Exception  {
+	public ResponseEntity<JSONResponse> listAulas() throws Exception  {
 		List<AulaListadoDTO> listAulas = this.service.listAulas();
     	JSONResponse response = new JSONResponse();
 		response.setData(listAulas);

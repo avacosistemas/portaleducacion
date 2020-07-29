@@ -57,7 +57,7 @@ public class Profesor extends Cliente implements Serializable {
 	@Column(name = "VALOR_HORA", nullable = true)
 	private Double valorHora;
 	
-	@Column(name = "CALIFICACION")
+	@Column(name = "CALIFICACION", nullable = true)
 	private Double calificacion;
     
     @Column(name = "FOTO", nullable = true)

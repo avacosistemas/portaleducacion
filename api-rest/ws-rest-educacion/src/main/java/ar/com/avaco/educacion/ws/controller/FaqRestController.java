@@ -21,7 +21,6 @@ import ar.com.avaco.commons.service.FormDefService;
 import ar.com.avaco.commons.service.ValidationFormDefService;
 import ar.com.avaco.educacion.ws.dto.FaqDTO;
 import ar.com.avaco.educacion.ws.service.FaqEPService;
-import ar.com.avaco.filter.MapFormFilter;
 import ar.com.avaco.ws.rest.controller.AbstractDTORestController;
 import ar.com.avaco.ws.rest.dto.JSONResponse;
 

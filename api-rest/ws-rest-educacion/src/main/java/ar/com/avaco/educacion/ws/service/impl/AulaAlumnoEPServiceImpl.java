@@ -8,76 +8,65 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import ar.com.avaco.commons.exception.BusinessException;
-import ar.com.avaco.educacion.domain.entities.Aula;
 import ar.com.avaco.educacion.domain.entities.Alumno;
-import ar.com.avaco.educacion.service.aula.AulaService;
+import ar.com.avaco.educacion.domain.entities.Aula;
+import ar.com.avaco.educacion.domain.entities.AulaAlumno;
+import ar.com.avaco.educacion.service.aula.AulaAlumnoService;
 import ar.com.avaco.educacion.ws.dto.AulaAlumnoDTO;
 import ar.com.avaco.educacion.ws.service.AulaAlumnoEPService;
 import ar.com.avaco.ws.rest.service.CRUDEPBaseService;
 
 @Service("aulaAlumnoEPService")
-public class AulaAlumnoEPServiceImpl extends CRUDEPBaseService<Long, AulaAlumnoDTO, Aula, AulaService> implements AulaAlumnoEPService {
+public class AulaAlumnoEPServiceImpl extends CRUDEPBaseService<Long, AulaAlumnoDTO, AulaAlumno, AulaAlumnoService> implements AulaAlumnoEPService {
 	
 	@Override
 	public List<AulaAlumnoDTO> listAulaAlumno(Long idAula) throws BusinessException {
-		Aula aula = this.getService().getAula(idAula);
-		
-		List<AulaAlumnoDTO> convertToDtos = this.convertToDtos(aula);
+		List<AulaAlumno> listByAula = new ArrayList<>();
+		if (idAula != null) {
+			listByAula = this.getService().listByAula(idAula);
+		} else {
+			listByAula = this.getService().list();
+		}
+		List<AulaAlumnoDTO> convertToDtos = this.convertToDtos(listByAula);
 		return convertToDtos;
 	}
-	
 
-	public List<AulaAlumnoDTO> convertToDtos(Aula aula) {
-		
-		AulaAlumnoDTO aulaAlumnoDto;
-		
-		List<AulaAlumnoDTO> dtos = new ArrayList<>();
-		
-		for (Alumno entity : aula.getAlumnos()) {
-		
-			aulaAlumnoDto = new AulaAlumnoDTO();
-			
-			aulaAlumnoDto.setIdAula(aula.getId());
-			aulaAlumnoDto.setIdAlumno(entity.getId());
-			
-			dtos.add(aulaAlumnoDto);
-		}
-		return dtos;
+	@Override
+	public AulaAlumnoDTO save(AulaAlumnoDTO dto) throws BusinessException {
+		AulaAlumno aulaAlumno = convertToEntity(dto);
+		this.service.saveAlumno(aulaAlumno);
+		return convertToDto(aulaAlumno);
 	}
 	
 	@Override
-	public AulaAlumnoDTO addAlumno(AulaAlumnoDTO aulaAlumnoDTO) throws BusinessException {				
-		Aula aula = service.addAlumnoAula(aulaAlumnoDTO.getIdAula(), aulaAlumnoDTO.getIdAlumno());
-		
-		AulaAlumnoDTO dto=new AulaAlumnoDTO();
-		dto.setIdAula(aula.getId());
-		dto.setIdAlumno(aulaAlumnoDTO.getIdAlumno());
-		
-		return aulaAlumnoDTO;
-	}
-	
-	@Override
-	public void removeAulaAlumno(Long idAula, Long idAlumno) throws BusinessException {
-		service.removeAulaAlumno(idAula, idAlumno);	
+	protected AulaAlumno convertToEntity(AulaAlumnoDTO dto) {
+		AulaAlumno aa = new AulaAlumno();
+		Alumno alumno = new Alumno();
+		alumno.setId(Long.parseLong(dto.getIdAlumno()));
+		aa.setAlumno(alumno );
+		Aula aula = new Aula();
+		aula.setId(Long.parseLong(dto.getIdAula()));
+		aa.setAula(aula);
+		return aa;
 	}
 
 	@Override
-	protected Aula convertToEntity(AulaAlumnoDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected AulaAlumnoDTO convertToDto(Aula entity) {
-		// TODO Auto-generated method stub
-		return null;
+	protected AulaAlumnoDTO convertToDto(AulaAlumno entity) {
+		AulaAlumnoDTO aulaAlumnoDto = new AulaAlumnoDTO();
+		aulaAlumnoDto.setIdAula(entity.getAula().getId().toString());
+		aulaAlumnoDto.setIdAlumno(entity.getId().toString());
+		aulaAlumnoDto.setId(entity.getId());
+		aulaAlumnoDto.setNombreAlumno(entity.getAlumno().getNombreApellido());
+		aulaAlumnoDto.setComentario(entity.getComentario());
+		aulaAlumnoDto.setCalificacion(entity.getCalificacion() != null ? entity.getCalificacion().toString(): "Sin Calificar");
+		return aulaAlumnoDto;
 	}
 
 	
 	@Override
-	@Resource(name = "aulaService")
-	protected void setService(AulaService aulaService) {
-		this.service = aulaService;
+	@Resource(name = "aulaAlumnoService")
+	protected void setService(AulaAlumnoService aulaAlumnoService) {
+		this.service = aulaAlumnoService;
 	}
 	
 	

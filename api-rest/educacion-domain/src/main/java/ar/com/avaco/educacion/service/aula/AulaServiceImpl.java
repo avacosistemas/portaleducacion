@@ -1,7 +1,5 @@
 package ar.com.avaco.educacion.service.aula;
 
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
@@ -15,10 +13,12 @@ import ar.com.avaco.arc.core.component.bean.service.NJBaseService;
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Alumno;
 import ar.com.avaco.educacion.domain.entities.Aula;
+import ar.com.avaco.educacion.domain.entities.AulaAlumno;
 import ar.com.avaco.educacion.domain.entities.HorasAlumno;
 import ar.com.avaco.educacion.domain.entities.Materia;
 import ar.com.avaco.educacion.domain.entities.Profesor;
 import ar.com.avaco.educacion.repository.aula.AulaRepository;
+import ar.com.avaco.educacion.service.SolapaUtils;
 import ar.com.avaco.educacion.service.alumno.AlumnoService;
 import ar.com.avaco.educacion.service.decidir.DecidirService;
 import ar.com.avaco.educacion.service.horas.disp.HorasAlumnoService;
@@ -38,6 +38,8 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 	private DecidirService decidirService;
 	
 	private HorasAlumnoService horasAlumnoService;  
+	
+	private AulaAlumnoService aulaAlumnoService;
 	
 	@Autowired
 	public AulaServiceImpl(MateriaService materiaService, ProfesorService profesorService, AlumnoService alumnoService, DecidirService decidirService, HorasAlumnoService horasAlumnoService) {
@@ -84,7 +86,7 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 
 		if (profesor.getAulas()!=null && !profesor.getAulas().isEmpty()) {
 			for (Aula aulaProfesor : profesor.getAulas()) {
-				if (seSolapanAulas(aulaProfesor, aula, 60)) {
+				if (SolapaUtils.seSolapanAulas(aulaProfesor, aula, 60)) {
 					throw new BusinessException("El profesor ya tiene una clase en ese dia y horario. Ver Aula para Materia"+aulaProfesor.getMateria().getDescripcion());
 				}			
 			}
@@ -110,50 +112,17 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 		aula = this.getRepository().save(aula);		
 	}
 	
-
-	
-	@Override
-	public Aula addAlumnoAula(Long idAula, Long idAlumno) throws BusinessException {
-		Aula aula = this.getRepository().getAula(idAula);
-		Alumno alumno = alumnoService.get(idAlumno);
-		
-		if (alumno==null)
-			throw new BusinessException("El alumno id "+idAlumno+" no existe");
-		
-		if (aula.getInstitucion()!=null && !alumno.getInstitucion().equals(aula.getInstitucion())) 
-			throw new BusinessException("El alumno no pertenece a la Institucion del aula");
-		
-		
-		if(aula.getAlumnos()!=null && aula.getAlumnos().contains(alumno)) 
-			throw new BusinessException("El aula ya tiene asociado al alumno");
-		
-		if (alumno.getAulas()!=null && !alumno.getAulas().isEmpty()) {
-			for (Aula aulaAlumno : alumno.getAulas()) {
-				if (seSolapanAulas(aulaAlumno, aula, 60)) {
-					throw new BusinessException("El alumno ya tiene una clase en ese dia y horario. Ver Aula para Materia: "+aulaAlumno.getMateria().getDescripcion());
-				}			
-			}
-		}
-			
-		aula.addAlumno(alumno);
-		alumno.addAula(aula);
-		
-		aula = this.getRepository().save(aula);	
-		
-		return aula;
-	}
-
-	@Override
-	public void removeAulaAlumno(Long idAula, Long idAlumno) {
-		Aula aula = this.getRepository().getOne(idAula);
-		Alumno alumno= alumnoService.get(idAlumno);
-
-		aula.removeAlumno(alumno);
-		alumno.removeAula(aula);
-				
-		aula = this.getRepository().save(aula);		
-		
-	}
+//	@Override
+//	public void removeAulaAlumno(Long idAula, Long idAlumno) {
+//		Aula aula = this.getRepository().getOne(idAula);
+//		Alumno alumno= alumnoService.get(idAlumno);
+//
+//		aula.removeAlumno(alumno);
+//		alumno.removeAula(aula);
+//				
+//		aula = this.getRepository().save(aula);		
+//		
+//	}
 
 	@Override
 	public Aula updateAula(Aula aula) throws BusinessException {
@@ -166,6 +135,8 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 		entity.setDia(aula.getDia());
 		entity.setHora(aula.getHora());
 		entity.setMateria(materiaService.get(aula.getMateria().getId()));
+		entity.setProfesor(aula.getProfesor());
+		entity.setInstitucion(aula.getInstitucion());
 		entity=getRepository().save(entity);
 				
 		return getAula(aula.getId());
@@ -227,9 +198,10 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 		aula.setHora(Integer.parseInt(hora));
 		aula.setMateria(materia);
 					
-		aula=this.crearAula(aula);
-		this.addAlumnoAula(aula.getId(), idAlumno);
+		aula = this.crearAula(aula);
+		
 		this.addProfesorAula(aula.getId(), idProfesor);		
+		this.addAlumnoAula(aula, alumno);
 		////////////////////
 		
 		//Descontar horas disponibles
@@ -240,36 +212,16 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 		return aula;
 	}
 	
+	private void addAlumnoAula(Aula aula, Alumno alumno) {
+		AulaAlumno entity = new AulaAlumno();
+		entity.setAula(aula);
+		entity.setAlumno(alumno);
+		this.aulaAlumnoService.save(entity);
+	}
 
-	/**
-	 * Compara dos aulas si su dia y hora se solapan
-	 * 
-	 * @param aula1 Aula 1
-	 * @param aula2 Aula 2
-	 * @param duracionClase en Minutos
-	 * @return
-	 */
-	public boolean seSolapanAulas(Aula aula1, Aula aula2, int duracionClase) {
-		return seSolapan(aula1.getDia(), aula2.getDia(), aula1.getHora(), aula2.getHora(), duracionClase);
+	@Resource(name = "aulaAlumnoService")
+	public void setAulaAlumnoService(AulaAlumnoService aulaAlumnoService) {
+		this.aulaAlumnoService = aulaAlumnoService;
 	}
-	
-	public boolean seSolapan(Date dia1, Date dia2, Integer hora1, Integer hora2, int duracionClase) {
-	
-		if (dia1 == null|| dia2 == null|| hora1 == null|| hora2 == null)
-			return false;
-		
-		//Si es el mismo dia		
-		if (dia1.toString().equals(dia2.toString())) {
-			//Si la hora1 esta entre 
-			LocalTime aula1LT = LocalTime.parse(hora1.toString());
-			LocalTime aula2LT = LocalTime.parse(hora2.toString());
-			long minutos=Math.abs(ChronoUnit.MINUTES.between(aula1LT, aula2LT));
-			if (minutos < duracionClase)
-				return true;
-		}
-		
-		return false;		
-	}
-	
 	
 }

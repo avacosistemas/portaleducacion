@@ -1,7 +1,6 @@
 package ar.com.avaco.educacion.ws.service.impl;
 
 import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.HorarioDisponible;
-
 import ar.com.avaco.educacion.service.disponibilidad.HorarioDisponibleService;
 import ar.com.avaco.educacion.ws.dto.HorarioDisponibleDTO;
 import ar.com.avaco.educacion.ws.dto.HorarioDisponibleFullDTO;

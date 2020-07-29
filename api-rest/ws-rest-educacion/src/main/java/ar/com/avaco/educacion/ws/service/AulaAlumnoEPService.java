@@ -7,13 +7,10 @@ import ar.com.avaco.ws.rest.service.CRUDEPService;
 
 public interface AulaAlumnoEPService extends CRUDEPService<Long, AulaAlumnoDTO> {
 
-	AulaAlumnoDTO addAlumno(AulaAlumnoDTO aulaAlumnoDTO) throws BusinessException;
+//	AulaAlumnoDTO addAlumno(AulaAlumnoDTO aulaAlumnoDTO) throws BusinessException;
 
-	void removeAulaAlumno(Long idAula, Long idAlumno) throws BusinessException;
+//	void removeAulaAlumno(Long idAula, Long idAlumno) throws BusinessException;
 
 	List<AulaAlumnoDTO> listAulaAlumno(Long idAula) throws BusinessException;
-
-	
-	
 
 }

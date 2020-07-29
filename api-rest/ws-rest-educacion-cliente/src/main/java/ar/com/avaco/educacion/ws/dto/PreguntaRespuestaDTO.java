@@ -1,7 +1,5 @@
 package ar.com.avaco.educacion.ws.dto;
 
-import java.time.LocalDate;
-
 import ar.com.avaco.educacion.domain.entities.PreguntaRespuesta;
 import ar.com.avaco.educacion.domain.entities.Profesor;
 import ar.com.avaco.utils.DateUtils;

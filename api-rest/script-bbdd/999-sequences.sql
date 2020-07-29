@@ -20,3 +20,4 @@ select pg_catalog.setval('public.institucion_seq', 500, true);
 select pg_catalog.setval('public.materia_seq', 500, true);
 select pg_catalog.setval('public.nivel_seq', 500, true);
 select pg_catalog.setval('public.preg_resp_seq', 500, true);
+select pg_catalog.setval('public.aula_alumno_seq', 500, true);

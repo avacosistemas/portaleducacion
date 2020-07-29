@@ -26,7 +26,6 @@ export const ALUMNO_UPDATE_FORM_FIELDS_DEF = [
     required: true,
     maxLength: 100,
   },
-  
   {
     key: 'idInstitucion',
     labelKey: 'alumno_create_form_fields_def_field_idinstitucion',

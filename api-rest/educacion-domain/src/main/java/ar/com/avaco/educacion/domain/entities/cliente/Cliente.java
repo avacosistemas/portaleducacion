@@ -1,6 +1,5 @@
 package ar.com.avaco.educacion.domain.entities.cliente;
 
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;

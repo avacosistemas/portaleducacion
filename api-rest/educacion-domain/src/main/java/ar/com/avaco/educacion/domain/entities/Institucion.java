@@ -18,10 +18,10 @@ public class Institucion extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	@Column(name = "ID_INSTITUCION")
     private Long id;
 	
-	@Column(name = "NOMBRE")
+	@Column(name = "NOMBRE", nullable = false)
 	private String nombre;
 
-	@OneToMany(targetEntity= Alumno.class, mappedBy="institucion", cascade=CascadeType.MERGE)
+	@OneToMany(targetEntity= Alumno.class, mappedBy="institucion", fetch = FetchType.LAZY)
 	private Set<Alumno> alumnos = new HashSet<>();
 	
 	public Institucion() {}

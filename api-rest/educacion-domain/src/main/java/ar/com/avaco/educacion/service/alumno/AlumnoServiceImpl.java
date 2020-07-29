@@ -64,12 +64,8 @@ public class AlumnoServiceImpl extends NJBaseService<Long, Alumno, AlumnoReposit
 	public Alumno updateAlumno(Alumno entity) throws BusinessException {
 
 		Alumno alumno = (Alumno) this.clienteService.validaUpdateProfesorAlumno(entity);
-
 		Institucion institucion = institucionService.get(entity.getInstitucion().getId());
-		
 		alumno.setInstitucion(institucion);
-		//alumno.getInstitucion().setNombre(entity.getInstitucion().getNombre());
-
 		return this.getRepository().save(alumno);
 	}
 

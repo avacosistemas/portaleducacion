@@ -1,0 +1,57 @@
+.alumnos-modal {
+    // .sectionIdDiv {
+    //     visibility: hidden;
+    //     height: 0px;
+    // }
+    app-dynamic-form-component {
+        overflow: hidden;
+    }
+}
+
+.component-ALUMNOS {
+    .crud-table{
+        
+        .action-cell {
+            width: 40px !important;
+            min-width: 40px !important;
+            max-width: 40px !important;
+        }
+
+    }
+}
+.control-mat-dialog .dynamicFormDiv[name=subForm]{
+    
+    .nombreDiv{
+        display: inline-block;
+        width:45%;
+        margin-right: 5%;
+    }
+
+    .apellidoDiv{
+        display: inline-block;
+        width:50%;
+    }
+
+    .tipoIdentificacionDiv{
+        display: inline-block;
+        width:25%;
+        margin-right: 5%;
+    }
+
+    .numeroIdentificacionDiv{
+        display: inline-block;
+        width:70%;
+    }
+
+    .telefonoMovilDiv{
+        display: inline-block;
+        width:35%;
+        margin-right: 5%;
+    }
+
+    .emailDiv{
+        display: inline-block;
+        width:60%;
+    }
+
+}

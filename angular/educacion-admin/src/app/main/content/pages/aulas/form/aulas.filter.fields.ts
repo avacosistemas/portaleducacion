@@ -1,19 +1,5 @@
 export const AULAS_FILTER_FORM_FIELDS_DEF = [
   {
-    key: 'id',
-    labelKey: 'AULAS_FILTER_FORM_FIELDS_DEF_FIELD_id',
-    label: 'ID',
-    type: 'string',
-    controlType: 'textbox'
-  },
-  {
-    key: 'idMateria',
-    labelKey: 'AULAS_FILTER_FORM_FIELDS_DEF_FIELD_idmateria',
-    label: 'idMateria',
-    type: 'string',
-    controlType: 'textbox'
-  },
-  {
     key: 'nombreMateria',
     labelKey: 'AULAS_FILTER_FORM_FIELDS_DEF_FIELD_nombremateria',
     label: 'Materia',
@@ -21,16 +7,9 @@ export const AULAS_FILTER_FORM_FIELDS_DEF = [
     controlType: 'textbox'
   },
   {
-    key: 'idInstitucion',
-    labelKey: 'AULAS_FILTER_FORM_FIELDS_DEF_FIELD_idinstitucion',
-    label: 'Institución',
-    type: 'string',
-    controlType: 'textbox'
-  },
-  {
     key: 'nombreInstitucion',
     labelKey: 'AULAS_FILTER_FORM_FIELDS_DEF_FIELD_nombreinstitucion',
-    label: 'Institución',
+    label: 'Instituciï¿½n',
     type: 'string',
     controlType: 'textbox'
   },
