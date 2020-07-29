@@ -1,6 +1,7 @@
 package ar.com.avaco.educacion.service.notificacion;
 
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import ar.com.avaco.arc.core.service.MailSenderSMTPService;
+import ar.com.avaco.educacion.domain.entities.Aula;
+import ar.com.avaco.educacion.domain.entities.aulaVirtual.Clase;
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 
 @Service("notificacionService")
@@ -43,17 +46,59 @@ public class NotificacionServiceImpl implements NotificacionService {
 	private String subjectRegistroClienteNuevoPassword;
 
 	@Value("template/registro-cliente-nuevo-password.html")
-	private String bodyRegistroClienteNuevoPassword;
+	private String bodyRegistroClienteNuevoPassword;	
 	
 	@Value("template/registro-alumno-nuevo.html")
 	private String bodyRegistroAlumnoNuevo;
-
+	
+	@Value("TechOnline - Usuario Habiliatdo!")
+	private String subjectHabilitacionExistosa;
+	
+	@Value("template/notificacion-habilitacion-existosa.html")
+	private String bodyHabilitacionExistosa;
+	
+	@Value("TechOnline - Docente aprobado!")
+	private String subjectAprobacionDocenteCategoria;
+	
+	@Value("template/notificacion-aprobacion-docente-categoria.html")
+	private String bodyAprobacionDocenteCategoria;
+	
+	@Value("TechOnline - Nueva pregunta!")
+	private String subjectNuevaPregunta;
+	
+	@Value("template/notificacion-nueva-pregunta.html")
+	private String bodyNuevaPregunta;
+	
+	@Value("TechOnline - Has comprado una clase!")
+	private String subjectCompraClase;
+	
+	@Value("template/notificacion-compra-clase.html")
+	private String bodyCompraClase;
+	
+	@Value("TechOnline - Pago aprobado!")
+	private String subjectPagoClase;
+	
+	@Value("template/notificacion-pago-clase.html")
+	private String bodyPagoClase;
+	
+	@Value("TechOnline - Nueva calificacion!")
+	private String subjectNuevaCalificacion;
+	
+	@Value("template/notificacion-nueva-calificacion.html")
+	private String bodyNuevaCalificacion;
+	
+	@Value("TechOnline - Asignación de aula!")
+	private String subjectAsignacionProfesorAula;
+	
+	@Value("template/notificacion-asignacion-aula-profesor.html")
+	private String bodyAsignacionProfesorAula;
+	
 	@Value("template/header-general.html")
 	private String headerGeneral;
 
 	@Value("template/footer-general.html")
-	private String footerGeneral;
-
+	private String footerGeneral;	
+	
 
 	public NotificacionServiceImpl() {
 		ve = new VelocityEngine();
@@ -122,7 +167,79 @@ public class NotificacionServiceImpl implements NotificacionService {
 				getBody(params, bodyRegistroAlumnoNuevo), null);
 		
 	}
-
+	
+	@Override
+	public void notificarHabilitacionExitosa(Cliente cliente) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("cliente", cliente.getNombreApellido());		
+		mailSenderSMTPService.sendMail(from, cliente.getEmail(), subjectHabilitacionExistosa,
+				getBody(params, bodyHabilitacionExistosa), null);
+		
+	}
+	
+	@Override
+	public void notificarAprobacionDocenteCategoria(Cliente cliente, String categoria ) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("cliente", cliente.getNombreApellido());	
+		params.put("categoria", categoria );	
+		mailSenderSMTPService.sendMail(from, cliente.getEmail(), subjectAprobacionDocenteCategoria,
+				getBody(params, bodyAprobacionDocenteCategoria), null);
+		
+	}
+	
+	@Override
+	public void notificarNuevaPregunta(Cliente cliente, String url ) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("cliente", cliente.getNombreApellido());	
+		params.put("url", url );
+		mailSenderSMTPService.sendMail(from, cliente.getEmail(), subjectNuevaPregunta,
+				getBody(params, bodyNuevaPregunta), null);		
+	}
+	
+	@Override
+	public void notificarCompraClase(Cliente cliente, Clase clase ) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("cliente", cliente.getNombreApellido());	
+		params.put("claseId", clase.getIdClase());
+		params.put("claseLink", clase.getUrl());		
+		mailSenderSMTPService.sendMail(from, cliente.getEmail(), subjectCompraClase,
+				getBody(params, bodyCompraClase), null);		
+	}
+	
+	@Override
+	public void notificarPagoClase(Cliente cliente, Clase clase ) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("cliente", cliente.getNombreApellido());	
+		params.put("claseId", clase.getIdClase());
+		params.put("claseLink", clase.getUrl());		
+		mailSenderSMTPService.sendMail(from, cliente.getEmail(), subjectPagoClase,
+				getBody(params, bodyPagoClase), null);		
+	}
+	
+	@Override
+	public void notificarNuevaCalificacion(Cliente profesor, Cliente alumno, String calificacion) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("profesor", profesor.getNombreApellido());
+		params.put("alumno", alumno.getNombreApellido());
+		params.put("calificacion", calificacion );
+		mailSenderSMTPService.sendMail(from, profesor.getEmail(), subjectNuevaCalificacion,
+				getBody(params, bodyNuevaCalificacion), null);		
+	}
+	
+	@Override
+	public void notificarAsignacionProfesorAula(Cliente profesor, Aula aula) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("profesor", profesor.getNombreApellido());
+		params.put("dia", new SimpleDateFormat("dd/MM/yyyy").format(aula.getDia()));
+		params.put("hora", aula.getHora().toString());
+		params.put("aulaId", aula.getId().toString());
+		params.put("materia", aula.getMateria().getDescripcion() + "("+ aula.getMateria().getNivel().getDescripcion() +")" );
+		
+		mailSenderSMTPService.sendMail(from, profesor.getEmail(), subjectNuevaCalificacion,
+				getBody(params, bodyNuevaCalificacion), null);		
+	}
+	
+	
 	@Resource(name = "mailSenderSMTPService")
 	public void setMailSenderSMTPService(MailSenderSMTPService mailSenderSMTPService) {
 		this.mailSenderSMTPService = mailSenderSMTPService;
