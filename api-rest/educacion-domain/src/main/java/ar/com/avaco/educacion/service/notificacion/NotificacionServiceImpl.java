@@ -93,6 +93,13 @@ public class NotificacionServiceImpl implements NotificacionService {
 	@Value("template/notificacion-asignacion-aula-profesor.html")
 	private String bodyAsignacionProfesorAula;
 	
+	@Value("TechOnline - Asignación de aula!")
+	private String subjectAsignacionAlumnoAula;
+	
+	@Value("template/notificacion-asignacion-aula-aulumno.html")
+	private String bodyAsignacionAlumnoAula;
+	
+	
 	@Value("template/header-general.html")
 	private String headerGeneral;
 
@@ -235,8 +242,21 @@ public class NotificacionServiceImpl implements NotificacionService {
 		params.put("aulaId", aula.getId().toString());
 		params.put("materia", aula.getMateria().getDescripcion() + "("+ aula.getMateria().getNivel().getDescripcion() +")" );
 		
-		mailSenderSMTPService.sendMail(from, profesor.getEmail(), subjectNuevaCalificacion,
-				getBody(params, bodyNuevaCalificacion), null);		
+		mailSenderSMTPService.sendMail(from, profesor.getEmail(), subjectAsignacionProfesorAula,
+				getBody(params, bodyAsignacionProfesorAula), null);		
+	}
+	
+	@Override
+	public void notificarAsignacionAlumnoAula(Cliente alumno, Aula aula) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("profesor", alumno.getNombreApellido());
+		params.put("dia", new SimpleDateFormat("dd/MM/yyyy").format(aula.getDia()));
+		params.put("hora", aula.getHora().toString());
+		params.put("aulaId", aula.getId().toString());
+		params.put("materia", aula.getMateria().getDescripcion() + "("+ aula.getMateria().getNivel().getDescripcion() +")" );
+		
+		mailSenderSMTPService.sendMail(from, alumno.getEmail(), subjectAsignacionAlumnoAula,
+				getBody(params, bodyAsignacionAlumnoAula), null);		
 	}
 	
 	

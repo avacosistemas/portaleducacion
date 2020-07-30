@@ -25,5 +25,7 @@ public interface NotificacionService {
 	void notificarNuevaCalificacion(Cliente profesor, Cliente alumno, String calificacion);
 	
 	void notificarAsignacionProfesorAula(Cliente profesor, Aula aula);
+	
+	void notificarAsignacionAlumnoAula(Cliente alumno, Aula aula);
 
 }
