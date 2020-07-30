@@ -4,6 +4,7 @@ import java.util.List;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.ws.dto.AlumnoDTO;
+import ar.com.avaco.educacion.ws.dto.RegistroAlumnoDTO;
 import ar.com.avaco.ws.rest.service.CRUDEPService;
 
 public interface AlumnoEPService extends CRUDEPService<Long, AlumnoDTO> {
@@ -18,6 +19,7 @@ public interface AlumnoEPService extends CRUDEPService<Long, AlumnoDTO> {
 	
 	AlumnoDTO bloquearHabilitarAlumno(Long id, boolean bloquear) throws BusinessException;
 
+	AlumnoDTO registrarAlumno(RegistroAlumnoDTO alumno) throws BusinessException;
 
 	
 }

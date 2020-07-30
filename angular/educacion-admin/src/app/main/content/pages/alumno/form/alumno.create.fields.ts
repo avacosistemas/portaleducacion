@@ -70,17 +70,17 @@ export const ALUMNO_CREATE_FORM_FIELDS_DEF = [
     controlType: 'textbox'
   },
   {
-    key: 'telefonoMovil',
-    labelKey: 'alumno_create_form_fields_def_field_telefonomovil',
-    label: 'Telefono Movil',
-    type: 'string',
-    controlType: 'textbox'
-  },
-  {
     key: 'email',
     labelKey: 'alumno_create_form_fields_def_field_email',
     label: 'Email',
     type: 'email',
     controlType: 'email'
+  },
+  {
+    key: 'telefonoMovil',
+    labelKey: 'alumno_create_form_fields_def_field_telefonomovil',
+    label: 'Telefono Movil',
+    type: 'string',
+    controlType: 'textbox'
   }
 ];

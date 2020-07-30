@@ -16,6 +16,7 @@ import ar.com.avaco.educacion.domain.entities.cliente.Identificacion;
 import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
 import ar.com.avaco.educacion.service.alumno.AlumnoService;
 import ar.com.avaco.educacion.ws.dto.AlumnoDTO;
+import ar.com.avaco.educacion.ws.dto.RegistroAlumnoDTO;
 import ar.com.avaco.educacion.ws.service.AlumnoEPService;
 import ar.com.avaco.ws.rest.service.CRUDEPBaseService;
 
@@ -52,8 +53,33 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		alumno = service.createAlumno(alumno);
 		return convertToDto(alumno);
 		
-	}
+	}	
 	
+	
+	@Override
+	public AlumnoDTO registrarAlumno(RegistroAlumnoDTO alumnoDto) throws BusinessException {
+		validarPassword(alumnoDto);
+		Alumno alumno =  convertToEntity(alumnoDto);
+		alumno.setPassword(alumnoDto.getPassword());
+		alumno = service.registrarAlumno(alumno);
+		return convertToDto(alumno);
+	}
+
+	/**
+	 * Valida los password antes de enviar al service
+	 * 
+	 * @param alumnoDto
+	 * @throws BusinessException
+	 */
+	private void validarPassword(RegistroAlumnoDTO alumnoDto) throws BusinessException {
+		if (alumnoDto.getPassword()==null)
+			throw new BusinessException("Debe Ingresar una contraseña");
+		if (alumnoDto.getSecondPassword()==null)
+			throw new BusinessException("Debe Repetir la contraseña");
+		if (!alumnoDto.getPassword().equals(alumnoDto.getSecondPassword()))
+			throw new BusinessException("No coindicen las contraseñas");
+	}
+
 	@Override
 	public AlumnoDTO bloquearHabilitarAlumno(Long id, boolean bloquear) throws BusinessException {
 		Alumno alumno = new Alumno();
@@ -69,7 +95,6 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		alumno.setId(dto.getId());
 		alumno.setNombre(dto.getNombre());
 		alumno.setApellido(dto.getApellido());
-
 		Identificacion id = new Identificacion();
 		id.setTipo(TipoIdentificacion.valueOf(dto.getTipoIdentificacion()));
 		id.setNumero(dto.getNumeroIdentificacion());

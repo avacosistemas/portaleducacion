@@ -51,5 +51,17 @@ public interface AlumnoService extends NJService<Long, Alumno> {
 	 * @throws BusinessException error de negocio
 	 */
 	Alumno bloquearHabilitarAlumno(Alumno entity, boolean bloquear) throws BusinessException;
+
+	/**
+	 * Registrar un nuevo alumno
+	 * - Este metodo es usado para el registro del alumno POR el Alumno. A diferncia del crear alumno donde el alumno es creado por el Administrador.
+	 * 
+	 * @param alumno
+	 * 
+	 * @return
+	 * @throws BusinessException error de negocio
+	 */
+	Alumno registrarAlumno(Alumno alumno) throws BusinessException;
+
 	
 }

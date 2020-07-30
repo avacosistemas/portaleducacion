@@ -58,6 +58,15 @@ public class AlumnoServiceImpl extends NJBaseService<Long, Alumno, AlumnoReposit
 	}
 	
 	/**
+	 * @see AlumnoService#registrarAlumno(Alumno)
+	 */
+	@Override
+	public Alumno registrarAlumno(Alumno alumno) throws BusinessException {
+		Alumno newAlumno = (Alumno) clienteService.registrarAlumnoPersona(alumno);
+		return newAlumno;
+	}
+	
+	/**
 	 * @see AlumnoService#updateAlumno(Alumno)
 	 */
 	@Override

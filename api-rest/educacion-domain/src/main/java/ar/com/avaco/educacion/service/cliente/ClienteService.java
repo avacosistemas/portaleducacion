@@ -29,4 +29,6 @@ public interface ClienteService extends NJService<Long, Cliente> {
 
 	Cliente getClientePorMail(String username);
 
+	Cliente registrarAlumnoPersona(Cliente alumno)  throws ErrorValidationException, BusinessException;
+
 }

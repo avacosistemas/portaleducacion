@@ -51,6 +51,27 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		cliente = registrarCliente(cliente);
 		return cliente;
 	}
+	
+	@Override
+	public Cliente registrarAlumnoPersona(Cliente cliente) throws ErrorValidationException, BusinessException {
+		validarClienteNoVacio(cliente);
+		validarAltaModificacionCliente(cliente);
+		validarContraseña(cliente);
+		validaContactoCliente(cliente.getContacto());
+		cliente = registrarAlumno(cliente);
+		return cliente;
+	}
+
+	/**
+	 *  Valida que los requerimientos de contraseña sean validos
+	 * 
+	 * @param cliente
+	 * @throws BusinessException 
+	 */
+	private void validarContraseña(Cliente cliente) throws BusinessException {
+		if (cliente.getPassword()==null)
+			throw new BusinessException("Debe ingresar una contraseña.");			
+	}
 
 	/**
 	 * Valida que la composición del cliente este completa, que no sea null y que la
@@ -97,6 +118,19 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 
 		return cliente;
 	}
+	
+	private Cliente registrarAlumno(Cliente cliente) {
+		// Por default el cliente se da de desbloqueado.
+		cliente.setBloqueado(false);
+		// La cantidad de intentos de login es cero.
+		cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
+		cliente.setIntentosFallidosLogin(INICIO_REINTENTOS_LOGIN);
+		cliente.setFechaRegistro(Calendar.getInstance().getTime());
+		cliente = getRepository().save(cliente);
+		notificarNuevoCliente(cliente);
+
+		return cliente;
+	}
 
 	@Override
 	public void updatePassword(Cliente cliente, String password, String newPassword) {
@@ -130,6 +164,10 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 
 	private void notificarPasswordANuevoCliente(Cliente cliente, String tmpass) {
 		notificacionService.notificarRegistroClienteNuevoPassword(cliente, tmpass);
+	}
+	
+	private void notificarNuevoCliente(Cliente cliente) {
+		notificacionService.notificarAlumnoNuevo(cliente);
 	}
 
 	/**
