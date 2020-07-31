@@ -224,7 +224,7 @@ public class NotificacionServiceImpl implements NotificacionService {
 	}
 	
 	@Override
-	public void notificarNuevaCalificacion(Cliente profesor, Cliente alumno, String calificacion) {
+	public void notificarNuevaCalificacion(Cliente profesor, Cliente alumno, String calificacion, String Comentario) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("profesor", profesor.getNombreApellido());
 		params.put("alumno", alumno.getNombreApellido());

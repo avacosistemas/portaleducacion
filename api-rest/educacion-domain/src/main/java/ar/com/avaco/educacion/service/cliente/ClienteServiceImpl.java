@@ -128,7 +128,7 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		cliente.setFechaRegistro(Calendar.getInstance().getTime());
 		cliente = getRepository().save(cliente);
 		notificarNuevoCliente(cliente);
-
+		notificacionService.notificarAlumnoNuevo(cliente);
 		return cliente;
 	}
 

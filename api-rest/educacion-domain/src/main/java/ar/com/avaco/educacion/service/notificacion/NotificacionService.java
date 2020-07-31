@@ -22,10 +22,11 @@ public interface NotificacionService {
 	
 	void notificarPagoClase(Cliente cliente, Clase clase );
 	
-	void notificarNuevaCalificacion(Cliente profesor, Cliente alumno, String calificacion);
+	void notificarNuevaCalificacion(Cliente profesor, Cliente alumno, String calificacion, String Comentario);
 	
 	void notificarAsignacionProfesorAula(Cliente profesor, Aula aula);
 	
 	void notificarAsignacionAlumnoAula(Cliente alumno, Aula aula);
+	
 
 }
