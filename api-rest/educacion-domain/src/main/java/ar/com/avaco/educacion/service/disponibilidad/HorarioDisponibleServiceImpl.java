@@ -1,5 +1,6 @@
 package ar.com.avaco.educacion.service.disponibilidad;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import ar.com.avaco.arc.core.component.bean.service.NJBaseService;
 import ar.com.avaco.commons.exception.BusinessException;
-import ar.com.avaco.commons.exception.ErrorValidationException;
 import ar.com.avaco.educacion.domain.entities.HorarioDisponible;
 import ar.com.avaco.educacion.domain.entities.Profesor;
 import ar.com.avaco.educacion.repository.disponibilidad.HorarioDisponibleRepository;
@@ -37,14 +37,18 @@ public class HorarioDisponibleServiceImpl extends NJBaseService<Long, HorarioDis
 	@Override
 	public List<HorarioDisponible> addHorariosDisponibles(List<HorarioDisponible> entities, Long idProfesor) throws BusinessException {
 
+		List<HorarioDisponible> entitiesForSave = new ArrayList<>();
 		Profesor profesor = profesorService.get(idProfesor);
 
 		for(HorarioDisponible entity: entities) {
 			entity.setProfesor(profesor);
-			//this.validaDuplicado(entity);
+			
+			if(!this.existeDuplicado(entity)) {
+				entitiesForSave.add(entity);
+			}
 		}
 
-		List<HorarioDisponible> horariosDisponibles = this.getRepository().save(entities);
+		List<HorarioDisponible> horariosDisponibles = this.getRepository().save(entitiesForSave);
 
 		return horariosDisponibles;
 	}
@@ -53,7 +57,9 @@ public class HorarioDisponibleServiceImpl extends NJBaseService<Long, HorarioDis
 	 * Valida que no exista un dia y horario para un profesor
 	 * @param horarioDisp horario disponible
 	 */
-	public void validaDuplicado(HorarioDisponible horarioDisp) {
+	public boolean existeDuplicado(HorarioDisponible horarioDisp) {
+	
+		
 		Map<String, String> errores = new HashMap<String, String>();
 
 		if (getRepository().findByDiaAndHoraAndProfesorId(horarioDisp.getDia(), horarioDisp.getHora(), horarioDisp.getProfesor().getId()) != null) {
@@ -61,8 +67,11 @@ public class HorarioDisponibleServiceImpl extends NJBaseService<Long, HorarioDis
 		}
 
 		if (!errores.isEmpty()) {
-			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
+			return true;
+			//throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
 		}
+		
+		return false;
 	}
 	
 	@Resource(name = "horarioDisponibleRepository")
