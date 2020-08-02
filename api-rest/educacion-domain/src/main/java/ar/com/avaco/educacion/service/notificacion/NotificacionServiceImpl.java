@@ -204,31 +204,40 @@ public class NotificacionServiceImpl implements NotificacionService {
 	}
 	
 	@Override
-	public void notificarCompraClase(Cliente cliente, Clase clase ) {
+	public void notificarCompraClase(Cliente cliente, Clase clase, Aula aula ) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("cliente", cliente.getNombreApellido());	
 		params.put("claseId", clase.getIdClase());
 		params.put("claseLink", clase.getUrl());		
+		params.put("dia", new SimpleDateFormat("dd/MM/yyyy").format(aula.getDia()));
+		params.put("hora", aula.getHora().toString());
+		params.put("aulaId", aula.getId().toString());
+		params.put("materia", aula.getMateria().getDescripcion() + "("+ aula.getMateria().getNivel().getDescripcion() +")" );
 		mailSenderSMTPService.sendMail(from, cliente.getEmail(), subjectCompraClase,
 				getBody(params, bodyCompraClase), null);		
 	}
 	
 	@Override
-	public void notificarPagoClase(Cliente cliente, Clase clase ) {
+	public void notificarPagoClase(Cliente cliente, Clase clase, Aula aula ) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("cliente", cliente.getNombreApellido());	
 		params.put("claseId", clase.getIdClase());
 		params.put("claseLink", clase.getUrl());		
+		params.put("dia", new SimpleDateFormat("dd/MM/yyyy").format(aula.getDia()));
+		params.put("hora", aula.getHora().toString());
+		params.put("aulaId", aula.getId().toString());
+		params.put("materia", aula.getMateria().getDescripcion() + "("+ aula.getMateria().getNivel().getDescripcion() +")" );
 		mailSenderSMTPService.sendMail(from, cliente.getEmail(), subjectPagoClase,
 				getBody(params, bodyPagoClase), null);		
 	}
 	
 	@Override
-	public void notificarNuevaCalificacion(Cliente profesor, Cliente alumno, String calificacion, String Comentario) {
+	public void notificarNuevaCalificacion(Cliente profesor, Cliente alumno, String calificacion, String comentario) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("profesor", profesor.getNombreApellido());
 		params.put("alumno", alumno.getNombreApellido());
 		params.put("calificacion", calificacion );
+		params.put("comentario", comentario );
 		mailSenderSMTPService.sendMail(from, profesor.getEmail(), subjectNuevaCalificacion,
 				getBody(params, bodyNuevaCalificacion), null);		
 	}

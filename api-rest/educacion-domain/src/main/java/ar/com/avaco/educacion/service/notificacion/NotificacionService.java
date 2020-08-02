@@ -18,11 +18,11 @@ public interface NotificacionService {
 	
 	void notificarNuevaPregunta(Cliente cliente, String url);
 	
-	void notificarCompraClase(Cliente cliente, Clase clase);
+	void notificarCompraClase(Cliente cliente, Clase clase, Aula aula);
 	
-	void notificarPagoClase(Cliente cliente, Clase clase );
+	void notificarPagoClase(Cliente cliente, Clase clase, Aula aula);
 	
-	void notificarNuevaCalificacion(Cliente profesor, Cliente alumno, String calificacion, String Comentario);
+	void notificarNuevaCalificacion(Cliente profesor, Cliente alumno, String calificacion, String comentario);
 	
 	void notificarAsignacionProfesorAula(Cliente profesor, Aula aula);
 	
