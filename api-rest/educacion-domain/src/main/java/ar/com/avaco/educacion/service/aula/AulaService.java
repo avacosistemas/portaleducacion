@@ -93,4 +93,19 @@ public interface AulaService extends NJService<Long, Aula> {
 	 * @return
 	 */
 	Aula comprarClase(Long idAlumno, Long idProfesor, Long idMateria, Date dia, String hora) throws BusinessException;
+
+	/**
+	 * Crea la Clase virtual en la plataforma de meeting y retorna el URL para el join
+	 * 
+	 * @param aula
+	 * @param idProfesor
+	 * @return
+	 */
+	String abrirClase(Aula aula, Long idProfesor) throws BusinessException;
+
+	/**
+	 * Valida el origen del request
+	 * @param fromIP
+	 */
+	void validarEventoClase(String fromIP)  throws BusinessException;
 }

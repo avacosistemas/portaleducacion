@@ -3,6 +3,7 @@ package ar.com.avaco.educacion.ws.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,12 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.ws.dto.AulaDTO;
 import ar.com.avaco.educacion.ws.dto.AulaListadoDTO;
+import ar.com.avaco.educacion.ws.dto.AulaProfesorDTO;
 import ar.com.avaco.educacion.ws.dto.CompraAulaDTO;
+import ar.com.avaco.educacion.ws.dto.EventoClaseDTO;
 import ar.com.avaco.educacion.ws.service.AulaEPService;
 import ar.com.avaco.ws.rest.controller.AbstractDTORestController;
 import ar.com.avaco.ws.rest.dto.JSONResponse;
@@ -76,6 +80,27 @@ public class AulaRestController extends AbstractDTORestController<AulaDTO, Long,
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 	
+	
+	@RequestMapping(value = "/event/aula/registroEventos/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public @ResponseBody ResponseEntity<JSONResponse> registrarEventoClase(@PathVariable("id") Long id,EventoClaseDTO eventoClaseDTO, HttpServletRequest request) throws BusinessException {
+		eventoClaseDTO.setFromIP(request.getRemoteAddr());
+		System.out.println(eventoClaseDTO.getEvent());
+		service.registrarEventoClase(id, eventoClaseDTO);
+		JSONResponse response = new JSONResponse();
+		response.setData("ACK");
+		response.setStatus(JSONResponse.OK);	
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);	
+	}
+	
+	@RequestMapping(value = "/aula/abrirClase/", method = RequestMethod.POST)
+	public ResponseEntity<JSONResponse> abrirClase(@RequestBody AulaProfesorDTO aulaProfesorDTO) throws BusinessException {
+		AulaDTO newAulaDto = service.abrirClase(aulaProfesorDTO);
+		JSONResponse response = new JSONResponse();
+		response.setData(newAulaDto);
+		response.setData("ACK");
+		response.setStatus(JSONResponse.OK);	
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);	
+	}
 	
 	
 	//Service

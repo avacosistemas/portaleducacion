@@ -7,6 +7,7 @@ import org.w3c.dom.DOMException;
 import ar.com.avaco.arc.core.component.bean.service.NJBaseService;
 import ar.com.avaco.educacion.domain.entities.Alumno;
 import ar.com.avaco.educacion.domain.entities.Aula;
+import ar.com.avaco.educacion.domain.entities.Materia;
 import ar.com.avaco.educacion.domain.entities.Profesor;
 import ar.com.avaco.educacion.domain.entities.aulaVirtual.Clase;
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
@@ -24,7 +25,9 @@ public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaReposi
 		super();
 		api=new BigBlueButtonApi();
 		api.setSalt("nZrGrMtLwe3cQuZxEUZS3C2qBXI9ecsQepGJBt0g1qE"); //TODO Traer de configuracion
+		api.setBigBlueButtonIP("192.168.146.128");
 		api.setBigBlueButtonURL("http://192.168.146.128/bigbluebutton/"); //TODO Traer de configuracion
+		api.setUrlEventsCallBack("http://192.168.5.101:8082/ws-rest-educacion/event/aula/registroEventos/"); //TODO Traer de configuracion
 		welcomeMessage = "Bienvenido a Portal Educacion"; //TODO Traer de bundle
 	}
 
@@ -33,9 +36,24 @@ public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaReposi
 		AulaVirtualServiceImpl aulaVirtualServiceImpl=new AulaVirtualServiceImpl();
 				
 		try {
-			String idMeeting=aulaVirtualServiceImpl.getApi().createMeeting("Sala Virtual", aulaVirtualServiceImpl.getWelcomeMessage(), null, null, null, null, null);
-			String urlSala=aulaVirtualServiceImpl.getApi().getJoinMeetingURL("Matcito10", idMeeting, "mp", null, new Long(0));
-			System.out.println(urlSala);
+			Aula aula=new Aula();
+			aula.setId(1l);
+			
+			Materia materia=new Materia();
+			materia.setId(5l);
+			materia.setDescripcion("Algebra de las plantas");
+			
+			aula.setMateria(materia);
+			
+			Profesor profesor=new Profesor();
+			profesor.setId(2l);
+			profesor.setNombre("Pepito");
+			profesor.setApellido("Castor");
+			profesor.setUsername("PepitoProfesor");
+			
+			Clase clase=aulaVirtualServiceImpl.crearClase(profesor, aula);
+						
+			System.out.println(clase.getUrl());
 		} catch (DOMException e) {
 			e.printStackTrace();
 		} catch (AulaVirtualException e) {
@@ -47,9 +65,13 @@ public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaReposi
 	public Clase crearClase(Profesor profesor, Aula aula ) throws AulaVirtualException {
 		String idMeeting;
 		try {
-			idMeeting = api.createMeeting("Aula "+aula.getMateria().getDescripcion()+" / Prof: "+profesor.getNombreApellido(), 
+			idMeeting = api.createMeeting(aula.generatedIdAula(profesor), 
 					welcomeMessage, null, null, null, null, null);
-			String urlSala=api.getJoinMeetingURL("Matcito10", idMeeting, "mp", null, profesor.getId());
+			String urlSala=api.getJoinMeetingURL(profesor.getUsername(), idMeeting, "mp", null, profesor.getId());
+			
+			//Hook a los eventos
+			api.hookEvents(aula.getId(), idMeeting);
+			
 			Clase clase=new Clase();
 			clase.setIdClase(idMeeting);
 			clase.setUrl(urlSala);
@@ -77,6 +99,15 @@ public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaReposi
 	}
 
 	
+	
+	@Override
+	public void validarOrigenEvento(String fromIP) throws AulaVirtualException {
+//		if (!fromIP.equals(api.getBigBlueButtonIP())) {
+//			throw new AulaVirtualException(1,"El evento no proviene del servidor de AulaVirtual");
+//		}
+		
+	}
+
 	@Override
 	public Boolean isClaseAbierta(String idClase) {
 		String result=api.isMeetingRunning(idClase);
@@ -102,5 +133,6 @@ public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaReposi
 		this.welcomeMessage = welcomeMessage;
 	}
 
+	
 	
 }

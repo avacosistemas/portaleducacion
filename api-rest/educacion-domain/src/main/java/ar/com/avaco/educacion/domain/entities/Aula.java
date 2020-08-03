@@ -58,6 +58,9 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	@OneToMany(targetEntity = Comentario.class, mappedBy = "aula", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private Set<Comentario> comentarios = new HashSet<>();
 	
+	@OneToMany(targetEntity = AulaEventos.class, mappedBy = "aula", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	private Set<AulaEventos> eventosAulas = new HashSet<>();	
+	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "ID_MATERIA")
 	private Materia materia;
@@ -82,6 +85,11 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	public Aula() {
 	}
 
+	/* Id usada para identificador unico de AulaVirtual */	
+	public String generatedIdAula(Profesor profesor) {
+		return "Aula "+this.getMateria().getDescripcion()+" / Prof: "+profesor.getNombreApellido();
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -156,6 +164,14 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 
 	public void setProfesor(Profesor profesor) {
 		this.profesor = profesor;
+	}
+	
+	public Set<AulaEventos> getEventosAulas() {
+		return eventosAulas;
+	}
+
+	public void setEventosAulas(Set<AulaEventos> eventosAulas) {
+		this.eventosAulas = eventosAulas;
 	}
 	
 	// TODO Agregar hashCode, equals y toString cuando se completen todos los

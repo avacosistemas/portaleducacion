@@ -50,5 +50,14 @@ public interface AulaVirtualService extends NJService<Long, Aula> {
 	Clase crearClase(Profesor profesor, Aula aula) throws AulaVirtualException;
 
 
+	/**
+	 * Valida el origen del request de evento
+	 * 
+	 * @param fromIP
+	 * @throws AulaVirtualException 
+	 */
+	void validarOrigenEvento(String fromIP) throws AulaVirtualException;
+
+
 	
 }
