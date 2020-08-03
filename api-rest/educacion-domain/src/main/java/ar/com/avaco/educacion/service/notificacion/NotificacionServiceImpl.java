@@ -93,6 +93,13 @@ public class NotificacionServiceImpl implements NotificacionService {
 	@Value("template/notificacion-asignacion-aula-profesor.html")
 	private String bodyAsignacionProfesorAula;
 	
+	@Value("TechOnline - Asignación de aula!")
+	private String subjectAsignacionAlumnoAula;
+	
+	@Value("template/notificacion-asignacion-aula-aulumno.html")
+	private String bodyAsignacionAlumnoAula;
+	
+	
 	@Value("template/header-general.html")
 	private String headerGeneral;
 
@@ -197,31 +204,40 @@ public class NotificacionServiceImpl implements NotificacionService {
 	}
 	
 	@Override
-	public void notificarCompraClase(Cliente cliente, Clase clase ) {
+	public void notificarCompraClase(Cliente cliente, Clase clase, Aula aula ) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("cliente", cliente.getNombreApellido());	
 		params.put("claseId", clase.getIdClase());
 		params.put("claseLink", clase.getUrl());		
+		params.put("dia", new SimpleDateFormat("dd/MM/yyyy").format(aula.getDia()));
+		params.put("hora", aula.getHora().toString());
+		params.put("aulaId", aula.getId().toString());
+		params.put("materia", aula.getMateria().getDescripcion() + "("+ aula.getMateria().getNivel().getDescripcion() +")" );
 		mailSenderSMTPService.sendMail(from, cliente.getEmail(), subjectCompraClase,
 				getBody(params, bodyCompraClase), null);		
 	}
 	
 	@Override
-	public void notificarPagoClase(Cliente cliente, Clase clase ) {
+	public void notificarPagoClase(Cliente cliente, Clase clase, Aula aula ) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("cliente", cliente.getNombreApellido());	
 		params.put("claseId", clase.getIdClase());
 		params.put("claseLink", clase.getUrl());		
+		params.put("dia", new SimpleDateFormat("dd/MM/yyyy").format(aula.getDia()));
+		params.put("hora", aula.getHora().toString());
+		params.put("aulaId", aula.getId().toString());
+		params.put("materia", aula.getMateria().getDescripcion() + "("+ aula.getMateria().getNivel().getDescripcion() +")" );
 		mailSenderSMTPService.sendMail(from, cliente.getEmail(), subjectPagoClase,
 				getBody(params, bodyPagoClase), null);		
 	}
 	
 	@Override
-	public void notificarNuevaCalificacion(Cliente profesor, Cliente alumno, String calificacion) {
+	public void notificarNuevaCalificacion(Cliente profesor, Cliente alumno, String calificacion, String comentario) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("profesor", profesor.getNombreApellido());
 		params.put("alumno", alumno.getNombreApellido());
 		params.put("calificacion", calificacion );
+		params.put("comentario", comentario );
 		mailSenderSMTPService.sendMail(from, profesor.getEmail(), subjectNuevaCalificacion,
 				getBody(params, bodyNuevaCalificacion), null);		
 	}
@@ -235,8 +251,21 @@ public class NotificacionServiceImpl implements NotificacionService {
 		params.put("aulaId", aula.getId().toString());
 		params.put("materia", aula.getMateria().getDescripcion() + "("+ aula.getMateria().getNivel().getDescripcion() +")" );
 		
-		mailSenderSMTPService.sendMail(from, profesor.getEmail(), subjectNuevaCalificacion,
-				getBody(params, bodyNuevaCalificacion), null);		
+		mailSenderSMTPService.sendMail(from, profesor.getEmail(), subjectAsignacionProfesorAula,
+				getBody(params, bodyAsignacionProfesorAula), null);		
+	}
+	
+	@Override
+	public void notificarAsignacionAlumnoAula(Cliente alumno, Aula aula) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("profesor", alumno.getNombreApellido());
+		params.put("dia", new SimpleDateFormat("dd/MM/yyyy").format(aula.getDia()));
+		params.put("hora", aula.getHora().toString());
+		params.put("aulaId", aula.getId().toString());
+		params.put("materia", aula.getMateria().getDescripcion() + "("+ aula.getMateria().getNivel().getDescripcion() +")" );
+		
+		mailSenderSMTPService.sendMail(from, alumno.getEmail(), subjectAsignacionAlumnoAula,
+				getBody(params, bodyAsignacionAlumnoAula), null);		
 	}
 	
 	

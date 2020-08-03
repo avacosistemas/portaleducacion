@@ -9,6 +9,8 @@
       http://www.springframework.org/schema/context
 	  http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<http pattern="/event/**" security="none"/>
+	
 	<http entry-point-ref="restAuthenticationEntryPoint">
 		<intercept-url pattern="/contact-us/send/*" access="permitAll" />
 		<intercept-url pattern="/portal/faqs/**" access="permitAll" />

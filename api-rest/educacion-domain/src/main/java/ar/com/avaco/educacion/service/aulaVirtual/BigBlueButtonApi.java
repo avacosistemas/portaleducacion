@@ -58,6 +58,8 @@ import ar.com.avaco.educacion.exception.AulaVirtualException;
 public class BigBlueButtonApi {
 
 	private String BigBlueButtonURL;
+	private String BigBlueButtonIP;
+	private String urlEventsCallBack;
 	private String salt;
 
 	//
@@ -133,6 +135,30 @@ public class BigBlueButtonApi {
 						
 	}
 
+	public void hookEvents(Long idAula, String idMeeting) throws AulaVirtualException {
+		String base_url_create = BigBlueButtonURL + "api/hooks/create?";
+		String url_hook = "callbackURL="+ urlEncode(urlEventsCallBack + idAula.toString())+"&meetingId="+urlEncode(idMeeting);
+		
+		String create_parameters = url_hook;
+		
+		Document doc = null;
+		try {
+			String xml = getURL(
+					base_url_create + create_parameters + "&checksum=" + checksum("hooks/create" + create_parameters + salt,1));
+			doc = parseXml(xml);
+		} catch (Exception e) {
+			throw new AulaVirtualException(new Integer(999), e.getMessage());
+		}
+		if (((Document) doc).getElementsByTagName("returncode").item(0).getTextContent().trim()
+				.equals("SUCCESS")) {
+			return ;
+		}
+		
+		Integer errorKey=Integer.getInteger(((Document) doc).getElementsByTagName("messageKey").item(0).getTextContent().trim());
+		throw new AulaVirtualException(errorKey, ((Document) doc).getElementsByTagName("message").item(0).getTextContent().trim());
+		
+	}
+	
 	//
 	// getJoinMeetingURL() -- get join meeting URL for both viewer and moderator
 	//
@@ -729,9 +755,13 @@ public class BigBlueButtonApi {
 	// checksum() -- Return a checksum based on SHA-1 digest
 	//
 	public static String checksum(String s) {
+		return checksum(s, 256); 
+	}
+	
+	public static String checksum(String s, int value) {
 		String checksum = "";
 		try {
-			ShaPasswordEncoder encoder = new ShaPasswordEncoder(256);
+			ShaPasswordEncoder encoder = new ShaPasswordEncoder(value);
 			checksum = encoder.encodePassword(s, null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -959,6 +989,21 @@ public class BigBlueButtonApi {
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
+
+	public String getUrlEventsCallBack() {
+		return urlEventsCallBack;
+	}
+
+	public void setUrlEventsCallBack(String urlEventsCallBack) {
+		this.urlEventsCallBack = urlEventsCallBack;
+	}
+
+	public void setBigBlueButtonIP(String bigBlueButtonIP) {
+		BigBlueButtonIP = bigBlueButtonIP;
+	}
+
+	
+	
 	
 	
 

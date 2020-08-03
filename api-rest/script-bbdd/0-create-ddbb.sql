@@ -21,6 +21,7 @@ create table ALUMNO (ID_CLIENTE int8 not null, ID_INSTITUCION int8, primary key 
 create table AULA (ID_AULA int8 not null, CALIFICACION int4 not null, DIA date not null, HORA int8 not null, ID_INSTITUCION int8, ID_MATERIA int8 not null, ID_PROFESOR int8 not null, primary key (ID_AULA));
 create table AULA_ALUMNO (ID_AULA_ALUMNO int8 not null, ID_AULA int8 not null, ID_ALUMNO int8 not null, CALIFICACION int8, COMENTARIO varchar(255), primary key (ID_AULA_ALUMNO));
 create table AULA_PROFESOR (ID_AULA int8 not null, ID_PROFESOR int8 not null, primary key (ID_AULA, ID_PROFESOR));
+create table AULA_EVENTOS (ID_AULA_EVENTO int8 not null, ID_AULA int8 not null, FECHA  date not null, TIPO_EVENTO varchar(20) not null, ID_USUARIO int8 not null,TIPO_USUARIO varchar(20) not null , primary key (ID_AULA_EVENTO));
 create table CLI_ACCESOS_CLIENTE (ID_ACCESO int8 not null, codigo varchar(255), descripcion varchar(255), primary key (ID_ACCESO));
 create table CLI_ACCESO_PERMISO (ID_ACCESO int8 not null, ID_PERMISO int8 not null, primary key (ID_ACCESO, ID_PERMISO));
 create table CLI_CLIENTE (ID_CLIENTE int8 not null, APELLIDO varchar(255) not null, TIPO_CLIENTE varchar(255) not null, BLOQUEADO boolean, EMAIL varchar(255) not null, FECHA_ALTA_PASSWORD timestamp, FECHA_NAC date, FECHA_REGISTRO timestamp not null, GENERO varchar(255), INTENTOS_FALLIDOS_LOGIN int4, NACIONALIDAD varchar(255), NOMBRE varchar(255) not null, PASSWORD varchar(255) not null, REQUIERE_CAMBIO_PASSWORD boolean, USERNAME varchar(255) not null, ID_ACCESOS int8, primary key (ID_CLIENTE));
@@ -69,6 +70,8 @@ alter table AULA_PROFESOR add constraint FK_7lrxnhmo4q0xs8eb9vkjevspr foreign ke
 alter table AULA_PROFESOR add constraint FK_51979urj12la2q8eyhlfklw8j foreign key (ID_AULA) references AULA;
 alter table AULA_ALUMNO add constraint FK_aula_alumno_alumno foreign key (ID_ALUMNO) references ALUMNO;
 alter table AULA_ALUMNO add constraint FK_aula_alumno_aula foreign key (ID_AULA) references AULA;
+alter table AULA_EVENTOS add CONSTRAINT fk_aula FOREIGN KEY (id_aula) REFERENCES aula (id_aula);
+alter table AULA_EVENTOS add CONSTRAINT fk_cliente FOREIGN KEY (id_usuario) REFERENCES cli_cliente (id_cliente) MATCH SIMPLE;
 alter table CLI_ACCESO_PERMISO add constraint FK_30ns7l5f4j4vp8q0snjitmpju foreign key (ID_PERMISO) references CLI_PERMISO_CLIENTE;
 alter table CLI_ACCESO_PERMISO add constraint FK_38ai98wwmvjbajehx5npvc138 foreign key (ID_ACCESO) references CLI_ACCESOS_CLIENTE;
 alter table CLI_CLIENTE add constraint FK_qsndlpgcb9rkjbv2y6r1wh8cu foreign key (ID_ACCESOS) references CLI_ACCESOS_CLIENTE;
@@ -105,6 +108,7 @@ create sequence WORD_SEQ START WITH 1000;
 --EDUCACION
 create sequence AULA_SEQ START WITH 1000;
 create sequence AULA_ALUMNO_SEQ START WITH 1000;
+create sequence AULA_EVENTO_SEQ START WITH 1000;
 create sequence CLIENTE_SEQ START WITH 1000;
 create sequence COMENTARIO_SEQ START WITH 1000;
 create sequence COMPRA_SEQ START WITH 1000;

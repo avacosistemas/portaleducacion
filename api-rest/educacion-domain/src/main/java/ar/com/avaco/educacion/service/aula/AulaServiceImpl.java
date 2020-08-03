@@ -17,9 +17,12 @@ import ar.com.avaco.educacion.domain.entities.AulaAlumno;
 import ar.com.avaco.educacion.domain.entities.HorasAlumno;
 import ar.com.avaco.educacion.domain.entities.Materia;
 import ar.com.avaco.educacion.domain.entities.Profesor;
+import ar.com.avaco.educacion.domain.entities.aulaVirtual.Clase;
+import ar.com.avaco.educacion.exception.AulaVirtualException;
 import ar.com.avaco.educacion.repository.aula.AulaRepository;
 import ar.com.avaco.educacion.service.SolapaUtils;
 import ar.com.avaco.educacion.service.alumno.AlumnoService;
+import ar.com.avaco.educacion.service.aulaVirtual.AulaVirtualService;
 import ar.com.avaco.educacion.service.decidir.DecidirService;
 import ar.com.avaco.educacion.service.horas.disp.HorasAlumnoService;
 import ar.com.avaco.educacion.service.materia.MateriaService;
@@ -39,15 +42,18 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 	
 	private HorasAlumnoService horasAlumnoService;  
 	
+	private AulaVirtualService aulaVirtualService; 
+	
 	private AulaAlumnoService aulaAlumnoService;
 	
 	@Autowired
-	public AulaServiceImpl(MateriaService materiaService, ProfesorService profesorService, AlumnoService alumnoService, DecidirService decidirService, HorasAlumnoService horasAlumnoService) {
+	public AulaServiceImpl(MateriaService materiaService, ProfesorService profesorService, AlumnoService alumnoService, DecidirService decidirService, HorasAlumnoService horasAlumnoService, AulaVirtualService aulaVirtualService) {
 		this.materiaService = materiaService;
 		this.profesorService = profesorService;
 		this.alumnoService = alumnoService;
 		this.decidirService = decidirService;
 		this.horasAlumnoService = horasAlumnoService;
+		this.aulaVirtualService = aulaVirtualService;
 		
 	}
 	
@@ -227,6 +233,36 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 	@Resource(name = "aulaAlumnoService")
 	public void setAulaAlumnoService(AulaAlumnoService aulaAlumnoService) {
 		this.aulaAlumnoService = aulaAlumnoService;
+	}
+	
+
+	@Override
+	public String abrirClase(Aula aula, Long idProfesor) throws BusinessException {
+		Profesor profesor = profesorService.getProfesor(idProfesor);
+		
+		if (profesor==null) {
+			throw new BusinessException("Profesor no existe");			
+		}
+		
+		if (aula==null) {
+			throw new BusinessException("Aula no existe");			
+		}
+		
+		try {
+			Clase clase=aulaVirtualService.crearClase(profesor, aula);
+			return clase.getUrl();
+		} catch (AulaVirtualException e) {
+			throw new BusinessException(e.getMessage());
+		}
+	}
+
+	@Override
+	public void validarEventoClase(String fromIP) throws BusinessException {
+		try {
+			aulaVirtualService.validarOrigenEvento(fromIP);
+		} catch (AulaVirtualException e) {
+			throw new BusinessException(e.getMessage());
+		}		
 	}
 	
 }

@@ -29,6 +29,7 @@ public class AulaRepositoryImpl extends NJBaseRepository<Long, Aula> implements 
 		criteria.setFetchMode("comentarios", FetchMode.JOIN);
 		criteria.setFetchMode("profesores", FetchMode.JOIN);
 		criteria.setFetchMode("alumnos", FetchMode.JOIN); 
+		criteria.setFetchMode("eventosAulas", FetchMode.JOIN);
 		return (Aula) criteria.uniqueResult();
 	}
 

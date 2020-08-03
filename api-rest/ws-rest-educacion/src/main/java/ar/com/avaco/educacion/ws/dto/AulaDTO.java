@@ -23,6 +23,8 @@ public class AulaDTO extends DTOEntity<Long> {
 	protected Long idProfesor;
 
 	protected String nombreProfesor;
+	
+	protected String urlJoin;
 
 	public AulaDTO() {
 
@@ -122,4 +124,14 @@ public class AulaDTO extends DTOEntity<Long> {
 		this.idInstitucion = idInstitucion;
 	}
 
+	public String getUrlJoin() {
+		return urlJoin;
+	}
+
+	public void setUrlJoin(String urlJoin) {
+		this.urlJoin = urlJoin;
+	}
+	
+	
+	
 }
