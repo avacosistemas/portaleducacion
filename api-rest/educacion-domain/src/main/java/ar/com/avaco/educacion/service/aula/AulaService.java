@@ -51,7 +51,6 @@ public interface AulaService extends NJService<Long, Aula> {
 	 * @throws BusinessException 
 	 */
 	Aula addProfesorAula(Long idAula, Long idProfesor) throws BusinessException;
-
 	
 	/**
 	 * Quita un profesor de un aula
@@ -62,26 +61,6 @@ public interface AulaService extends NJService<Long, Aula> {
 	 */
 	void removeAulaProfesor(Long idAula, Long idProfesor) throws BusinessException;
 
-//	/**
-//	 * Agrega un alumno al aula
-//	 * 
-//	 * @param idAula
-//	 * @param idAlumno
-//	 * @return
-//	 * @throws BusinessException 
-//	 */
-//	Aula addAlumnoAula(Long idAula, Long idAlumno) throws BusinessException;
-
-	
-//	/**
-//	 * Quita un alumno del aula
-//	 * 
-//	 * @param idAula
-//	 * @param idAlumno
-//	 */
-//	void removeAulaAlumno(Long idAula, Long idAlumno)  throws BusinessException;
-	
-	
 	/**
 	 * Alumno compra una clase
 	 * 
@@ -93,4 +72,6 @@ public interface AulaService extends NJService<Long, Aula> {
 	 * @return
 	 */
 	Aula comprarClase(Long idAlumno, Long idProfesor, Long idMateria, Date dia, String hora) throws BusinessException;
+
+	List<Aula> listByProfesorId(Long id);
 }

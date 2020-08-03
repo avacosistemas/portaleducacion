@@ -1,6 +1,6 @@
 package ar.com.avaco.educacion.domain.entities;
 
-public enum FiltroCatalogo {
+public enum OrdenCatalogo {
 
 	RELEVANTE, MAYOR_PRECIO, MENOR_PRECIO;
 	

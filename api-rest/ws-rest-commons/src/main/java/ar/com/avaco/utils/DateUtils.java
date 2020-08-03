@@ -9,8 +9,8 @@ import java.util.Date;
 
 public class DateUtils {
 	
-	private final static String FORMAT_PATTERN = "yyyyMMdd"; //TODO Parametrizar?
-	private final static String FULL_24_HS = "dd/MM/yyyy HH:mm:ss";
+	public final static String FORMAT_PATTERN = "yyyyMMdd"; //TODO Parametrizar?
+	public final static String FULL_24_HS = "dd/MM/yyyy HH:mm:ss";
 	
 	public static Date toDate(String dia, String pattern) throws ParseException {
 		SimpleDateFormat dateFormat=(SimpleDateFormat) DateFormat.getInstance();
@@ -23,8 +23,12 @@ public class DateUtils {
 	}
 	
 	public static String toString(Date fecha) {
+		return toString(fecha, "dd/MM/yyyy");
+	}
+	
+	public static String toString(Date fecha, String pattern) {
 		SimpleDateFormat dateFormat=(SimpleDateFormat) DateFormat.getInstance();
-		dateFormat.applyPattern("dd/MM/yyyy");
+		dateFormat.applyPattern(pattern);
 		return dateFormat.format(fecha);
 	}
 	

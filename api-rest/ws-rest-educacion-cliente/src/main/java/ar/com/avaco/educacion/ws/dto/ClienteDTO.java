@@ -12,6 +12,7 @@ public class ClienteDTO extends DTOEntity<Long> {
 	private String username;
 	private String email;
 	private String telefonoMovil;
+	private String descripcion;
 
 	public ClienteDTO() {
 	}
@@ -80,4 +81,14 @@ public class ClienteDTO extends DTOEntity<Long> {
 		this.telefonoMovil = telefonoMovil;
 	}
 
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	
+	
 }

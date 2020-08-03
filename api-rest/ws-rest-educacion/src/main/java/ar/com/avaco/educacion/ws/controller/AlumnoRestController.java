@@ -60,6 +60,26 @@ public class AlumnoRestController extends AbstractDTORestController<AlumnoDTO, L
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 	
+	/**
+	 * 
+	 *  nombre
+	 *	apellido
+	 *	numeroIdentificacion
+	 *	username
+	 *	email
+	 *	telefonoFijo -> Agregar
+	 *	telefonoMovil
+	 *	password
+	 *	secondPassword
+	 *	checkTerminosCondiciones -> Agregar
+	 *
+	 *	TODO Revisar los campos que faltan
+	 *	TODO Hardcodear el tipo de identificacion
+	 * 
+	 * @param alumno
+	 * @return
+	 * @throws BusinessException
+	 */
 	@RequestMapping(value = "/alumnos/registrar/", method = RequestMethod.POST)
 	public ResponseEntity<JSONResponse> registrar(@RequestBody RegistroAlumnoDTO alumno) throws BusinessException {
 		AlumnoDTO newAlumnoDto = service.registrarAlumno(alumno);

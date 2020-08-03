@@ -23,6 +23,5 @@ public interface ClienteEPService extends CRUDEPService<Long, ClienteListadoDTO>
 	void validarContacto(ContactoDTO contactoDTO) throws ErrorValidationException;
 
 	void resetPassword(Long id);
-
-
+	
 }

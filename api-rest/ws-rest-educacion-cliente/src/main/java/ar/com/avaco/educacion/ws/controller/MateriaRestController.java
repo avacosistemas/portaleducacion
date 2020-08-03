@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,19 +24,19 @@ import ar.com.avaco.ws.rest.dto.JSONResponse;
 public class MateriaRestController extends AbstractDTORestController<MateriaDTO, Long, MateriaEPService> {
 
 	
+	/**
+	 * TODO Beto: incluir el nivel entre parentesis
+	 * @param descripcion
+	 * @return
+	 */
 	@RequestMapping(value = "/materias/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> list(@RequestParam(value= "descripcion", required= false) String descripcion) {
-		
-		if(!StringUtils.isBlank(descripcion)) {
-			
+		if (!StringUtils.isBlank(descripcion)) {
 			ResponseEntity<JSONResponse>resp = super.listFiltered(materia-> materia.getDescripcion()
 					.toUpperCase().contains(descripcion.toUpperCase()));
-			
 			return resp;
-			
 		}		
 		return super.list();		
-	
 	}
 	
 
@@ -55,31 +54,6 @@ public class MateriaRestController extends AbstractDTORestController<MateriaDTO,
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/materias/", method = RequestMethod.POST)
-	public ResponseEntity<JSONResponse> create(@RequestBody MateriaDTO materia) throws BusinessException {
-		MateriaDTO newMateriaDto = service.createMateria(materia);
-		JSONResponse response = new JSONResponse();
-		response.setData(newMateriaDto);
-		response.setStatus(JSONResponse.OK);	
-        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
-	}
-	
-	
-	@RequestMapping(value = "/materias/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<JSONResponse> update(@PathVariable("id") Long id, @RequestBody MateriaDTO materia) throws BusinessException {
-		MateriaDTO materiaDtoToUpdate = service.updateMateria(id, materia);
-		JSONResponse response = new JSONResponse();
-		response.setData(materiaDtoToUpdate);
-		response.setStatus(JSONResponse.OK);	
-        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
-	}
-		
-
-	@RequestMapping(value = "/materias/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<JSONResponse> delete(@PathVariable("id") Long id) throws BusinessException {
-		return super.delete(id);
-	}
-
 	//Service
 	@Resource(name = "materiaEPService")
 	public void setService(MateriaEPService materiaEPService) {

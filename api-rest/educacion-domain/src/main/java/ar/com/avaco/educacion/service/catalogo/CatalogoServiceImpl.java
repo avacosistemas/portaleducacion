@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Aula;
-import ar.com.avaco.educacion.domain.entities.FiltroCatalogo;
+import ar.com.avaco.educacion.domain.entities.OrdenCatalogo;
 import ar.com.avaco.educacion.domain.entities.HorarioDisponible;
 import ar.com.avaco.educacion.domain.entities.PreguntaRespuesta;
 import ar.com.avaco.educacion.domain.entities.Profesor;
@@ -46,13 +46,13 @@ public class CatalogoServiceImpl implements CatalogoService {
 	}
 
 	@Override
-	public List<Profesor> listCatalogoProfesor(FiltroCatalogo filtro, Long idMateria, Integer idNivel) {
+	public List<Profesor> listCatalogoProfesor(OrdenCatalogo filtro, Long idMateria, Integer idNivel) {
 		List<Profesor> catalogosProfesores;
 		Sort orden = new Sort(Sort.Direction.DESC, "calificacion");
 		
-		if(filtro.equals(FiltroCatalogo.MAYOR_PRECIO)){
+		if(filtro.equals(OrdenCatalogo.MAYOR_PRECIO)){
 			orden = new Sort(Sort.Direction.DESC, "valorHora");
-		} else if(filtro.equals(FiltroCatalogo.MAYOR_PRECIO)){
+		} else if(filtro.equals(OrdenCatalogo.MAYOR_PRECIO)){
 			orden = new Sort(Sort.Direction.ASC, "valorHora");
 		}
 	

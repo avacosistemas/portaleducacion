@@ -5,20 +5,23 @@ import ar.com.avaco.educacion.domain.entities.Nivel;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class MateriaProfesorFullDTO extends DTOEntity<Long> {
-	
+
 	private Long id;
 	private Long idMateria;
 	private String descMateria;
 	private Integer idNivel;
 	private String descNivel;
-	
-	public MateriaProfesorFullDTO() {}
+
+	private String materiaConNivel;
+
+	public MateriaProfesorFullDTO() {
+	}
 
 	public MateriaProfesorFullDTO(Materia materia) {
 		this.setDTO(materia);
 	}
 
-	//Getters and Setters
+	// Getters and Setters
 	public Long getId() {
 		return id;
 	}
@@ -26,7 +29,7 @@ public class MateriaProfesorFullDTO extends DTOEntity<Long> {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public Long getIdMateria() {
 		return idMateria;
 	}
@@ -59,25 +62,30 @@ public class MateriaProfesorFullDTO extends DTOEntity<Long> {
 		this.descNivel = descNivel;
 	}
 
-	//Converter
+	// Converter
 	public Materia toEntity() {
 		Materia materia = new Materia();
 		materia.setId(this.getId());
-		
+
 		Nivel nivel = new Nivel();
 		nivel.setId(this.idNivel);
-	
+
 		materia.setNivel(nivel);
-	
+
 		return materia;
 	}
-	
+
 	public void setDTO(Materia materia) {
 		this.setId(materia.getId());
 
 	}
 
+	public String getMateriaConNivel() {
+		return materiaConNivel;
+	}
 
-	
+	public void setMateriaConNivel(String materiaConNivel) {
+		this.materiaConNivel = materiaConNivel;
+	}
 
 }

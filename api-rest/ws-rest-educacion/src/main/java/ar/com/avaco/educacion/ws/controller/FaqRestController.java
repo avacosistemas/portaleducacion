@@ -43,12 +43,9 @@ public class FaqRestController extends AbstractDTORestController<FaqDTO, Long, F
     	return super.list();
     }
     
-	@RequestMapping(value = "/portal/faqs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/portal/faqs/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JSONResponse> list(@RequestParam Map<String, String> customQuery) throws Exception {
-//    	return super.executeProcess("get-faqs-with-params", Void -> { 
-//    		return this.service.listFilter(new MapFormFilter(customQuery,this.formDefService.getFieldsDef(FAQ_FILTER_FIELDS_JSON)));
-//    	});
-		return super.executeProcess("faq-legales", Void -> { 
+		return super.executeProcess("faq", Void -> { 
 			return this.service.list();
 		});
     }

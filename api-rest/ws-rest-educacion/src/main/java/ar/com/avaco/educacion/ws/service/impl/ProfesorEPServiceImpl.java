@@ -95,6 +95,8 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 		profesor.setUsername(dto.getUsername());
 		profesor.setEmail(dto.getEmail());
 	
+		profesor.setDescripcion(dto.getDescripcion());
+		
 		return profesor;
 	}
 
@@ -110,6 +112,7 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 		profesorDTO.setEmail(entity.getEmail());
 		profesorDTO.setTelefonoMovil(entity.getContacto().getTelefonoMovil());
 		profesorDTO.setNombreApellido(entity.getNombre() + " " + entity.getApellido());
+		profesorDTO.setDescripcion(entity.getDescripcion());
 		return profesorDTO;
 	}
 

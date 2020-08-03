@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import ar.com.avaco.educacion.domain.entities.Institucion;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import ar.com.avaco.commons.exception.BusinessException;

@@ -11,6 +11,5 @@ import ar.com.avaco.educacion.repository.comentario.ComentarioRepository;
 @Transactional
 @Service("comentarioService")
 public class ComentarioServiceImpl extends NJBaseService<Long, Comentario, ComentarioRepository> implements ComentarioService {
-
 	
 }

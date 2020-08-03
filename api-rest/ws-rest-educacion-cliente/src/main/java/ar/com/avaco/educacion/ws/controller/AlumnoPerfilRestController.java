@@ -16,7 +16,7 @@ import ar.com.avaco.ws.rest.controller.AbstractDTORestController;
 import ar.com.avaco.ws.rest.dto.JSONResponse;
 
 @RestController
-public class AlumnoRestController extends AbstractDTORestController<AlumnoDTO, Long, AlumnoEPService> {
+public class AlumnoPerfilRestController extends AbstractDTORestController<AlumnoDTO, Long, AlumnoEPService> {
 
 	@RequestMapping(value = "/alumnos/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> getAlumno(@PathVariable("id") Long id) throws Exception {

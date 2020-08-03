@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
-import ar.com.avaco.educacion.domain.entities.FiltroCatalogo;
+import ar.com.avaco.educacion.domain.entities.OrdenCatalogo;
 import ar.com.avaco.educacion.ws.dto.CatalogoProfesorDTO;
 import ar.com.avaco.educacion.ws.dto.ConsultaDTO;
 import ar.com.avaco.educacion.ws.dto.HorarioDisponibleDTO;
@@ -32,7 +32,7 @@ public class CatalogoProfesorRestController {
 	private CatalogoProfesorEPService service;
 
 	@RequestMapping(value = "/catalogoDocente/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listCatalogoProfesor(@RequestParam("filtro") FiltroCatalogo filtro, 
+	public ResponseEntity<JSONResponse> listCatalogoProfesor(@RequestParam("orden") OrdenCatalogo filtro, 
 															 @RequestParam("idMateria") Long idMateria,
 															 @RequestParam("idNivel") Integer idNivel) throws BusinessException {
 		

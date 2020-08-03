@@ -31,8 +31,6 @@ import org.springframework.security.core.GrantedAuthority;
 import ar.com.avaco.arc.sec.domain.UserDetailsExtended;
 
 /**
- * Un cliente del portal que realiza inversiones o toma prestamos.
- * 
  * @author beto
  *
  */
@@ -160,6 +158,10 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 	@Column(name = "FECHA_REGISTRO", nullable = false, updatable = false)
 	private Date fechaRegistro;
 
+	@Column (name = "TIPO_CLIENTE")
+	@Enumerated(EnumType.STRING)
+	private TipoCliente tipoCliente;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_ACCESOS")
 	private AccesosCliente accesos;
@@ -365,4 +367,12 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 		return this.getNombre() + " " + this.getApellido();
 	}
 
+	public TipoCliente getTipoCliente() {
+		return tipoCliente;
+	}
+
+	public void setTipoCliente(TipoCliente tipoCliente) {
+		this.tipoCliente = tipoCliente;
+	}
+	
 }

@@ -1,9 +1,6 @@
 package ar.com.avaco.educacion.ws.dto;
 
-import java.text.ParseException;
 import java.util.Calendar;
-import java.util.Date;
-
 import org.apache.commons.lang3.StringUtils;
 
 import ar.com.avaco.educacion.domain.entities.Aula;

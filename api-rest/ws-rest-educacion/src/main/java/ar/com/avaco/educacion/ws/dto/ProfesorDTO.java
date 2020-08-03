@@ -10,8 +10,11 @@ public class ProfesorDTO extends ClienteDTO {
 	private byte[] foto;
 
 	private String nombreApellido;
-	
-	public ProfesorDTO() {}
+
+	private String descripcion;
+
+	public ProfesorDTO() {
+	}
 
 	public ProfesorDTO(Profesor profesor) {
 		this.setDTO(profesor);
@@ -33,23 +36,24 @@ public class ProfesorDTO extends ClienteDTO {
 		profesor.setApellido(this.getApellido());
 		profesor.setUsername(this.getUsername());
 		profesor.setEmail(this.getEmail());
-		
+
 		Identificacion id = new Identificacion();
 		id.setNumero(this.getNumeroIdentificacion());
 		id.setTipo(TipoIdentificacion.valueOf(this.getTipoIdentificacion()));
 		id.setCliente(profesor);
 		profesor.setIdentificacion(id);
-		
+
 		Contacto contacto = new Contacto();
 		contacto.setTelefonoMovil(this.getTelefonoMovil());
 		contacto.setCliente(profesor);
 		profesor.setContacto(contacto);
-	
+
+		profesor.setDescripcion(this.getDescripcion());
+		
 		return profesor;
 	}
 
 	public void setDTO(Profesor profesor) {
-	
 		this.setId(profesor.getId());
 		this.setNombre(profesor.getNombre());
 		this.setApellido(profesor.getApellido());
@@ -60,7 +64,7 @@ public class ProfesorDTO extends ClienteDTO {
 		this.setEmail(profesor.getEmail());
 		this.setTelefonoMovil(profesor.getContacto().getTelefonoMovil());
 		this.setNombreApellido(profesor.getNombre() + " " + profesor.getApellido());
-
+		this.setDescripcion(profesor.getDescripcion());
 	}
 
 	public String getNombreApellido() {
@@ -71,6 +75,12 @@ public class ProfesorDTO extends ClienteDTO {
 		this.nombreApellido = nombreApellido;
 	}
 
-	
-	
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 }

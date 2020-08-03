@@ -24,7 +24,6 @@ public class MateriaProfesorEPServiceImpl extends CRUDEPBaseService<Long, Materi
 	@Override
 	public List<MateriaProfesorFullDTO> listMateriasProfesor(Long id) {
 		Profesor profesor = this.getService().getMateriaProfesor(id);
-		
 		List<MateriaProfesorFullDTO> convertToDtos = this.convertToDtos(profesor);
 		profesor = null;
 		return convertToDtos;
@@ -42,19 +41,8 @@ public class MateriaProfesorEPServiceImpl extends CRUDEPBaseService<Long, Materi
 		MateriaProfesorDTO dto = new MateriaProfesorDTO();
 		dto.setIdMateria(idMateria);
 		dto.setIdProfesor(profesor.getId());
-		
-		/*Optional<Materia> materiaOpt = profesor.getMaterias().stream().filter(mat -> mat.getId().equals(idMateria)).findFirst();
-		
-		if(materiaOpt.isPresent()) {
-			
-			Materia materia = materiaOpt.get();
-			dto.setIdMateria(idMateria);
-			dto.setDescMateria(materia.getDescripcion());
-			
-			dto.setIdNivel(materia.getNivel().getId());
-			dto.setDescNivel(materia.getNivel().getDescripcion());
 
-		}*/
+		
 		
 		return dto;
 	}

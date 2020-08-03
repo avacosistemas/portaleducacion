@@ -23,11 +23,11 @@ create table AULA_ALUMNO (ID_AULA_ALUMNO int8 not null, ID_AULA int8 not null, I
 create table AULA_PROFESOR (ID_AULA int8 not null, ID_PROFESOR int8 not null, primary key (ID_AULA, ID_PROFESOR));
 create table CLI_ACCESOS_CLIENTE (ID_ACCESO int8 not null, codigo varchar(255), descripcion varchar(255), primary key (ID_ACCESO));
 create table CLI_ACCESO_PERMISO (ID_ACCESO int8 not null, ID_PERMISO int8 not null, primary key (ID_ACCESO, ID_PERMISO));
-create table CLI_CLIENTE (ID_CLIENTE int8 not null, APELLIDO varchar(255) not null, BLOQUEADO boolean, EMAIL varchar(255) not null, FECHA_ALTA_PASSWORD timestamp, FECHA_NAC date, FECHA_REGISTRO timestamp not null, GENERO varchar(255), INTENTOS_FALLIDOS_LOGIN int4, NACIONALIDAD varchar(255), NOMBRE varchar(255) not null, PASSWORD varchar(255) not null, REQUIERE_CAMBIO_PASSWORD boolean, USERNAME varchar(255) not null, ID_ACCESOS int8, primary key (ID_CLIENTE));
+create table CLI_CLIENTE (ID_CLIENTE int8 not null, APELLIDO varchar(255) not null, TIPO_CLIENTE varchar(255) not null, BLOQUEADO boolean, EMAIL varchar(255) not null, FECHA_ALTA_PASSWORD timestamp, FECHA_NAC date, FECHA_REGISTRO timestamp not null, GENERO varchar(255), INTENTOS_FALLIDOS_LOGIN int4, NACIONALIDAD varchar(255), NOMBRE varchar(255) not null, PASSWORD varchar(255) not null, REQUIERE_CAMBIO_PASSWORD boolean, USERNAME varchar(255) not null, ID_ACCESOS int8, primary key (ID_CLIENTE));
 create table CLI_CONTACTO (ID_CONTACTO int8 not null, BARRIO varchar(255), CODIGO_POSTAL varchar(255), DOMICILIO varchar(255), LOCALIDAD varchar(255), NOMBRE_CONTACTO varchar(255), PROVINCIA int4, TEL_FIJO varchar(255), TEL_CELULAR varchar(255) not null, primary key (ID_CONTACTO));
 create table CLI_IDENTIFICACION (ID_IDENTIFICACION int8 not null, NUMERO_ID varchar(255) not null, TIPO_ID varchar(255) not null, primary key (ID_IDENTIFICACION));
 create table CLI_PERMISO_CLIENTE (ID_PERMISO int8 not null, codigo varchar(255), descripcion varchar(255), primary key (ID_PERMISO));
-create table COMENTARIO (ID_COMENTARIO int8 not null, DESC_COMENTARIO varchar(280), ID_AULA int8, primary key (ID_COMENTARIO));
+create table COMENTARIO (ID_COMENTARIO int8 not null, NOMBRE varchar(200), FECHA timestamp, DESC_COMENTARIO varchar(280), ID_AULA int8, primary key (ID_COMENTARIO));
 create table DECIDIR (ID_DECIDIR int8 not null, primary key (ID_DECIDIR));
 create table HORARIO_DISP (ID_HORARIO_DISP int8 not null, DIA_DISPONIBLE int4 not null, HORA_DISPONIBLE int4 not null, ID_PROFESOR int8, primary key (ID_HORARIO_DISP));
 create table HORAS_COMPRA (ID_COMPRA int8 not null, CANT_HORAS_COMPRA int4, ID_ALUMNO int8, FK_DECIDIR int8 not null, ID_PROFESOR int8, primary key (ID_COMPRA));
@@ -35,8 +35,8 @@ create table HORAS_DISP (ID_HORAS_DISP int8 not null, CANT_HORAS_DISP int4, ID_A
 create table INSTITUCION (ID_INSTITUCION int8 not null, NOMBRE varchar(255), primary key (ID_INSTITUCION));
 create table MATERIA (ID_MATERIA int8 not null, DESC_MATERIA varchar(255) not null, ID_NIVEL int4, primary key (ID_MATERIA));
 create table NIVEL (ID_NIVEL int4 not null, DESC_NIVEL varchar(255) not null, primary key (ID_NIVEL));
-create table PREG_RESP (ID_PREG_RESP int8 not null, FECHA_PREGUNTA timestamp, PREGUNTA varchar(255), RESPUESTA varchar(255), ID_ALUMNO int8, ID_MATERIA int8, ID_PROFESOR int8, primary key (ID_PREG_RESP));
-create table PROFESOR (FOTO bytea, VALOR_HORA float8, CALIFICACION float8, ID_CLIENTE int8 not null, primary key (ID_CLIENTE));
+create table PREG_RESP (ID_PREG_RESP int8 not null, FECHA_PREGUNTA timestamp, FECHA_RESPUESTA timestamp, PREGUNTA varchar(255), RESPUESTA varchar(255), ID_ALUMNO int8, ID_MATERIA int8, ID_PROFESOR int8, primary key (ID_PREG_RESP));
+create table PROFESOR (DESCRIPCION text, MATERIAS_STRING text, FOTO bytea, VALOR_HORA float8, CALIFICACION float8, ID_CLIENTE int8 not null, primary key (ID_CLIENTE));
 create table PROFESOR_MATERIA (ID_PROFESOR int8 not null, ID_MATERIA int8 not null, primary key (ID_PROFESOR, ID_MATERIA));
 
 

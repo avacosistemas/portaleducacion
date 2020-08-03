@@ -66,12 +66,14 @@ public class ProfesorServiceImpl extends NJBaseService<Long, Profesor, ProfesorR
 			
 			profesor.addMateria(materia);
 			materia.addProfesor(profesor);
-
+			
 			profesor = this.getRepository().save(profesor);
 
 		} else {
 			throw new BusinessException("El profesor ya tiene asociada la materia");
 		}
+		
+		
 		
 		return profesor;
 	}

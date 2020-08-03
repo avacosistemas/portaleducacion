@@ -5,12 +5,11 @@ import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
 import ar.com.avaco.educacion.domain.entities.cliente.Identificacion;
 import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
 
-public class ProfesorDTO extends ClienteDTO {
+public class ProfesorPerfilDTO extends ClienteDTO {
 
+	public ProfesorPerfilDTO() {}
 
-	public ProfesorDTO() {}
-
-	public ProfesorDTO(Profesor profesor) {
+	public ProfesorPerfilDTO(Profesor profesor) {
 		this.setDTO(profesor);
 
 	}
@@ -26,7 +25,7 @@ public class ProfesorDTO extends ClienteDTO {
 		
 		Identificacion id = new Identificacion();
 		id.setNumero(this.getNumeroIdentificacion());
-		id.setTipo(TipoIdentificacion.valueOf(this.getTipoIdentificacion()));
+		id.setTipo(TipoIdentificacion.DNI);
 		id.setCliente(profesor);
 		profesor.setIdentificacion(id);
 		

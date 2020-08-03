@@ -1,7 +1,6 @@
 package ar.com.avaco.educacion.ws.dto;
 
 import ar.com.avaco.educacion.domain.entities.PreguntaRespuesta;
-import ar.com.avaco.educacion.domain.entities.Profesor;
 import ar.com.avaco.utils.DateUtils;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
@@ -9,11 +8,12 @@ public class PreguntaRespuestaDTO extends DTOEntity<Long> {
 	
 	private Long id;
 	private Long idProfesor;
+	private String nombreAlumno;
 	private String pregunta;
 	private String respuesta;
-	private String fecha;
-	private String hora;
-	
+	private String fechaPregunta;
+	private String fechaRespuesta;
+
 	public PreguntaRespuestaDTO() {
 	}
 
@@ -37,20 +37,12 @@ public class PreguntaRespuestaDTO extends DTOEntity<Long> {
 		this.idProfesor = idProfesor;
 	}
 
-	public String getFecha() {
-		return fecha;
+	public String getFechaPregunta() {
+		return fechaPregunta;
 	}
 
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
-
-	public String getHora() {
-		return hora;
-	}
-
-	public void setHora(String hora) {
-		this.hora = hora;
+	public void setFechaPregunta(String fechaPregunta) {
+		this.fechaPregunta = fechaPregunta;
 	}
 
 	public String getPregunta() {
@@ -69,28 +61,32 @@ public class PreguntaRespuestaDTO extends DTOEntity<Long> {
 		this.respuesta = respuesta;
 	}
 
-	public PreguntaRespuesta toEntity() {
-		Profesor profesor = new Profesor();
-		PreguntaRespuesta preguntaRta = new PreguntaRespuesta();
-		
-		preguntaRta.setId(this.getId());
-		profesor.setId(this.getIdProfesor());
-		
-		preguntaRta.setProfesor(profesor);
-		
-		preguntaRta.setPregunta(this.getPregunta());
-		
-		return preguntaRta;
-	}
-
 	public void setDTO(PreguntaRespuesta preguntaRta) {
 		this.setId(preguntaRta.getId());
 		this.setIdProfesor(preguntaRta.getProfesor().getId());
 		this.setPregunta(preguntaRta.getPregunta());
 		this.setRespuesta(preguntaRta.getRespuesta());
-		this.setFecha(DateUtils.toString(preguntaRta.getFechaPregunta()));
-		//this.setHora(preguntaRta.getHoraPregunta()!=null ? preguntaRta.getHoraPregunta().toString():"");
-		
+		this.setFechaPregunta(DateUtils.toString(preguntaRta.getFechaPregunta(), DateUtils.FULL_24_HS));
+		if (preguntaRta.getFechaRespuesta() != null) {
+			this.setFechaRespuesta(DateUtils.toString(preguntaRta.getFechaRespuesta(), DateUtils.FULL_24_HS));
+		}
+		this.setNombreAlumno(preguntaRta.getAlumno().getNombreApellido());
+	}
+
+	public String getNombreAlumno() {
+		return nombreAlumno;
+	}
+
+	public void setNombreAlumno(String nombreAlumno) {
+		this.nombreAlumno = nombreAlumno;
+	}
+
+	public String getFechaRespuesta() {
+		return fechaRespuesta;
+	}
+
+	public void setFechaRespuesta(String fechaRespuesta) {
+		this.fechaRespuesta = fechaRespuesta;
 	}
 
 }

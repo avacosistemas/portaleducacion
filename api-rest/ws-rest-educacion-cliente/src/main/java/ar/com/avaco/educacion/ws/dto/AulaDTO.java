@@ -65,7 +65,7 @@ public class AulaDTO extends DTOEntity<Long> {
 
 //		if (profesores!=null && !profesores.isEmpty()) {
 //			HashSet<Profesor> profesoresList=new HashSet<>();
-//			for (ProfesorDTO profesorDTO : profesores) {
+//			for (ProfesorPerfilDTO profesorDTO : profesores) {
 //				Profesor profesor=profesorDTO.toEntity();
 //				profesoresList.add(profesor);
 //			}
@@ -87,9 +87,9 @@ public class AulaDTO extends DTOEntity<Long> {
 //		}
 
 //		if (aula.getProfesores() != null && !aula.getProfesores().isEmpty()) {
-//			HashSet<ProfesorDTO> profesoresDTOs = new HashSet<>();
+//			HashSet<ProfesorPerfilDTO> profesoresDTOs = new HashSet<>();
 //			for (Profesor profesor : aula.getProfesores()) {
-//				profesoresDTOs.add(new ProfesorDTO(profesor));
+//				profesoresDTOs.add(new ProfesorPerfilDTO(profesor));
 //			}
 //			this.setProfesores(profesoresDTOs);
 //		}

@@ -68,6 +68,7 @@ public class MateriaProfesorEPServiceImpl extends CRUDEPBaseService<Long, Materi
 		
 		MateriaProfesorFullDTO materiaProfesorDto;
 		List<MateriaProfesorFullDTO> dtos = new ArrayList<>();
+		
 		if (profesor != null) {
 			for (Materia entity : profesor.getMaterias()) {
 			
@@ -81,6 +82,7 @@ public class MateriaProfesorEPServiceImpl extends CRUDEPBaseService<Long, Materi
 				materiaProfesorDto.setIdNivel(entity.getNivel().getId());
 				materiaProfesorDto.setDescNivel(entity.getNivel().getDescripcion());
 				
+				materiaProfesorDto.setMateriaConNivel(entity.getDescripcion() + "(" + entity.getNivel().getDescripcion() + ")");
 				
 				dtos.add(materiaProfesorDto);
 			}

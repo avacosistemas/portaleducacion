@@ -219,6 +219,11 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 		this.aulaAlumnoService.save(entity);
 	}
 
+	@Override
+	public List<Aula> listByProfesorId(Long id) {
+		return this.repository.findAllByProfesoresIdIn(id);
+	}
+	
 	@Resource(name = "aulaAlumnoService")
 	public void setAulaAlumnoService(AulaAlumnoService aulaAlumnoService) {
 		this.aulaAlumnoService = aulaAlumnoService;

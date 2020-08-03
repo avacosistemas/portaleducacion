@@ -24,22 +24,6 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "AULA_SEQ", sequenceName = "AULA_SEQ", allocationSize = 1)
 public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 
-	public Date getDia() {
-		return dia;
-	}
-
-	public void setDia(Date dia) {
-		this.dia = dia;
-	}
-
-	public Integer getHora() {
-		return hora;
-	}
-
-	public void setHora(Integer hora) {
-		this.hora = hora;
-	}
-
 	/** serializacion */
 	private static final long serialVersionUID = 939136778257772228L;
 
@@ -156,6 +140,22 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 
 	public void setProfesor(Profesor profesor) {
 		this.profesor = profesor;
+	}
+
+	public Date getDia() {
+		return dia;
+	}
+
+	public void setDia(Date dia) {
+		this.dia = dia;
+	}
+
+	public Integer getHora() {
+		return hora;
+	}
+
+	public void setHora(Integer hora) {
+		this.hora = hora;
 	}
 	
 	// TODO Agregar hashCode, equals y toString cuando se completen todos los
