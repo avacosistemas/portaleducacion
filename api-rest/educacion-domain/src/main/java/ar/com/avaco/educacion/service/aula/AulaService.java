@@ -108,4 +108,15 @@ public interface AulaService extends NJService<Long, Aula> {
 	 * @param fromIP
 	 */
 	void validarEventoClase(String fromIP)  throws BusinessException;
+
+	/**
+	 * Permite a los alumnos unirse a una Clase Virtual existente.
+	 * 
+	 * @param aula
+	 * @param idAlumno
+	 * @return
+	 * @throws BusinessException
+	 */
+	String unirseClase(Aula aula, String idAlumno) throws BusinessException;
+	 
 }

@@ -259,5 +259,27 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 			throw new BusinessException(e.getMessage());
 		}		
 	}
+
+	@Override
+	public String unirseClase(Aula aula, String idAlumno) throws BusinessException {
+		Alumno alumno = alumnoService.getAlumno(Long.valueOf(idAlumno));
+		
+		if (alumno==null) {
+			throw new BusinessException("Alumno no existe");			
+		}
+		
+		if (aula==null) {
+			throw new BusinessException("Aula no existe");			
+		}
+		
+		try {
+			String url=aulaVirtualService.unirseAlumnoClase(aula.generatedIdAula(), alumno);
+			return url;
+		} catch (AulaVirtualException e) {
+			throw new BusinessException(e.getMessage());
+		}
+	}
+	
+	
 	
 }
