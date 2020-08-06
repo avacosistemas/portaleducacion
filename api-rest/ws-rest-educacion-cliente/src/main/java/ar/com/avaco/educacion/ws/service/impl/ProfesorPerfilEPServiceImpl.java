@@ -11,16 +11,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Aula;
+import ar.com.avaco.educacion.domain.entities.AulaAlumno;
+import ar.com.avaco.educacion.domain.entities.Comentario;
 import ar.com.avaco.educacion.domain.entities.PreguntaRespuesta;
 import ar.com.avaco.educacion.domain.entities.Profesor;
 import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
 import ar.com.avaco.educacion.domain.entities.cliente.Identificacion;
 import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
+import ar.com.avaco.educacion.service.aula.AulaAlumnoService;
 import ar.com.avaco.educacion.service.aula.AulaService;
+import ar.com.avaco.educacion.service.comentario.ComentarioService;
 import ar.com.avaco.educacion.service.pregresp.PreguntaRespuestaService;
 import ar.com.avaco.educacion.service.profesor.ProfesorService;
-import ar.com.avaco.educacion.ws.dto.AulaDTO;
-import ar.com.avaco.educacion.ws.dto.AulaProfesorDTO;
+import ar.com.avaco.educacion.ws.dto.AulaProfesorPortalDTO;
+import ar.com.avaco.educacion.ws.dto.CalificacionDTO;
 import ar.com.avaco.educacion.ws.dto.ComentarioDTO;
 import ar.com.avaco.educacion.ws.dto.PreguntaRespuestaDTO;
 import ar.com.avaco.educacion.ws.dto.ProfesorPerfilDTO;
@@ -34,6 +38,10 @@ public class ProfesorPerfilEPServiceImpl extends CRUDEPBaseService<Long, Profeso
 	private PreguntaRespuestaService preguntaRespuestaService;
 	
 	private AulaService aulaService;
+	
+	private ComentarioService comentarioService;
+	
+	private AulaAlumnoService aulaAlumnoService;
 	
 	@Override
 	public ProfesorPerfilDTO getProfesor(Long id) {
@@ -116,26 +124,56 @@ public class ProfesorPerfilEPServiceImpl extends CRUDEPBaseService<Long, Profeso
 	}
 	
 	@Override
-	public List<AulaProfesorDTO> listarMisAulas(Long id) {
+	public List<AulaProfesorPortalDTO> listarMisAulas(Long id) {
 		List<Aula> aulas = aulaService.listByProfesorId(id);
-		List<AulaProfesorDTO> aulasDTO = new ArrayList<>();
-		aulas.stream().forEach(x->aulasDTO.add(new AulaProfesorDTO(x)));
+		List<AulaProfesorPortalDTO> aulasDTO = new ArrayList<>();
+		aulas.stream().forEach(x->aulasDTO.add(new AulaProfesorPortalDTO(x)));
 		return aulasDTO;
 	}
 	
 	@Override
-	public AulaProfesorDTO getAula(Long idClase) {
+	public AulaProfesorPortalDTO getAula(Long idClase) {
 		Aula aula = aulaService.get(idClase);
-		AulaProfesorDTO apdto = new AulaProfesorDTO(aula);
+		AulaProfesorPortalDTO apdto = new AulaProfesorPortalDTO(aula);
 		return apdto;
 	}
 	
 	@Override
-	public List<ComentarioDTO> getAnotacionesAula(Long idClase) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ComentarioDTO> getComentariosAula(Long idClase) {
+		List<Comentario> comentarios = comentarioService.listByClaseId(idClase);
+		List<ComentarioDTO> comentariosDTO = new ArrayList<>();
+		comentarios.forEach(x->comentariosDTO.add(new ComentarioDTO(x)));
+		return comentariosDTO;
 	}
 
+	@Override
+	public void agregarComentarioAula(ComentarioDTO comentarioDTO, Long idAula, String nombre) {
+		Comentario comentario = new Comentario();
+		Aula aula = new Aula();
+		aula.setId(idAula);
+		comentario.setAula(aula);
+		comentario.setComentario(comentarioDTO.getComentario());
+		comentario.setFecha(Calendar.getInstance().getTime());
+		comentario.setNombre(nombre);
+		comentarioService.save(comentario);
+	}
+
+	@Override
+	public List<CalificacionDTO> getCalificaciones(Long id) {
+		List<AulaAlumno> aulaAlumnoList = aulaAlumnoService.listByProfesorId(id);
+		List<CalificacionDTO> calificaciones = new ArrayList<>();
+		aulaAlumnoList.forEach(x->calificaciones.add(new CalificacionDTO(x)));
+		return calificaciones;
+	}
+
+	@Override
+	public List<CalificacionDTO> getAlumnos(Long idClase) {
+		List<AulaAlumno> aulaAlumnoList = aulaAlumnoService.listByAula(idClase);
+		List<CalificacionDTO> calificaciones = new ArrayList<>();
+		aulaAlumnoList.forEach(x->calificaciones.add(new CalificacionDTO(x)));
+		return calificaciones;
+	}
+	
 	//Service
 	@Override
 	@Resource(name = "profesorService")
@@ -151,6 +189,16 @@ public class ProfesorPerfilEPServiceImpl extends CRUDEPBaseService<Long, Profeso
 	@Resource(name = "aulaService")
 	public void setAulaService(AulaService aulaService) {
 		this.aulaService = aulaService;
+	}
+	
+	@Resource(name = "comentarioService")
+	public void setComentarioService(ComentarioService comentarioService) {
+		this.comentarioService = comentarioService;
+	}
+	
+	@Resource(name = "aulaAlumnoService")
+	public void setAulaAlumnoService(AulaAlumnoService aulaAlumnoService) {
+		this.aulaAlumnoService = aulaAlumnoService;
 	}
 	
 }

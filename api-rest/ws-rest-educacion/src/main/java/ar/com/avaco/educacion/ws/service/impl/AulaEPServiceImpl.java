@@ -24,6 +24,7 @@ import ar.com.avaco.educacion.domain.entities.TipoUsuario;
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 import ar.com.avaco.educacion.service.aula.AulaEventoService;
 import ar.com.avaco.educacion.service.aula.AulaService;
+import ar.com.avaco.educacion.ws.dto.AulaAlumnoDTO;
 import ar.com.avaco.educacion.ws.dto.AulaDTO;
 import ar.com.avaco.educacion.ws.dto.AulaListadoDTO;
 import ar.com.avaco.educacion.ws.dto.AulaProfesorDTO;
@@ -217,5 +218,20 @@ public class AulaEPServiceImpl extends CRUDEPBaseService<Long, AulaDTO, Aula, Au
 		aulaDTO.setUrlJoin(url);
 		return aulaDTO;
 	}
+
+	@Override
+	public AulaDTO unirseClase(AulaAlumnoDTO aulaAlumnoDTO) throws BusinessException {
+		String idAlumno = ClienteUtils.getClienteLogueadoId().toString();
+
+		aulaAlumnoDTO.setIdAlumno(idAlumno);
+		Aula aula = service.getAula(Long.valueOf(aulaAlumnoDTO.getIdAula()));
+		String url = service.unirseClase(aula, aulaAlumnoDTO.getIdAlumno());
+
+		AulaDTO aulaDTO = new AulaDTO(aula);
+		aulaDTO.setUrlJoin(url);
+		return aulaDTO;
+	}
+	
+	
 
 }

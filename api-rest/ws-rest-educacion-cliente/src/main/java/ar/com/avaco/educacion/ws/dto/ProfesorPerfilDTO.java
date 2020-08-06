@@ -7,6 +7,8 @@ import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
 
 public class ProfesorPerfilDTO extends ClienteDTO {
 
+	private Double calificacion;
+	
 	public ProfesorPerfilDTO() {}
 
 	public ProfesorPerfilDTO(Profesor profesor) {
@@ -33,7 +35,7 @@ public class ProfesorPerfilDTO extends ClienteDTO {
 		contacto.setTelefonoMovil(this.getTelefonoMovil());
 		contacto.setCliente(profesor);
 		profesor.setContacto(contacto);
-	
+		
 		return profesor;
 	}
 
@@ -47,7 +49,17 @@ public class ProfesorPerfilDTO extends ClienteDTO {
 		this.setUsername(profesor.getUsername());
 		this.setEmail(profesor.getEmail());
 		this.setTelefonoMovil(profesor.getContacto().getTelefonoMovil());
-
+		this.setCalificacion(profesor.getCalificacion()); 
 	}
 
+	public Double getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(Double calificacion) {
+		this.calificacion = calificacion;
+	}
+
+	
+	
 }

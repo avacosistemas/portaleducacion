@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
+import ar.com.avaco.educacion.ws.dto.AulaAlumnoDTO;
 import ar.com.avaco.educacion.ws.dto.AulaDTO;
 import ar.com.avaco.educacion.ws.dto.AulaListadoDTO;
 import ar.com.avaco.educacion.ws.dto.AulaProfesorDTO;
@@ -108,6 +109,15 @@ public class AulaRestController extends AbstractDTORestController<AulaDTO, Long,
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);	
 	}
 	
+	@RequestMapping(value = "/aula/unirseClase/", method = RequestMethod.POST)
+	public ResponseEntity<JSONResponse> unirseClase(@RequestBody AulaAlumnoDTO aulaAlumnoDTO) throws BusinessException {
+		AulaDTO newAulaDto = service.unirseClase(aulaAlumnoDTO);
+		JSONResponse response = new JSONResponse();
+		response.setData(newAulaDto);
+		response.setData("ACK");
+		response.setStatus(JSONResponse.OK);	
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);	
+	}
 	
 	//Service
 	@Resource(name = "aulaEPService")

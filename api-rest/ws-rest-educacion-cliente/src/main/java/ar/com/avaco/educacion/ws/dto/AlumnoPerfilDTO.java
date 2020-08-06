@@ -5,11 +5,11 @@ import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
 import ar.com.avaco.educacion.domain.entities.cliente.Identificacion;
 import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
 
-public class AlumnoDTO extends ClienteDTO {
+public class AlumnoPerfilDTO extends ClienteDTO {
 
-	public AlumnoDTO() {}
+	public AlumnoPerfilDTO() {}
 
-	public AlumnoDTO(Alumno alumno) {
+	public AlumnoPerfilDTO(Alumno alumno) {
 		this.setDTO(alumno);
 	}
 	
@@ -30,6 +30,7 @@ public class AlumnoDTO extends ClienteDTO {
 		
 		Contacto contacto = new Contacto();
 		contacto.setTelefonoMovil(this.getTelefonoMovil());
+		contacto.setTelefonoFijo(this.getTelefonoFijo());
 		contacto.setCliente(alumno);
 		alumno.setContacto(contacto);
 	
@@ -46,6 +47,7 @@ public class AlumnoDTO extends ClienteDTO {
 		this.setUsername(alumno.getUsername());
 		this.setEmail(alumno.getEmail());
 		this.setTelefonoMovil(alumno.getContacto().getTelefonoMovil());
+		this.setTelefonoFijo(alumno.getContacto().getTelefonoFijo());
 
 	}
 

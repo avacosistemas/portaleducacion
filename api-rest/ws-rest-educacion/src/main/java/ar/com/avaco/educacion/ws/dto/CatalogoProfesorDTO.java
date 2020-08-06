@@ -14,6 +14,8 @@ public class CatalogoProfesorDTO extends DTOEntity<Long> {
 
 	private String materias;
 
+	private Double calificacion;
+
 	public CatalogoProfesorDTO() {
 	}
 
@@ -63,6 +65,7 @@ public class CatalogoProfesorDTO extends DTOEntity<Long> {
 
 		this.setMaterias(profesor.getMateriasString());
 		this.setDescripcion(profesor.getDescripcion());
+		this.setCalificacion(profesor.getCalificacion());
 	}
 
 	public String getMaterias() {
@@ -79,6 +82,14 @@ public class CatalogoProfesorDTO extends DTOEntity<Long> {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public Double getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(Double calificacion) {
+		this.calificacion = calificacion;
 	}
 
 }

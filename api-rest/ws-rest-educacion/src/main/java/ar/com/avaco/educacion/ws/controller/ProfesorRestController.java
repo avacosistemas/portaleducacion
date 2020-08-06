@@ -34,7 +34,6 @@ import ar.com.avaco.ws.rest.dto.JSONResponse;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamResource;
 
-
 @RestController
 public class ProfesorRestController extends AbstractDTORestController<ProfesorDTO, Long, ProfesorEPService> {
 

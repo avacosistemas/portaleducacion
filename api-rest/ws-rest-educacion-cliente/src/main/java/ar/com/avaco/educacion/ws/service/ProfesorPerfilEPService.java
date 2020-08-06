@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import ar.com.avaco.commons.exception.BusinessException;
-import ar.com.avaco.educacion.ws.dto.AulaProfesorDTO;
+import ar.com.avaco.educacion.ws.dto.AulaProfesorPortalDTO;
+import ar.com.avaco.educacion.ws.dto.CalificacionDTO;
 import ar.com.avaco.educacion.ws.dto.ComentarioDTO;
 import ar.com.avaco.educacion.ws.dto.PreguntaRespuestaDTO;
 import ar.com.avaco.educacion.ws.dto.ProfesorPerfilDTO;
@@ -26,10 +27,16 @@ public interface ProfesorPerfilEPService extends CRUDEPService<Long, ProfesorPer
 
 	void responderPregunta(RespuestaDTO respuestaDTO);
 
-	List<AulaProfesorDTO> listarMisAulas(Long id);
+	List<AulaProfesorPortalDTO> listarMisAulas(Long id);
 
-	AulaProfesorDTO getAula(Long idClase);
+	AulaProfesorPortalDTO getAula(Long idClase);
 
-	List<ComentarioDTO> getAnotacionesAula(Long idClase);
+	List<ComentarioDTO> getComentariosAula(Long idClase);
+
+	void agregarComentarioAula(ComentarioDTO comentarioDTO, Long idAula, String nombre);
+
+	List<CalificacionDTO> getCalificaciones(Long id);
+
+	List<CalificacionDTO> getAlumnos(Long idClase);
 	
 }

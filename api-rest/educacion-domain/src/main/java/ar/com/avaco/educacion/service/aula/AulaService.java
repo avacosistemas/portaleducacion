@@ -16,20 +16,20 @@ public interface AulaService extends NJService<Long, Aula> {
 	 * @return
 	 */
 	Aula getAula(Long id);
-	
-	/** 
+
+	/**
 	 * Retorna un listado de aulas
 	 * 
 	 * @return
 	 */
 	List<Aula> getAulas();
-	
+
 	/**
 	 * Crea un aula
 	 * 
 	 * @param aula
 	 * @return
-	 * @throws BusinessException 
+	 * @throws BusinessException
 	 */
 	Aula crearAula(Aula aula) throws BusinessException;
 
@@ -38,7 +38,7 @@ public interface AulaService extends NJService<Long, Aula> {
 	 * 
 	 * @param aula
 	 * @return
-	 * @throws BusinessException 
+	 * @throws BusinessException
 	 */
 	Aula updateAula(Aula aula) throws BusinessException;
 
@@ -48,10 +48,10 @@ public interface AulaService extends NJService<Long, Aula> {
 	 * @param idAula
 	 * @param idProfesor
 	 * @return
-	 * @throws BusinessException 
+	 * @throws BusinessException
 	 */
 	Aula addProfesorAula(Long idAula, Long idProfesor) throws BusinessException;
-	
+
 	/**
 	 * Quita un profesor de un aula
 	 * 
@@ -72,8 +72,10 @@ public interface AulaService extends NJService<Long, Aula> {
 	 * @return
 	 */
 	Aula comprarClase(Long idAlumno, Long idProfesor, Long idMateria, Date dia, String hora) throws BusinessException;
-/**
-	 * Crea la Clase virtual en la plataforma de meeting y retorna el URL para el join
+
+	/**
+	 * Crea la Clase virtual en la plataforma de meeting y retorna el URL para el
+	 * join
 	 * 
 	 * @param aula
 	 * @param idProfesor
@@ -83,8 +85,21 @@ public interface AulaService extends NJService<Long, Aula> {
 
 	/**
 	 * Valida el origen del request
+	 * 
 	 * @param fromIP
 	 */
-	void validarEventoClase(String fromIP)  throws BusinessException;
+	void validarEventoClase(String fromIP) throws BusinessException;
+
+	/**
+	 * Permite a los alumnos unirse a una Clase Virtual existente.
+	 * 
+	 * @param aula
+	 * @param idAlumno
+	 * @return
+	 * @throws BusinessException
+	 */
+	String unirseClase(Aula aula, String idAlumno) throws BusinessException;
+
 	List<Aula> listByProfesorId(Long id);
+
 }

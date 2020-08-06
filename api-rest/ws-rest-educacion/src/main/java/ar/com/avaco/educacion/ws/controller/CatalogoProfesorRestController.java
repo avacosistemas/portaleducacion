@@ -80,6 +80,7 @@ public class CatalogoProfesorRestController {
 	}
 	
 	@RequestMapping(value = "/catalogoConsultas/", method = RequestMethod.POST)
+	@Deprecated
 	public ResponseEntity<JSONResponse> create(@RequestBody ConsultaDTO consulta) throws BusinessException {
 		ConsultaDTO newConsultaDto = service.createCatalogoConsulta(consulta);
 		JSONResponse response = new JSONResponse();

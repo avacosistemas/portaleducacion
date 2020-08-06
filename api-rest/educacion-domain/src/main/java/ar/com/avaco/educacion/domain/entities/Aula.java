@@ -74,6 +74,14 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 		return "Aula "+this.getMateria().getDescripcion()+" / Prof: "+profesor.getNombreApellido();
 	}
 	
+	/* Id usada para identificador unico de AulaVirtual */	
+	public String generatedIdAula() {
+		if (this.getProfesor()!=null)
+			return generatedIdAula(this.getProfesor());
+		return null;
+	}
+	
+	
 	public Long getId() {
 		return id;
 	}

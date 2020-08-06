@@ -12,4 +12,11 @@ public interface AulaAlumnoService extends NJService<Long, AulaAlumno> {
 
 	AulaAlumno saveAlumno(AulaAlumno aulaAlumno) throws BusinessException;
 
+	List<AulaAlumno> listByProfesorId(Long id);
+
+	List<AulaAlumno> listByAlumnoId(Long id);
+
+	AulaAlumno getByIdAulaIdAlumno(Long idClase, Long id);
+
+
 }

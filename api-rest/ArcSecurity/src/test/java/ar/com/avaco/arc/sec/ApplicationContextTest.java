@@ -27,8 +27,7 @@ public class ApplicationContextTest implements ApplicationContextAware {
 	}
 	
 	@Override
-	public void setApplicationContext(ApplicationContext applicationContext)
-			throws BeansException {
+	public void setApplicationContext(ApplicationContext applicationContext) {
 		this.appCtx = applicationContext;
 	}
 }

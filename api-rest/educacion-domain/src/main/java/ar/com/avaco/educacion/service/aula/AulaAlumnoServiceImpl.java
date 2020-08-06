@@ -31,9 +31,14 @@ public class AulaAlumnoServiceImpl extends NJBaseService<Long, AulaAlumno, AulaA
 
 	@Override
 	public List<AulaAlumno> listByAula(Long idAula) {
-		return this.getRepository().findByAulaId(idAula);
+		return this.getRepository().findAllByAulaId(idAula);
 	}
 
+	@Override
+	public AulaAlumno getByIdAulaIdAlumno(Long idAula, Long id) {
+		return this.repository.findOneByAulaIdAndAlumnoId(idAula, id);
+	}
+	
 	@Override
 	public AulaAlumno saveAlumno(AulaAlumno aulaAlumno) throws BusinessException {
 
@@ -56,7 +61,7 @@ public class AulaAlumnoServiceImpl extends NJBaseService<Long, AulaAlumno, AulaA
 			}
 		}
 		
-		List<AulaAlumno> aulasAlumno = this.getRepository().findByAlumnoId(alumno.getId());
+		List<AulaAlumno> aulasAlumno = this.getRepository().findAllByAlumnoId(alumno.getId());
 		
 		if (aulasAlumno != null && !alumno.getAulas().isEmpty()) {
 			for (AulaAlumno aa : aulasAlumno) {
@@ -71,6 +76,17 @@ public class AulaAlumnoServiceImpl extends NJBaseService<Long, AulaAlumno, AulaA
 		return super.save(aulaAlumno);
 	}
 
+	@Override
+	public List<AulaAlumno> listByProfesorId(Long id) {
+		return this.repository.findAllByAulaProfesorId(id);
+	}
+	
+	@Override
+	public List<AulaAlumno> listByAlumnoId(Long id) {
+		return this.repository.findAllByAlumnoId(id);
+	}
+
+	
 	@Resource(name = "aulaAlumnoRepository")
 	public void setRepository(AulaAlumnoRepository aulaAlumnoRepository) {
 		this.repository = aulaAlumnoRepository;

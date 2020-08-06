@@ -3,7 +3,7 @@ package ar.com.avaco.educacion.ws.dto;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class ClienteDTO extends DTOEntity<Long> {
-	
+
 	private Long id;
 	private String nombre;
 	private String apellido;
@@ -12,6 +12,7 @@ public class ClienteDTO extends DTOEntity<Long> {
 	private String username;
 	private String email;
 	private String telefonoMovil;
+	private String telefonoFijo;
 	private String descripcion;
 
 	public ClienteDTO() {
@@ -32,7 +33,7 @@ public class ClienteDTO extends DTOEntity<Long> {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public String getApellido() {
 		return apellido;
 	}
@@ -89,6 +90,12 @@ public class ClienteDTO extends DTOEntity<Long> {
 		this.descripcion = descripcion;
 	}
 
-	
-	
+	public String getTelefonoFijo() {
+		return telefonoFijo;
+	}
+
+	public void setTelefonoFijo(String telefonoFijo) {
+		this.telefonoFijo = telefonoFijo;
+	}
+
 }

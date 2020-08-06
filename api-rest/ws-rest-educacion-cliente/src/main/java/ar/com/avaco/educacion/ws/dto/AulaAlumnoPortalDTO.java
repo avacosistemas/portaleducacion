@@ -5,12 +5,15 @@ import java.util.Calendar;
 import org.apache.commons.lang3.StringUtils;
 
 import ar.com.avaco.educacion.domain.entities.Aula;
+import ar.com.avaco.educacion.domain.entities.AulaAlumno;
 import ar.com.avaco.utils.DateUtils;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
-public class AulaProfesorDTO extends DTOEntity<Long> {
+public class AulaAlumnoPortalDTO extends DTOEntity<Long> {
 
 	private Long id;
+
+	private String profesor;
 
 	private String materia;
 
@@ -20,16 +23,23 @@ public class AulaProfesorDTO extends DTOEntity<Long> {
 
 	private String hora;
 
-	private Integer calificacion;
-
 	private String estado;
 
-	public AulaProfesorDTO(Aula aula) {
+	
+	public AulaAlumnoPortalDTO(AulaAlumno aulaAlumno) {
+		createDTO(aulaAlumno.getAula());
+	}
+
+	public AulaAlumnoPortalDTO(Aula aula) {
+		createDTO(aula);
+	}
+
+	private void createDTO(Aula aula) {
 		this.id = aula.getId();
 		this.materia = aula.getMateria().getDescripcion();
 		this.dia = DateUtils.toString(aula.getDia());
 		this.hora = StringUtils.leftPad(aula.getHora().toString(), 2, "0");
-		this.calificacion = aula.getCalificacion();
+		this.profesor = aula.getProfesor().getNombreApellido();
 		this.institucion = aula.getInstitucion() != null ? aula.getInstitucion().getNombre() : "";
 		Calendar ahora = Calendar.getInstance();
 		ahora.setTime(DateUtils.getFechaYHoraActual());
@@ -84,14 +94,6 @@ public class AulaProfesorDTO extends DTOEntity<Long> {
 		this.hora = hora;
 	}
 
-	public Integer getCalificacion() {
-		return calificacion;
-	}
-
-	public void setCalificacion(Integer calificacion) {
-		this.calificacion = calificacion;
-	}
-
 	public String getInstitucion() {
 		return institucion;
 	}
@@ -106,6 +108,14 @@ public class AulaProfesorDTO extends DTOEntity<Long> {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public String getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(String profesor) {
+		this.profesor = profesor;
 	}
 
 }

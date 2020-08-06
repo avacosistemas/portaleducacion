@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 import ar.com.avaco.educacion.domain.entities.cliente.TipoCliente;
 import ar.com.avaco.educacion.ws.dto.ComentarioDTO;
-import ar.com.avaco.educacion.ws.dto.AulaProfesorDTO;
+import ar.com.avaco.educacion.ws.dto.AulaProfesorPortalDTO;
+import ar.com.avaco.educacion.ws.dto.CalificacionDTO;
 import ar.com.avaco.educacion.ws.dto.PreguntaRespuestaDTO;
 import ar.com.avaco.educacion.ws.dto.ProfesorPerfilDTO;
 import ar.com.avaco.educacion.ws.dto.RespuestaDTO;
@@ -92,7 +93,7 @@ public class ProfesorPerfilRestController extends AbstractDTORestController<Prof
 		Cliente cliente = (Cliente)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		JSONResponse response = new JSONResponse();
 		if (cliente.getId().equals(id) && cliente.getTipoCliente().equals(TipoCliente.PROFESOR)) {
-			List<AulaProfesorDTO> aulas =  this.service.listarMisAulas(id);
+			List<AulaProfesorPortalDTO> aulas =  this.service.listarMisAulas(id);
 			response.setData(aulas);
 			response.setStatus(JSONResponse.OK);
 		} else {
@@ -107,7 +108,7 @@ public class ProfesorPerfilRestController extends AbstractDTORestController<Prof
 		Cliente cliente = (Cliente)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		JSONResponse response = new JSONResponse();
 		if (cliente.getId().equals(id) && cliente.getTipoCliente().equals(TipoCliente.PROFESOR)) {
-			AulaProfesorDTO aulaProfesorDTO = this.service.getAula(idClase);
+			AulaProfesorPortalDTO aulaProfesorDTO = this.service.getAula(idClase);
 			response.setData(aulaProfesorDTO);
 			response.setStatus(JSONResponse.OK);
 		} else {
@@ -118,12 +119,26 @@ public class ProfesorPerfilRestController extends AbstractDTORestController<Prof
 	}
 
 	@RequestMapping(value = "/profesor/{id}/anotaciones/{idClase}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> getAnotaciones(@PathVariable("id") Long id, @PathVariable("idClase") Long idClase) throws Exception {
+	public ResponseEntity<JSONResponse> getComentarios(@PathVariable("id") Long id, @PathVariable("idClase") Long idClase) throws Exception {
 		Cliente cliente = (Cliente)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		JSONResponse response = new JSONResponse();
 		if (cliente.getId().equals(id) && cliente.getTipoCliente().equals(TipoCliente.PROFESOR)) {
-			List<ComentarioDTO> anotaciones = this.service.getAnotacionesAula(idClase);
-//			response.setData(aulaProfesorDTO);
+			List<ComentarioDTO> anotaciones = this.service.getComentariosAula(idClase);
+			response.setData(anotaciones);
+			response.setStatus(JSONResponse.OK);
+		} else {
+			response.setData("No es profesor o no coinciden los parametros");
+			response.setStatus(JSONResponse.ERROR);
+		}
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/profesor/{id}/anotaciones/{idClase}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> agregarComentario(@PathVariable("id") Long id, @PathVariable("idClase") Long idClase, @RequestBody ComentarioDTO comentario) throws Exception {
+		Cliente cliente = (Cliente)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		JSONResponse response = new JSONResponse();
+		if (cliente.getId().equals(id) && cliente.getTipoCliente().equals(TipoCliente.PROFESOR)) {
+			this.service.agregarComentarioAula(comentario, idClase, cliente.getNombreApellido());
 			response.setStatus(JSONResponse.OK);
 		} else {
 			response.setData("No es profesor o no coinciden los parametros");
@@ -132,6 +147,37 @@ public class ProfesorPerfilRestController extends AbstractDTORestController<Prof
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/profesor/calificaciones/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> getCalificaciones(@PathVariable("id") Long id) throws Exception {
+		Cliente cliente = (Cliente)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		JSONResponse response = new JSONResponse();
+		if (cliente.getId().equals(id) && cliente.getTipoCliente().equals(TipoCliente.PROFESOR)) {
+			List<CalificacionDTO> calificaciones = this.service.getCalificaciones(id);
+			response.setData(calificaciones);
+			response.setStatus(JSONResponse.OK);
+		} else {
+			response.setData("No es profesor o no coinciden los parametros");
+			response.setStatus(JSONResponse.ERROR);
+		}
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/profesor/{id}/alumnos/{idClase}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> getAlumnosAula(@PathVariable("id") Long id, @PathVariable("idClase") Long idClase) throws Exception {
+		Cliente cliente = (Cliente)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		JSONResponse response = new JSONResponse();
+		if (cliente.getId().equals(id) && cliente.getTipoCliente().equals(TipoCliente.PROFESOR)) {
+			List<CalificacionDTO> calificaciones = this.service.getAlumnos(idClase);
+			response.setData(calificaciones);
+			response.setStatus(JSONResponse.OK);
+		} else {
+			response.setData("No es profesor o no coinciden los parametros");
+			response.setStatus(JSONResponse.ERROR);
+		}
+		return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}
+
+	
 	
 	//Service
 	@Resource(name = "profesorPerfilEPService")

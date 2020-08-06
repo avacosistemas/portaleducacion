@@ -56,7 +56,7 @@ public class AulaDTO extends DTOEntity<Long> {
 
 //		if (alumnos!=null && !alumnos.isEmpty()) {
 //			HashSet<Alumno> alumnosList=new HashSet<>();
-//			for (AlumnoDTO alumnoDTO : alumnos) {
+//			for (AlumnoPerfilDTO alumnoDTO : alumnos) {
 //				Alumno alumno=alumnoDTO.toEntity();
 //				alumnosList.add(alumno);
 //			}
@@ -79,9 +79,9 @@ public class AulaDTO extends DTOEntity<Long> {
 		this.setId(aula.getId());
 
 //		if (aula.getAlumnos() != null && !aula.getAlumnos().isEmpty()) {
-//			HashSet<AlumnoDTO> alumnoDTOs = new HashSet<>();
+//			HashSet<AlumnoPerfilDTO> alumnoDTOs = new HashSet<>();
 //			for (Alumno alumno : aula.getAlumnos()) {
-//				alumnoDTOs.add(new AlumnoDTO(alumno));
+//				alumnoDTOs.add(new AlumnoPerfilDTO(alumno));
 //			}
 //			this.setAlumnos(alumnoDTOs);
 //		}
