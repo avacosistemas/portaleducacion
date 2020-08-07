@@ -21,6 +21,17 @@
 	<component-scan base-package="ar.com.avaco.ws.controller" resource-pattern="**/*Controller.class" />
 	<component-scan base-package="ar.com.avaco.ws.rest.security" resource-pattern="**/*.class" />		
 	
+	<beans:bean id="swagger2Config"
+		class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration">
+	</beans:bean>
+
+	<mvc:resources order="1" location="/resources/"
+		mapping="/resources/**" />
+	<mvc:resources mapping="swagger-ui.html"
+		location="classpath:/META-INF/resources/" />
+	<mvc:resources mapping="/webjars/**"
+		location="classpath:/META-INF/resources/webjars/" />
+	
 	<mvc:annotation-driven />
 	
 	<mvc:default-servlet-handler />

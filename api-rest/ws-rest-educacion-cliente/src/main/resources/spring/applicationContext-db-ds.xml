@@ -17,16 +17,6 @@
 							        http://www.springframework.org/schema/jdbc 
 							        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-<!-- 	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
-<!-- 	 	<beans:property name="locations"> -->
-<!-- 	 		<beans:list> -->
-<!-- 		 		<beans:value>file:${catalina.home}/conf/connection-admin.properties</beans:value> -->
-<!-- 		 		<beans:value>file:${catalina.home}/conf/notificacion.properties</beans:value> -->
-<!-- 	 		</beans:list> -->
-<!-- 	 	</beans:property> -->
-<!-- 	</beans:bean> -->
-
-	
 	<!-- These beans handle database configuration. -->
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<beans:property name="driverClassName" value="#{dataSourceMap['DB_DRIVERCLASSNAME']}" />

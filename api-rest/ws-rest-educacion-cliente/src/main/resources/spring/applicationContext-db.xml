@@ -21,13 +21,29 @@
 
 	<tx:annotation-driven/>
 	
+	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	 	<beans:property name="locations">
+	 		<beans:list>
+		 		<beans:value>file:${catalina.home}/conf/connection-cliente.properties</beans:value>
+	 		</beans:list>
+	 	</beans:property>
+	</beans:bean>
+	
 	<util:map id="dataSourceMap">
-		<beans:entry key="DB_DRIVERCLASSNAME" value="#{systemProperties['DB_DRIVERCLASSNAME']}" />
-        <beans:entry key="DB_DIALECT" value="#{systemProperties['DB_DIALECT']}" />
-        <beans:entry key="DB_USERNAME" value="#{systemProperties['DB_USERNAME']}" />
-        <beans:entry key="DB_PASSWORD" value="#{systemProperties['DB_PASSWORD']}" />
-        <beans:entry key="DB_URL" value="#{systemProperties['DB_URL']}" />
+		<beans:entry key="DB_DRIVERCLASSNAME" value="${DB_DRIVERCLASSNAME}" />
+        <beans:entry key="DB_DIALECT" value="${DB_DIALECT}" />
+        <beans:entry key="DB_USERNAME" value="${DB_USERNAME}" />
+        <beans:entry key="DB_PASSWORD" value="${DB_PASSWORD}" />
+        <beans:entry key="DB_URL" value="${DB_URL}" />
 	</util:map>
+	
+<!-- 	<util:map id="dataSourceMap"> -->
+<!-- 		<beans:entry key="DB_DRIVERCLASSNAME" value="#{systemProperties['DB_DRIVERCLASSNAME']}" /> -->
+<!--         <beans:entry key="DB_DIALECT" value="#{systemProperties['DB_DIALECT']}" /> -->
+<!--         <beans:entry key="DB_USERNAME" value="#{systemProperties['DB_USERNAME']}" /> -->
+<!--         <beans:entry key="DB_PASSWORD" value="#{systemProperties['DB_PASSWORD']}" /> -->
+<!--         <beans:entry key="DB_URL" value="#{systemProperties['DB_URL']}" /> -->
+<!-- 	</util:map> -->
 	
     <beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <beans:property name="entityManagerFactory" ref="entityManagerFactory" />
