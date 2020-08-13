@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
+import ar.com.avaco.educacion.domain.entities.cliente.TipoCliente;
 
 @Entity
 @Table(name = "ALUMNO")
@@ -31,7 +32,9 @@ public class Alumno extends Cliente {
 	@ManyToMany(mappedBy = "alumnos", fetch = FetchType.LAZY)
 	Set<Aula> aulas;
 
-	public Alumno() {}
+	public Alumno() {
+		this.setTipoCliente(TipoCliente.ALUMNO);
+	}
 
 	public Set<HorasAlumno> getHorasDispAlumo() {
 		return horasDispAlumo;

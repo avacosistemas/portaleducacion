@@ -49,7 +49,7 @@ public class HorarioDisponibleRestController extends AbstractDTORestController<H
 		
 	}
 	
-	@RequestMapping(value = "/horariosdisponibles", method = RequestMethod.POST)
+	@RequestMapping(value = "/horariosdisponibles/", method = RequestMethod.POST)
 	public ResponseEntity<JSONResponse> addHorariosDisponibles(@RequestBody HorarioDisponibleFullDTO horariosDisp) throws BusinessException {
 		List<HorarioDisponibleDTO> horariosDisponibles = service.addHorarioDisponible(horariosDisp);
 		JSONResponse response = new JSONResponse();

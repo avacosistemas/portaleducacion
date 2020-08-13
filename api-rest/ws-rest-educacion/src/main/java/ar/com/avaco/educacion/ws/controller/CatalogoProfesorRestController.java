@@ -31,7 +31,7 @@ public class CatalogoProfesorRestController {
     @Qualifier("catalogoProfesorEPService")
 	private CatalogoProfesorEPService service;
 
-	@RequestMapping(value = "/catalogoDocente/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/catalogoDocente", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> listCatalogoProfesor(@RequestParam("orden") OrdenCatalogo filtro, 
 															 @RequestParam("idMateria") Long idMateria,
 															 @RequestParam("idNivel") Integer idNivel) throws BusinessException {

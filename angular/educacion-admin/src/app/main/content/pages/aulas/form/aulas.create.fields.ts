@@ -32,7 +32,7 @@ export const AULAS_CREATE_FORM_FIELDS_DEF = [
     required: false,
     controlType: 'select',
     options: {
-        elementLabel: 'nombre',
+        elementLabel: 'nombreApellido',
         elementValue: 'id',
         fromWs: {
           key: 'alumno_create_form_fields_def_field_idinstitucion',

@@ -38,80 +38,17 @@ public class FaqRestController extends AbstractDTORestController<FaqDTO, Long, F
 	
 	//-------------------Retrieve All pages--------------------------------------------------------    
     @Override
-	@RequestMapping(value = "/faqs/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/faqs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JSONResponse> list() {
     	return super.list();
     }
     
-	@RequestMapping(value = "/portal/faqs/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/portal/faqs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JSONResponse> list(@RequestParam Map<String, String> customQuery) throws Exception {
 		return super.executeProcess("faq", Void -> { 
 			return this.service.list();
 		});
     }
-
-	@RequestMapping(value = "/portal/faqs/legales/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listLegales() throws Exception {
-		return super.executeProcess("faq-legales", Void -> { 
-			return this.service.listFaqs(Faq.CATEGORY_LEGALES, Faq.SUBCATEGORY_LEGALES);
-		});
-	}
-
-	@RequestMapping(value = "/portal/faqs/prestamos/inversor/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listPrestamosInversor() throws Exception {
-		return super.executeProcess("faq-prestamos-inversor", Void -> { 
-			return this.service.listFaqs(Faq.CATEGORY_PRESTAMOS, Faq.SUBCATEGORY_INVERSOR);
-		});
-	}
-
-	@RequestMapping(value = "/portal/faqs/prestamos/solicitante/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listPrestamosSolicitante() throws Exception {
-		return super.executeProcess("faq-prestamos-solicitante", Void -> { 
-			return this.service.listFaqs(Faq.CATEGORY_PRESTAMOS, Faq.SUBCATEGORY_SOLICITANTE);
-		});
-	}
-
-	@RequestMapping(value = "/portal/faqs/factoring/inversor/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listFactoringInversor() throws Exception {
-		return super.executeProcess("faq-factoring-inversor", Void -> { 
-			return this.service.listFaqs(Faq.CATEGORY_FACTORING, Faq.SUBCATEGORY_INVERSOR);
-		});
-	}
-
-	@RequestMapping(value = "/portal/faqs/factoring/solicitante/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listFactoringSolicitante() throws Exception {
-		return super.executeProcess("faq-factoring-solicitante", Void -> { 
-			return this.service.listFaqs(Faq.CATEGORY_FACTORING, Faq.SUBCATEGORY_SOLICITANTE);
-		});
-	}
-
-	@RequestMapping(value = "/portal/faqs/prestamos/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listPrestamos() throws Exception {
-		return super.executeProcess("faq-prestamos", Void -> { 
-			return this.service.listFaqs(Faq.CATEGORY_PRESTAMOS);
-		});
-	}
-
-	@RequestMapping(value = "/portal/faqs/factoring/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listFactoring() throws Exception {
-		return super.executeProcess("faq-factoring", Void -> { 
-			return this.service.listFaqs(Faq.CATEGORY_FACTORING);
-		});
-	}
-
-	@RequestMapping(value = "/portal/faqs/seguros/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listSeguros() throws Exception {
-		return super.executeProcess("faq-seguros", Void -> { 
-			return this.service.listFaqs(Faq.CATEGORY_SEGUROS);
-		});
-	}
-
-	@RequestMapping(value = "/portal/faqs/mercadocapitales/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listMercadoCapitales() throws Exception {
-		return super.executeProcess("faq-mecadocapitales", Void -> { 
-			return this.service.listFaqs(Faq.CATEGORY_MCAPITALES);
-		});
-	}
 
     //-------------------Retrieve single Pages--------------------------------------------------------  
     @RequestMapping(value = "/faqs/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -119,12 +56,6 @@ public class FaqRestController extends AbstractDTORestController<FaqDTO, Long, F
     	return super.get(id);
     }
     
-    //-------------------Retrieve single Pages--------------------------------------------------------  
-    @RequestMapping(value = "/faqs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<JSONResponse> getFilterLang(@RequestParam Map<String, String> customQuery) throws BusinessException {
-        return new ResponseEntity<JSONResponse>(getResponseOK(null), HttpStatus.OK);
-    }
-       
     //-------------------Create a Page--------------------------------------------------------    
     @RequestMapping(value = "/faqs/", method = RequestMethod.POST)
     public  ResponseEntity<JSONResponse> create(@RequestBody FaqDTO faqDTO) throws BusinessException {

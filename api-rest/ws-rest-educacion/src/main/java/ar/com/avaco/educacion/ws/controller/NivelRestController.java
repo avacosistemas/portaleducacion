@@ -23,7 +23,7 @@ import ar.com.avaco.ws.rest.dto.JSONResponse;
 public class NivelRestController extends AbstractDTORestController<NivelDTO, Integer, NivelEPService> {
 
 	
-	@RequestMapping(value = "/niveles/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/niveles", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> listNiveles(@RequestParam(value= "descripcion", required= false ) String descripcion) {
 		if(!StringUtils.isBlank(descripcion)) {			
 			ResponseEntity<JSONResponse>resp = super.listFiltered(nivel-> nivel.getDescripcion()

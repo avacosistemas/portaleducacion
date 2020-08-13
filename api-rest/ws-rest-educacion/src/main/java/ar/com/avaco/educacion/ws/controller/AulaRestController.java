@@ -30,7 +30,7 @@ import ar.com.avaco.ws.rest.dto.JSONResponse;
 public class AulaRestController extends AbstractDTORestController<AulaDTO, Long, AulaEPService> {
 
 	
-	@RequestMapping(value = "/aulas/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/aulas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> listAulas() throws Exception  {
 		List<AulaListadoDTO> listAulas = this.service.listAulas();
     	JSONResponse response = new JSONResponse();

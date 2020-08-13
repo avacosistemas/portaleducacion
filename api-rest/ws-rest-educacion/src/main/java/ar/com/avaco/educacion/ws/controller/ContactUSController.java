@@ -25,7 +25,7 @@ public class ContactUSController extends AbstractDTORestController<ContactUSDTO,
 	
 	//-------------------Retrieve All pages--------------------------------------------------------    
     @Override
-	@RequestMapping(value = "/contact-us/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/contact-us", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JSONResponse> list() {
     	return super.list();
     }

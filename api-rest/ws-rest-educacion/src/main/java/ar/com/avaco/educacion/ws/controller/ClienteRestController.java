@@ -29,7 +29,7 @@ import ar.com.avaco.ws.rest.dto.JSONResponse;
 public class ClienteRestController extends AbstractDTORestController<ClienteListadoDTO, Long, ClienteEPService> {
 
 
-	@RequestMapping(value = "/clientes/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/clientes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> listClientesListado() throws Exception  {
 		List<ClienteListadoDTO> listClientesListado = this.service.listClientesListado();
     	JSONResponse response = new JSONResponse();

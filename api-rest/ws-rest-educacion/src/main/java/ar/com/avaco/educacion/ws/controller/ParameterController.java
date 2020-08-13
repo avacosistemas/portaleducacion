@@ -28,7 +28,7 @@ public class ParameterController extends AbstractDTORestController<ParameterDTO,
 	
 	
 	//-------------------Retrieve All pages--------------------------------------------------------    
-	@RequestMapping(value = "/parameters/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/parameters", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JSONResponse> list() {
     	return super.list();
     }

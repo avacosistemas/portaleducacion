@@ -51,7 +51,7 @@ public class AlumnoRestController extends AbstractDTORestController<AlumnoDTO, L
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/alumnos", method = RequestMethod.POST)
+	@RequestMapping(value = "/alumnos/", method = RequestMethod.POST)
 	public ResponseEntity<JSONResponse> create(@RequestBody AlumnoDTO alumno) throws BusinessException {
 		AlumnoDTO newAlumnoDto = service.createAlumno(alumno);
 		JSONResponse response = new JSONResponse();

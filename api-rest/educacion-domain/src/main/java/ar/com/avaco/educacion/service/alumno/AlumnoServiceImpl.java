@@ -3,7 +3,7 @@ package ar.com.avaco.educacion.service.alumno;
 import ar.com.avaco.arc.core.component.bean.service.NJBaseService;
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Alumno;
-import ar.com.avaco.educacion.domain.entities.Institucion;
+import ar.com.avaco.educacion.domain.entities.Institucion;import ar.com.avaco.educacion.domain.entities.cliente.TipoCliente;
 import ar.com.avaco.educacion.repository.alumno.AlumnoRepository;
 import ar.com.avaco.educacion.service.cliente.ClienteService;
 import ar.com.avaco.educacion.service.institucion.InstitucionService;
@@ -51,9 +51,13 @@ public class AlumnoServiceImpl extends NJBaseService<Long, Alumno, AlumnoReposit
 	 */
 	@Override
 	public Alumno createAlumno(Alumno alumno) throws BusinessException {
-		Institucion institucion = institucionService.get(alumno.getInstitucion().getId());
-		alumno.setInstitucion(institucion);
+		if (alumno.getInstitucion() != null && alumno.getInstitucion().getId() > 0) {
+			Institucion institucion = institucionService.get(alumno.getInstitucion().getId());
+			alumno.setInstitucion(institucion);
+		}
+		alumno.setTipoCliente(TipoCliente.);
 		Alumno newAlumno = (Alumno) clienteService.registrarClientePersona(alumno);
+		
 		return newAlumno;
 	}
 	
@@ -71,9 +75,11 @@ public class AlumnoServiceImpl extends NJBaseService<Long, Alumno, AlumnoReposit
 	 */
 	@Override
 	public Alumno updateAlumno(Alumno entity) throws BusinessException {
-
 		Alumno alumno = (Alumno) this.clienteService.validaUpdateProfesorAlumno(entity);
-		Institucion institucion = institucionService.get(entity.getInstitucion().getId());
+		Institucion institucion = null;
+		if (entity.getInstitucion() != null && entity.getInstitucion().getId() > 0) {
+			institucion= institucionService.get(entity.getInstitucion().getId());
+		} 
 		alumno.setInstitucion(institucion);
 		return this.getRepository().save(alumno);
 	}

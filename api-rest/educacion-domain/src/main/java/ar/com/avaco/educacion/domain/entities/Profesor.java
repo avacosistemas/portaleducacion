@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Type;
 
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
+import ar.com.avaco.educacion.domain.entities.cliente.TipoCliente;
 
 @Entity
 @Table(name = "PROFESOR")
@@ -65,6 +66,7 @@ public class Profesor extends Cliente implements Serializable {
 	private String descripcion;
 
 	public Profesor() {
+		this.setTipoCliente(TipoCliente.PROFESOR);
 	}
 
 	private void generarMateriasString() {

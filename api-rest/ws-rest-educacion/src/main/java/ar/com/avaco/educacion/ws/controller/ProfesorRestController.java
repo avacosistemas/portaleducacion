@@ -38,7 +38,7 @@ import org.springframework.core.io.InputStreamResource;
 public class ProfesorRestController extends AbstractDTORestController<ProfesorDTO, Long, ProfesorEPService> {
 
 	
-	@RequestMapping(value = "/profesores/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/profesores", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> listProfesores() throws Exception  {
 		List<ProfesorDTO> listProfesores = this.service.listProfesores();
     	JSONResponse response = new JSONResponse();

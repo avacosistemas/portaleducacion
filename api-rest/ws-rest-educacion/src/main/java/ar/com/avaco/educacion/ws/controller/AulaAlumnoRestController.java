@@ -23,7 +23,7 @@ import ar.com.avaco.ws.rest.dto.JSONResponse;
 public class AulaAlumnoRestController extends AbstractDTORestController<AulaAlumnoDTO, Long, AulaAlumnoEPService> {
 
 	
-	@RequestMapping(value = "/aulaAlumno/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/aulaAlumno", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 //	public ResponseEntity<JSONResponse> listByAula(@RequestParam("idAula") Long idAula) throws BusinessException {
 	public ResponseEntity<JSONResponse> listByAula() throws BusinessException {
 		List<AulaAlumnoDTO> listaulaAlumno = this.service.listAulaAlumno(null);

@@ -55,7 +55,7 @@ public class MateriaRestController extends AbstractDTORestController<MateriaDTO,
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/materias", method = RequestMethod.POST)
+	@RequestMapping(value = "/materias/", method = RequestMethod.POST)
 	public ResponseEntity<JSONResponse> create(@RequestBody MateriaDTO materia) throws BusinessException {
 		MateriaDTO newMateriaDto = service.createMateria(materia);
 		JSONResponse response = new JSONResponse();
