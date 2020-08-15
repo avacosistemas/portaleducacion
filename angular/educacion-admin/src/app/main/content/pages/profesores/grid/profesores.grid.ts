@@ -41,7 +41,6 @@ export const PROFESORES_GRID_DEF = {
   ],
   sortAllColumns: true,
   displayedColumns: [
-    'nombreApellido',
     'nombre',
     'apellido',
     'tipoIdentificacion',

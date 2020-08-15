@@ -7,6 +7,13 @@ export const MATERIA_PROFESOR_FILTER_FORM_FIELDS_DEF = [
     controlType: 'textbox'
   },
   {
+    key: 'descNivel',
+    labelKey: 'MATERIA_PROFESOR_FILTER_FORM_FIELDS_DEF_FIELD_descmateria',
+    label: 'Nivel',
+    type: 'string',
+    controlType: 'textbox'
+  },
+  {
     key: 'idProfesor',
     label: 'sectionID',
     controlType: 'hidden'

@@ -68,6 +68,8 @@ export const AULAS_UPDATE_FORM_FIELDS_DEF = [
     label: 'Hora',
     type: 'string',
     controlType: 'number',
-    required: true
+    required: true,
+    minValue: 0,
+    maxValue: 23
   }
 ];
