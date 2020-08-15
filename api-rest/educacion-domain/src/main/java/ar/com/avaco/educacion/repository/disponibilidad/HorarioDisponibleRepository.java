@@ -17,7 +17,7 @@ public interface HorarioDisponibleRepository extends NJRepository<Long, HorarioD
 	HorarioDisponible findByDiaAndHoraAndProfesorId(DayOfWeek dia, Integer hora, Long id);
 	
 
-   @Query(value = "SELECT hd FROM HorarioDisponible hd WHERE hd.dia = :dia and hd.id = :id")
+   @Query(value = "SELECT hd FROM HorarioDisponible hd WHERE hd.dia = :dia and hd.profesor.id = :id")
    List<HorarioDisponible> selectHorariosByDiaAndProfesor(@Param("dia") DayOfWeek dia, @Param("id") Long id);
 	
 	//List<HorarioDisponible> findByDiaAndProfesorId(DayOfWeek dia, Long idProfesor);

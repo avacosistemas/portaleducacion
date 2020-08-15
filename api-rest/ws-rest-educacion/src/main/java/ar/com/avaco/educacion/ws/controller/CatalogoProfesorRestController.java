@@ -1,6 +1,7 @@
 package ar.com.avaco.educacion.ws.controller;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import ar.com.avaco.educacion.ws.dto.ConsultaDTO;
 import ar.com.avaco.educacion.ws.dto.HorarioDisponibleDTO;
 import ar.com.avaco.educacion.ws.dto.PreguntaRespuestaDTO;
 import ar.com.avaco.educacion.ws.service.CatalogoProfesorEPService;
+import ar.com.avaco.utils.DateUtils;
 import ar.com.avaco.ws.rest.dto.JSONResponse;
 
 @RestController
@@ -61,9 +63,10 @@ public class CatalogoProfesorRestController {
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/catalogoHorario/profesor/{id}/fecha/{fecha}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> getCatalogoHorario(@PathVariable("profesor") Long idProfesor, @PathVariable("fecha") LocalDate fecha) throws BusinessException {
-		List<HorarioDisponibleDTO> catalogoHorariosDto = service.getCatalogoHorarios(fecha, idProfesor);
+	@RequestMapping(value = "/catalogoHorario/profesor/{idProfesor}/fecha/{fecha}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> getCatalogoHorario(@PathVariable("idProfesor") Long idProfesor, @PathVariable("fecha") String fecha) throws BusinessException {
+		LocalDate ld = DateUtils.toLocalDate(fecha, DateUtils.PATTERN_yyyyMMdd);
+		List<HorarioDisponibleDTO> catalogoHorariosDto = service.getCatalogoHorarios(ld, idProfesor);
     	JSONResponse response = new JSONResponse();
 		response.setData(catalogoHorariosDto);
 		response.setStatus(JSONResponse.OK);	

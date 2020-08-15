@@ -1,7 +1,9 @@
 package ar.com.avaco.educacion.ws.service.impl;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import ar.com.avaco.educacion.ws.dto.ConsultaDTO;
 import ar.com.avaco.educacion.ws.dto.HorarioDisponibleDTO;
 import ar.com.avaco.educacion.ws.dto.PreguntaRespuestaDTO;
 import ar.com.avaco.educacion.ws.service.CatalogoProfesorEPService;
+import ar.com.avaco.utils.DateUtils;
 
 @Service("catalogoProfesorEPService")
 public class CatalogoProfesorEPServiceImpl implements CatalogoProfesorEPService {
@@ -57,6 +60,7 @@ public class CatalogoProfesorEPServiceImpl implements CatalogoProfesorEPService 
 	
 	@Override
 	public List<HorarioDisponibleDTO> getCatalogoHorarios(LocalDate fecha, Long id) {
+		
 		List<HorarioDisponible> entities = catalogoService.getCatalogoHorarios(fecha, id);
 		
 		List<HorarioDisponibleDTO> dtos = new ArrayList<HorarioDisponibleDTO>();

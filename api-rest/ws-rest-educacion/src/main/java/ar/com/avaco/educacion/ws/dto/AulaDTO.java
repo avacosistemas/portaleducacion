@@ -23,7 +23,7 @@ public class AulaDTO extends DTOEntity<Long> {
 	protected Long idProfesor;
 
 	protected String nombreProfesor;
-	
+
 	protected String urlJoin;
 
 	public AulaDTO() {
@@ -37,11 +37,7 @@ public class AulaDTO extends DTOEntity<Long> {
 	public Aula toEntity() {
 		Aula aula = new Aula();
 		aula.setId(this.getId());
-		try {
-			aula.setDia(DateUtils.toDate(getDia(), "dd/MM/yyyy"));
-		} catch (ParseException e) {
-			// No deberia llegar aca
-		}
+		aula.setDia(DateUtils.toDate(getDia(), "dd/MM/yyyy"));
 		aula.setHora(Integer.parseInt(getHora()));
 		Materia materia = new Materia();
 		materia.setId(idMateria);
@@ -131,7 +127,5 @@ public class AulaDTO extends DTOEntity<Long> {
 	public void setUrlJoin(String urlJoin) {
 		this.urlJoin = urlJoin;
 	}
-	
-	
-	
+
 }

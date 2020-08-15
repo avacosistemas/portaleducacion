@@ -95,7 +95,11 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		alumno.setNombre(dto.getNombre());
 		alumno.setApellido(dto.getApellido());
 		Identificacion id = new Identificacion();
-		id.setTipo(TipoIdentificacion.valueOf(dto.getTipoIdentificacion()));
+		if (dto.getTipoIdentificacion() != null) {
+			id.setTipo(TipoIdentificacion.valueOf(dto.getTipoIdentificacion().toUpperCase()));
+		} else {
+			id.setTipo(TipoIdentificacion.DNI);
+		}
 		id.setNumero(dto.getNumeroIdentificacion());
 		id.setCliente(alumno);
 		alumno.setIdentificacion(id);
