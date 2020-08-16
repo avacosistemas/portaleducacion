@@ -1,7 +1,10 @@
 package ar.com.avaco.educacion.service.catalogo;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -89,12 +92,9 @@ public class CatalogoServiceImpl implements CatalogoService {
 	
 	@Override
 	public List<HorarioDisponible> getCatalogoHorarios(LocalDate fecha, Long idProfesor) {
-	
 		List<HorarioDisponible> horariosDisponibles = horariosRepo.selectHorariosByDiaAndProfesor(fecha.getDayOfWeek(), idProfesor);
-		List<LocalTime> horariosAula = aulaRepo.selectHorariosByFechaAndProfesor(fecha, idProfesor);
-		
+		List<LocalTime> horariosAula = aulaRepo.selectHorariosByFechaAndProfesor(DateUtils.toDate(fecha), idProfesor);
 		horariosDisponibles.stream().map(hd -> hd.getHora()).collect(Collectors.toList()).removeAll(horariosAula);
-	
 		return horariosDisponibles;
 	}
 	

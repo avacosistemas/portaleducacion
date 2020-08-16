@@ -34,13 +34,8 @@ public class AulaDTO extends DTOEntity<Long> {
 	public Aula toEntity() {
 		Aula aula = new Aula();
 		aula.setId(this.getId());
-		try {
-			aula.setDia(DateUtils.toDate(getDia(), "dd/MM/yyyy"));
-		} catch (ParseException e) {
-			// Nada no deberia llegar aca
-		}
+		aula.setDia(DateUtils.toDate(getDia(), "dd/MM/yyyy"));
 		aula.setHora(Integer.parseInt(getHora()));
-
 		Materia materia = new Materia();
 		materia.setId(idMateria);
 		aula.setMateria(materia);

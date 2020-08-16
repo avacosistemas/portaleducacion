@@ -226,8 +226,10 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-		for (PermisoCliente permiso : accesos.getPermisos()) {
-			authorities.add(permiso);
+		if (accesos != null && accesos.getPermisos() != null && !accesos.getPermisos().isEmpty()) {
+			for (PermisoCliente permiso : accesos.getPermisos()) {
+				authorities.add(permiso);
+			}
 		}
 		return authorities;
 	}

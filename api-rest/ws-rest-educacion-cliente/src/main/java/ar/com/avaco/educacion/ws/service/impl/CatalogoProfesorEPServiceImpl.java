@@ -18,6 +18,7 @@ import ar.com.avaco.educacion.ws.dto.ConsultaDTO;
 import ar.com.avaco.educacion.ws.dto.HorarioDisponibleDTO;
 import ar.com.avaco.educacion.ws.dto.PreguntaRespuestaDTO;
 import ar.com.avaco.educacion.ws.service.CatalogoProfesorEPService;
+import ar.com.avaco.utils.DateUtils;
 
 @Service("catalogoProfesorEPService")
 public class CatalogoProfesorEPServiceImpl implements CatalogoProfesorEPService {
