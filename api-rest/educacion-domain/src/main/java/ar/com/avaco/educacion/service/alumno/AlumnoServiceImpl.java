@@ -55,7 +55,7 @@ public class AlumnoServiceImpl extends NJBaseService<Long, Alumno, AlumnoReposit
 			Institucion institucion = institucionService.get(alumno.getInstitucion().getId());
 			alumno.setInstitucion(institucion);
 		}
-		alumno.setTipoCliente(TipoCliente.);
+		alumno.setTipoCliente(TipoCliente.ALUMNO);
 		Alumno newAlumno = (Alumno) clienteService.registrarClientePersona(alumno);
 		
 		return newAlumno;

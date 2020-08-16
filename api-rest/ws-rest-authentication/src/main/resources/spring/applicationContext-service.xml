@@ -18,6 +18,10 @@
 	<ctx:component-scan base-package="ar.com.avaco.commons.service" resource-pattern="**/*ServiceImpl.class"/>
 	
 	<ctx:component-scan base-package="ar.com.avaco.educacion.service.notificacion" resource-pattern="**/*ServiceImpl.class"/>
+	
+	<ctx:component-scan base-package="ar.com.avaco.commons.service.captcha" resource-pattern="**/*.class" />
+		
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate"> </bean>
 						
 </beans>
 
