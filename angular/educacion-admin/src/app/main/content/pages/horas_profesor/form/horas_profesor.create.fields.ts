@@ -17,7 +17,7 @@ export const HORAS_PROFESOR_CREATE_FORM_FIELDS_DEF = [
           controlType: 'number',
           type: 'number',
           minValue:0,
-          maxValue:24,          
+          maxValue:23,          
           required: true,
         },
 
@@ -28,7 +28,7 @@ export const HORAS_PROFESOR_CREATE_FORM_FIELDS_DEF = [
           controlType: 'number',
           type: 'number',          
           minValue:0,
-          maxValue:24,
+          maxValue:23,
           required: true
         },      
       
