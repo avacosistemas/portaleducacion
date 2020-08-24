@@ -4,41 +4,35 @@ import ar.com.avaco.educacion.domain.entities.Alumno;
 import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
 import ar.com.avaco.educacion.domain.entities.cliente.Identificacion;
 import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
+import ar.com.avaco.ws.rest.dto.DTOEntity;
 
-public class AlumnoPerfilDTO extends ClienteDTO {
+public class AlumnoPerfilDTO extends DTOEntity<Long> {
 
-	public AlumnoPerfilDTO() {}
+	private Long id;
+	private String nombre;
+	private String apellido;
+	private String tipoIdentificacion;
+	private String numeroIdentificacion;
+	private String username;
+	private String email;
+	private String telefonoMovil;
+	private String telefonoFijo;
+	private String descripcion;
+	private String institucion;
+
+	public AlumnoPerfilDTO() {
+	}
 
 	public AlumnoPerfilDTO(Alumno alumno) {
 		this.setDTO(alumno);
 	}
-	
-	public Alumno toEntity() {
 
-		Alumno alumno = new Alumno();
-		alumno.setId(this.getId());
-		alumno.setNombre(this.getNombre());
-		alumno.setApellido(this.getApellido());
-		alumno.setUsername(this.getUsername());
-		alumno.setEmail(this.getEmail());
-		
-		Identificacion id = new Identificacion();
-		id.setNumero(this.getNumeroIdentificacion());
-		id.setTipo(TipoIdentificacion.valueOf(this.getTipoIdentificacion()));
-		id.setCliente(alumno);
-		alumno.setIdentificacion(id);
-		
-		Contacto contacto = new Contacto();
-		contacto.setTelefonoMovil(this.getTelefonoMovil());
-		contacto.setTelefonoFijo(this.getTelefonoFijo());
-		contacto.setCliente(alumno);
-		alumno.setContacto(contacto);
-	
-		return alumno;
+	public String getNombreApellido() {
+		return this.nombre + " " + this.apellido;
 	}
 
 	public void setDTO(Alumno alumno) {
-	
+
 		this.setId(alumno.getId());
 		this.setNombre(alumno.getNombre());
 		this.setApellido(alumno.getApellido());
@@ -48,7 +42,96 @@ public class AlumnoPerfilDTO extends ClienteDTO {
 		this.setEmail(alumno.getEmail());
 		this.setTelefonoMovil(alumno.getContacto().getTelefonoMovil());
 		this.setTelefonoFijo(alumno.getContacto().getTelefonoFijo());
+		this.setInstitucion(alumno.getInstitucion() != null ? alumno.getInstitucion().getNombre() : null);
 
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public String getTipoIdentificacion() {
+		return tipoIdentificacion;
+	}
+
+	public void setTipoIdentificacion(String tipoIdentificacion) {
+		this.tipoIdentificacion = tipoIdentificacion;
+	}
+
+	public String getNumeroIdentificacion() {
+		return numeroIdentificacion;
+	}
+
+	public void setNumeroIdentificacion(String numeroIdentificacion) {
+		this.numeroIdentificacion = numeroIdentificacion;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefonoMovil() {
+		return telefonoMovil;
+	}
+
+	public void setTelefonoMovil(String telefonoMovil) {
+		this.telefonoMovil = telefonoMovil;
+	}
+
+	public String getTelefonoFijo() {
+		return telefonoFijo;
+	}
+
+	public void setTelefonoFijo(String telefonoFijo) {
+		this.telefonoFijo = telefonoFijo;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getInstitucion() {
+		return institucion;
+	}
+
+	public void setInstitucion(String institucion) {
+		this.institucion = institucion;
 	}
 
 }

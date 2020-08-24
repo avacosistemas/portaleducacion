@@ -200,38 +200,4 @@ public class AulaEPServiceImpl extends CRUDEPBaseService<Long, AulaDTO, Aula, Au
 		return null;
 	}
 
-	@Override
-	public AulaDTO abrirClase(AulaProfesorDTO aulaProfesorDTO) throws BusinessException {
-		Long idProfesor = ClienteUtils.getClienteLogueadoId();
-
-		if (aulaProfesorDTO.getIdProfesor() == null)
-			aulaProfesorDTO.setIdProfesor(idProfesor);
-
-		// Y si es Admin?
-		if (!idProfesor.equals(aulaProfesorDTO.getIdProfesor()))
-			throw new BusinessException("No puede crear la clase de otro profesor");
-
-		Aula aula = service.getAula(aulaProfesorDTO.getIdAula());
-		String url = service.abrirClase(aula, aulaProfesorDTO.getIdProfesor());
-
-		AulaDTO aulaDTO = new AulaDTO(aula);
-		aulaDTO.setUrlJoin(url);
-		return aulaDTO;
-	}
-
-	@Override
-	public AulaDTO unirseClase(AulaAlumnoDTO aulaAlumnoDTO) throws BusinessException {
-		String idAlumno = ClienteUtils.getClienteLogueadoId().toString();
-
-		aulaAlumnoDTO.setIdAlumno(idAlumno);
-		Aula aula = service.getAula(Long.valueOf(aulaAlumnoDTO.getIdAula()));
-		String url = service.unirseClase(aula, aulaAlumnoDTO.getIdAlumno());
-
-		AulaDTO aulaDTO = new AulaDTO(aula);
-		aulaDTO.setUrlJoin(url);
-		return aulaDTO;
-	}
-	
-	
-
 }

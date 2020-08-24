@@ -8,7 +8,7 @@ import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.ws.dto.AulaProfesorPortalDTO;
 import ar.com.avaco.educacion.ws.dto.CalificacionDTO;
 import ar.com.avaco.educacion.ws.dto.ComentarioDTO;
-import ar.com.avaco.educacion.ws.dto.PreguntaRespuestaDTO;
+import ar.com.avaco.educacion.ws.dto.PreguntaRespuestaAulaDTO;
 import ar.com.avaco.educacion.ws.dto.ProfesorPerfilDTO;
 import ar.com.avaco.educacion.ws.dto.RespuestaDTO;
 import ar.com.avaco.ws.rest.service.CRUDEPService;
@@ -23,7 +23,7 @@ public interface ProfesorPerfilEPService extends CRUDEPService<Long, ProfesorPer
 
 	byte[] downloadFotoPerfil(Long id) throws BusinessException;
 
-	List<PreguntaRespuestaDTO> listPreguntaRespuestas(Long idProfesor);
+	List<PreguntaRespuestaAulaDTO> listPreguntaRespuestas(Long idProfesor);
 
 	void responderPregunta(RespuestaDTO respuestaDTO);
 

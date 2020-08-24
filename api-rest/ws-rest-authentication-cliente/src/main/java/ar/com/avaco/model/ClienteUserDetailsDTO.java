@@ -27,10 +27,11 @@ public class ClienteUserDetailsDTO extends UserAuthorised implements UserDetails
 	private boolean accountNonLocked;
 	private boolean credentialsNonExpired;
 	private Long id;
+	private String tipoCliente;
 
 	public ClienteUserDetailsDTO(Long id, String username, String nombreApellido, String email, String password,
-			Collection<? extends GrantedAuthority> authorities, boolean bloqueado, Date lastPasswordResetDate, 
-			boolean aaccountNonExpired, boolean aaccountNonLocked, boolean acredentialsNonExpired) {
+			Collection<? extends GrantedAuthority> authorities, boolean bloqueado, Date lastPasswordResetDate,
+			boolean aaccountNonExpired, boolean aaccountNonLocked, boolean acredentialsNonExpired, String tipoCliente) {
 		this.setId(id);
 		this.username = username;
 		this.nombreApellido = nombreApellido;
@@ -40,23 +41,18 @@ public class ClienteUserDetailsDTO extends UserAuthorised implements UserDetails
 		this.bloqueado = bloqueado;
 		this.lastPasswordResetDate = lastPasswordResetDate;
 		this.accountNonExpired = aaccountNonExpired;
-		this.accountNonLocked= aaccountNonLocked ;
+		this.accountNonLocked = aaccountNonLocked;
 		this.credentialsNonExpired = acredentialsNonExpired;
+		this.tipoCliente = tipoCliente;
 	}
-
-
 
 	public Long getId() {
 		return id;
 	}
 
-
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 
 	@Override
 	public String getUsername() {
@@ -115,6 +111,14 @@ public class ClienteUserDetailsDTO extends UserAuthorised implements UserDetails
 	public Integer getIntentosFallidosLogin() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String getTipoCliente() {
+		return tipoCliente;
+	}
+
+	public void setTipoCliente(String tipoCliente) {
+		this.tipoCliente = tipoCliente;
 	}
 
 }

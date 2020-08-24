@@ -2,7 +2,6 @@ package ar.com.avaco.educacion.domain.entities;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,15 +26,15 @@ public class PreguntaRespuesta extends ar.com.avaco.arc.core.domain.Entity<Long>
 	@Column(name = "ID_PREG_RESP")
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_ALUMNO", insertable = true, updatable = false)
 	private Alumno alumno;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_PROFESOR", insertable = true, updatable = false)
 	private Profesor profesor;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_MATERIA", insertable = true, updatable = false)
 	private Materia materia;
 

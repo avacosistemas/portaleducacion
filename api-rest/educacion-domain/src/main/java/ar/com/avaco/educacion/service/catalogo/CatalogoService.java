@@ -2,7 +2,6 @@ package ar.com.avaco.educacion.service.catalogo;
 
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import ar.com.avaco.commons.exception.BusinessException;

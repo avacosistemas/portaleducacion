@@ -12,19 +12,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
+import ar.com.avaco.ws.rest.security.dto.PassworResetClienteDTO;
 import ar.com.avaco.ws.rest.security.dto.UpdatePasswordDTO;
-import ar.com.avaco.ws.rest.security.service.ClienteEPService;
+import ar.com.avaco.ws.rest.security.service.ClienteEPPortalService;
 import ar.com.avaco.ws.rest.dto.JSONResponse;
 import ar.com.avaco.ws.rest.service.FunctionBusiness;
 
 @RestController
 public class PasswordClienteRestController {
 
-	private ClienteEPService clienteEPService;
+	private ClienteEPPortalService clienteEPService;
 
 	@RequestMapping(value = "/password/reset/", method = RequestMethod.POST)
-	public ResponseEntity<JSONResponse> reset(@RequestBody String username) throws BusinessException {
-		clienteEPService.sendMissingPassword(username);
+	public ResponseEntity<JSONResponse> reset(@RequestBody PassworResetClienteDTO dto) throws BusinessException {
+		clienteEPService.sendMissingPassword(dto.getUsername());
 		JSONResponse jsonResponse = new JSONResponse();
 		jsonResponse.setData(null);
 		jsonResponse.setStatus(JSONResponse.OK);
@@ -50,7 +51,7 @@ public class PasswordClienteRestController {
 	}
 
 	@Resource(name= "clienteEPService")
-	public void setClienteEPService(ClienteEPService clienteEPService) {
+	public void setClienteEPService(ClienteEPPortalService clienteEPService) {
 		this.clienteEPService = clienteEPService;
 	}
     

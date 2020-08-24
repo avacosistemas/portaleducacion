@@ -1,11 +1,11 @@
 package ar.com.avaco.educacion.ws.dto;
 
-public class MateriaProfesorDTO {
+public class MateriaProfesorPortalDTO {
 	
 	private Long idProfesor;
 	private Long idMateria;
 	
-	public MateriaProfesorDTO() {}
+	public MateriaProfesorPortalDTO() {}
 
 	public Long getIdProfesor() {
 		return idProfesor;

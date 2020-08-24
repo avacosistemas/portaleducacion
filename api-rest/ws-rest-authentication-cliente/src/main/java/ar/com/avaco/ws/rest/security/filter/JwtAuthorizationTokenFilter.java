@@ -19,7 +19,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import ar.com.avaco.ws.rest.security.service.ClienteEPService;
+import ar.com.avaco.ws.rest.security.service.ClienteEPPortalService;
 import ar.com.avaco.ws.rest.security.util.JwtTokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 
@@ -29,7 +29,7 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
 	@Autowired(required = false)
 	@Value("${jwt.header}")
 	private String tokenHeader;
-	private ClienteEPService clienteEPService;
+	private ClienteEPPortalService clienteEPService;
 	@Resource
 	private JwtTokenUtil jwtTokenUtil;
 
@@ -90,7 +90,7 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
 	}
 
 	@Resource(name = "clienteEPService")
-	public void setClienteEPService(ClienteEPService clienteEPService) {
+	public void setClienteEPService(ClienteEPPortalService clienteEPService) {
 		this.clienteEPService = clienteEPService;
 	}
 }

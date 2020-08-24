@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.ws.dto.ProfesorDTO;
+import ar.com.avaco.educacion.ws.dto.QuieroSerProfesorDTO;
 import ar.com.avaco.educacion.ws.service.ProfesorEPService;
 import ar.com.avaco.ws.rest.controller.AbstractDTORestController;
 import ar.com.avaco.ws.rest.dto.JSONResponse;
@@ -73,7 +74,16 @@ public class ProfesorRestController extends AbstractDTORestController<ProfesorDT
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}	
-		
+
+	@RequestMapping(value = "/profesores/contacto/", method = RequestMethod.POST)
+	public ResponseEntity<JSONResponse> quieroSerProfesor(@RequestBody QuieroSerProfesorDTO contacto) throws BusinessException {
+		JSONResponse response = new JSONResponse();
+		// TODO implementar
+		response.setStatus(JSONResponse.OK);	
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}	
+
+	
 	@RequestMapping(value = "/profesores/habilitar/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<JSONResponse> habilitarProfesor(@PathVariable("id") Long id) throws BusinessException {
 		ProfesorDTO updateProfesor = service.bloquearHabilitarProfesor(id, false);

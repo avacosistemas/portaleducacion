@@ -4,7 +4,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import ar.com.avaco.ws.rest.security.dto.UpdatePasswordDTO;
 
-public interface ClienteEPService extends UserDetailsService {
+public interface ClienteEPPortalService extends UserDetailsService {
 
 	void updatePassword(UpdatePasswordDTO updatePassword);
 

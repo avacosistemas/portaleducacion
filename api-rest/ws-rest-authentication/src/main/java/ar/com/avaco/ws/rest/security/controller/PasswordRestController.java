@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.arc.sec.service.UsuarioService;
 import ar.com.avaco.ws.rest.dto.JSONResponse;
+import ar.com.avaco.ws.rest.security.dto.PassworResetDTO;
 import ar.com.avaco.ws.rest.security.dto.UpdatePasswordDTO;
 import ar.com.avaco.ws.rest.security.service.UserService;
 import ar.com.avaco.ws.rest.service.FunctionBusiness;
@@ -26,8 +27,8 @@ public class PasswordRestController {
 	private UserService userEPservice;
 
 	@RequestMapping(value = "/password/reset/", method = RequestMethod.POST)
-	public ResponseEntity<JSONResponse> reset(@RequestBody String username) throws BusinessException {
-		usuarioService.sendMissingPassword(username);
+	public ResponseEntity<JSONResponse> reset(@RequestBody PassworResetDTO dto) throws BusinessException {
+		usuarioService.sendMissingPassword(dto.getUsername());
 		JSONResponse jsonResponse = new JSONResponse();
 		jsonResponse.setData(null);
 		jsonResponse.setStatus(JSONResponse.OK);

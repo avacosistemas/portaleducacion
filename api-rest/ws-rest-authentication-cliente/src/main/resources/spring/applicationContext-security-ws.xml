@@ -10,9 +10,15 @@
 	  http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<http entry-point-ref="restAuthenticationEntryPoint">
-		<intercept-url pattern="/auth/**" access="permitAll" />
+		<intercept-url pattern="/auth" method="POST" access="permitAll" />
 		<intercept-url pattern="/password/**" access="permitAll" />
-		<intercept-url pattern="/auth/reset-password" access="permitAll" />
+		<intercept-url pattern="/auth/reset-password" access="isAuthenticated()" />
+		
+		
+		<intercept-url pattern="/cliente" method="GET" access="isAuthenticated()" />
+		<intercept-url pattern="/password/reset/" method="POST" access="permitAll" />
+		<intercept-url pattern="/password/update/" method="POST" access="isAuthenticated()" />
+		
 		<intercept-url pattern="/**" access="permitAll" />
 		<csrf disabled="true" />
 

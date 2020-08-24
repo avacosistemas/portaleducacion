@@ -1,7 +1,6 @@
 package ar.com.avaco.educacion.ws.service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import ar.com.avaco.commons.exception.BusinessException;

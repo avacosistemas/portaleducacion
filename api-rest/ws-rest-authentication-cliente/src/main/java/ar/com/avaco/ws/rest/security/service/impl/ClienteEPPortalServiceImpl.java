@@ -14,10 +14,10 @@ import ar.com.avaco.educacion.service.cliente.ClienteService;
 import ar.com.avaco.ws.rest.security.ClienteUserDetailsFactory;
 import ar.com.avaco.ws.rest.security.dto.UpdatePasswordDTO;
 import ar.com.avaco.ws.rest.security.dto.UserAuthorised;
-import ar.com.avaco.ws.rest.security.service.ClienteEPService;
+import ar.com.avaco.ws.rest.security.service.ClienteEPPortalService;
 
 @Service("clienteEPService")
-public class ClienteEPServiceImpl implements ClienteEPService {
+public class ClienteEPPortalServiceImpl implements ClienteEPPortalService {
 
 	private ClienteService clienteService;
 	

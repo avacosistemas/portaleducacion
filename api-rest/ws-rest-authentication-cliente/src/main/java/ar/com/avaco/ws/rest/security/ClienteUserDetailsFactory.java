@@ -20,7 +20,8 @@ public final class ClienteUserDetailsFactory {
                 cliente.getFechaAltaPassword(),
                 cliente.isAccountNonExpired(),
                 cliente.isAccountNonLocked(),
-                cliente.isCredentialsNonExpired()
+                cliente.isCredentialsNonExpired(),
+                cliente.getTipoCliente().getLabel().toUpperCase()
         );
     }
 

@@ -92,33 +92,7 @@ public class AulaRestController extends AbstractDTORestController<AulaDTO, Long,
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);	
 	}
-	
-	/**
-	 * TODO MOVER A WS-EDUCACION-CLIENTE
-	 * @param aulaProfesorDTO
-	 * @return
-	 * @throws BusinessException
-	 */
-	@RequestMapping(value = "/aula/abrirClase/", method = RequestMethod.POST)
-	public ResponseEntity<JSONResponse> abrirClase(@RequestBody AulaProfesorDTO aulaProfesorDTO) throws BusinessException {
-		AulaDTO newAulaDto = service.abrirClase(aulaProfesorDTO);
-		JSONResponse response = new JSONResponse();
-		response.setData(newAulaDto);
-		response.setData("ACK");
-		response.setStatus(JSONResponse.OK);	
-        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);	
-	}
-	
-	@RequestMapping(value = "/aula/unirseClase/", method = RequestMethod.POST)
-	public ResponseEntity<JSONResponse> unirseClase(@RequestBody AulaAlumnoDTO aulaAlumnoDTO) throws BusinessException {
-		AulaDTO newAulaDto = service.unirseClase(aulaAlumnoDTO);
-		JSONResponse response = new JSONResponse();
-		response.setData(newAulaDto);
-		response.setData("ACK");
-		response.setStatus(JSONResponse.OK);	
-        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);	
-	}
-	
+		
 	//Service
 	@Resource(name = "aulaEPService")
 	public void setService(AulaEPService aulaEPService) {

@@ -11,6 +11,26 @@
 
 	<http entry-point-ref="restAuthenticationEntryPoint">
 		<intercept-url pattern="/swagger-ui.html" access="permitAll" />
+
+		<intercept-url pattern="/profesor/miperfil/*" method="GET" access="isAuthenticated()" />
+		<intercept-url pattern="/profesor/miperfil/*" method="PUT" access="isAuthenticated()" />
+		<intercept-url pattern="/profesor/preguntas/*" method="GET" access="isAuthenticated()" />
+		<intercept-url pattern="/profesor/responder/*" method="PUT" access="isAuthenticated()" />
+		<intercept-url pattern="/profesor/misclases/*" method="GET" access="isAuthenticated()" />
+		<intercept-url pattern="/profesor/*/detalleclase/*" method="GET" access="isAuthenticated()" />
+		<intercept-url pattern="/profesor/*/anotaciones/*" method="GET" access="isAuthenticated()" />
+		<intercept-url pattern="/profesor/*/anotaciones/*" method="PUT" access="isAuthenticated()" />
+		<intercept-url pattern="/profesor/*/alumnos/*" method="GET" access="isAuthenticated()" />
+
+		<intercept-url pattern="/alumno/miperfil/*" method="GET" access="isAuthenticated()" />
+		<intercept-url pattern="/alumno/miperfil/" method="PUT" access="isAuthenticated()" />
+		<intercept-url pattern="/alumno/preguntar/*" method="POST" access="isAuthenticated()" />
+		<intercept-url pattern="/alumno/misclases/*" method="GET" access="isAuthenticated()" />
+		<intercept-url pattern="/alumno/*/detalleclase/*" method="GET" access="isAuthenticated()" />
+		<intercept-url pattern="/alumno/*/anotaciones/*" method="GET" access="isAuthenticated()" />
+		<intercept-url pattern="/alumno/*/anotaciones/*" method="POST" access="isAuthenticated()" />
+		<intercept-url pattern="/alumno/*/puntuacion/*" method="POST" access="isAuthenticated()" />
+		
 		<intercept-url pattern="/**" access="permitAll" />
 		<csrf disabled="true" />
 		<custom-filter before="BASIC_AUTH_FILTER" ref="tokenFilter" />

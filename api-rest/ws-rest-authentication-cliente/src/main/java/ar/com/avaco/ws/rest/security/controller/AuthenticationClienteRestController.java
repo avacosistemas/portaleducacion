@@ -23,7 +23,7 @@ import ar.com.avaco.model.ClienteUserDetailsDTO;
 import ar.com.avaco.ws.rest.dto.JwtAuthenticationRequest;
 import ar.com.avaco.ws.rest.dto.JwtAuthenticationResponse;
 import ar.com.avaco.ws.rest.security.exception.AuthenticationException;
-import ar.com.avaco.ws.rest.security.service.ClienteEPService;
+import ar.com.avaco.ws.rest.security.service.ClienteEPPortalService;
 import ar.com.avaco.ws.rest.security.util.JwtTokenUtil;
 
 @RestController
@@ -36,7 +36,7 @@ public class AuthenticationClienteRestController {
 
 	private JwtTokenUtil jwtTokenUtil;
 
-	private ClienteEPService clienteEPService;
+	private ClienteEPPortalService clienteEPService;
 
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
@@ -104,7 +104,7 @@ public class AuthenticationClienteRestController {
 	}
 
 	@Resource(name = "clienteEPService")
-	public void setClienteEPService(ClienteEPService clienteEPService) {
+	public void setClienteEPService(ClienteEPPortalService clienteEPService) {
 		this.clienteEPService = clienteEPService;
 	}
 

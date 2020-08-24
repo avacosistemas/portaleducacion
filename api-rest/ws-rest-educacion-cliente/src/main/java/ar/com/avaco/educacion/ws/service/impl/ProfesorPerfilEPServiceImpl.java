@@ -26,7 +26,7 @@ import ar.com.avaco.educacion.service.profesor.ProfesorService;
 import ar.com.avaco.educacion.ws.dto.AulaProfesorPortalDTO;
 import ar.com.avaco.educacion.ws.dto.CalificacionDTO;
 import ar.com.avaco.educacion.ws.dto.ComentarioDTO;
-import ar.com.avaco.educacion.ws.dto.PreguntaRespuestaDTO;
+import ar.com.avaco.educacion.ws.dto.PreguntaRespuestaAulaDTO;
 import ar.com.avaco.educacion.ws.dto.ProfesorPerfilDTO;
 import ar.com.avaco.educacion.ws.dto.RespuestaDTO;
 import ar.com.avaco.educacion.ws.service.ProfesorPerfilEPService;
@@ -52,8 +52,23 @@ public class ProfesorPerfilEPServiceImpl extends CRUDEPBaseService<Long, Profeso
 	
 	@Override
 	public ProfesorPerfilDTO updateProfesor(Long id, ProfesorPerfilDTO profesorDto) throws BusinessException {
-		Profesor profesor = profesorDto.toEntity();
-		profesor.setId(id);
+		Profesor profesor = service.get(id);
+		
+		profesor.setNombre(profesorDto.getNombre());
+		profesor.setApellido(profesorDto.getApellido());
+		profesor.setEmail(profesorDto.getEmail());
+		profesor.setDescripcion(profesorDto.getDescripcion());
+		Identificacion ident = profesor.getIdentificacion();
+		ident.setNumero(profesorDto.getNumeroIdentificacion());
+		ident.setTipo(TipoIdentificacion.DNI);
+		ident.setCliente(profesor);
+		profesor.setIdentificacion(ident);
+		
+		Contacto contacto = profesor.getContacto();
+		contacto.setTelefonoMovil(profesorDto.getTelefonoMovil());
+		contacto.setCliente(profesor);
+		profesor.setContacto(contacto);
+		
 		profesor = service.updateProfesor(profesor);
 		return new ProfesorPerfilDTO(profesor);
 	}
@@ -108,10 +123,10 @@ public class ProfesorPerfilEPServiceImpl extends CRUDEPBaseService<Long, Profeso
 	}
 
 	@Override
-	public List<PreguntaRespuestaDTO> listPreguntaRespuestas(Long idProfesor) {
+	public List<PreguntaRespuestaAulaDTO> listPreguntaRespuestas(Long idProfesor) {
 		List<PreguntaRespuesta> listByProfesor = preguntaRespuestaService.listByProfesor(idProfesor);
-		List<PreguntaRespuestaDTO> list = new ArrayList<>();
-		listByProfesor.forEach(pr -> list.add(new PreguntaRespuestaDTO(pr)));
+		List<PreguntaRespuestaAulaDTO> list = new ArrayList<>();
+		listByProfesor.forEach(pr -> list.add(new PreguntaRespuestaAulaDTO(pr)));
 		return list;
 	}
 

@@ -2,6 +2,7 @@ package ar.com.avaco.educacion.service.comentario;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -18,5 +19,11 @@ public class ComentarioServiceImpl extends NJBaseService<Long, Comentario, Comen
 	public List<Comentario> listByClaseId(Long idClase) {
 		return this.repository.findAllByAulaId(idClase);
 	}
+
+	@Resource(name = "comentarioRepository")
+	void setProfesorRepository(ComentarioRepository comentarioRepository) {
+		this.repository = comentarioRepository;
+	}
+	
 	
 }

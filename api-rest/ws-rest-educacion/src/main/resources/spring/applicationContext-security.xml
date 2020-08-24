@@ -16,6 +16,18 @@
 		<intercept-url pattern="/contact-us/send/*" access="permitAll" />
 		<intercept-url pattern="/portal/faqs/**" access="permitAll" />
 		<intercept-url pattern="/parametrosPortal/**" access="permitAll" />
+		
+		<intercept-url pattern="/alumnos/registrar/" method="POST" access="permitAll" />
+		<intercept-url pattern="/contact-us/send/" method="POST" access="permitAll" />
+		<intercept-url pattern="/portal/faqs" method="GET" access="permitAll" />
+		<intercept-url pattern="/materias/nivel/*" method="GET" access="permitAll" />
+		<intercept-url pattern="/materias" method="GET" access="permitAll" />
+		<intercept-url pattern="/catalogoDocente" method="GET" access="permitAll" />
+		<intercept-url pattern="/catalogoDocente/*" method="GET" access="permitAll" />
+		<intercept-url pattern="/catalogoHorario/profesor/*/fecha/*" method="GET" access="permitAll" />
+		<intercept-url pattern="/materiasprofesor/*" method="GET" access="permitAll" />
+		<intercept-url pattern="/catalogoConsultas/*" method="GET" access="permitAll" />
+		
 		<intercept-url pattern="/**" access="permitAll" />
 		<csrf disabled="true" />
 		<custom-filter before="BASIC_AUTH_FILTER" ref="tokenFilter" />

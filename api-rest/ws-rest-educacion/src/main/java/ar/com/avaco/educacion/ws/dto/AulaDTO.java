@@ -1,6 +1,5 @@
 package ar.com.avaco.educacion.ws.dto;
 
-import java.text.ParseException;
 import ar.com.avaco.educacion.domain.entities.Aula;
 import ar.com.avaco.educacion.domain.entities.Institucion;
 import ar.com.avaco.educacion.domain.entities.Materia;

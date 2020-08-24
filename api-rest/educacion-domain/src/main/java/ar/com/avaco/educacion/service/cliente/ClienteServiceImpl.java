@@ -347,18 +347,18 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		validarAltaModificacionCliente(entity);
 		validaContactoCliente(entity.getContacto());
 
-		Cliente cliente = this.get(entity.getId());
-		cliente.setId(entity.getId());
-		cliente.setNombre(entity.getNombre());
-		cliente.setApellido(entity.getApellido());
-		cliente.setUsername(entity.getUsername());
-		cliente.setEmail(entity.getEmail());
+//		Cliente cliente = this.get(entity.getId());
+//		cliente.setId(entity.getId());
+//		cliente.setNombre(entity.getNombre());
+//		cliente.setApellido(entity.getApellido());
+//		cliente.setUsername(entity.getUsername());
+//		cliente.setEmail(entity.getEmail());
+//
+//		cliente.getIdentificacion().setTipo(entity.getIdentificacion().getTipo());
+//		cliente.getIdentificacion().setNumero(entity.getIdentificacion().getNumero());
+//		cliente.getContacto().setTelefonoMovil(entity.getContacto().getTelefonoMovil());
 
-		cliente.getIdentificacion().setTipo(entity.getIdentificacion().getTipo());
-		cliente.getIdentificacion().setNumero(entity.getIdentificacion().getNumero());
-		cliente.getContacto().setTelefonoMovil(entity.getContacto().getTelefonoMovil());
-
-		return cliente;
+		return entity;
 	}
 
 	@Override

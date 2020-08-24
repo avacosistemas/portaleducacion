@@ -4,7 +4,7 @@ import ar.com.avaco.educacion.domain.entities.PreguntaRespuesta;
 import ar.com.avaco.utils.DateUtils;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
-public class PreguntaRespuestaDTO extends DTOEntity<Long> {
+public class PreguntaRespuestaAulaDTO extends DTOEntity<Long> {
 	
 	private Long id;
 	private Long idProfesor;
@@ -14,10 +14,10 @@ public class PreguntaRespuestaDTO extends DTOEntity<Long> {
 	private String fechaPregunta;
 	private String fechaRespuesta;
 
-	public PreguntaRespuestaDTO() {
+	public PreguntaRespuestaAulaDTO() {
 	}
 
-	public PreguntaRespuestaDTO(PreguntaRespuesta preguntaRta) {
+	public PreguntaRespuestaAulaDTO(PreguntaRespuesta preguntaRta) {
 		this.setDTO(preguntaRta);
 	}
 

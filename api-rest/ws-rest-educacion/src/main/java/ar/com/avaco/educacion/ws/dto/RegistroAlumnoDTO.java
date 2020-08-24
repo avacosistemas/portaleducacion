@@ -6,6 +6,8 @@ public class RegistroAlumnoDTO extends AlumnoDTO {
 	
 	protected String secondPassword;
 	
+	private Boolean checkTerminosCondiciones;
+	
 	public RegistroAlumnoDTO() {}
 
 	public String getPassword() {
@@ -23,6 +25,15 @@ public class RegistroAlumnoDTO extends AlumnoDTO {
 	public void setSecondPassword(String secondPassword) {
 		this.secondPassword = secondPassword;
 	}
+
+	public Boolean getCheckTerminosCondiciones() {
+		return checkTerminosCondiciones;
+	}
+
+	public void setCheckTerminosCondiciones(Boolean checkTerminosCondiciones) {
+		this.checkTerminosCondiciones = checkTerminosCondiciones;
+	}
+	
 	
 	
 

@@ -14,6 +14,10 @@ public class ComentarioDTO extends DTOEntity<Long> {
 
 	private String fechaHora;
 
+	public ComentarioDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public ComentarioDTO(Comentario comentario) {
 		this.id = comentario.getId();
 		this.nombre = comentario.getNombre();
