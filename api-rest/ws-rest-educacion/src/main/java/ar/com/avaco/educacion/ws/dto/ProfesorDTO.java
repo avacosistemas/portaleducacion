@@ -25,6 +25,8 @@ public class ProfesorDTO extends DTOEntity<Long> {
 
 	private String estado;
 
+	private Double calificacion;
+
 	public ProfesorDTO() {
 	}
 
@@ -146,6 +148,14 @@ public class ProfesorDTO extends DTOEntity<Long> {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+	public Double getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(Double calificacion) {
+		this.calificacion = calificacion;
 	}
 
 }

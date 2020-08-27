@@ -58,7 +58,7 @@ public class AulaAlumnoEPServiceImpl extends CRUDEPBaseService<Long, AulaAlumnoD
 		aulaAlumnoDto.setId(entity.getId());
 		aulaAlumnoDto.setNombreAlumno(entity.getAlumno().getNombreApellido());
 		aulaAlumnoDto.setComentario(entity.getComentario());
-		aulaAlumnoDto.setCalificacion(entity.getCalificacion() != null ? entity.getCalificacion().toString(): "Sin Calificar");
+		aulaAlumnoDto.setCalificacion(entity.getCalificacion() != null &&  entity.getCalificacion() > 0D ? entity.getCalificacion() : null);
 		return aulaAlumnoDto;
 	}
 

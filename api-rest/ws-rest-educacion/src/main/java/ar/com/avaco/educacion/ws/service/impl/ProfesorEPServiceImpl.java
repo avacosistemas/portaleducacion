@@ -141,6 +141,7 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 		profesorDTO.setBloqueado(entity.isBloqueado());
 		profesorDTO.setHabilitado(!entity.isBloqueado());
 		profesorDTO.setEstado(entity.isBloqueado() ? "Bloqueado" : "Habilitado");
+		profesorDTO.setCalificacion(entity.getCalificacion());
 		return profesorDTO;
 	}
 

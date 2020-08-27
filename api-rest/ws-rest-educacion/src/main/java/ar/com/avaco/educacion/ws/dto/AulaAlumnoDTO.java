@@ -9,7 +9,7 @@ public class AulaAlumnoDTO extends DTOEntity<Long> {
 	private String idAlumno;
 
 	private String nombreAlumno;
-	private String calificacion;
+	private Double calificacion;
 	private String comentario;
 
 	public String getIdAula() {
@@ -44,11 +44,11 @@ public class AulaAlumnoDTO extends DTOEntity<Long> {
 		this.nombreAlumno = nombreAlumno;
 	}
 
-	public String getCalificacion() {
+	public Double getCalificacion() {
 		return calificacion;
 	}
 
-	public void setCalificacion(String calificacion) {
+	public void setCalificacion(Double calificacion) {
 		this.calificacion = calificacion;
 	}
 

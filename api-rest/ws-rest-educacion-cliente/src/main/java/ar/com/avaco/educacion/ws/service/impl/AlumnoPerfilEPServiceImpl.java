@@ -2,7 +2,11 @@ package ar.com.avaco.educacion.ws.service.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.OptionalDouble;
+import java.util.Set;
+import java.util.stream.DoubleStream;
 
 import javax.annotation.Resource;
 
@@ -20,6 +24,7 @@ import ar.com.avaco.educacion.service.aula.AulaAlumnoService;
 import ar.com.avaco.educacion.service.aula.AulaService;
 import ar.com.avaco.educacion.service.comentario.ComentarioService;
 import ar.com.avaco.educacion.service.pregresp.PreguntaRespuestaService;
+import ar.com.avaco.educacion.service.profesor.ProfesorService;
 import ar.com.avaco.educacion.ws.dto.AlumnoPerfilDTO;
 import ar.com.avaco.educacion.ws.dto.AulaAlumnoPortalDTO;
 import ar.com.avaco.educacion.ws.dto.ComentarioDTO;
@@ -36,6 +41,7 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	private ComentarioService comentarioService;
 	private AulaService aulaService;
 	private AulaAlumnoService aulaAlumnoService;
+	private ProfesorService profesorService;
 
 	// Service
 	@Override
@@ -118,9 +124,22 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	@Override
 	public void calificarAula(Long idAula, Long id, PuntuacionDTO puntuacionDTO) {
 		AulaAlumno aa = aulaAlumnoService.getByIdAulaIdAlumno(idAula, id);
-		aa.setCalificacion(puntuacionDTO.getPuntuacion());
+		aa.setCalificacion(puntuacionDTO.getPuntuacion().doubleValue());
 		aa.setComentario(puntuacionDTO.getComentario());
 		aulaAlumnoService.update(aa);
+
+		List<AulaAlumno> alumnos = aulaAlumnoService.listByAula(aa.getAula().getId());
+		OptionalDouble avgAula = alumnos.stream().filter(x -> x.getCalificacion() != null && x.getCalificacion() > 0D).mapToDouble(AulaAlumno::getCalificacion).average(); 
+		
+		Aula aula = aa.getAula();
+		aula.setCalificacion(avgAula.getAsDouble());
+		aulaService.update(aula);
+		
+		List<Aula> aulasProfesor = aulaService.listByProfesorId(aula.getProfesor().getId());
+		OptionalDouble avgProfesor = aulasProfesor.stream().filter(x -> x.getCalificacion() != null && x.getCalificacion() > 0D).mapToDouble(Aula::getCalificacion).average();
+		Profesor profesor = aula.getProfesor();
+		profesor.setCalificacion(avgProfesor.getAsDouble());
+		profesorService.update(profesor);
 	}
 	
 	@Override
@@ -153,6 +172,11 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	@Resource(name = "aulaAlumnoService")
 	public void setAulaAlumnoService(AulaAlumnoService aulaAlumnoService) {
 		this.aulaAlumnoService = aulaAlumnoService;
+	}
+	
+	@Resource(name = "profesorService")
+	public void setProfesorService(ProfesorService profesorService) {
+		this.profesorService = profesorService;
 	}
 	
 }

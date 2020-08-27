@@ -155,9 +155,9 @@ export class Datepicker2Component extends DynamicFieldFormComponent implements O
         f.required = this.field.required;
         f.label = this.field.label;
 
-        if (f.required != undefined && f.required == true) {
-          f.label = f.label + ' (*)';
-        }
+        // if (f.required != undefined && f.required == true) {
+        //   f.label = f.label + ' (*)';
+        // }
 
       });
       this.fieldLabel = fVF;

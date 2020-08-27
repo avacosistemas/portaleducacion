@@ -38,13 +38,13 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "AULA_PROFESOR", joinColumns = @JoinColumn(name = "ID_AULA"), inverseJoinColumns = @JoinColumn(name = "ID_PROFESOR"))
 	Set<Profesor> profesores = new HashSet<>();
-	
+
 	@OneToMany(targetEntity = Comentario.class, mappedBy = "aula", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	private Set<Comentario> comentarios = new HashSet<>();
-	
+
 	@OneToMany(targetEntity = AulaEventos.class, mappedBy = "aula", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	private Set<AulaEventos> eventosAulas = new HashSet<>();	
-	
+	private Set<AulaEventos> eventosAulas = new HashSet<>();
+
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "ID_MATERIA")
 	private Materia materia;
@@ -60,7 +60,7 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	private Integer hora;
 
 	@Column(name = "CALIFICACION", nullable = false)
-	private Integer calificacion = 0;
+	private Double calificacion = 0D;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_PROFESOR")
@@ -69,19 +69,18 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	public Aula() {
 	}
 
-	/* Id usada para identificador unico de AulaVirtual */	
+	/* Id usada para identificador unico de AulaVirtual */
 	public String generatedIdAula(Profesor profesor) {
-		return "Aula "+this.getMateria().getDescripcion()+" / Prof: "+profesor.getNombreApellido();
+		return "Aula " + this.getMateria().getDescripcion() + " / Prof: " + profesor.getNombreApellido();
 	}
-	
-	/* Id usada para identificador unico de AulaVirtual */	
+
+	/* Id usada para identificador unico de AulaVirtual */
 	public String generatedIdAula() {
-		if (this.getProfesor()!=null)
+		if (this.getProfesor() != null)
 			return generatedIdAula(this.getProfesor());
 		return null;
 	}
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -122,12 +121,16 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 		this.materia = materia;
 	}
 
-	public Integer getCalificacion() {
+	public Double getCalificacion() {
 		return calificacion;
 	}
 
-	public void setCalificacion(Integer calificacion) {
+	public void setCalificacion(Double calificacion) {
 		this.calificacion = calificacion;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public void addProfesor(Profesor profesor) {
@@ -173,7 +176,7 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	public void setHora(Integer hora) {
 		this.hora = hora;
 	}
-	
+
 	public Set<AulaEventos> getEventosAulas() {
 		return eventosAulas;
 	}
@@ -181,7 +184,7 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	public void setEventosAulas(Set<AulaEventos> eventosAulas) {
 		this.eventosAulas = eventosAulas;
 	}
-	
+
 	// TODO Agregar hashCode, equals y toString cuando se completen todos los
 	// atributos
 

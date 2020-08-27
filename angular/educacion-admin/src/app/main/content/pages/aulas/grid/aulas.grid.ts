@@ -62,7 +62,8 @@ export const AULAS_GRID_DEF = {
     'nombreInstitucion',
     'dia',
     'horaString',
-    'estado'
+    'estado',
+    'calificacion'
   ],
   actions: [
     {
