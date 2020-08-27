@@ -1,0 +1,6 @@
+export const SUBASTA_PRESTAMO_SECURITY_DEF = {
+  readAccess: 'SUBASTA_PRESTAMO_READ',
+  updateAccess: 'SUBASTA_PRESTAMO_UPDATE',
+  createAccess: 'SUBASTA_PRESTAMO_CREATE',
+  deleteAccess: 'SUBASTA_PRESTAMO_DELETE'
+};

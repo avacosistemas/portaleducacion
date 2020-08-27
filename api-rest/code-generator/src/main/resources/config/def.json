@@ -1,0 +1,30 @@
+import { ${functionalityNameUppercase}_CREATE_FORM_FIELDS_DEF } from './form/${functionalityNameLowercase}.create.fields';
+import { ${functionalityNameUppercase}_UPDATE_FORM_FIELDS_DEF } from './form/${functionalityNameLowercase}.update.fields';
+import { ${functionalityNameUppercase}_READ_FORM_FIELDS_DEF } from './form/${functionalityNameLowercase}.read.fields';
+import { ${functionalityNameUppercase}_FILTER_FORM_FIELDS_DEF } from './form/${functionalityNameLowercase}.filter.fields';
+import { ${functionalityNameUppercase}_SECURITY_DEF } from './security/${functionalityNameLowercase}.security';
+import { ${functionalityNameUppercase}_GRID_DEF } from './grid/${functionalityNameLowercase}.grid';
+import { ${functionalityNameUppercase}_I18N_DEF } from './i18n/${functionalityNameLowercase}.i18n';
+import { ${functionalityNameUppercase}_NAV_DEF } from './navigation/${functionalityNameLowercase}.nav';
+
+// Definicion de un template crud(Create,Read,Update and Delete)
+export const ${functionalityNameUppercase}_DEF: CrudDef = { 
+    name: '${functionalityNameUppercase}',
+    i18n: ${functionalityNameUppercase}_I18N_DEF,
+    grid: ${functionalityNameUppercase}_GRID_DEF, // Si el crud tiene grilla, entonces se agrega su definicion.
+    forms: {
+        filter: ${functionalityNameUppercase}_FILTER_FORM_FIELDS_DEF, // Si el crud tiene campos de busqueda, entonces se agrega su definicion.
+        create: ${functionalityNameUppercase}_CREATE_FORM_FIELDS_DEF, // Si el crud tiene formulario de alta, entonces se agrega su definicion.
+        update: ${functionalityNameUppercase}_UPDATE_FORM_FIELDS_DEF, // Si el crud tiene formulario de modificacion, entonces se agrega su definicion.
+        read:  ${functionalityNameUppercase}_READ_FORM_FIELDS_DEF // Si existe un formulario de edicion no exite uno de solo lectura
+    },
+    navigation: ${functionalityNameUppercase}_NAV_DEF,
+    security: ${functionalityNameUppercase}_SECURITY_DEF,
+    ws: {
+        key: '${functionalityNameUppercase}_CRUD_URL',
+        url: '${functionalityUrl}'
+    },
+    dialogConfig: {
+        width: '400px'
+    }   
+};

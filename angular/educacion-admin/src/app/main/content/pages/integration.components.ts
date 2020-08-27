@@ -1,6 +1,7 @@
 
 import { ComponentDef } from '../../../modules/fwk/core/model/component-def/component-def';
 import { PARAMETER_DEF } from './parameter/parameter.def';
+import { FAQS_DEF } from './faq/faqs.def';
 import { INSTITUCIONES_DEF } from './instituciones/instituciones.def';
 import { MATERIAS_DEF } from './materias/materias.def';
 import { USER_DEF } from '../user/component/user.def';
@@ -12,19 +13,22 @@ import { HORAS_PROFESOR_DEF } from './horas_profesor/horas_profesor.def';
 import { ALUMNO_DEF } from './alumno/alumno.def';
 import { AULAS_DEF } from './aulas/aulas.def';
 import { AULA_ALUMNO_DEF } from './aula_alumno/aula_alumno.def';
+import { PROFILE_DEF } from '../profile/component/profile.def';
 
 export const COMPONENTS: ComponentDef[] = [
   PARAMETER_DEF,
+  FAQS_DEF,
   INSTITUCIONES_DEF,
   MATERIAS_DEF,
   USER_DEF,
   ROLE_DEF,
   PROFESORES_DEF,
   PERMISSION_DEF,
+  PROFILE_DEF,
   MATERIA_PROFESOR_DEF,
   HORAS_PROFESOR_DEF,
   ALUMNO_DEF,
-  AULAS_DEF, 
+  AULAS_DEF,
   AULA_ALUMNO_DEF
 ];
 

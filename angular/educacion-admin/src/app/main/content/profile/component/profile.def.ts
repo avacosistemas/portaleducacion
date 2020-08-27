@@ -1,11 +1,11 @@
 
 import { PROFILE_SEARCH_FIELDS } from '../form/profile.search.fields';
-import { environment } from 'environments/environment';
+import {environment, PREFIX_DOMAIN_API_EDUCACION} from 'environments/environment';
 import { CrudDef } from 'app/modules/fwk/core/model/component-def/crud-def';
 const PERMISSIONS_COMPONENT_KEY = 'permissions';
 const ROLE_COMPONENT_KEY = 'role';
 // Definicion de un template crud(Create,Read,Update and Delete)
-export const PROFILE_DEF: CrudDef = { 
+export const PROFILE_DEF: CrudDef = {
 
     name : 'profile',
     i18n : {
@@ -21,7 +21,7 @@ export const PROFILE_DEF: CrudDef = {
         url: '/' + environment.URL_PROFILE
     },
 
-    security: {               
+    security: {
         createAccess: 'PERFIL_CREATE',
         deleteAccess: 'PERFIL_DELETE',
         readAccess: 'PERFIL_READ',
@@ -31,7 +31,7 @@ export const PROFILE_DEF: CrudDef = {
     dialogConfig: {
         width: 'auto'
     },
-    
+
     grid: {
             columnsDef: [
                             {columnNameKey: 'Id', columnDef: 'id'},
@@ -40,18 +40,18 @@ export const PROFILE_DEF: CrudDef = {
                             {columnNameKey: 'Activo', columnDef: 'enabled'}
                         ],
             sortAllColumns: true,
-            displayedColumns: ['name', 'enabled'],
+            displayedColumns: ['name', 'role.name', 'enabled'],
             deleteColumn: { key: 'delete',
                             name: 'Eliminar'}
             },
     forms: {
         filter: PROFILE_SEARCH_FIELDS,
-        create: [{               
+        create: [{
                 key: 'name',
                 labelKey: 'Nombre',
                 required: true,
                 requiredMessage: 'El campo nombre es requerido',
-                
+
                 controlType: 'textbox',
                 maxLength: 50
             },
@@ -59,7 +59,7 @@ export const PROFILE_DEF: CrudDef = {
                 key: 'enabled',
                 labelKey: 'Activo',
                 requiredMessage: 'El campo activo es requerido',
-                
+
                 controlType: 'checkbox'
             },
             {
@@ -67,7 +67,6 @@ export const PROFILE_DEF: CrudDef = {
                 labelKey: 'Permisos',
                 required: true,
                 requiredMessage: 'El campo permisos es requerido',
-                
                 controlType: 'pick-list',
                 options: {
                     compositeKey: ['id'],
@@ -79,8 +78,23 @@ export const PROFILE_DEF: CrudDef = {
                         url: environment.PERMISSION_CRUD_URL
                     }
                 }
+            },
+            {
+              key: ROLE_COMPONENT_KEY,
+              labelKey: 'Rol',
+              required: true,
+              requiredMessage: 'El campo rol es requerido',
+              controlType: 'select',
+              options: {
+                elementLabel: 'name',
+                elementValue: 'id',
+                fromWs: {
+                  key: 'user_ws_roles',
+                  url: environment.ROLE_CRUD_URL
+                }
+              }
             }],
-    update:  [{               
+    update:  [{
         key: 'name',
         labelKey: 'Nombre',
         required: true,
@@ -99,7 +113,7 @@ export const PROFILE_DEF: CrudDef = {
         labelKey: 'Permisos',
         required: true,
         requiredMessage: 'El campo permisos es requerido',
-        
+
         controlType: 'pick-list',
         options: {
             compositeKey: ['id'],
@@ -112,27 +126,27 @@ export const PROFILE_DEF: CrudDef = {
             }
         }
         }],
-    read:  [{               
+    read:  [{
             key: 'code',
             labelKey: 'Codigo',
-            
+
             controlType: 'textbox'
             },
             {
             key: 'description',
             labelKey: 'Descripcion',
-            
+
             controlType: 'textbox'
             },
             {
             key: 'enabled',
             labelKey: 'Activo',
-            
+
             controlType: 'checkbox'
             }]
     },
     ws: {
         key: 'PROFILE_CRUD_URL',
-        url: environment.PROFILE_CRUD_URL
+        url: environment.PROFILE_CRUD_URL,
     }
 };

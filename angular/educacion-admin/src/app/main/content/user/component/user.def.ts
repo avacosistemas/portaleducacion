@@ -4,7 +4,7 @@ import { CrudDef } from 'app/modules/fwk/core/model/component-def/crud-def';
 import { REGEX_KEY_USER } from 'app/modules/fwk/core/service/dynamic-form/form.validator.service';
 const PROFILES_COMPONENT_KEY = 'profiles';
 // Definicion de un template crud(Create,Read,Update and Delete)
-export const USER_DEF: CrudDef = { 
+export const USER_DEF: CrudDef = {
 
     name : 'user',
     dialogConfig: {
@@ -31,7 +31,7 @@ export const USER_DEF: CrudDef = {
         updateAccess: 'USUARIO_MODIFY',
     },
 
-    
+
     grid: {
             columnsDef: [
                           {columnNameKey: 'Id', columnDef: 'id'},
@@ -46,10 +46,10 @@ export const USER_DEF: CrudDef = {
                             name: 'Eliminar'}
             },
     forms: {
-        validationAddURL: environment.USER_VALIDATION_ADD_URL,
-        validationEditURL: environment.USER_VALIDATION_EDIT_URL,
+      /**validationAddURL: environment.USER_VALIDATION_ADD_URL,*/
+      /**validationEditURL: environment.USER_VALIDATION_EDIT_URL,*/
         filter: USER_SEARCH_FIELDS,
-        create: [{               
+        create: [{
               key: 'username',
               labelKey: 'Nombre de Usuario',
               required: true,
@@ -100,7 +100,7 @@ export const USER_DEF: CrudDef = {
                   },
               }
             }],
-        update:  [{               
+        update:  [{
                   key: 'username',
                   labelKey: 'Nombre de Usuario',
                   required: true,
@@ -157,7 +157,7 @@ export const USER_DEF: CrudDef = {
                   }
                 }],
         read:  [],
-    },  
+    },
     ws: {
         key: 'USER_CRUD_URL',
         url: environment.USER_CRUD_URL

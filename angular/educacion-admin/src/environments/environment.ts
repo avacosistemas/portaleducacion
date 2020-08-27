@@ -15,7 +15,7 @@ export const PREFIX_DOMAIN_API_AUTHENTICATION =  'http://localhost:8080/ws-rest-
 
 export const environment = {
     localAuth: true,
-    
+
     production: true,
     hmr       : false,
     // pasar a true para evitar ws
@@ -24,11 +24,11 @@ export const environment = {
     /** AUTHENTICATION */
     AUTHENTICATION_URL:  PREFIX_DOMAIN_API_AUTHENTICATION + '/auth',
     AUTHENTICATION_REFRESH_TOKEN_URL:  PREFIX_DOMAIN_API_AUTHENTICATION + '/refresh',
-    PERMISSION_CRUD_URL: PREFIX_DOMAIN_API_AUTHENTICATION + '/permission',
+    PERMISSION_CRUD_URL: PREFIX_DOMAIN_API_AUTHENTICATION + '/permissions/',
 
-    PROFILE_CRUD_URL: PREFIX_DOMAIN_API_AUTHENTICATION + '/profile',
-    ROLE_CRUD_URL :  PREFIX_DOMAIN_API_AUTHENTICATION + '/role',
-    USER_CRUD_URL :  PREFIX_DOMAIN_API_AUTHENTICATION + '/user',
+    PROFILE_CRUD_URL: PREFIX_DOMAIN_API_AUTHENTICATION + '/profiles/',
+    ROLE_CRUD_URL :  PREFIX_DOMAIN_API_AUTHENTICATION + '/roles/',
+    USER_CRUD_URL :  PREFIX_DOMAIN_API_AUTHENTICATION + '/users/',
     USER_VALIDATION_ADD_URL : PREFIX_DOMAIN_API_AUTHENTICATION + '/validationAdd',
     USER_VALIDATION_EDIT_URL  : PREFIX_DOMAIN_API_AUTHENTICATION + '/validationEdit',
 
@@ -37,6 +37,7 @@ export const environment = {
     URL_LOGIN: '/auth/login',
     // Business
     URL_PARAMETERS : 'parameters',
+    URL_FAQS : 'faqs',
     URL_INSTITUCIONES : 'instituciones',
     URL_MATERIAS : 'materias',
     URL_AULAS : 'aulas',
@@ -47,6 +48,6 @@ export const environment = {
     URL_PROFILE : 'perfiles',
     URL_ROLE : 'roles',
     URL_USER : 'usuarios'
-    
+
 };
 

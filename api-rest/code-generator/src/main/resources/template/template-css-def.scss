@@ -1,0 +1,26 @@
+
+import { ACREDITACION_GRID_DEF } from './grid/acreditacion.grid';
+import { ACREDITACION_NAV_DEF } from './navigation/acreditacion.nav';
+import { ACREDITACION_SECURITY_DEF } from './security/acreditacion.security';
+import { ACREDITACION_I18N_DEF } from './i18n/acreditacion.i18n';
+import { ACREDITACION_FILTER_FIELDS } from './form/acreditacion.filter.fields';
+import { CrudDef } from '../../../../../modules/fwk/core/model/component-def/crud-def';
+
+// Definicion de un template crud(Create,Read,Update and Delete)
+export const ACREDITACION_DEF: CrudDef = { 
+    name: 'admin_acreditacion_definition',
+    i18n: ACREDITACION_I18N_DEF,
+    grid: ACREDITACION_GRID_DEF, // Si el crud tiene grilla, entonces se agrega su definicion.
+    forms: {
+        filter: ACREDITACION_FILTER_FIELDS, // Si el crud tiene campos de busqueda, entonces se agrega su definicion.
+    },
+    navigation: ACREDITACION_NAV_DEF,
+    security: ACREDITACION_SECURITY_DEF,
+    ws: {
+        key: 'ADMIN_ACREDITACION_WS_CRUD_URL',
+        url: 'http://localhost:8080/ws-rest-acreditacion/acreditacion/'
+    },
+    dialogConfig: {
+        width: '400px'
+    }   
+};

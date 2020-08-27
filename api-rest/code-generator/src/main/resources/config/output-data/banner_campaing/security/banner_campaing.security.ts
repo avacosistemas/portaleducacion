@@ -1,0 +1,6 @@
+export const BANNER_CAMPAING_SECURITY_DEF = {
+  readAccess: 'BANNER_CAMPAING_READ',
+  updateAccess: 'BANNER_CAMPAING_UPDATE',
+  createAccess: 'BANNER_CAMPAING_CREATE',
+  deleteAccess: 'BANNER_CAMPAING_DELETE'
+};

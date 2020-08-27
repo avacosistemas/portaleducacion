@@ -4,6 +4,7 @@ import { environment } from 'environments/environment';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { IntegrationComponent } from '../integration/integration.component';
 import { PARAMETER_DEF } from './parameter/parameter.def';
+import { FAQS_DEF } from './faq/faqs.def';
 import { INSTITUCIONES_DEF } from './instituciones/instituciones.def';
 import { MATERIAS_DEF } from './materias/materias.def';
 import { PROFESORES_DEF } from './profesores/profesores.def';
@@ -18,14 +19,19 @@ import { AULAS_DEF } from './aulas/aulas.def';
 import { AULA_ALUMNO_DEF } from './aula_alumno/aula_alumno.def';
 
 
-export const ROUTES: Routes = [  
-    { 
-      path: 'dashboard', 
-      component: DashboardComponent, 
+export const ROUTES: Routes = [
+    {
+      path: 'dashboard',
+      component: DashboardComponent,
       canActivate: [AuthGuardService]
     },
     {
       path: PARAMETER_DEF.navigation.url.split('/')[1],
+      component: IntegrationComponent,
+      canActivate: [AuthGuardService]
+    },
+    {
+      path: FAQS_DEF.navigation.url.split('/')[1],
       component: IntegrationComponent,
       canActivate: [AuthGuardService]
     },

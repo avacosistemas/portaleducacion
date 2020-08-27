@@ -1,0 +1,6 @@
+export const SECTION_CONTENT_SECURITY_DEF = {
+  readAccess: 'SECTION_CONTENT_READ',
+  updateAccess: 'SECTION_CONTENT_UPDATE',
+  createAccess: 'SECTION_CONTENT_CREATE',
+  deleteAccess: 'SECTION_CONTENT_DELETE'
+};
