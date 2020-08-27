@@ -26,9 +26,11 @@ export class FilterService{
         entityValue = this.convertValue(entityValue, fieldDef);
         filterValue = this.convertValue(filterValue, fieldDef);
         // Si no hay valores para el filtro entonces no se filtra esto incluye undefined, nulos o longitud
-        if (filterValue === null || filterValue === undefined || filterValue.length === 0){
+        if (filterValue === null || filterValue === undefined || filterValue.length === 0 || fieldDef.key == 'parentTitle'){
             return true;
-        } if (entityValue === undefined){
+        } 
+        
+        if (entityValue === undefined){
             return false;
         } else if (entityValue !== undefined && filterValue !== undefined && entityValue !== ''){
             if (filterType !== FILTER_TYPE.LIKE){

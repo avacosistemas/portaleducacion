@@ -24,12 +24,11 @@ export const HORAS_PROFESOR_CREATE_FORM_FIELDS_DEF = [
         {
           key: 'horaHasta',
           labelKey: 'seccion_create_form_fields_def_field_horaHasta',
-          label: 'Hora Hasta',
           controlType: 'number',
           type: 'number',          
           minValue:0,
           maxValue:23,
-          required: true
+          required: false
         },      
       
         {

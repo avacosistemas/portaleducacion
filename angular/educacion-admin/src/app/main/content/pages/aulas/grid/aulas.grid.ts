@@ -6,6 +6,10 @@ export const AULAS_GRID_DEF = {
       id: true
     },
     {
+      columnDef: 'idString',
+      columnNameKey: 'aulas_grid_def_column_id',
+    },
+    {
       columnDef: 'idProfesor',
       columnNameKey: 'aulas_grid_def_column_idprofesor'
     },
@@ -52,6 +56,7 @@ export const AULAS_GRID_DEF = {
   ],
   sortAllColumns: true,
   displayedColumns: [
+    'idString',
     'nombreProfesor',
     'nombreMateria',
     'nombreInstitucion',
@@ -67,6 +72,7 @@ export const AULAS_GRID_DEF = {
         url: '/aulaAlumno',
         querystring: {
           idAula : 'id',
+          idInstitucion: 'idInstitucion',
           parentTitle: 'idString'
         }
       },

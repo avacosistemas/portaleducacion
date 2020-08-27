@@ -8,11 +8,12 @@ import ar.com.avaco.educacion.domain.entities.HorarioDisponible;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class HorarioDisponibleDTO extends DTOEntity<Long> {
-	
+
 	private Long id;
 	private Integer numeroDia;
 	private String dia;
 	private Integer hora;
+	private String rangoHora;
 
 	public HorarioDisponibleDTO() {
 	}
@@ -59,15 +60,26 @@ public class HorarioDisponibleDTO extends DTOEntity<Long> {
 		disponibilidad.setId(this.getId());
 		disponibilidad.setDia(DayOfWeek.of(this.getNumeroDia()));
 		disponibilidad.setHora(this.getHora());
-	
+
 		return disponibilidad;
 	}
 
 	public void setDTO(HorarioDisponible disponibilidad) {
 		this.setId(disponibilidad.getId());
 		this.setNumeroDia(disponibilidad.getDia().getValue());
-		this.setDia(disponibilidad.getDia().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
-		this.setHora(disponibilidad.getHora());
+		this.setDia(disponibilidad.getDia().getDisplayName(TextStyle.FULL, new Locale("es", "ES")).toUpperCase());
+		Integer laHora = disponibilidad.getHora();
+		Integer laHoraMasUno = laHora + 1 == 24 ? 0 : laHora + 1; 
+		this.setHora(laHora);
+		this.setRangoHora(laHora.toString() + ":00 a " + (laHoraMasUno).toString() + ":00 Hs.");
+	}
+
+	public String getRangoHora() {
+		return rangoHora;
+	}
+
+	public void setRangoHora(String rangoHora) {
+		this.rangoHora = rangoHora;
 	}
 
 }

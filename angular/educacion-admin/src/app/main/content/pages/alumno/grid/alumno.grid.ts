@@ -46,17 +46,21 @@ export const ALUMNO_GRID_DEF = {
     {
       columnDef: 'nombreApellido',
       columnNameKey: 'alumno_grid_def_column_nombreapellido'
+    },
+    {
+      columnDef: 'estado',
+      columnNameKey: 'Estado'
     }
   ],
   sortAllColumns: true,
   displayedColumns: [
-    'nombreApellido',
-    'nombreInstitucion',
+    'nombre',
+    'apellido',
     'username',
-    'tipoIdentificacion',
-    'numeroIdentificacion',
     'telefonoMovil',
-    'email'
+    'email',
+    'nombreInstitucion',
+    'estado'
   ],
   actions: [
     {
@@ -85,5 +89,21 @@ export const ALUMNO_GRID_DEF = {
       }
     }
 
+  ],
+  displayedActionsCondition: [
+    {
+      key: 'alumno_grid_def_button_action_habilitar',
+      expression: {
+                    key: 'bloqueado',
+                    value: true
+                  }
+    },
+    {
+      key: 'alumno_grid_def_button_action_bloquear',
+      expression: {
+                    key: 'habilitado',
+                    value: true
+                  }
+    }
   ]
 };

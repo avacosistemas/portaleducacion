@@ -1,9 +1,5 @@
 package ar.com.avaco.educacion.ws.dto;
 
-import ar.com.avaco.educacion.domain.entities.Profesor;
-import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
-import ar.com.avaco.educacion.domain.entities.cliente.Identificacion;
-import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class ProfesorDTO extends DTOEntity<Long> {
@@ -21,13 +17,15 @@ public class ProfesorDTO extends DTOEntity<Long> {
 
 	private String nombreApellido;
 
+	private String titulo;
 	private String descripcion;
 
-	public ProfesorDTO() {
-	}
+	private Boolean bloqueado;
+	private Boolean habilitado;
 
-	public ProfesorDTO(Profesor profesor) {
-		this.setDTO(profesor);
+	private String estado;
+
+	public ProfesorDTO() {
 	}
 
 	public byte[] getFoto() {
@@ -36,45 +34,6 @@ public class ProfesorDTO extends DTOEntity<Long> {
 
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
-	}
-
-	public Profesor toEntity() {
-
-		Profesor profesor = new Profesor();
-		profesor.setId(this.getId());
-		profesor.setNombre(this.getNombre());
-		profesor.setApellido(this.getApellido());
-		profesor.setUsername(this.getUsername());
-		profesor.setEmail(this.getEmail());
-
-		Identificacion id = new Identificacion();
-		id.setNumero(this.getNumeroIdentificacion());
-		id.setTipo(TipoIdentificacion.valueOf(this.getTipoIdentificacion()));
-		id.setCliente(profesor);
-		profesor.setIdentificacion(id);
-
-		Contacto contacto = new Contacto();
-		contacto.setTelefonoMovil(this.getTelefonoMovil());
-		contacto.setCliente(profesor);
-		profesor.setContacto(contacto);
-
-		profesor.setDescripcion(this.getDescripcion());
-
-		return profesor;
-	}
-
-	public void setDTO(Profesor profesor) {
-		this.setId(profesor.getId());
-		this.setNombre(profesor.getNombre());
-		this.setApellido(profesor.getApellido());
-		this.setFoto(profesor.getFoto());
-		this.setTipoIdentificacion(profesor.getIdentificacion().getTipo().name());
-		this.setNumeroIdentificacion(profesor.getIdentificacion().getNumero());
-		this.setUsername(profesor.getUsername());
-		this.setEmail(profesor.getEmail());
-		this.setTelefonoMovil(profesor.getContacto().getTelefonoMovil());
-		this.setNombreApellido(profesor.getNombre() + " " + profesor.getApellido());
-		this.setDescripcion(profesor.getDescripcion());
 	}
 
 	public String getNombreApellido() {
@@ -157,6 +116,36 @@ public class ProfesorDTO extends DTOEntity<Long> {
 		this.telefonoMovil = telefonoMovil;
 	}
 
-	
-	
+	public Boolean getBloqueado() {
+		return bloqueado;
+	}
+
+	public void setBloqueado(Boolean bloqueado) {
+		this.bloqueado = bloqueado;
+	}
+
+	public Boolean getHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(Boolean habilitado) {
+		this.habilitado = habilitado;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
 }

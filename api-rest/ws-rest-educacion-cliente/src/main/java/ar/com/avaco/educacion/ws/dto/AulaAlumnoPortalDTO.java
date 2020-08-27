@@ -25,6 +25,8 @@ public class AulaAlumnoPortalDTO extends DTOEntity<Long> {
 
 	private String estado;
 
+	private String idString;
+	
 	
 	public AulaAlumnoPortalDTO(AulaAlumno aulaAlumno) {
 		createDTO(aulaAlumno.getAula());
@@ -44,6 +46,8 @@ public class AulaAlumnoPortalDTO extends DTOEntity<Long> {
 		Calendar ahora = Calendar.getInstance();
 		ahora.setTime(DateUtils.getFechaYHoraActual());
 
+		this.idString = "Aula" + " #" + StringUtils.leftPad(id.toString(), 5, "0");
+		
 		Calendar instance = Calendar.getInstance();
 		instance.setTime(aula.getDia());
 		instance.set(Calendar.HOUR, aula.getHora());
@@ -118,4 +122,14 @@ public class AulaAlumnoPortalDTO extends DTOEntity<Long> {
 		this.profesor = profesor;
 	}
 
+	public String getIdString() {
+		return idString;
+	}
+
+	public void setIdString(String idString) {
+		this.idString = idString;
+	}
+
+	
+	
 }

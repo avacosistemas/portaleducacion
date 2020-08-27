@@ -130,7 +130,7 @@ public class AlumnoPerfilRestController extends AbstractDTORestController<Alumno
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/alumno/{id}/puntuacion/{idAula}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/alumno/{id}/puntuacion/{idAula}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> calificarClase(@PathVariable("id") Long id, @PathVariable("idAula") Long idAula, 
 			@RequestBody PuntuacionDTO puntuacionDTO) throws Exception {
 		Long idCliente = ClienteUtils.getClienteLogueadoId();

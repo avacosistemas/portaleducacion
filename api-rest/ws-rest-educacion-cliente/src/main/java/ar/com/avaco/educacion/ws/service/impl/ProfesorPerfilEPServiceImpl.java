@@ -46,7 +46,7 @@ public class ProfesorPerfilEPServiceImpl extends CRUDEPBaseService<Long, Profeso
 	@Override
 	public ProfesorPerfilDTO getProfesor(Long id) {
 		Profesor profesor = this.getService().getProfesor(id);
-		ProfesorPerfilDTO profesorDTO = new ProfesorPerfilDTO(profesor);
+		ProfesorPerfilDTO profesorDTO = convertToDto(profesor);
 		return profesorDTO;
 	}
 	
@@ -58,6 +58,8 @@ public class ProfesorPerfilEPServiceImpl extends CRUDEPBaseService<Long, Profeso
 		profesor.setApellido(profesorDto.getApellido());
 		profesor.setEmail(profesorDto.getEmail());
 		profesor.setDescripcion(profesorDto.getDescripcion());
+		profesor.setTitulo(profesorDto.getTitulo());
+		
 		Identificacion ident = profesor.getIdentificacion();
 		ident.setNumero(profesorDto.getNumeroIdentificacion());
 		ident.setTipo(TipoIdentificacion.DNI);
@@ -70,7 +72,7 @@ public class ProfesorPerfilEPServiceImpl extends CRUDEPBaseService<Long, Profeso
 		profesor.setContacto(contacto);
 		
 		profesor = service.updateProfesor(profesor);
-		return new ProfesorPerfilDTO(profesor);
+		return convertToDto(profesor);
 	}
 	
 	@Override
@@ -109,17 +111,21 @@ public class ProfesorPerfilEPServiceImpl extends CRUDEPBaseService<Long, Profeso
 	}
 
 	@Override
-	protected ProfesorPerfilDTO convertToDto(Profesor entity) {
-		ProfesorPerfilDTO profesorDTO = new ProfesorPerfilDTO();
-		profesorDTO.setId(entity.getId());
-		profesorDTO.setNombre(entity.getNombre());
-		profesorDTO.setApellido(entity.getApellido());
-		profesorDTO.setTipoIdentificacion(entity.getIdentificacion().getTipo().name());
-		profesorDTO.setNumeroIdentificacion(entity.getIdentificacion().getNumero());
-		profesorDTO.setUsername(entity.getUsername());
-		profesorDTO.setEmail(entity.getEmail());
-		profesorDTO.setTelefonoMovil(entity.getContacto().getTelefonoMovil());
-		return profesorDTO;
+	protected ProfesorPerfilDTO convertToDto(Profesor profesor) {
+		ProfesorPerfilDTO dto = new ProfesorPerfilDTO();
+		dto.setId(profesor.getId());
+		dto.setNombre(profesor.getNombre());
+		dto.setApellido(profesor.getApellido());
+		dto.setTipoIdentificacion(profesor.getIdentificacion().getTipo().name());
+		dto.setNumeroIdentificacion(profesor.getIdentificacion().getNumero());
+		dto.setUsername(profesor.getUsername());
+		dto.setEmail(profesor.getEmail());
+		dto.setTelefonoMovil(profesor.getContacto().getTelefonoMovil());
+		dto.setTelefonoFijo(profesor.getContacto().getTelefonoFijo());
+		dto.setCalificacion(profesor.getCalificacion());
+		dto.setDescripcion(profesor.getDescripcion());
+		dto.setTitulo(profesor.getTitulo());
+		return dto;
 	}
 
 	@Override

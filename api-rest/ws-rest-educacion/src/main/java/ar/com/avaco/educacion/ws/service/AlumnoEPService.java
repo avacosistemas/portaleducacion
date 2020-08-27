@@ -21,5 +21,7 @@ public interface AlumnoEPService extends CRUDEPService<Long, AlumnoDTO> {
 
 	AlumnoDTO registrarAlumno(RegistroAlumnoDTO alumno) throws BusinessException;
 
+	List<AlumnoDTO> listAlumnosByInstitucion(Long idInstitucion);
+
 	
 }

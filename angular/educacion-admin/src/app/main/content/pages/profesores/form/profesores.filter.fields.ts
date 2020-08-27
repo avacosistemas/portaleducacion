@@ -7,20 +7,6 @@ export const PROFESORES_FILTER_FORM_FIELDS_DEF = [
     controlType: 'textbox'
   },
   {
-    key: 'tipoIdentificacion',
-    labelKey: 'PROFESORES_FILTER_FORM_FIELDS_DEF_FIELD_tipoidentificacion',
-    label: 'Tipo de Identificación',
-    type: 'string',
-    controlType: 'textbox'
-  },
-  {
-    key: 'numeroIdentificacion',
-    labelKey: 'PROFESORES_FILTER_FORM_FIELDS_DEF_FIELD_numeroidentificacion',
-    label: 'Número de Identificación',
-    type: 'string',
-    controlType: 'textbox'
-  },
-  {
     key: 'username',
     labelKey: 'PROFESORES_FILTER_FORM_FIELDS_DEF_FIELD_username',
     label: 'Usuario',

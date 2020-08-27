@@ -18,6 +18,11 @@ public class AlumnoDTO extends DTOEntity<Long> {
 
 	private String nombreApellido;
 
+	private Boolean bloqueado;
+	private Boolean habilitado;
+
+	private String estado;
+
 	public String getNombreInstitucion() {
 		return nombreInstitucion;
 	}
@@ -104,6 +109,30 @@ public class AlumnoDTO extends DTOEntity<Long> {
 
 	public void setTelefonoMovil(String telefonoMovil) {
 		this.telefonoMovil = telefonoMovil;
+	}
+
+	public Boolean getBloqueado() {
+		return bloqueado;
+	}
+
+	public void setBloqueado(Boolean bloqueado) {
+		this.bloqueado = bloqueado;
+	}
+
+	public Boolean getHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(Boolean habilitado) {
+		this.habilitado = habilitado;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 }

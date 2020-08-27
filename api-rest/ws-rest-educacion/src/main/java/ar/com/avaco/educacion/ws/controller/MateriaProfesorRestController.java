@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
@@ -23,8 +24,8 @@ import ar.com.avaco.ws.rest.dto.JSONResponse;
 @RestController
 public class MateriaProfesorRestController extends AbstractDTORestController<MateriaProfesorFullDTO, Long, MateriaProfesorEPService> {
 
-	@RequestMapping(value = "/materiasprofesor/{idProfesor}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listByProfesor(@PathVariable("idProfesor") Long idProfesor) throws BusinessException {
+	@RequestMapping(value = "/materiasprofesor/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> listByProfesor(@RequestParam("idProfesor") Long idProfesor) throws BusinessException {
 		List<MateriaProfesorFullDTO> listMateriasProfesor = this.service.listMateriasProfesor(idProfesor);
     	JSONResponse response = new JSONResponse();
 		response.setData(listMateriasProfesor);

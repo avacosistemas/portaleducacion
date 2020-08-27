@@ -45,7 +45,12 @@ public class AlumnoServiceImpl extends NJBaseService<Long, Alumno, AlumnoReposit
 	public List<Alumno> listAlumnos() {
 		return getRepository().listAlumnos();
 	}
-
+	
+	@Override
+	public List<Alumno> listAlumnosByInstitucion(Long idInstitucion) {
+		return getRepository().findByInstitucionId(idInstitucion);
+	}
+	
 	/**
 	 * @see AlumnoService#createAlumno(Alumno)
 	 */

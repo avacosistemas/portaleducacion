@@ -1,5 +1,6 @@
 package ar.com.avaco.educacion.ws.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
@@ -25,8 +27,14 @@ public class AlumnoRestController extends AbstractDTORestController<AlumnoDTO, L
 
 	
 	@RequestMapping(value = "/alumnos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listAlumnos() throws Exception  {
-		List<AlumnoDTO> listAlumnos = this.service.listAlumnos();
+	public ResponseEntity<JSONResponse> listAlumnos(@RequestParam(required = false) Long idInstitucion) throws Exception  {
+		List<AlumnoDTO> listAlumnos = null;
+		if (idInstitucion == null) {
+			listAlumnos = this.service.listAlumnos();
+		} else {
+			listAlumnos = this.service.listAlumnosByInstitucion(idInstitucion);
+		}
+		
     	JSONResponse response = new JSONResponse();
 		response.setData(listAlumnos);
 		response.setStatus(JSONResponse.OK);	

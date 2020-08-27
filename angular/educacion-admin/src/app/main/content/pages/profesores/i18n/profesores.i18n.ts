@@ -39,13 +39,17 @@ export const PROFESORES_I18N_DEF = {
     profesores_grid_def_column_username: 'Usuario',
     profesores_grid_def_column_email: 'Email',
     profesores_grid_def_column_telefonomovil: 'Celular',
-    profesores_grid_def_button_action_nuevo_horario: 'Agregar horario',
+    profesores_grid_def_button_action_nuevo_horario: 'Gestionar Horarios',
     profesores_grid_def_button_action_habilitar: 'Habilitar',
     profesores_grid_def_button_action_bloquear: 'Bloquear',
   	profesores_grid_def_button_action_materia_profesor: 'Materias',
 	  profesores_create_form_fields_def_field_nombre: 'Nombre',
     profesores_create_form_fields_def_field_apellido: 'Apellido',
     profesores_grid_def_column_nombre: 'Nombre',
-    profesores_grid_def_column_apellido: 'Apellido'
+    profesores_grid_def_column_apellido: 'Apellido',
+    profesores_grid_def_column_titulo: 'Título',
+    profesores_grid_def_column_descripcion: 'Descripción',
+    profesores_create_form_fields_def_field_titulo: 'Título',
+    profesores_create_form_fields_def_field_descripcion: 'Descripción'
   }
 };

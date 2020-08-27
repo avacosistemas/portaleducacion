@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.loader.custom.Return;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,7 +25,7 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 	@Override
 	public ProfesorDTO getProfesor(Long id) {
 		Profesor profesor = this.getService().getProfesor(id);
-		ProfesorDTO profesorDTO = new ProfesorDTO(profesor);
+		ProfesorDTO profesorDTO = convertToDto(profesor);
 		return profesorDTO;
 	}
 	
@@ -38,10 +39,31 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 	
 	@Override
 	public ProfesorDTO updateProfesor(Long id, ProfesorDTO profesorDto) throws BusinessException {
-		Profesor profesor = profesorDto.toEntity();
-		profesor.setId(id);
+		Profesor profesor = this.service.get(profesorDto.getId());
+
+		profesor.setId(profesorDto.getId());
+		profesor.setNombre(profesorDto.getNombre());
+		profesor.setApellido(profesorDto.getApellido());
+		profesor.setUsername(profesorDto.getUsername());
+		profesor.setEmail(profesorDto.getEmail());
+		profesor.setDescripcion(profesorDto.getDescripcion());
+		profesor.setTitulo(profesorDto.getTitulo());
+
+		Identificacion identificacion = profesor.getIdentificacion();
+		identificacion.setNumero(profesorDto.getNumeroIdentificacion());
+		TipoIdentificacion ti = TipoIdentificacion.DNI;
+		if (profesorDto.getTipoIdentificacion() != null) {
+			ti = TipoIdentificacion.valueOf(profesorDto.getTipoIdentificacion());
+		}
+		identificacion.setTipo(ti);
+
+		Contacto contacto = profesor.getContacto();
+		contacto.setTelefonoMovil(profesorDto.getTelefonoMovil());
+
+
 		profesor = service.updateProfesor(profesor);
-		return new ProfesorDTO(profesor);
+
+		return convertToDto(profesor);
 	}
 	
 	@Override
@@ -49,7 +71,7 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 		Profesor profesor = service.uploadFotoPerfil(id, file);
 		profesor = service.createProfesor(profesor);
 	
-		return new ProfesorDTO(profesor);
+		return convertToDto(profesor);
 	}
 	
 	@Override
@@ -61,7 +83,7 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 	public ProfesorDTO createProfesor(ProfesorDTO profesorDTO) throws BusinessException {
 		Profesor profesor = convertToEntity(profesorDTO);
 		profesor = service.createProfesor(profesor);
-		return new ProfesorDTO(profesor);
+		return convertToDto(profesor);
 		
 	}
 	
@@ -70,7 +92,7 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 		Profesor profesor = new Profesor();
 		profesor.setId(id);
 		profesor = service.bloquearHabilitarProfesor(profesor, bloquear);
-		return new ProfesorDTO(profesor);
+		return convertToDto(profesor);
 	}
 	
 	@Override
@@ -97,6 +119,8 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 	
 		profesor.setDescripcion(dto.getDescripcion());
 		
+		profesor.setTitulo(dto.getTitulo());
+		
 		return profesor;
 	}
 
@@ -113,6 +137,10 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 		profesorDTO.setTelefonoMovil(entity.getContacto().getTelefonoMovil());
 		profesorDTO.setNombreApellido(entity.getNombre() + " " + entity.getApellido());
 		profesorDTO.setDescripcion(entity.getDescripcion());
+		profesorDTO.setTitulo(entity.getTitulo());
+		profesorDTO.setBloqueado(entity.isBloqueado());
+		profesorDTO.setHabilitado(!entity.isBloqueado());
+		profesorDTO.setEstado(entity.isBloqueado() ? "Bloqueado" : "Habilitado");
 		return profesorDTO;
 	}
 

@@ -18,57 +18,15 @@ public class ProfesorPerfilDTO extends DTOEntity<Long> {
 	private String telefonoMovil;
 	private String telefonoFijo;
 	private String descripcion;
-	
+	private String titulo;
+
 	public String getNombreApellido() {
-		return nombre  + " " + apellido;
+		return nombre + " " + apellido;
 	}
 
-	
 	private Double calificacion;
-	
-	public ProfesorPerfilDTO() {}
 
-	public ProfesorPerfilDTO(Profesor profesor) {
-		this.setDTO(profesor);
-
-	}
-	
-	public Profesor toEntity() {
-
-		Profesor profesor = new Profesor();
-		profesor.setId(this.getId());
-		profesor.setNombre(this.getNombre());
-		profesor.setApellido(this.getApellido());
-		profesor.setUsername(this.getUsername());
-		profesor.setEmail(this.getEmail());
-		
-		Identificacion id = new Identificacion();
-		id.setNumero(this.getNumeroIdentificacion());
-		id.setTipo(TipoIdentificacion.DNI);
-		id.setCliente(profesor);
-		profesor.setIdentificacion(id);
-		
-		Contacto contacto = new Contacto();
-		contacto.setTelefonoMovil(this.getTelefonoMovil());
-		contacto.setCliente(profesor);
-		profesor.setContacto(contacto);
-		
-		return profesor;
-	}
-
-	public void setDTO(Profesor profesor) {
-	
-		this.setId(profesor.getId());
-		this.setNombre(profesor.getNombre());
-		this.setApellido(profesor.getApellido());
-		this.setTipoIdentificacion(profesor.getIdentificacion().getTipo().name());
-		this.setNumeroIdentificacion(profesor.getIdentificacion().getNumero());
-		this.setUsername(profesor.getUsername());
-		this.setEmail(profesor.getEmail());
-		this.setTelefonoMovil(profesor.getContacto().getTelefonoMovil());
-		this.setTelefonoFijo(profesor.getContacto().getTelefonoFijo());
-		this.setCalificacion(profesor.getCalificacion()); 
-		this.setDescripcion(profesor.getDescripcion());
+	public ProfesorPerfilDTO() {
 	}
 
 	public Double getCalificacion() {
@@ -159,6 +117,12 @@ public class ProfesorPerfilDTO extends DTOEntity<Long> {
 		this.descripcion = descripcion;
 	}
 
-	
-	
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
 }

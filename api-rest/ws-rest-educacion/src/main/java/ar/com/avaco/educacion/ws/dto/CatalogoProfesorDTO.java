@@ -1,6 +1,5 @@
 package ar.com.avaco.educacion.ws.dto;
 
-import ar.com.avaco.educacion.domain.entities.Profesor;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class CatalogoProfesorDTO extends DTOEntity<Long> {
@@ -17,10 +16,6 @@ public class CatalogoProfesorDTO extends DTOEntity<Long> {
 	private Double calificacion;
 
 	public CatalogoProfesorDTO() {
-	}
-
-	public CatalogoProfesorDTO(Profesor profesor) {
-		this.setDTO(profesor);
 	}
 
 	// Getters and Setters
@@ -54,18 +49,6 @@ public class CatalogoProfesorDTO extends DTOEntity<Long> {
 
 	public void setValorHora(Double valorHora) {
 		this.valorHora = valorHora;
-	}
-
-	public void setDTO(Profesor profesor) {
-		this.setId(profesor.getId());
-		this.setNombreApellido(profesor.getNombreApellido());
-
-		this.setFoto(profesor.getFoto());
-		this.setValorHora(profesor.getValorHora());
-
-		this.setMaterias(profesor.getMateriasString());
-		this.setDescripcion(profesor.getDescripcion());
-		this.setCalificacion(profesor.getCalificacion());
 	}
 
 	public String getMaterias() {

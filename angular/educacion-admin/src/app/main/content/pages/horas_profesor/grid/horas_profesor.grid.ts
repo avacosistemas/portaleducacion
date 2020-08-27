@@ -13,13 +13,17 @@ export const HORAS_PROFESOR_GRID_DEF = {
     {
       columnDef: 'hora',
       columnNameKey: 'horas_profesor_grid_def_column_hora'
+    },
+    {
+      columnDef: 'rangoHora',
+      columnNameKey: 'horas_profesor_grid_def_column_hora'
     }
     
   ],
   sortAllColumns: true,
   displayedColumns: [        
     'dia',
-    'hora'
+    'rangoHora'
   ],
   deleteAction: true
 };

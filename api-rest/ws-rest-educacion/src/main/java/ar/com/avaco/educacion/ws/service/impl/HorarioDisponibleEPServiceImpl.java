@@ -37,7 +37,11 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 		List<HorarioDisponible> horariosToAdd = new ArrayList<>();
 		HorarioDisponible horarioDisp;
 	
-		for(int i=horariosDispDto.getHoraDesde(); i <= horariosDispDto.getHoraHasta(); i++) {
+		if (horariosDispDto.getHoraHasta() == null) {
+			horariosDispDto.setHoraHasta(horariosDispDto.getHoraDesde() + 1);
+		}
+		
+		for(int i=horariosDispDto.getHoraDesde(); i <= horariosDispDto.getHoraHasta() - 1; i++) {
 	
 			if(horariosDispDto.isLunes()) {
 				horarioDisp = new HorarioDisponible();
@@ -139,8 +143,10 @@ public class HorarioDisponibleEPServiceImpl extends CRUDEPBaseService<Long, Hora
 		disponibilidadDTO.setId(entity.getId());
 		disponibilidadDTO.setNumeroDia(entity.getDia().getValue());
 		disponibilidadDTO.setDia(entity.getDia().getDisplayName(TextStyle.FULL, new Locale("es","ES")).toUpperCase());
-		disponibilidadDTO.setHora(entity.getHora());
-		
+		Integer laHora = entity.getHora();
+		Integer laHoraMasUno = laHora + 1 == 24 ? 0 : laHora + 1; 
+		disponibilidadDTO.setHora(laHora);
+		disponibilidadDTO.setRangoHora(laHora.toString() + ":00 a " + (laHoraMasUno).toString() + ":00 Hs.");
 		return disponibilidadDTO;
 	}
 

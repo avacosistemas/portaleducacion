@@ -36,17 +36,31 @@ public class CatalogoProfesorEPServiceImpl implements CatalogoProfesorEPService 
 		
 		List<CatalogoProfesorDTO> dtos = new ArrayList<CatalogoProfesorDTO>();
 		for (Profesor entity : entities) {
-			dtos.add(new CatalogoProfesorDTO(entity));
+			dtos.add(convertToDto(entity));
 		}
 		
 		return dtos;
 
 	}
 	
+	private CatalogoProfesorDTO convertToDto(Profesor entity) {
+		CatalogoProfesorDTO dto = new CatalogoProfesorDTO();
+		dto.setId(entity.getId());
+		dto.setNombreApellido(entity.getNombreApellido());
+
+		dto.setFoto(entity.getFoto());
+		dto.setValorHora(entity.getValorHora());
+
+		dto.setMaterias(entity.getTitulo());
+		dto.setDescripcion(entity.getDescripcion());
+		dto.setCalificacion(entity.getCalificacion());
+		return dto;
+	}
+
 	@Override
 	public CatalogoProfesorDTO getCatalogoProfesor(Long id) {
 		Profesor profesor = catalogoService.getCatalogoProfesor(id);
-		CatalogoProfesorDTO catalogoProfesorDTO = new CatalogoProfesorDTO(profesor);
+		CatalogoProfesorDTO catalogoProfesorDTO = convertToDto(profesor);
 		return catalogoProfesorDTO;
 	}
 	

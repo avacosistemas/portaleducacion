@@ -354,7 +354,7 @@ export class FormService {
             field.options.fromWs) {
       const fromWs: WsDef = field.options.fromWs;
       fromWs.method = HTTP_METHODS.get;
-      if (fromWs.querystring) {
+      if (fromWs.querystring && fromWs.url.indexOf('?') < 0) {
         let querystring = '';
         let andString = '';
         Object.keys(fromWs.querystring).forEach(key => {
@@ -363,7 +363,7 @@ export class FormService {
             andString = '&';
           }
         });
-        fromWs.url += querystring === '' ? '' : querystring;
+        fromWs.url += querystring === '' ? '' : '?' +  querystring;
       }
       this.genericHttpService.callWs(fromWs).subscribe(r => {
         field.options.fromData = r;

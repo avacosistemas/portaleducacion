@@ -63,5 +63,7 @@ public interface AlumnoService extends NJService<Long, Alumno> {
 	 */
 	Alumno registrarAlumno(Alumno alumno) throws BusinessException;
 
+	List<Alumno> listAlumnosByInstitucion(Long idInstitucion);
+
 	
 }

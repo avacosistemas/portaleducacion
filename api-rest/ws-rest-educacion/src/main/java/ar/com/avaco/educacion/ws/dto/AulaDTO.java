@@ -42,9 +42,11 @@ public class AulaDTO extends DTOEntity<Long> {
 		materia.setId(idMateria);
 		aula.setMateria(materia);
 
-		Institucion institucion = new Institucion();
-		institucion.setId(this.getIdInstitucion());
-		aula.setInstitucion(institucion);
+		if (this.getIdInstitucion() != null && this.getIdInstitucion() > 0) {
+			Institucion institucion = new Institucion();
+			institucion.setId(this.getIdInstitucion());
+			aula.setInstitucion(institucion);
+		}
 
 		Profesor profesor = new Profesor();
 		profesor.setId(this.getIdProfesor());

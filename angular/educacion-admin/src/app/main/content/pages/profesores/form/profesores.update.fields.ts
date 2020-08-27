@@ -75,5 +75,17 @@ export const PROFESORES_UPDATE_FORM_FIELDS_DEF = [
     controlType: 'textbox',
     required:true,
     maxLength: 15
+  },
+  {
+    key: 'titulo',
+    labelKey: 'profesores_create_form_fields_def_field_titulo',
+    controlType: 'textbox',
+    maxLength: 100
+  },
+  {
+    key: 'descripcion',
+    labelKey: 'profesores_create_form_fields_def_field_descripcion',
+    controlType: 'textbox',
+    maxLength: 100
   }
 ];

@@ -8,8 +8,14 @@ export const AULA_ALUMNO_CREATE_FORM_FIELDS_DEF = [
     mappingQuerystring: true
   },
   {
+    key: 'idInstitucion',
+    label: 'idInstitucion',
+    controlType: 'hidden',
+    mappingQuerystring: true
+  },
+  {
     key: 'idAlumno',
-    labelKey: 'aula_alumno_create_form_fields_def_field_idalumno',
+    labelKey: 'aula_alumno_create_form_fields_def_field_alumno',
     controlType: 'select',
     required: true,
     options: {
@@ -17,7 +23,10 @@ export const AULA_ALUMNO_CREATE_FORM_FIELDS_DEF = [
       elementValue: 'id',
       fromWs: {
         key: 'alumno_create_form_fields_def_field_alumno',
-        url: PREFIX_DOMAIN_API_EDUCACION + '/alumnos'
+        url: PREFIX_DOMAIN_API_EDUCACION + '/alumnos',
+        querystring: {
+          idInstitucion : 'idInstitucion',
+        }
       }
     }
   },

@@ -14,9 +14,15 @@ export const AULA_ALUMNO_DEF: CrudDef = {
     name: 'AULA_ALUMNO',
     i18n: AULA_ALUMNO_I18N_DEF,
     grid: AULA_ALUMNO_GRID_DEF, // Si el crud tiene grilla, entonces se agrega su definicion.
+    formsDef: {
+        create: {
+            fields: AULA_ALUMNO_CREATE_FORM_FIELDS_DEF,
+            showSubmitContinue: true 
+        }
+    },
     forms: {
         filter: AULA_ALUMNO_FILTER_FORM_FIELDS_DEF, // Si el crud tiene campos de busqueda, entonces se agrega su definicion.
-        create: AULA_ALUMNO_CREATE_FORM_FIELDS_DEF, // Si el crud tiene formulario de alta, entonces se agrega su definicion.
+        //create: AULA_ALUMNO_CREATE_FORM_FIELDS_DEF, // Si el crud tiene formulario de alta, entonces se agrega su definicion.
         // update: AULA_ALUMNO_UPDATE_FORM_FIELDS_DEF, // Si el crud tiene formulario de modificacion, entonces se agrega su definicion.
         // read:  AULA_ALUMNO_READ_FORM_FIELDS_DEF // Si existe un formulario de edicion no exite uno de solo lectura
     },
@@ -27,7 +33,7 @@ export const AULA_ALUMNO_DEF: CrudDef = {
         url: PREFIX_DOMAIN_API_EDUCACION + '/aulaAlumno/'
     },
     dialogConfig: {
-        width: '400px'
+        width: '500px'
     },
     backButton: true,
 };

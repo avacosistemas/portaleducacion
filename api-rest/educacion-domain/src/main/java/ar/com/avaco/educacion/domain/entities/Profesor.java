@@ -59,19 +59,14 @@ public class Profesor extends Cliente implements Serializable {
 	@Type(type = "org.hibernate.type.BinaryType")
 	private byte foto[];
 
-	@Column(name = "MATERIAS_STRING", nullable = true)
-	private String materiasString;
+	@Column(name = "TITULO", nullable = true)
+	private String titulo;
 
 	@Column(name = "DESCRIPCION", nullable = true)
 	private String descripcion;
 
 	public Profesor() {
 		this.setTipoCliente(TipoCliente.PROFESOR);
-	}
-
-	private void generarMateriasString() {
-		List<String> collect = this.materias.stream().map(Materia::getDescripcion).collect(Collectors.toList());
-		this.materiasString = StringUtils.join(collect, ", ");
 	}
 
 	public Set<HorarioDisponible> getHorariosDisp() {
@@ -125,13 +120,11 @@ public class Profesor extends Cliente implements Serializable {
 	public void addMateria(Materia materia) {
 		this.materias.add(materia);
 		materia.getProfesores().add(this);
-		generarMateriasString();
 	}
 
 	public void removeMateria(Materia materia) {
 		this.materias.remove(materia);
 		materia.getProfesores().remove(this);
-		generarMateriasString();
 	}
 
 	public void addAula(Aula aula) {
@@ -169,12 +162,12 @@ public class Profesor extends Cliente implements Serializable {
 		this.calificacion = calificacion;
 	}
 
-	public String getMateriasString() {
-		return materiasString;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setMateriasString(String materiasString) {
-		this.materiasString = materiasString;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public String getDescripcion() {

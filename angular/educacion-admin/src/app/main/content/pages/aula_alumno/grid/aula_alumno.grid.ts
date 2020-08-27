@@ -5,20 +5,16 @@ export const AULA_ALUMNO_GRID_DEF = {
       columnNameKey: 'aula_alumno_grid_def_column_id'
     },
     {
-      columnDef: 'idAlumno',
-      columnNameKey: 'aula_alumno_grid_def_column_idalumno'
-    },
-    {
       columnDef: 'idAula',
       columnNameKey: 'aula_alumno_grid_def_column_idaula'
     },
     {
-      columnDef: 'nombreAlumno',
-      columnNameKey: 'aula_alumno_grid_def_column_nombrealumno'
+      columnDef: 'idAlumno',
+      columnNameKey: 'aula_alumno_grid_def_column_idalumno'
     },
     {
-      columnDef: 'idInstitucion',
-      columnNameKey: 'aula_alumno_grid_def_column_idinstitucion'
+      columnDef: 'nombreAlumno',
+      columnNameKey: 'aula_alumno_grid_def_column_nombrealumno'
     },
     {
       columnDef: 'calificacion',
@@ -34,6 +30,5 @@ export const AULA_ALUMNO_GRID_DEF = {
     'nombreAlumno',
     'calificacion',
     'comentario'
-  ],
-  deleteAction: true,
+  ]
 };

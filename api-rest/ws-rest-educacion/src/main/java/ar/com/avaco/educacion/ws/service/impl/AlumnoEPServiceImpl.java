@@ -37,11 +37,38 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		alumnos = null;
 		return convertToDtos;
 	}
+
+	@Override
+	public List<AlumnoDTO> listAlumnosByInstitucion(Long idInstitucion) {
+		List<Alumno> alumnos = this.getService().listAlumnosByInstitucion(idInstitucion);
+		List<AlumnoDTO> convertToDtos = convertToDtos(alumnos);
+		alumnos = null;
+		return convertToDtos;
+	}
 	
 	@Override
 	public AlumnoDTO updateAlumno(Long id, AlumnoDTO alumnoDto) throws BusinessException {
-		Alumno alumno = convertToEntity(alumnoDto);
-		alumno.setId(id);
+		Alumno alumno = this.service.getAlumno(id);
+		
+		alumno.setNombre(alumnoDto.getNombre());
+		alumno.setApellido(alumnoDto.getApellido());
+		Identificacion identificacion = alumno.getIdentificacion();
+		if (alumnoDto.getTipoIdentificacion() != null) {
+			identificacion.setTipo(TipoIdentificacion.valueOf(alumnoDto.getTipoIdentificacion().toUpperCase()));
+		} else {
+			identificacion.setTipo(TipoIdentificacion.DNI);
+		}
+		identificacion.setNumero(alumnoDto.getNumeroIdentificacion());
+		
+		Contacto contacto = alumno.getContacto();
+		contacto.setTelefonoMovil(alumnoDto.getTelefonoMovil());
+		alumno.setEmail(alumnoDto.getEmail());
+
+		if (alumnoDto.getIdInstitucion() != null && alumnoDto.getIdInstitucion() > 0) {
+			Institucion institucion = new Institucion();
+			institucion.setId(alumnoDto.getIdInstitucion());
+			alumno.setInstitucion(institucion);
+		}
 		alumno = service.updateAlumno(alumno);
 		return convertToDto(alumno);
 	}
@@ -138,6 +165,9 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 			alumnoDTO.setIdInstitucion(entity.getInstitucion().getId());
 			alumnoDTO.setNombreInstitucion(entity.getInstitucion().getNombre());
 		}
+		alumnoDTO.setBloqueado(entity.isBloqueado());
+		alumnoDTO.setHabilitado(!entity.isBloqueado());
+		alumnoDTO.setEstado(entity.isBloqueado() ? "Bloqueado" : "Habilitado");
 		return alumnoDTO;
 	}
 

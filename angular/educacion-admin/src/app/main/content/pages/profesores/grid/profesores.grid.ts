@@ -11,6 +11,14 @@ export const PROFESORES_GRID_DEF = {
       columnNameKey: 'profesores_grid_def_column_nombreApellido'
     },
     {
+      columnDef: 'titulo',
+      columnNameKey: 'profesores_grid_def_column_titulo'
+    },
+    {
+      columnDef: 'descripcion',
+      columnNameKey: 'profesores_grid_def_column_descripcion'
+    },
+    {
       columnDef: 'nombre',
       columnNameKey: 'profesores_grid_def_column_nombre'
     },
@@ -37,17 +45,20 @@ export const PROFESORES_GRID_DEF = {
     {
       columnDef: 'telefonoMovil',
       columnNameKey: 'profesores_grid_def_column_telefonomovil'
+    },
+    {
+      columnDef: 'estado',
+      columnNameKey: 'Estado'
     }
   ],
   sortAllColumns: true,
   displayedColumns: [
     'nombre',
     'apellido',
-    'tipoIdentificacion',
-    'numeroIdentificacion',
     'username',
     'email',
-    'telefonoMovil'
+    'telefonoMovil',
+    'estado'
   ],
   actions: [
     {
@@ -103,5 +114,21 @@ export const PROFESORES_GRID_DEF = {
       }
     }
 
+  ],
+  displayedActionsCondition: [
+    {
+      key: 'profesores_grid_def_button_action_habilitar',
+      expression: {
+                    key: 'bloqueado',
+                    value: true
+                  }
+    },
+    {
+      key: 'profesores_grid_def_button_action_bloquear',
+      expression: {
+                    key: 'habilitado',
+                    value: true
+                  }
+    }
   ]
 };

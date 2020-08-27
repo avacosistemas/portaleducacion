@@ -1,16 +1,12 @@
 package ar.com.avaco.educacion.service.cliente;
 
-import ar.com.avaco.arc.core.component.bean.service.NJBaseService;
-import ar.com.avaco.arc.sec.exception.NuclearJSecurityException;
-import ar.com.avaco.commons.exception.BusinessException;
-import ar.com.avaco.commons.exception.ErrorValidationException;
-import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
-import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
-import ar.com.avaco.educacion.domain.entities.cliente.Identificacion;
-import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
-import ar.com.avaco.educacion.repository.cliente.ClienteRepository;
-import ar.com.avaco.educacion.service.notificacion.NotificacionService;
-import ar.com.avaco.validation.Validations;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +18,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import ar.com.avaco.arc.core.component.bean.service.NJBaseService;
+import ar.com.avaco.arc.sec.exception.NuclearJSecurityException;
+import ar.com.avaco.commons.exception.BusinessException;
+import ar.com.avaco.commons.exception.ErrorValidationException;
+import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
+import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
+import ar.com.avaco.educacion.domain.entities.cliente.Identificacion;
+import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
+import ar.com.avaco.educacion.repository.cliente.ClienteRepository;
+import ar.com.avaco.educacion.service.notificacion.NotificacionService;
+import ar.com.avaco.validation.Validations;
 
 @Transactional
 @Service("clienteService")
@@ -197,6 +199,8 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 			
 				errores.put("username", "El username no esta disponible. Intente otro diferente.");
 			}
+			
+			cliByUsername = null;
 	
 		}
 
@@ -213,6 +217,9 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 				errores.put("email", "El Email ingresado ya se encuentra registrado.");
 			
 			}
+			
+			cliByEmail = null;
+			
 		}
 
 		// Validacion identificacion
@@ -306,7 +313,10 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 					|| identificacionPorNumeroEncontrado.getNumero().substring(2, 9).equals(numeroIdentificacion)) {
 				errores.put("numeroIdentificacion", tipoIdentificacion + " ya se encuentra registrado");
 			}
+			identificacionPorNumeroEncontrado = null;
 		}
+		
+		cli = null;
 
 
 		if (!errores.isEmpty()) {
