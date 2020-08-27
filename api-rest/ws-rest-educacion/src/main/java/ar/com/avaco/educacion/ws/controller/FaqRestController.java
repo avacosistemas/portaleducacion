@@ -57,17 +57,19 @@ public class FaqRestController extends AbstractDTORestController<FaqDTO, Long, F
     //-------------------Create a Page--------------------------------------------------------    
     @RequestMapping(value = "/faqs/", method = RequestMethod.POST)
     public  ResponseEntity<JSONResponse> create(@RequestBody FaqDTO faqDTO) throws BusinessException {
-    	FormDef formDef = this.formDefService.getFormDef("faqSave");
-    	this.validationFormDefService.validate(faqDTO, formDef);
     	return super.create(faqDTO);
+    	/*FormDef formDef = this.formDefService.getFormDef("faqSave");
+    	this.validationFormDefService.validate(faqDTO, formDef);
+    	return super.create(faqDTO);*/
     }
     
     //------------------- Update a Page --------------------------------------------------------    
     @RequestMapping(value = "/faqs/{id}", method = RequestMethod.PUT)
     public ResponseEntity<JSONResponse> update(@PathVariable("id") Long id, @RequestBody FaqDTO faqDTO) throws BusinessException {
-    	FormDef formDef = this.formDefService.getFormDef("faqUpdate");
-    	this.validationFormDefService.validate(faqDTO, formDef);
     	return super.update(id, faqDTO);
+    	/*FormDef formDef = this.formDefService.getFormDef("faqUpdate");
+    	this.validationFormDefService.validate(faqDTO, formDef);
+    	return super.update(id, faqDTO);*/
     }
     //------------------- Delete a Page --------------------------------------------------------
     

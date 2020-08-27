@@ -21,13 +21,42 @@ export const navigation = [
                         'type' : 'item',
                         'url'  : '/' + environment.URL_PARAMETERS,
                     },
-                    // {
-                    //     'id'   : 'usuarios',
-                    //     'title': 'Usuarios',
-                    //     'translate': 'NAV.USUARIOS.TITLE',
-                    //     'type' : 'item',
-                    //     'url'  : '/' + environment.URL_USER,
-                    // }                    
+                    {
+                      'id'   : 'permissions',
+                      'title': 'Permisos',
+                      'translate': 'NAV.PERMISSIONS.TITLE',
+                      'type' : 'item',
+                      'url'  : '/' + environment.URL_PERMISSION,
+                    },
+                    {
+                      'id'   : 'profiles',
+                      'title': 'Profiles',
+                      'translate': 'NAV.PROFILES.TITLE',
+                      'type' : 'item',
+                      'url'  : '/' + environment.URL_PROFILE,
+                    },
+                    {
+                      'id'   : 'usuarios',
+                      'title': 'Usuarios',
+                      'translate': 'NAV.USUARIOS.TITLE',
+                      'type' : 'item',
+                      'url'  : '/' + environment.URL_USER,
+                    },
+                    {
+                      'id'   : 'roles',
+                      'title': 'Roles',
+                      'translate': 'NAV.ROLES.TITLE',
+                      'type' : 'item',
+                      'url'  : '/' + environment.URL_ROLE,
+                    },
+                    {
+                      'id'   : 'faqs',
+                      'title': 'Faqs',
+                      'translate': 'NAV.FAQS.TITLE',
+                      'type' : 'item',
+                      'url'  : '/' + environment.URL_FAQS,
+                    }
+
                 ]
             },
             {
@@ -70,7 +99,7 @@ export const navigation = [
                 'type' : 'item',
                 'url'  : '/' + environment.URL_MATERIAS,
             }
-            
+
         ]
     }
 ];
