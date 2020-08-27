@@ -29,8 +29,15 @@ export const navigation = [
                       'url'  : '/' + environment.URL_PERMISSION,
                     },
                     {
+                      'id'   : 'roles',
+                      'title': 'Roles',
+                      'translate': 'NAV.ROLES.TITLE',
+                      'type' : 'item',
+                      'url'  : '/' + environment.URL_ROLE,
+                    },
+                    {
                       'id'   : 'profiles',
-                      'title': 'Profiles',
+                      'title': 'Perfiles',
                       'translate': 'NAV.PROFILES.TITLE',
                       'type' : 'item',
                       'url'  : '/' + environment.URL_PROFILE,
@@ -41,13 +48,6 @@ export const navigation = [
                       'translate': 'NAV.USUARIOS.TITLE',
                       'type' : 'item',
                       'url'  : '/' + environment.URL_USER,
-                    },
-                    {
-                      'id'   : 'roles',
-                      'title': 'Roles',
-                      'translate': 'NAV.ROLES.TITLE',
-                      'type' : 'item',
-                      'url'  : '/' + environment.URL_ROLE,
                     },
                     {
                       'id'   : 'faqs',

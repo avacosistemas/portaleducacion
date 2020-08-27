@@ -40,7 +40,7 @@ export const PROFILE_DEF: CrudDef = {
                             {columnNameKey: 'Activo', columnDef: 'enabled'}
                         ],
             sortAllColumns: true,
-            displayedColumns: ['name', 'role.name', 'enabled'],
+            displayedColumns: ['name', 'enabled'],
             deleteColumn: { key: 'delete',
                             name: 'Eliminar'}
             },
@@ -78,21 +78,6 @@ export const PROFILE_DEF: CrudDef = {
                         url: environment.PERMISSION_CRUD_URL
                     }
                 }
-            },
-            {
-              key: ROLE_COMPONENT_KEY,
-              labelKey: 'Rol',
-              required: true,
-              requiredMessage: 'El campo rol es requerido',
-              controlType: 'select',
-              options: {
-                elementLabel: 'name',
-                elementValue: 'id',
-                fromWs: {
-                  key: 'user_ws_roles',
-                  url: environment.ROLE_CRUD_URL
-                }
-              }
             }],
     update:  [{
         key: 'name',

@@ -57,9 +57,14 @@ public class ProfileServiceImpl extends AbstractConvertService<Profile, Long, Pe
 	public Perfil convertToEntity(Perfil entity, Profile dto) {
 		entity.setActivo(dto.getEnabled());
 		entity.setNombre(dto.getName());
+		
+		//FIXME Por default tiene el rol ADM, modificar cuando se requiera
+		Role role = roleService.list().stream().filter(rol -> rol.getCode().equals("ADM")).findFirst().orElse(new Role());
 		Rol r = new Rol();
-		r.setId(dto.getRole().getId());
-		entity.setRol(roleService.convertToEntity(r,dto.getRole()));
+		r.setId(role.getId());
+		//r.setId(dto.getRole().getId());
+		entity.setRol(roleService.convertToEntity(r,role/*dto.getRole()*/));
+		
 		List<Permiso> permisos = new  ArrayList<>();
 		for(Permission permission :dto.getPermissions()) {
 			Permiso p = new Permiso();
