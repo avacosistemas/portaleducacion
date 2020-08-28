@@ -9,6 +9,7 @@ export const locale = {
             'ROLES' : {'TITLE' : 'ROLES'},
             'FAQS' : {'TITLE' : 'Faqs'},
             'SEGURIDAD' : {'TITLE' : 'Seguridad'},
+            'CONFIGURACION' : {'TITLE' : 'Configuracion'},
             'AULAS' : {'TITLE' : 'Aulas'},
             'PROFESORES' : {'TITLE' : 'Profesores'},
             'ALUMNOS' : {'TITLE' : 'Productos'},

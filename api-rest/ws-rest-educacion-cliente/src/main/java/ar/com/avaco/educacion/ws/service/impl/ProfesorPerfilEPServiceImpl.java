@@ -59,7 +59,10 @@ public class ProfesorPerfilEPServiceImpl extends CRUDEPBaseService<Long, Profeso
 		profesor.setEmail(profesorDto.getEmail());
 		profesor.setDescripcion(profesorDto.getDescripcion());
 		profesor.setTitulo(profesorDto.getTitulo());
-		
+		if (profesorDto.getFoto() != null) {
+			profesor.setFoto(profesorDto.getFoto());
+		}
+
 		Identificacion ident = profesor.getIdentificacion();
 		ident.setNumero(profesorDto.getNumeroIdentificacion());
 		ident.setTipo(TipoIdentificacion.DNI);
@@ -125,6 +128,7 @@ public class ProfesorPerfilEPServiceImpl extends CRUDEPBaseService<Long, Profeso
 		dto.setCalificacion(profesor.getCalificacion());
 		dto.setDescripcion(profesor.getDescripcion());
 		dto.setTitulo(profesor.getTitulo());
+		dto.setFoto(profesor.getFoto());
 		return dto;
 	}
 

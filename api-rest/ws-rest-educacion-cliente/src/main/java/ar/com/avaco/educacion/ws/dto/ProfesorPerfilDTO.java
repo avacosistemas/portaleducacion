@@ -1,9 +1,5 @@
 package ar.com.avaco.educacion.ws.dto;
 
-import ar.com.avaco.educacion.domain.entities.Profesor;
-import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
-import ar.com.avaco.educacion.domain.entities.cliente.Identificacion;
-import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class ProfesorPerfilDTO extends DTOEntity<Long> {
@@ -19,6 +15,7 @@ public class ProfesorPerfilDTO extends DTOEntity<Long> {
 	private String telefonoFijo;
 	private String descripcion;
 	private String titulo;
+	private byte[] foto;
 
 	public String getNombreApellido() {
 		return nombre + " " + apellido;
@@ -123,6 +120,14 @@ public class ProfesorPerfilDTO extends DTOEntity<Long> {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
 }

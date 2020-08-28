@@ -1,9 +1,6 @@
 package ar.com.avaco.educacion.ws.dto;
 
 import ar.com.avaco.educacion.domain.entities.Alumno;
-import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
-import ar.com.avaco.educacion.domain.entities.cliente.Identificacion;
-import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
 import ar.com.avaco.ws.rest.dto.DTOEntity;
 
 public class AlumnoPerfilDTO extends DTOEntity<Long> {
@@ -19,6 +16,7 @@ public class AlumnoPerfilDTO extends DTOEntity<Long> {
 	private String telefonoFijo;
 	private String descripcion;
 	private String institucion;
+	private byte[] foto;
 
 	public AlumnoPerfilDTO() {
 	}
@@ -32,7 +30,6 @@ public class AlumnoPerfilDTO extends DTOEntity<Long> {
 	}
 
 	public void setDTO(Alumno alumno) {
-
 		this.setId(alumno.getId());
 		this.setNombre(alumno.getNombre());
 		this.setApellido(alumno.getApellido());
@@ -43,7 +40,7 @@ public class AlumnoPerfilDTO extends DTOEntity<Long> {
 		this.setTelefonoMovil(alumno.getContacto().getTelefonoMovil());
 		this.setTelefonoFijo(alumno.getContacto().getTelefonoFijo());
 		this.setInstitucion(alumno.getInstitucion() != null ? alumno.getInstitucion().getNombre() : null);
-
+		this.setFoto(alumno.getFoto());
 	}
 
 	public Long getId() {
@@ -132,6 +129,14 @@ public class AlumnoPerfilDTO extends DTOEntity<Long> {
 
 	public void setInstitucion(String institucion) {
 		this.institucion = institucion;
+	}
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
 }

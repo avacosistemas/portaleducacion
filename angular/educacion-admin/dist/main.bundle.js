@@ -6341,6 +6341,11 @@ var ALUMNO_CREATE_FORM_FIELDS_DEF = [
         label: 'Telefono Movil',
         type: 'string',
         controlType: 'textbox'
+    },
+    {
+        key: 'foto',
+        labelKey: 'Foto',
+        controlType: 'file'
     }
 ];
 
@@ -6553,6 +6558,11 @@ var ALUMNO_UPDATE_FORM_FIELDS_DEF = [
         label: 'Telefono Movil',
         type: 'string',
         controlType: 'textbox'
+    },
+    {
+        key: 'foto',
+        labelKey: 'Foto',
+        controlType: 'file'
     }
 ];
 
@@ -7088,7 +7098,7 @@ var AULAS_CREATE_FORM_FIELDS_DEF = [
     {
         key: 'idProfesor',
         labelKey: 'aulas_create_form_fields_def_field_nombreProfesor',
-        required: false,
+        required: true,
         controlType: 'select',
         options: {
             elementLabel: 'nombreApellido',
@@ -7102,7 +7112,7 @@ var AULAS_CREATE_FORM_FIELDS_DEF = [
     {
         key: 'idMateria',
         labelKey: 'aulas_create_form_fields_def_field_nombremateria',
-        required: false,
+        required: true,
         controlType: 'select',
         options: {
             elementLabel: 'descripcionNivel',
@@ -7273,7 +7283,7 @@ var AULAS_UPDATE_FORM_FIELDS_DEF = [
     {
         key: 'idProfesor',
         labelKey: 'aulas_create_form_fields_def_field_nombreProfesor',
-        required: false,
+        required: true,
         controlType: 'select',
         options: {
             elementLabel: 'nombreApellido',
@@ -7287,7 +7297,7 @@ var AULAS_UPDATE_FORM_FIELDS_DEF = [
     {
         key: 'idMateria',
         labelKey: 'aulas_create_form_fields_def_field_nombremateria',
-        required: false,
+        required: true,
         controlType: 'select',
         options: {
             elementLabel: 'descripcionNivel',
@@ -7404,7 +7414,8 @@ var AULAS_GRID_DEF = {
         'nombreInstitucion',
         'dia',
         'horaString',
-        'estado'
+        'estado',
+        'calificacion'
     ],
     actions: [
         {
@@ -9683,6 +9694,11 @@ var PROFESORES_CREATE_FORM_FIELDS_DEF = [
         labelKey: 'profesores_create_form_fields_def_field_descripcion',
         controlType: 'textbox',
         maxLength: 100
+    },
+    {
+        key: 'foto',
+        labelKey: 'Foto',
+        controlType: 'file'
     }
 ];
 
@@ -9889,6 +9905,11 @@ var PROFESORES_UPDATE_FORM_FIELDS_DEF = [
         labelKey: 'profesores_create_form_fields_def_field_descripcion',
         controlType: 'textbox',
         maxLength: 100
+    },
+    {
+        key: 'foto',
+        labelKey: 'Foto',
+        controlType: 'file'
     }
 ];
 
@@ -9951,6 +9972,10 @@ var PROFESORES_GRID_DEF = {
         {
             columnDef: 'estado',
             columnNameKey: 'Estado'
+        },
+        {
+            columnDef: 'calificacion',
+            columnNameKey: 'Calificacion'
         }
     ],
     sortAllColumns: true,
@@ -9960,7 +9985,8 @@ var PROFESORES_GRID_DEF = {
         'username',
         'email',
         'telefonoMovil',
-        'estado'
+        'estado',
+        'calificacion'
     ],
     actions: [
         {
@@ -10318,7 +10344,7 @@ var PROFILE_DEF = {
             { columnNameKey: 'Activo', columnDef: 'enabled' }
         ],
         sortAllColumns: true,
-        displayedColumns: ['name', 'role.name', 'enabled'],
+        displayedColumns: ['name', 'enabled'],
         deleteColumn: { key: 'delete',
             name: 'Eliminar' }
     },
@@ -10352,21 +10378,6 @@ var PROFILE_DEF = {
                     fromWs: {
                         key: 'user_ws_profiles',
                         url: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["c" /* environment */].PERMISSION_CRUD_URL
-                    }
-                }
-            },
-            {
-                key: ROLE_COMPONENT_KEY,
-                labelKey: 'Rol',
-                required: true,
-                requiredMessage: 'El campo rol es requerido',
-                controlType: 'select',
-                options: {
-                    elementLabel: 'name',
-                    elementValue: 'id',
-                    fromWs: {
-                        key: 'user_ws_roles',
-                        url: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["c" /* environment */].ROLE_CRUD_URL
                     }
                 }
             }],
@@ -15097,9 +15108,9 @@ var Datepicker2Component = /** @class */ (function (_super) {
             this.fieldsVisualDatepicker.forEach(function (f) {
                 f.required = _this.field.required;
                 f.label = _this.field.label;
-                if (f.required != undefined && f.required == true) {
-                    f.label = f.label + ' (*)';
-                }
+                // if (f.required != undefined && f.required == true) {
+                //   f.label = f.label + ' (*)';
+                // }
             });
             this.fieldLabel = fVF;
             this.fieldLabel.value = this.field.value;
@@ -21568,8 +21579,15 @@ var navigation = [
                         'url': '/' + __WEBPACK_IMPORTED_MODULE_0_environments_environment__["c" /* environment */].URL_PERMISSION,
                     },
                     {
+                        'id': 'roles',
+                        'title': 'Roles',
+                        'translate': 'NAV.ROLES.TITLE',
+                        'type': 'item',
+                        'url': '/' + __WEBPACK_IMPORTED_MODULE_0_environments_environment__["c" /* environment */].URL_ROLE,
+                    },
+                    {
                         'id': 'profiles',
-                        'title': 'Profiles',
+                        'title': 'Perfiles',
                         'translate': 'NAV.PROFILES.TITLE',
                         'type': 'item',
                         'url': '/' + __WEBPACK_IMPORTED_MODULE_0_environments_environment__["c" /* environment */].URL_PROFILE,
@@ -21580,13 +21598,6 @@ var navigation = [
                         'translate': 'NAV.USUARIOS.TITLE',
                         'type': 'item',
                         'url': '/' + __WEBPACK_IMPORTED_MODULE_0_environments_environment__["c" /* environment */].URL_USER,
-                    },
-                    {
-                        'id': 'roles',
-                        'title': 'Roles',
-                        'translate': 'NAV.ROLES.TITLE',
-                        'type': 'item',
-                        'url': '/' + __WEBPACK_IMPORTED_MODULE_0_environments_environment__["c" /* environment */].URL_ROLE,
                     },
                     {
                         'id': 'faqs',
@@ -21656,10 +21667,10 @@ var navigation = [
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 // export const PREFIX_DOMAIN_API =  'http://localhost:8080/';
-var PREFIX_DOMAIN_API_EDUCACION = 'http://localhost:8080/ws-rest-educacion';
-var PREFIX_DOMAIN_API_AUTHENTICATION = 'http://localhost:8080/ws-rest-authentication';
-// export const PREFIX_DOMAIN_API_EDUCACION =  'http://ec2-18-215-75-115.compute-1.amazonaws.com:8080/ws-rest-educacion';
-// export const PREFIX_DOMAIN_API_AUTHENTICATION =  'http://ec2-18-215-75-115.compute-1.amazonaws.com:8080/ws-rest-authentication';
+// export const PREFIX_DOMAIN_API_EDUCACION =  'http://localhost:8080/ws-rest-educacion';
+// export const PREFIX_DOMAIN_API_AUTHENTICATION =  'http://localhost:8080/ws-rest-authentication';
+var PREFIX_DOMAIN_API_EDUCACION = 'http://ec2-18-215-75-115.compute-1.amazonaws.com:8080/ws-rest-educacion';
+var PREFIX_DOMAIN_API_AUTHENTICATION = 'http://ec2-18-215-75-115.compute-1.amazonaws.com:8080/ws-rest-authentication';
 var environment = {
     localAuth: true,
     production: true,

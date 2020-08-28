@@ -63,32 +63,35 @@ public class FaqServiceImpl extends NJBaseService<Long, Faq, FaqRepository> impl
 	
 	@Override
 	public Faq update(Faq entity) {
-		List<Faq> faqs = this.repository.findByIdNotAndCategoryEqualsAndSubcategoryEqualsOrderByOrderFaqAsc(entity.getId(), entity.getCategory(), entity.getSubcategory());
-		Faq toUpdate = repository.findOne(entity.getId());
 		
-		String category = toUpdate.getCategory();
-		String subcategory = toUpdate.getSubcategory();
+		entity = this.getRepository().save(entity);
 		
-		boolean mustUpdate = !category.equals(entity.getCategory()) || !subcategory.equals(entity.getSubcategory()); 
-		
-		if (entity.getOrderFaq() < faqs.size()) {
-			faqs.add(entity.getOrderFaq() - 1, entity);
-		} else {
-			faqs.add(entity);
-		}
-		
-		for (int i = 1 ; i <= faqs.size() ; i++ ) {
-			faqs.get(i-1).setOrderFaq(i);
-		}
-		
-		repository.save(faqs);
-		
-		if (mustUpdate) {
-			faqs = this.repository.findByCategoryEqualsAndSubcategoryEqualsOrderByOrderFaqAsc(entity.getCategory(), entity.getSubcategory());
-			for (int i = 1 ; i <= faqs.size() ; i++ ) {
-				faqs.get(i-1).setOrderFaq(i);
-			}
-		}
+//		List<Faq> faqs = this.repository.findByIdNotAndCategoryEqualsAndSubcategoryEqualsOrderByOrderFaqAsc(entity.getId(), entity.getCategory(), entity.getSubcategory());
+//		Faq toUpdate = repository.findOne(entity.getId());
+//		
+//		String category = toUpdate.getCategory();
+//		String subcategory = toUpdate.getSubcategory();
+//		
+//		boolean mustUpdate = false; // !category.equals(entity.getCategory()) || !subcategory.equals(entity.getSubcategory()); 
+//		
+//		if (entity.getOrderFaq() < faqs.size()) {
+//			faqs.add(entity.getOrderFaq() - 1, entity);
+//		} else {
+//			faqs.add(entity);
+//		}
+//		
+//		for (int i = 1 ; i <= faqs.size() ; i++ ) {
+//			faqs.get(i-1).setOrderFaq(i);
+//		}
+//		
+//		repository.save(faqs);
+//		
+//		if (mustUpdate) {
+//			faqs = this.repository.findByCategoryEqualsAndSubcategoryEqualsOrderByOrderFaqAsc(entity.getCategory(), entity.getSubcategory());
+//			for (int i = 1 ; i <= faqs.size() ; i++ ) {
+//				faqs.get(i-1).setOrderFaq(i);
+//			}
+//		}
 		return entity;
 	}
 	

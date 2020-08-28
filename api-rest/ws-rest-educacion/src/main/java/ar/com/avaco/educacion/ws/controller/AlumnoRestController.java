@@ -1,6 +1,5 @@
 package ar.com.avaco.educacion.ws.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;

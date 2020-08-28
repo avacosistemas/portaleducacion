@@ -14,6 +14,7 @@ import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Alumno;
 import ar.com.avaco.educacion.domain.entities.Aula;
 import ar.com.avaco.educacion.domain.entities.AulaAlumno;
+import ar.com.avaco.educacion.domain.entities.AulaEventos;
 import ar.com.avaco.educacion.domain.entities.HorasAlumno;
 import ar.com.avaco.educacion.domain.entities.Materia;
 import ar.com.avaco.educacion.domain.entities.Profesor;
@@ -45,6 +46,8 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 	private AulaVirtualService aulaVirtualService; 
 	
 	private AulaAlumnoService aulaAlumnoService;
+	
+	private AulaEventoService aulaEventoService;
 	
 	@Autowired
 	public AulaServiceImpl(MateriaService materiaService, ProfesorService profesorService, AlumnoService alumnoService, DecidirService decidirService, HorasAlumnoService horasAlumnoService, AulaVirtualService aulaVirtualService) {
@@ -284,7 +287,10 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 			throw new BusinessException(e.getMessage());
 		}
 	}
+
 	
-	
+	public void setAulaEventoService(AulaEventoService aulaEventoService) {
+		this.aulaEventoService = aulaEventoService;
+	}
 	
 }

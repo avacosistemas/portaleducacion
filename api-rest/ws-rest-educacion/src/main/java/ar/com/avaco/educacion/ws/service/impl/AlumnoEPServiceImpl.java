@@ -69,7 +69,12 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 			institucion.setId(alumnoDto.getIdInstitucion());
 			alumno.setInstitucion(institucion);
 		}
+		if (alumnoDto.getFoto() != null) {
+			alumno.setFoto(alumnoDto.getFoto());
+		}
 		alumno = service.updateAlumno(alumno);
+		
+		
 		return convertToDto(alumno);
 	}
 	
@@ -139,6 +144,10 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		alumno.setUsername(dto.getUsername());
 		alumno.setEmail(dto.getEmail());
 
+		if (dto.getFoto() != null) {
+			alumno.setFoto(dto.getFoto());
+		}
+		
 		if (dto.getIdInstitucion() != null && dto.getIdInstitucion() > 0) {
 			Institucion institucion = new Institucion();
 			institucion.setId(dto.getIdInstitucion());

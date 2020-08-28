@@ -23,6 +23,8 @@ public class AlumnoDTO extends DTOEntity<Long> {
 
 	private String estado;
 
+	private byte[] foto;
+
 	public String getNombreInstitucion() {
 		return nombreInstitucion;
 	}
@@ -133,6 +135,14 @@ public class AlumnoDTO extends DTOEntity<Long> {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
 }

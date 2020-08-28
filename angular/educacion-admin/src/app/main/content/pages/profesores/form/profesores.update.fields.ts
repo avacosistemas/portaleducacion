@@ -87,5 +87,10 @@ export const PROFESORES_UPDATE_FORM_FIELDS_DEF = [
     labelKey: 'profesores_create_form_fields_def_field_descripcion',
     controlType: 'textbox',
     maxLength: 100
+  },
+  {               
+    key: 'foto',
+    labelKey: 'Foto',
+    controlType: 'file'
   }
 ];

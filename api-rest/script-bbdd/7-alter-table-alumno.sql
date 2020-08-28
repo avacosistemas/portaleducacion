@@ -1,0 +1,1 @@
+ALTER TABLE public.alumno ADD COLUMN foto bytea;
