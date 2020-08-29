@@ -129,7 +129,6 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		cliente.setIntentosFallidosLogin(INICIO_REINTENTOS_LOGIN);
 		cliente.setFechaRegistro(Calendar.getInstance().getTime());
 		cliente = getRepository().save(cliente);
-		notificarNuevoCliente(cliente);
 		notificacionService.notificarAlumnoNuevo(cliente);
 		return cliente;
 	}
@@ -168,10 +167,6 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		notificacionService.notificarRegistroClienteNuevoPassword(cliente, tmpass);
 	}
 	
-	private void notificarNuevoCliente(Cliente cliente) {
-		notificacionService.notificarAlumnoNuevo(cliente);
-	}
-
 	/**
 	 * Valida que el username, email y numero de identificacion no se encuentre
 	 * registrado.

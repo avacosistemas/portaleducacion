@@ -206,7 +206,8 @@ public class AulaEPServiceImpl extends CRUDEPBaseService<Long, AulaDTO, Aula, Au
 	public List<EventoBBBDTO> listarEventos() {
 		List<AulaEventos> eventos = this.aulaEventoService.list();
 		List<EventoBBBDTO> eventosDTO = new ArrayList<>();
-		return null;
+		eventos.stream().sorted(Comparator.comparing(AulaEventos::getFecha)).forEach(x -> eventosDTO.add(new EventoBBBDTO(x)));;
+		return eventosDTO;
 	}
 	
 }

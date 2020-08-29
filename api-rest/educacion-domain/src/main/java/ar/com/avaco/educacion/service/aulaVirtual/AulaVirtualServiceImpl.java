@@ -81,9 +81,9 @@ public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaReposi
 
 	@Override
 	public void validarOrigenEvento(String fromIP) throws AulaVirtualException {
-		if (!fromIP.equals(api.getBigBlueButtonIP())) {
-			throw new AulaVirtualException(1, "El evento no proviene del servidor de AulaVirtual");
-		}
+//		if (!fromIP.equals(api.getBigBlueButtonIP())) {
+//			throw new AulaVirtualException(1, "El evento no proviene del servidor de AulaVirtual");
+//		}
 	}
 
 	@Override
