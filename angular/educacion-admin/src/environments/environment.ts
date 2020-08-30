@@ -12,7 +12,6 @@ export const PREFIX_DOMAIN_API_AUTHENTICATION =  'http://localhost:8080/ws-rest-
 // export const PREFIX_DOMAIN_API_EDUCACION =  'http://ec2-18-215-75-115.compute-1.amazonaws.com:8080/ws-rest-educacion';
 // export const PREFIX_DOMAIN_API_AUTHENTICATION =  'http://ec2-18-215-75-115.compute-1.amazonaws.com:8080/ws-rest-authentication';
 
-
 export const environment = {
     localAuth: true,
 

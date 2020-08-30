@@ -30,7 +30,6 @@ public class AulaPortalRestController extends AbstractRestBaseController {
 		URLAulaDTO newAulaDto = service.abrirClase(aulaProfesorDTO);
 		JSONResponse response = new JSONResponse();
 		response.setData(newAulaDto);
-		response.setData("ACK");
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);	
 	}
@@ -40,7 +39,6 @@ public class AulaPortalRestController extends AbstractRestBaseController {
 		URLAulaDTO newAulaDto = service.unirseClase(aulaAlumnoDTO);
 		JSONResponse response = new JSONResponse();
 		response.setData(newAulaDto);
-		response.setData("ACK");
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);	
 	}

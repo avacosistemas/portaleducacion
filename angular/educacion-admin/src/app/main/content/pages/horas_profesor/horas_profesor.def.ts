@@ -35,6 +35,6 @@ export const HORAS_PROFESOR_DEF: CrudDef = {
     dialogConfig: {
         width: '500px'
     },
-    filterInMemory: true,
+    filterInMemory: false,
     backButton: true   
 };

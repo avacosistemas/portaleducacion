@@ -17,35 +17,37 @@ import ar.com.avaco.educacion.repository.aula.AulaRepository;
 @Service("aulaVirtualService")
 public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaRepository> implements AulaVirtualService {
 
-	@Value("bbb.api.url.callback.evento")
+	@Value("${bbb.api.url.callback.evento}")
 	private String callbackEvento;
 
-	@Value("bbb.url")
+	@Value("${bbb.url}")
 	private String url;
 
-	@Value("bbb.ip")
+	@Value("${bbb.ip}")
 	private String ip;
 
-	@Value("bbb.salt")
+	@Value("${bbb.salt}")
 	private String salt;
 
-	@Value("bbb.welcome.message")
+	@Value("${bbb.welcome.message}")
 	private String welcomeMessage;
 
 	private BigBlueButtonApi api;
 
 	public AulaVirtualServiceImpl() {
 		super();
-		api = new BigBlueButtonApi();
-		api.setSalt(salt);
-		api.setBigBlueButtonIP(ip);
-		api.setBigBlueButtonURL(url);
-		api.setUrlEventsCallBack(callbackEvento);
 	}
 
 	@Override
 	public Clase crearClase(Profesor profesor, Aula aula) throws AulaVirtualException {
 		String idMeeting;
+
+		api = new BigBlueButtonApi();
+		api.setSalt(salt);
+		api.setBigBlueButtonIP(ip);
+		api.setBigBlueButtonURL(url);
+		api.setUrlEventsCallBack(callbackEvento);
+		
 		try {
 			idMeeting = api.createMeeting(aula.generatedIdAula(profesor), welcomeMessage, null, null, null, null, null);
 			String urlSala = api.getJoinMeetingURL(profesor.getUsername(), idMeeting, "mp", null, profesor.getId());

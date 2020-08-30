@@ -17,6 +17,7 @@ import { HORAS_PROFESOR_DEF } from './horas_profesor/horas_profesor.def';
 import { ALUMNO_DEF } from './alumno/alumno.def';
 import { AULAS_DEF } from './aulas/aulas.def';
 import { AULA_ALUMNO_DEF } from './aula_alumno/aula_alumno.def';
+import { EVENTO_AULA_DEF } from './evento_aula/evento_aula.def';
 
 
 export const ROUTES: Routes = [
@@ -94,7 +95,13 @@ export const ROUTES: Routes = [
       path: AULA_ALUMNO_DEF.navigation.url.split('/')[1],
       component: IntegrationComponent,
       canActivate: [AuthGuardService]
+    },
+    {
+      path: EVENTO_AULA_DEF.navigation.url.split('/')[1],
+      component: IntegrationComponent,
+      canActivate: [AuthGuardService]
     }
+
 
 ];
 

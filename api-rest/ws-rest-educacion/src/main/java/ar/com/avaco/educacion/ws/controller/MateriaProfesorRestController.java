@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
@@ -32,6 +33,15 @@ public class MateriaProfesorRestController extends AbstractDTORestController<Mat
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/materiasprofesor/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> listByProfesorParam(@RequestParam("idProfesor") Long idProfesor) throws BusinessException {
+		List<MateriaProfesorFullDTO> listMateriasProfesor = this.service.listMateriasProfesor(idProfesor);
+    	JSONResponse response = new JSONResponse();
+		response.setData(listMateriasProfesor);
+		response.setStatus(JSONResponse.OK);
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}
+	
 	@RequestMapping(path = "/materiasprofesor/", method = RequestMethod.POST)
 	public ResponseEntity<JSONResponse> createMateriaProfesor(@RequestBody MateriaProfesorDTO materiaProfesor) throws BusinessException {
 		
@@ -40,6 +50,11 @@ public class MateriaProfesorRestController extends AbstractDTORestController<Mat
 		response.setData(newMateriaProfesorDto);
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/materiasprofesor/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<JSONResponse> delete(@PathVariable("id") Long id) throws BusinessException {
+		return super.delete(id);
 	}
 	
 	@RequestMapping(path = "/materiasprofesor/profesor/{idProfesor}/materia/{idMateria}", method = RequestMethod.DELETE)
