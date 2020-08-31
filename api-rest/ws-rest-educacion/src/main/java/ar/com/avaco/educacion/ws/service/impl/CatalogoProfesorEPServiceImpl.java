@@ -54,6 +54,9 @@ public class CatalogoProfesorEPServiceImpl implements CatalogoProfesorEPService 
 		dto.setMaterias(entity.getTitulo());
 		dto.setDescripcion(entity.getDescripcion());
 		dto.setCalificacion(entity.getCalificacion());
+		
+		dto.setValorHora(entity.getValorHora());
+		
 		return dto;
 	}
 

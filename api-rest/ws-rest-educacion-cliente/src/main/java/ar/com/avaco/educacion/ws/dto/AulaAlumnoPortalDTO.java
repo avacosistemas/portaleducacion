@@ -26,9 +26,14 @@ public class AulaAlumnoPortalDTO extends DTOEntity<Long> {
 	private String estado;
 
 	private String idString;
-	
-	
+
+	private Double puntuacion;
+
+	private String comentario;
+
 	public AulaAlumnoPortalDTO(AulaAlumno aulaAlumno) {
+		this.puntuacion = aulaAlumno.getCalificacion();
+		this.comentario = aulaAlumno.getComentario();
 		createDTO(aulaAlumno.getAula());
 	}
 
@@ -47,7 +52,7 @@ public class AulaAlumnoPortalDTO extends DTOEntity<Long> {
 		ahora.setTime(DateUtils.getFechaYHoraActual());
 
 		this.idString = "Aula" + " #" + StringUtils.leftPad(id.toString(), 5, "0");
-		
+
 		Calendar instance = Calendar.getInstance();
 		instance.setTime(aula.getDia());
 		instance.set(Calendar.HOUR, aula.getHora());
@@ -130,6 +135,20 @@ public class AulaAlumnoPortalDTO extends DTOEntity<Long> {
 		this.idString = idString;
 	}
 
-	
-	
+	public Double getPuntuacion() {
+		return puntuacion;
+	}
+
+	public void setPuntuacion(Double puntuacion) {
+		this.puntuacion = puntuacion;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
 }

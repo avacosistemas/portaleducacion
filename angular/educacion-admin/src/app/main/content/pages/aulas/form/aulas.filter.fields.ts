@@ -9,7 +9,6 @@ export const AULAS_FILTER_FORM_FIELDS_DEF = [
   {
     key: 'nombreInstitucion',
     labelKey: 'AULAS_FILTER_FORM_FIELDS_DEF_FIELD_nombreinstitucion',
-    label: 'Instituci�n',
     type: 'string',
     controlType: 'textbox'
   },
@@ -18,7 +17,7 @@ export const AULAS_FILTER_FORM_FIELDS_DEF = [
     labelKey: 'AULAS_FILTER_FORM_FIELDS_DEF_FIELD_fecha',
     label: 'Fecha',
     type: 'string',
-    controlType: 'textbox'
+    controlType: 'datepicker'
   },
   {
     key: 'hora',

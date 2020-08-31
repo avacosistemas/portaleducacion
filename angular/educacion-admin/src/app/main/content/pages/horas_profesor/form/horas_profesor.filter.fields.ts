@@ -32,4 +32,8 @@ export const HORAS_PROFESOR_FILTER_FORM_FIELDS_DEF = [
     type: 'hidden',
     controlType: 'hidden'
   },
+  {
+    key : 'parentTitle',
+    controlType: 'hidden'
+  }
 ];

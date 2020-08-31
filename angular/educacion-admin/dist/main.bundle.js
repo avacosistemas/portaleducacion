@@ -7175,7 +7175,6 @@ var AULAS_FILTER_FORM_FIELDS_DEF = [
     {
         key: 'nombreInstitucion',
         labelKey: 'AULAS_FILTER_FORM_FIELDS_DEF_FIELD_nombreinstitucion',
-        label: 'Instituci�n',
         type: 'string',
         controlType: 'textbox'
     },
@@ -7184,7 +7183,7 @@ var AULAS_FILTER_FORM_FIELDS_DEF = [
         labelKey: 'AULAS_FILTER_FORM_FIELDS_DEF_FIELD_fecha',
         label: 'Fecha',
         type: 'string',
-        controlType: 'textbox'
+        controlType: 'datepicker'
     },
     {
         key: 'hora',
@@ -7430,6 +7429,18 @@ var AULAS_GRID_DEF = {
                 }
             },
             icon: 'group'
+        },
+        {
+            actionNameKey: 'aulas_grid_def_button_action_eventos',
+            actionType: 'redirect',
+            redirect: {
+                url: '/eventoAula',
+                querystring: {
+                    idAula: 'id',
+                    parentTitle: 'idString'
+                }
+            },
+            icon: 'notificationsActive'
         }
     ]
 };
@@ -7523,6 +7534,276 @@ var AULAS_SECURITY_DEF = {
 
 /***/ }),
 
+/***/ "./src/app/main/content/pages/evento_aula/evento_aula.def.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EVENTO_AULA_DEF; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__form_evento_aula_read_fields__ = __webpack_require__("./src/app/main/content/pages/evento_aula/form/evento_aula.read.fields.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__form_evento_aula_filter_fields__ = __webpack_require__("./src/app/main/content/pages/evento_aula/form/evento_aula.filter.fields.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__security_evento_aula_security__ = __webpack_require__("./src/app/main/content/pages/evento_aula/security/evento_aula.security.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__grid_evento_aula_grid__ = __webpack_require__("./src/app/main/content/pages/evento_aula/grid/evento_aula.grid.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__i18n_evento_aula_i18n__ = __webpack_require__("./src/app/main/content/pages/evento_aula/i18n/evento_aula.i18n.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__navigation_evento_aula_nav__ = __webpack_require__("./src/app/main/content/pages/evento_aula/navigation/evento_aula.nav.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_environments_environment__ = __webpack_require__("./src/environments/environment.ts");
+
+
+
+
+
+
+
+// Definicion de un template crud(Create,Read,Update and Delete)
+var EVENTO_AULA_DEF = {
+    name: 'EVENTO_AULA',
+    i18n: __WEBPACK_IMPORTED_MODULE_4__i18n_evento_aula_i18n__["a" /* EVENTO_AULA_I18N_DEF */],
+    grid: __WEBPACK_IMPORTED_MODULE_3__grid_evento_aula_grid__["a" /* EVENTO_AULA_GRID_DEF */],
+    forms: {
+        filter: __WEBPACK_IMPORTED_MODULE_1__form_evento_aula_filter_fields__["a" /* EVENTO_AULA_FILTER_FORM_FIELDS_DEF */],
+        // create: EVENTO_AULA_CREATE_FORM_FIELDS_DEF, // Si el crud tiene formulario de alta, entonces se agrega su definicion.
+        // update: EVENTO_AULA_UPDATE_FORM_FIELDS_DEF, // Si el crud tiene formulario de modificacion, entonces se agrega su definicion.
+        read: __WEBPACK_IMPORTED_MODULE_0__form_evento_aula_read_fields__["a" /* EVENTO_AULA_READ_FORM_FIELDS_DEF */] // Si existe un formulario de edicion no exite uno de solo lectura
+    },
+    navigation: __WEBPACK_IMPORTED_MODULE_5__navigation_evento_aula_nav__["a" /* EVENTO_AULA_NAV_DEF */],
+    security: __WEBPACK_IMPORTED_MODULE_2__security_evento_aula_security__["a" /* EVENTO_AULA_SECURITY_DEF */],
+    ws: {
+        key: 'EVENTO_AULA_CRUD_URL',
+        url: __WEBPACK_IMPORTED_MODULE_6_environments_environment__["b" /* PREFIX_DOMAIN_API_EDUCACION */] + '/event/aula/registroEventos'
+    },
+    dialogConfig: {
+        width: '400px'
+    },
+    backButton: true
+};
+
+
+/***/ }),
+
+/***/ "./src/app/main/content/pages/evento_aula/form/evento_aula.filter.fields.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EVENTO_AULA_FILTER_FORM_FIELDS_DEF; });
+var EVENTO_AULA_FILTER_FORM_FIELDS_DEF = [
+    {
+        key: 'usuario',
+        labelKey: 'EVENTO_AULA_FILTER_FORM_FIELDS_DEF_FIELD_usuario',
+        label: 'Usuario',
+        type: 'string',
+        controlType: 'textbox'
+    },
+    {
+        key: 'tipoUsuario',
+        labelKey: 'EVENTO_AULA_FILTER_FORM_FIELDS_DEF_FIELD_tipousuario',
+        label: 'tipoUsuario',
+        type: 'string',
+        controlType: 'textbox'
+    },
+    {
+        key: 'nombreAlumno',
+        labelKey: 'EVENTO_AULA_FILTER_FORM_FIELDS_DEF_FIELD_nombrealumno',
+        label: 'Alumno',
+        type: 'string',
+        controlType: 'textbox'
+    },
+    {
+        key: 'idAula',
+        labelKey: 'EVENTO_AULA_FILTER_FORM_FIELDS_DEF_FIELD_idaula',
+        label: 'idAula',
+        type: 'string',
+        controlType: 'hidden'
+    },
+    {
+        key: 'parentTitle',
+        controlType: 'hidden'
+    },
+    {
+        key: 'tipoEvento',
+        labelKey: 'EVENTO_AULA_FILTER_FORM_FIELDS_DEF_FIELD_tipoevento',
+        label: 'Tipo Evento',
+        type: 'string',
+        controlType: 'textbox'
+    }
+];
+
+
+/***/ }),
+
+/***/ "./src/app/main/content/pages/evento_aula/form/evento_aula.read.fields.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EVENTO_AULA_READ_FORM_FIELDS_DEF; });
+var EVENTO_AULA_READ_FORM_FIELDS_DEF = [
+    {
+        key: 'fecha',
+        labelKey: 'EVENTO_AULA_READ_FORM_FIELDS_DEF_FIELD_fecha',
+        label: 'Fecha',
+        type: 'string',
+        disabled: true,
+        controlType: 'textbox'
+    },
+    {
+        key: 'usuario',
+        labelKey: 'EVENTO_AULA_READ_FORM_FIELDS_DEF_FIELD_usuario',
+        label: 'Usuario',
+        type: 'string',
+        disabled: true,
+        controlType: 'textbox'
+    },
+    {
+        key: 'tipoUsuario',
+        labelKey: 'EVENTO_AULA_READ_FORM_FIELDS_DEF_FIELD_tipousuario',
+        label: 'tipoUsuario',
+        type: 'string',
+        disabled: true,
+        controlType: 'textbox'
+    },
+    {
+        key: 'nombreAlumno',
+        labelKey: 'EVENTO_AULA_READ_FORM_FIELDS_DEF_FIELD_nombrealumno',
+        label: 'Alumno',
+        type: 'string',
+        disabled: true,
+        controlType: 'textbox'
+    },
+    {
+        key: 'idAula',
+        labelKey: 'EVENTO_AULA_READ_FORM_FIELDS_DEF_FIELD_idaula',
+        label: 'idAula',
+        type: 'string',
+        disabled: true,
+        controlType: 'textbox'
+    },
+    {
+        key: 'tipoEvento',
+        labelKey: 'EVENTO_AULA_READ_FORM_FIELDS_DEF_FIELD_tipoevento',
+        label: 'Tipo Evento',
+        type: 'string',
+        disabled: true,
+        controlType: 'textbox'
+    }
+];
+
+
+/***/ }),
+
+/***/ "./src/app/main/content/pages/evento_aula/grid/evento_aula.grid.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EVENTO_AULA_GRID_DEF; });
+var EVENTO_AULA_GRID_DEF = {
+    columnsDef: [
+        {
+            columnDef: 'fecha',
+            columnNameKey: 'evento_aula_grid_def_column_fecha'
+        },
+        {
+            columnDef: 'usuario',
+            columnNameKey: 'evento_aula_grid_def_column_usuario'
+        },
+        {
+            columnDef: 'tipoUsuario',
+            columnNameKey: 'evento_aula_grid_def_column_tipousuario'
+        },
+        {
+            columnDef: 'idAula',
+            columnNameKey: 'evento_aula_grid_def_column_idaula'
+        },
+        {
+            columnDef: 'tipoEvento',
+            columnNameKey: 'evento_aula_grid_def_column_tipoevento'
+        }
+    ],
+    sortAllColumns: true,
+    displayedColumns: [
+        'fecha',
+        'tipoEvento',
+        'usuario',
+        'tipoUsuario'
+    ]
+};
+
+
+/***/ }),
+
+/***/ "./src/app/main/content/pages/evento_aula/i18n/evento_aula.i18n.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EVENTO_AULA_I18N_DEF; });
+var EVENTO_AULA_I18N_DEF = {
+    name: 'EVENTO_AULA_I18N_DEF',
+    lang: 'es',
+    words: {
+        page_title: 'Eventos del Aula',
+        evento_aula_nav_def: 'Eventos del Aula',
+        evento_aula_create_form_fields_def_field_fecha: 'Fecha y Hora',
+        evento_aula_create_form_fields_def_field_usuario: 'Usuario',
+        evento_aula_create_form_fields_def_field_tipousuario: 'Tipo Cliente',
+        evento_aula_create_form_fields_def_field_nombrealumno: 'Alumno',
+        evento_aula_create_form_fields_def_field_idaula: 'idAula',
+        evento_aula_create_form_fields_def_field_tipoevento: 'Tipo Evento',
+        evento_aula_update_form_fields_def_field_fecha: 'Fecha y Hora',
+        evento_aula_update_form_fields_def_field_usuario: 'Usuario',
+        evento_aula_update_form_fields_def_field_tipousuario: 'Tipo Cliente',
+        evento_aula_update_form_fields_def_field_nombrealumno: 'Alumno',
+        evento_aula_update_form_fields_def_field_idaula: 'idAula',
+        evento_aula_update_form_fields_def_field_tipoevento: 'Tipo Evento',
+        evento_aula_read_form_fields_def_field_fecha: 'Fecha y Hora',
+        evento_aula_read_form_fields_def_field_usuario: 'Usuario',
+        evento_aula_read_form_fields_def_field_tipousuario: 'Tipo Cliente',
+        evento_aula_read_form_fields_def_field_nombrealumno: 'Alumno',
+        evento_aula_read_form_fields_def_field_idaula: 'idAula',
+        evento_aula_read_form_fields_def_field_tipoevento: 'Tipo Evento',
+        evento_aula_filter_form_fields_def_field_fecha: 'Fecha y Hora',
+        evento_aula_filter_form_fields_def_field_usuario: 'Usuario',
+        evento_aula_filter_form_fields_def_field_tipousuario: 'Tipo Cliente',
+        evento_aula_filter_form_fields_def_field_nombrealumno: 'Alumno',
+        evento_aula_filter_form_fields_def_field_idaula: 'idAula',
+        evento_aula_filter_form_fields_def_field_tipoevento: 'Tipo Evento',
+        evento_aula_grid_def_column_fecha: 'Fecha y Hora',
+        evento_aula_grid_def_column_usuario: 'Usuario',
+        evento_aula_grid_def_column_tipousuario: 'Tipo Cliente',
+        evento_aula_grid_def_column_nombrealumno: 'Alumno',
+        evento_aula_grid_def_column_idaula: 'idAula',
+        evento_aula_grid_def_column_tipoevento: 'Tipo Evento'
+    }
+};
+
+
+/***/ }),
+
+/***/ "./src/app/main/content/pages/evento_aula/navigation/evento_aula.nav.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EVENTO_AULA_NAV_DEF; });
+var EVENTO_AULA_NAV_DEF = {
+    id: 'EVENTO_AULA',
+    translateKey: 'evento_aula_nav_def',
+    url: '/eventoAula'
+};
+
+
+/***/ }),
+
+/***/ "./src/app/main/content/pages/evento_aula/security/evento_aula.security.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EVENTO_AULA_SECURITY_DEF; });
+var EVENTO_AULA_SECURITY_DEF = {
+    readAccess: 'EVENTO_AULA_READ',
+    updateAccess: 'EVENTO_AULA_UPDATE',
+    createAccess: 'EVENTO_AULA_CREATE',
+    deleteAccess: 'EVENTO_AULA_DELETE'
+};
+
+
+/***/ }),
+
 /***/ "./src/app/main/content/pages/faq/faqs.def.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7577,41 +7858,41 @@ var FAQS_DEF = {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FAQS_CREATE_FORM_FIELDS_DEF; });
 var FAQS_CREATE_FORM_FIELDS_DEF = [
-    {
-        key: 'favourite',
-        labelKey: 'faqs_create_form_fields_def_field_favourite',
-        label: 'Favourite',
-        type: 'boolean',
-        controlType: 'checkbox'
-    },
-    {
-        key: 'order',
-        labelKey: 'faqs_create_form_fields_def_field_order',
-        label: 'Order',
-        type: 'number',
-        controlType: 'textbox'
-    },
-    {
-        key: 'lang',
-        labelKey: 'faqs_create_form_fields_def_field_lang',
-        label: 'Lang',
-        type: 'string',
-        controlType: 'textbox'
-    },
-    {
-        key: 'category',
-        labelKey: 'faqs_create_form_fields_def_field_category',
-        label: 'Category',
-        type: 'string',
-        controlType: 'textbox'
-    },
-    {
-        key: 'subcategory',
-        labelKey: 'faqs_create_form_fields_def_field_subcategory',
-        label: 'Subcategory',
-        type: 'string',
-        controlType: 'textbox'
-    },
+    // {
+    //   key: 'favourite',
+    //   labelKey: 'faqs_create_form_fields_def_field_favourite',
+    //   label: 'Favourite',
+    //   type: 'boolean',
+    //   controlType: 'checkbox'
+    // },
+    // {
+    //   key: 'order',
+    //   labelKey: 'faqs_create_form_fields_def_field_order',
+    //   label: 'Order',
+    //   type: 'number',
+    //   controlType: 'textbox'
+    // },
+    // {
+    //   key: 'lang',
+    //   labelKey: 'faqs_create_form_fields_def_field_lang',
+    //   label: 'Lang',
+    //   type: 'string',
+    //   controlType: 'textbox'
+    // },
+    // {
+    //   key: 'category',
+    //   labelKey: 'faqs_create_form_fields_def_field_category',
+    //   label: 'Category',
+    //   type: 'string',
+    //   controlType: 'textbox'
+    // },
+    // {
+    //   key: 'subcategory',
+    //   labelKey: 'faqs_create_form_fields_def_field_subcategory',
+    //   label: 'Subcategory',
+    //   type: 'string',
+    //   controlType: 'textbox'
+    // },
     {
         key: 'question',
         labelKey: 'faqs_create_form_fields_def_field_question',
@@ -7637,34 +7918,34 @@ var FAQS_CREATE_FORM_FIELDS_DEF = [
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FAQS_FILTER_FORM_FIELDS_DEF; });
 var FAQS_FILTER_FORM_FIELDS_DEF = [
-    {
-        key: 'order',
-        labelKey: 'FAQS_FILTER_FORM_FIELDS_DEF_FIELD_order',
-        label: 'Order',
-        type: 'number',
-        controlType: 'textbox'
-    },
-    {
-        key: 'lang',
-        labelKey: 'FAQS_FILTER_FORM_FIELDS_DEF_FIELD_lang',
-        label: 'Lang',
-        type: 'string',
-        controlType: 'textbox'
-    },
-    {
-        key: 'category',
-        labelKey: 'FAQS_FILTER_FORM_FIELDS_DEF_FIELD_category',
-        label: 'Category',
-        type: 'string',
-        controlType: 'textbox'
-    },
-    {
-        key: 'subcategory',
-        labelKey: 'FAQS_FILTER_FORM_FIELDS_DEF_FIELD_subcategory',
-        label: 'Subcategory',
-        type: 'string',
-        controlType: 'textbox'
-    },
+    // {
+    //   key: 'order',
+    //   labelKey: 'FAQS_FILTER_FORM_FIELDS_DEF_FIELD_order',
+    //   label: 'Order',
+    //   type: 'number',
+    //   controlType: 'textbox'
+    // },
+    // {
+    //   key: 'lang',
+    //   labelKey: 'FAQS_FILTER_FORM_FIELDS_DEF_FIELD_lang',
+    //   label: 'Lang',
+    //   type: 'string',
+    //   controlType: 'textbox'
+    // },
+    // {
+    //   key: 'category',
+    //   labelKey: 'FAQS_FILTER_FORM_FIELDS_DEF_FIELD_category',
+    //   label: 'Category',
+    //   type: 'string',
+    //   controlType: 'textbox'
+    // },
+    // {
+    //   key: 'subcategory',
+    //   labelKey: 'FAQS_FILTER_FORM_FIELDS_DEF_FIELD_subcategory',
+    //   label: 'Subcategory',
+    //   type: 'string',
+    //   controlType: 'textbox'
+    // },
     {
         key: 'question',
         labelKey: 'FAQS_FILTER_FORM_FIELDS_DEF_FIELD_question',
@@ -7772,41 +8053,41 @@ var FAQS_UPDATE_FORM_FIELDS_DEF = [
         type: 'hidden',
         controlType: 'hidden'
     },
-    {
-        key: 'favourite',
-        labelKey: 'FAQS_UPDATE_FORM_FIELDS_DEF_FIELD_favourite',
-        label: 'Favourite',
-        type: 'boolean',
-        controlType: 'checkbox'
-    },
-    {
-        key: 'order',
-        labelKey: 'FAQS_UPDATE_FORM_FIELDS_DEF_FIELD_order',
-        label: 'Order',
-        type: 'number',
-        controlType: 'textbox'
-    },
-    {
-        key: 'lang',
-        labelKey: 'FAQS_UPDATE_FORM_FIELDS_DEF_FIELD_lang',
-        label: 'Lang',
-        type: 'string',
-        controlType: 'textbox'
-    },
-    {
-        key: 'category',
-        labelKey: 'FAQS_UPDATE_FORM_FIELDS_DEF_FIELD_category',
-        label: 'Category',
-        type: 'string',
-        controlType: 'textbox'
-    },
-    {
-        key: 'subcategory',
-        labelKey: 'FAQS_UPDATE_FORM_FIELDS_DEF_FIELD_subcategory',
-        label: 'Subcategory',
-        type: 'string',
-        controlType: 'textbox'
-    },
+    // {
+    //   key: 'favourite',
+    //   labelKey: 'FAQS_UPDATE_FORM_FIELDS_DEF_FIELD_favourite',
+    //   label: 'Favourite',
+    //   type: 'boolean',
+    //   controlType: 'checkbox'
+    // },
+    // {
+    //   key: 'order',
+    //   labelKey: 'FAQS_UPDATE_FORM_FIELDS_DEF_FIELD_order',
+    //   label: 'Order',
+    //   type: 'number',
+    //   controlType: 'textbox'
+    // },
+    // {
+    //   key: 'lang',
+    //   labelKey: 'FAQS_UPDATE_FORM_FIELDS_DEF_FIELD_lang',
+    //   label: 'Lang',
+    //   type: 'string',
+    //   controlType: 'textbox'
+    // },
+    // {
+    //   key: 'category',
+    //   labelKey: 'FAQS_UPDATE_FORM_FIELDS_DEF_FIELD_category',
+    //   label: 'Category',
+    //   type: 'string',
+    //   controlType: 'textbox'
+    // },
+    // {
+    //   key: 'subcategory',
+    //   labelKey: 'FAQS_UPDATE_FORM_FIELDS_DEF_FIELD_subcategory',
+    //   label: 'Subcategory',
+    //   type: 'string',
+    //   controlType: 'textbox'
+    // },
     {
         key: 'question',
         labelKey: 'FAQS_UPDATE_FORM_FIELDS_DEF_FIELD_question',
@@ -7870,10 +8151,6 @@ var FAQS_GRID_DEF = {
     sortAllColumns: true,
     deleteAction: true,
     displayedColumns: [
-        'order',
-        'lang',
-        'category',
-        'subcategory',
         'question',
         'answer'
     ]
@@ -8108,6 +8385,10 @@ var HORAS_PROFESOR_FILTER_FORM_FIELDS_DEF = [
         type: 'hidden',
         controlType: 'hidden'
     },
+    {
+        key: 'parentTitle',
+        controlType: 'hidden'
+    }
 ];
 
 
@@ -8191,7 +8472,7 @@ var HORAS_PROFESOR_DEF = {
     dialogConfig: {
         width: '500px'
     },
-    filterInMemory: true,
+    filterInMemory: false,
     backButton: true
 };
 
@@ -8281,7 +8562,7 @@ var INSTITUCIONES_CREATE_FORM_FIELDS_DEF = [
         label: 'Nombre',
         type: 'string',
         controlType: 'textbox',
-        maxLength: 100
+        maxLength: 50
     }
 ];
 
@@ -8353,7 +8634,7 @@ var INSTITUCIONES_UPDATE_FORM_FIELDS_DEF = [
         type: 'string',
         controlType: 'textbox',
         required: true,
-        maxLength: 100
+        maxLength: 50
     }
 ];
 
@@ -8516,6 +8797,8 @@ var INSTITUCIONES_SECURITY_DEF = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__aulas_aulas_def__ = __webpack_require__("./src/app/main/content/pages/aulas/aulas.def.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__aula_alumno_aula_alumno_def__ = __webpack_require__("./src/app/main/content/pages/aula_alumno/aula_alumno.def.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__profile_component_profile_def__ = __webpack_require__("./src/app/main/content/profile/component/profile.def.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__evento_aula_evento_aula_def__ = __webpack_require__("./src/app/main/content/pages/evento_aula/evento_aula.def.ts");
+
 
 
 
@@ -8544,7 +8827,8 @@ var COMPONENTS = [
     __WEBPACK_IMPORTED_MODULE_9__horas_profesor_horas_profesor_def__["a" /* HORAS_PROFESOR_DEF */],
     __WEBPACK_IMPORTED_MODULE_10__alumno_alumno_def__["a" /* ALUMNO_DEF */],
     __WEBPACK_IMPORTED_MODULE_11__aulas_aulas_def__["a" /* AULAS_DEF */],
-    __WEBPACK_IMPORTED_MODULE_12__aula_alumno_aula_alumno_def__["a" /* AULA_ALUMNO_DEF */]
+    __WEBPACK_IMPORTED_MODULE_12__aula_alumno_aula_alumno_def__["a" /* AULA_ALUMNO_DEF */],
+    __WEBPACK_IMPORTED_MODULE_14__evento_aula_evento_aula_def__["a" /* EVENTO_AULA_DEF */]
 ];
 
 
@@ -8572,6 +8856,8 @@ var COMPONENTS = [
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__alumno_alumno_def__ = __webpack_require__("./src/app/main/content/pages/alumno/alumno.def.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__aulas_aulas_def__ = __webpack_require__("./src/app/main/content/pages/aulas/aulas.def.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__aula_alumno_aula_alumno_def__ = __webpack_require__("./src/app/main/content/pages/aula_alumno/aula_alumno.def.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__evento_aula_evento_aula_def__ = __webpack_require__("./src/app/main/content/pages/evento_aula/evento_aula.def.ts");
+
 
 
 
@@ -8662,6 +8948,11 @@ var ROUTES = [
     },
     {
         path: __WEBPACK_IMPORTED_MODULE_16__aula_alumno_aula_alumno_def__["a" /* AULA_ALUMNO_DEF */].navigation.url.split('/')[1],
+        component: __WEBPACK_IMPORTED_MODULE_2__integration_integration_component__["a" /* IntegrationComponent */],
+        canActivate: [__WEBPACK_IMPORTED_MODULE_0__modules_fwk_core_service_security_auth_guard_service__["a" /* AuthGuardService */]]
+    },
+    {
+        path: __WEBPACK_IMPORTED_MODULE_17__evento_aula_evento_aula_def__["a" /* EVENTO_AULA_DEF */].navigation.url.split('/')[1],
         component: __WEBPACK_IMPORTED_MODULE_2__integration_integration_component__["a" /* IntegrationComponent */],
         canActivate: [__WEBPACK_IMPORTED_MODULE_0__modules_fwk_core_service_security_auth_guard_service__["a" /* AuthGuardService */]]
     }
@@ -9693,11 +9984,17 @@ var PROFESORES_CREATE_FORM_FIELDS_DEF = [
         key: 'descripcion',
         labelKey: 'profesores_create_form_fields_def_field_descripcion',
         controlType: 'textbox',
-        maxLength: 100
+        maxLength: 1000
+    },
+    {
+        key: 'valorHora',
+        labelKey: 'profesores_create_form_fields_def_field_valorhora',
+        controlType: 'number',
+        min: 0
     },
     {
         key: 'foto',
-        labelKey: 'Foto',
+        labelKey: 'Foto (solo jpg)',
         controlType: 'file'
     }
 ];
@@ -9904,12 +10201,24 @@ var PROFESORES_UPDATE_FORM_FIELDS_DEF = [
         key: 'descripcion',
         labelKey: 'profesores_create_form_fields_def_field_descripcion',
         controlType: 'textbox',
-        maxLength: 100
+        maxLength: 1000
+    },
+    {
+        key: 'valorHora',
+        labelKey: 'profesores_create_form_fields_def_field_valorhora',
+        controlType: 'number',
+        min: 0
     },
     {
         key: 'foto',
-        labelKey: 'Foto',
+        labelKey: 'Foto (solo jpg)',
         controlType: 'file'
+    },
+    {
+        key: 'tieneFoto',
+        labelKey: 'Foto Cargada',
+        controlType: 'check',
+        readonly: true
     }
 ];
 
@@ -10116,7 +10425,8 @@ var PROFESORES_I18N_DEF = {
         profesores_grid_def_column_titulo: 'Título',
         profesores_grid_def_column_descripcion: 'Descripción',
         profesores_create_form_fields_def_field_titulo: 'Título',
-        profesores_create_form_fields_def_field_descripcion: 'Descripción'
+        profesores_create_form_fields_def_field_descripcion: 'Descripción',
+        profesores_create_form_fields_def_field_valorhora: 'Valor Hora'
     }
 };
 
@@ -21531,6 +21841,7 @@ var locale = {
             'ROLES': { 'TITLE': 'ROLES' },
             'FAQS': { 'TITLE': 'Faqs' },
             'SEGURIDAD': { 'TITLE': 'Seguridad' },
+            'CONFIGURACION': { 'TITLE': 'Configuracion' },
             'AULAS': { 'TITLE': 'Aulas' },
             'PROFESORES': { 'TITLE': 'Profesores' },
             'ALUMNOS': { 'TITLE': 'Productos' },
@@ -21565,31 +21876,26 @@ var navigation = [
                 'icon': 'lock',
                 'children': [
                     {
-                        'id': 'parameters',
-                        'title': 'Parametros',
-                        'translate': 'NAV.PARAMETERS.TITLE',
-                        'type': 'item',
-                        'url': '/' + __WEBPACK_IMPORTED_MODULE_0_environments_environment__["c" /* environment */].URL_PARAMETERS,
-                    },
-                    {
                         'id': 'permissions',
                         'title': 'Permisos',
                         'translate': 'NAV.PERMISSIONS.TITLE',
                         'type': 'item',
+                        'icon': 'rule',
                         'url': '/' + __WEBPACK_IMPORTED_MODULE_0_environments_environment__["c" /* environment */].URL_PERMISSION,
                     },
-                    {
-                        'id': 'roles',
-                        'title': 'Roles',
-                        'translate': 'NAV.ROLES.TITLE',
-                        'type': 'item',
-                        'url': '/' + __WEBPACK_IMPORTED_MODULE_0_environments_environment__["c" /* environment */].URL_ROLE,
-                    },
+                    // {
+                    //   'id'   : 'roles',
+                    //   'title': 'Roles',
+                    //   'translate': 'NAV.ROLES.TITLE',
+                    //   'type' : 'item',
+                    //   'url'  : '/' + environment.URL_ROLE,
+                    // },
                     {
                         'id': 'profiles',
                         'title': 'Perfiles',
                         'translate': 'NAV.PROFILES.TITLE',
                         'type': 'item',
+                        'icon': 'supervised_user_circle',
                         'url': '/' + __WEBPACK_IMPORTED_MODULE_0_environments_environment__["c" /* environment */].URL_PROFILE,
                     },
                     {
@@ -21597,13 +21903,31 @@ var navigation = [
                         'title': 'Usuarios',
                         'translate': 'NAV.USUARIOS.TITLE',
                         'type': 'item',
+                        'icon': 'groups',
                         'url': '/' + __WEBPACK_IMPORTED_MODULE_0_environments_environment__["c" /* environment */].URL_USER,
+                    },
+                ]
+            },
+            {
+                'title': 'configuracion',
+                'translate': 'NAV.CONFIGURACION.TITLE',
+                'type': 'collapse',
+                'icon': 'build',
+                'children': [
+                    {
+                        'id': 'parameters',
+                        'title': 'Parametros',
+                        'translate': 'NAV.PARAMETERS.TITLE',
+                        'type': 'item',
+                        'icon': 'list',
+                        'url': '/' + __WEBPACK_IMPORTED_MODULE_0_environments_environment__["c" /* environment */].URL_PARAMETERS,
                     },
                     {
                         'id': 'faqs',
                         'title': 'Faqs',
                         'translate': 'NAV.FAQS.TITLE',
                         'type': 'item',
+                        'icon': 'question_answer',
                         'url': '/' + __WEBPACK_IMPORTED_MODULE_0_environments_environment__["c" /* environment */].URL_FAQS,
                     }
                 ]

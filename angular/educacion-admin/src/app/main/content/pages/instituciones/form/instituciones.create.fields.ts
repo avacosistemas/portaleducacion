@@ -6,7 +6,7 @@ export const INSTITUCIONES_CREATE_FORM_FIELDS_DEF = [
     label: 'Nombre',
     type: 'string',
     controlType: 'textbox',
-    maxLength: 100
+    maxLength: 50
   }
 ];
  

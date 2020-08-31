@@ -27,6 +27,12 @@ public class ProfesorDTO extends DTOEntity<Long> {
 
 	private Double calificacion;
 
+	private String valorHora;
+
+	private String valorHoraString;
+
+	private Boolean tieneFoto;
+
 	public ProfesorDTO() {
 	}
 
@@ -156,6 +162,30 @@ public class ProfesorDTO extends DTOEntity<Long> {
 
 	public void setCalificacion(Double calificacion) {
 		this.calificacion = calificacion;
+	}
+
+	public String getValorHora() {
+		return valorHora;
+	}
+
+	public void setValorHora(String valorHora) {
+		this.valorHora = valorHora;
+	}
+
+	public String getValorHoraString() {
+		return valorHoraString;
+	}
+
+	public void setValorHoraString(String valorHoraString) {
+		this.valorHoraString = valorHoraString;
+	}
+
+	public Boolean getTieneFoto() {
+		return tieneFoto;
+	}
+
+	public void setTieneFoto(Boolean tieneFoto) {
+		this.tieneFoto = tieneFoto;
 	}
 
 }
