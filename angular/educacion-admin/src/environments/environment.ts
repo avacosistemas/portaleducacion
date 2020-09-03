@@ -6,11 +6,11 @@
 // export const PREFIX_DOMAIN_API =  'http://localhost:8080/';
 
 
-// export const PREFIX_DOMAIN_API_EDUCACION =  'http://localhost:8080/ws-rest-educacion';
-// export const PREFIX_DOMAIN_API_AUTHENTICATION =  'http://localhost:8080/ws-rest-authentication';
+export const PREFIX_DOMAIN_API_EDUCACION =  'http://localhost:8080/ws-rest-educacion';
+export const PREFIX_DOMAIN_API_AUTHENTICATION =  'http://localhost:8080/ws-rest-authentication';
 
-export const PREFIX_DOMAIN_API_EDUCACION =  'http://ec2-18-215-75-115.compute-1.amazonaws.com:8080/ws-rest-educacion';
-export const PREFIX_DOMAIN_API_AUTHENTICATION =  'http://ec2-18-215-75-115.compute-1.amazonaws.com:8080/ws-rest-authentication';
+// export const PREFIX_DOMAIN_API_EDUCACION =  'http://ec2-18-215-75-115.compute-1.amazonaws.com:8080/ws-rest-educacion';
+// export const PREFIX_DOMAIN_API_AUTHENTICATION =  'http://ec2-18-215-75-115.compute-1.amazonaws.com:8080/ws-rest-authentication';
 
 export const environment = {
     localAuth: true,
@@ -31,7 +31,7 @@ export const environment = {
     USER_VALIDATION_ADD_URL : PREFIX_DOMAIN_API_AUTHENTICATION + '/validationAdd',
     USER_VALIDATION_EDIT_URL  : PREFIX_DOMAIN_API_AUTHENTICATION + '/validationEdit',
 
-    /* Config General URl*/
+        /* Config General URl*/
     URL_ROOT: '',
     URL_LOGIN: '/auth/login',
     // Business
@@ -46,7 +46,8 @@ export const environment = {
     URL_PERMISSION : 'permisos',
     URL_PROFILE : 'perfiles',
     URL_ROLE : 'roles',
-    URL_USER : 'usuarios'
+    URL_USER : 'usuarios',
+    URL_PASSWORD_UPDATE: 'password'
 
 };
 

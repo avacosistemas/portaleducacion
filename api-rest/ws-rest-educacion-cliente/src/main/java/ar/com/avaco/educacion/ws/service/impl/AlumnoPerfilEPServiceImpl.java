@@ -10,6 +10,7 @@ import java.util.stream.DoubleStream;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import ar.com.avaco.commons.exception.BusinessException;
@@ -115,15 +116,28 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	}
 	
 	@Override
-	public AulaAlumnoPortalDTO getAula(Long idClase) {
-		Aula aula = aulaService.get(idClase);
-		AulaAlumnoPortalDTO apdto = new AulaAlumnoPortalDTO(aula);
+	public AulaAlumnoPortalDTO getAula(Long idClase, Long idAlumno) {
+		AulaAlumno aulaAlumno = aulaAlumnoService.getByIdAulaIdAlumno(idClase, idAlumno);
+		AulaAlumnoPortalDTO apdto = new AulaAlumnoPortalDTO(aulaAlumno);
 		return apdto;
 	}
 
 	@Override
-	public void calificarAula(Long idAula, Long id, PuntuacionDTO puntuacionDTO) {
+	public void calificarAula(Long idAula, Long id, PuntuacionDTO puntuacionDTO) throws BusinessException {
 		AulaAlumno aa = aulaAlumnoService.getByIdAulaIdAlumno(idAula, id);
+		
+		if (aa.getCalificacion() != null) {
+			throw new BusinessException("El aula ya cuenta con una calificación.");
+		}
+		
+		if (puntuacionDTO.getPuntuacion() == null || puntuacionDTO.getPuntuacion() > 5 || puntuacionDTO.getPuntuacion() < 1) {
+			throw new BusinessException("La calificación debe estar entre 1 y 5.");
+		}
+
+		if (StringUtils.isBlank(puntuacionDTO.getComentario()) || puntuacionDTO.getComentario().length() > 200 || puntuacionDTO.getComentario().length() < 2) {
+			throw new BusinessException("El comentario debe tener entre 2 y 200 caracteres.");
+		}
+		
 		aa.setCalificacion(puntuacionDTO.getPuntuacion().doubleValue());
 		aa.setComentario(puntuacionDTO.getComentario());
 		aulaAlumnoService.update(aa);
@@ -178,5 +192,5 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	public void setProfesorService(ProfesorService profesorService) {
 		this.profesorService = profesorService;
 	}
-	
+
 }

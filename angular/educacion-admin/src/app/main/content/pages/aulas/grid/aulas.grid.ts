@@ -89,7 +89,7 @@ export const AULAS_GRID_DEF = {
           parentTitle: 'idString'
         }
       },
-      icon: 'notificationsActive'
+      icon: 'notifications'
     }
   ]
 };

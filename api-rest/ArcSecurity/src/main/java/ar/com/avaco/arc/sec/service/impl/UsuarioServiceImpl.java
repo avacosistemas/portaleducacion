@@ -157,10 +157,10 @@ public class UsuarioServiceImpl extends NJBaseService<Long, Usuario, UsuarioRepo
 	}
 
 	private void notifyPasswordNewUser(Usuario user, String tmpass) {
-		String subject = "From - Inversión Colaborativa<br><br>";
+		String subject = "TeachOnline Admin";
 		StringBuilder msg = new StringBuilder("¡Bienvenido "); 
 		msg.append(user.getNombreApellido()); 
-		msg.append(" a ! <br>");
+		msg.append(" a TeachOnline Admin! <br>");
 		msg.append("Se le ha asignado una contraseña temporal a su usuario ");
 		msg.append(user.getUsername());
 		msg.append(".<br>");
@@ -172,7 +172,7 @@ public class UsuarioServiceImpl extends NJBaseService<Long, Usuario, UsuarioRepo
 
 	
 	private void notifyPassword(Usuario user, String tmppas) {
-		String subject = "From - Inversión Colaborativa<br><br>";
+		String subject = "TeachOnline Admin";
 		StringBuilder msg = new StringBuilder("Estimado "); 
 		msg.append(user.getNombreApellido()); 
 		msg.append("<br>Se le ha asignado una contraseña temporal a su usuario ");

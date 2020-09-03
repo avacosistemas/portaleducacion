@@ -19,7 +19,7 @@ export const navigation = [
                       'title': 'Permisos',
                       'translate': 'NAV.PERMISSIONS.TITLE',
                       'type' : 'item',
-                      'icon' : 'rule',
+                      'icon' : 'traffic',
                       'url'  : '/' + environment.URL_PERMISSION,
                     },
                     // {
@@ -34,7 +34,7 @@ export const navigation = [
                       'title': 'Perfiles',
                       'translate': 'NAV.PROFILES.TITLE',
                       'type' : 'item',
-                      'icon' : 'supervised_user_circle',
+                      'icon' : 'groups',
                       'url'  : '/' + environment.URL_PROFILE,
                     },
                     {
@@ -42,7 +42,7 @@ export const navigation = [
                       'title': 'Usuarios',
                       'translate': 'NAV.USUARIOS.TITLE',
                       'type' : 'item',
-                      'icon' : 'groups',
+                      'icon' : 'person',
                       'url'  : '/' + environment.URL_USER,
                     },
 
@@ -51,7 +51,7 @@ export const navigation = [
 
 
             {
-                'title' : 'configuracion',
+                'title' : 'Configuración',
                 'translate': 'NAV.CONFIGURACION.TITLE',
                 'type' : 'collapse',
                 'icon' : 'build',

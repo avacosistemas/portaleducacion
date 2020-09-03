@@ -22,10 +22,10 @@ public interface AlumnoPerfilEPService extends CRUDEPService<Long, AlumnoPerfilD
 
 	List<AulaAlumnoPortalDTO> listarMisAulas(Long id);
 
-	AulaAlumnoPortalDTO getAula(Long idClase);
-
 	List<ComentarioDTO> getComentariosAula(Long idClase);
 
-	void calificarAula(Long idClase, Long id, PuntuacionDTO puntuacionDTO);
+	void calificarAula(Long idClase, Long id, PuntuacionDTO puntuacionDTO) throws BusinessException;
+
+	AulaAlumnoPortalDTO getAula(Long idClase, Long idAlumno);
 
 }

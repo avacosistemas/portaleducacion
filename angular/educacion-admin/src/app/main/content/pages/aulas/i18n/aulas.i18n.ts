@@ -43,6 +43,7 @@ export const AULAS_I18N_DEF = {
     aulas_grid_def_column_nombreProfesor: 'Profesor',
     aulas_create_form_fields_def_field_nombreProfesor: 'Profesor',
     aulas_grid_def_button_action_alumnos: 'Gestionar Alumnos',
-    aulas_grid_def_column_estado: 'Estado'
+    aulas_grid_def_column_estado: 'Estado',
+    aulas_grid_def_button_action_eventos: 'Eventos'
   }
 };

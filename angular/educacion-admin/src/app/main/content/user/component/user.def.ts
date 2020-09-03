@@ -35,7 +35,7 @@ export const USER_DEF: CrudDef = {
     grid: {
             columnsDef: [
                           {columnNameKey: 'Id', columnDef: 'id'},
-                          {columnNameKey: 'Nombre de Usuario', columnDef: 'username'},
+                          {columnNameKey: 'Username', columnDef: 'username'},
                           {columnNameKey: 'Nombre', columnDef: 'name'},
                           {columnNameKey: 'Apellido', columnDef: 'lastname'},
                           {columnNameKey: 'Email', columnDef: 'email'}
@@ -51,7 +51,7 @@ export const USER_DEF: CrudDef = {
         filter: USER_SEARCH_FIELDS,
         create: [{
               key: 'username',
-              labelKey: 'Nombre de Usuario',
+              labelKey: 'Username',
               required: true,
               requiredMessage: 'El campo nombre de usuario es requerido',
               controlType: 'textbox',

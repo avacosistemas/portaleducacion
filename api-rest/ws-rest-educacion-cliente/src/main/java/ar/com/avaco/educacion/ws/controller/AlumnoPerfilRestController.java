@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.ws.dto.AlumnoPerfilDTO;
 import ar.com.avaco.educacion.ws.dto.AulaAlumnoPortalDTO;
 import ar.com.avaco.educacion.ws.dto.ComentarioDTO;
@@ -85,12 +86,12 @@ public class AlumnoPerfilRestController extends AbstractDTORestController<Alumno
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/alumno/{id}/detalleclase/{idClase}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> getMiClases(@PathVariable("id") Long id, @PathVariable("idClase") Long idClase) throws Exception {
+	@RequestMapping(value = "/alumno/{idAlumno}/detalleclase/{idClase}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> getMiClases(@PathVariable("idAlumno") Long idAlumno, @PathVariable("idClase") Long idClase) throws Exception {
 		Long idCliente = ClienteUtils.getClienteLogueadoId();
 		JSONResponse response = new JSONResponse();
-		if (idCliente.equals(id)) {
-			AulaAlumnoPortalDTO aulaAlumnoDTO = this.service.getAula(idClase);
+		if (idCliente.equals(idAlumno)) {
+			AulaAlumnoPortalDTO aulaAlumnoDTO = this.service.getAula(idClase, idAlumno);
 			response.setData(aulaAlumnoDTO);
 			response.setStatus(JSONResponse.OK);
 		} else {
@@ -132,7 +133,7 @@ public class AlumnoPerfilRestController extends AbstractDTORestController<Alumno
 
 	@RequestMapping(value = "/alumno/{id}/puntuacion/{idAula}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> calificarClase(@PathVariable("id") Long id, @PathVariable("idAula") Long idAula, 
-			@RequestBody PuntuacionDTO puntuacionDTO) throws Exception {
+			@RequestBody PuntuacionDTO puntuacionDTO) throws BusinessException  {
 		Long idCliente = ClienteUtils.getClienteLogueadoId();
 		JSONResponse response = new JSONResponse();
 		if (idCliente.equals(id)) {
