@@ -156,6 +156,10 @@ export class FuseToolbarComponent extends AbstractComponent
         this.authService.logout();
     }
 
+    goPasswordUpdate(){
+       // this.navigate(environment.URL_PASSWORD_UPDATE, undefined);
+    }
+
     goUserDetails(){
         // this.navigate(environment.URL_CLIENTE_DETAIL, undefined);
         this.showDialogProfile();
