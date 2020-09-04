@@ -112,7 +112,7 @@ export class FormService {
         if (action.actionType === 'notification'){
           if (action.input.messageKey){
             action.input.message = i18n.translate(action.input.messageKey);
-          } 
+          }
           if (action.input.modalNameKey){
             action.input.modalName = i18n.translate(action.input.modalNameKey);
           }
@@ -126,7 +126,7 @@ export class FormService {
         if (action.gridModal){
           this.setUpGridFromI18n(i18n, action.gridModal.gridDef);
         }
-        
+
         if (action.confirm && typeof action.confirm === 'object'){
           if (action.confirm.messageKey) {
             action.confirm.message = i18n.translate(action.confirm.messageKey);
@@ -202,7 +202,7 @@ export class FormService {
         }
         this.setUpPickListTextFromI18n(i18n, element);
         this.setUpDisclaimerTextFromI18n(i18n, element);
-      }); 
+      });
     }
   }
   setUpDisclaimerTextFromI18n(i18n: I18n, element: any): any {
@@ -261,11 +261,11 @@ export class FormService {
       if (existField === undefined || !existField){
         console.warn('el tipo de campo -> ' + field.controlType + ' no se encuentra implementado en el fwk');
         return false;
-      }  
+      }
       return true;
     });
     fields.forEach(field => {
-        
+
         if (field.options === undefined) {
           field.options = {};
         }
@@ -283,7 +283,7 @@ export class FormService {
         if (field.controlType === 'checkbox' && (field.value === undefined || field.value === null)) {
           field.value = false;
         }
-      
+
         const value = {
           value: field.value !== undefined ? field.value : '',
           disabled: field.disabled
@@ -348,8 +348,8 @@ export class FormService {
   }
 
   private setUpWsDef(field, form: FormGroup){
-    if ((field.controlType === CONTROL_TYPE.select || 
-          field.controlType === CONTROL_TYPE.autocomplete || 
+    if ((field.controlType === CONTROL_TYPE.select ||
+          field.controlType === CONTROL_TYPE.autocomplete ||
           field.controlType === CONTROL_TYPE.picklist) &&
             field.options.fromWs) {
       const fromWs: WsDef = field.options.fromWs;
@@ -460,9 +460,9 @@ export class FormService {
           entity[element.key] = false;
         }
         if (element.controlType === 'datepicker' && entity[element.key] && entity[element.key].format !== undefined) {
-          
+
         }
-        if (element.controlType === 'number' && 
+        if (element.controlType === 'number' &&
             (entity[element.key] !== '' && entity[element.key] !== undefined && entity[element.key] !== null)){
           entity[element.key] = Number(entity[element.key]);
           element.value = Number(element.value);
@@ -499,10 +499,10 @@ export class FormService {
         }
         if (element.controlType === 'float' && element.options) {
             const delim = element.options.delim ? element.options.delim : ',';
-            const outputDelim = element.options.outputFormatDelim ? element.options.outputFormatDelim : '.'; 
+            const outputDelim = element.options.outputFormatDelim ? element.options.outputFormatDelim : '.';
             entity[element.key] =  entity[element.key].replace(delim, outputDelim);
         }
-        if (element.controlType === 'number' && 
+        if (element.controlType === 'number' &&
             (entity[element.key] !== '' && entity[element.key] !== undefined && entity[element.key] !== null)){
           entity[element.key] = Number(entity[element.key]);
           element.value = Number(element.value);
@@ -593,7 +593,7 @@ export class FormService {
 
     });
   }
-  
+
   // Customs Validators
   private hideField(form: FormGroup, field) {
     if (field.controlType !== HIDDEN) {
@@ -625,7 +625,7 @@ export class FormService {
       this.updateValidators(form, field);
     }
   }
-  
+
   private changeRemoveLengths(form, field){
     if (field.length || field.minLength || field.maxLength){
       field.length = undefined;
@@ -673,8 +673,8 @@ export class FormService {
           (def.validation === undefined && field.validation !== undefined)){
       field.validation = def.validation;
     }else if (def.validation !== undefined &&  field.validation !== undefined) {
-      if ((def.validation.regexKey !== field.validation.regexKey) || 
-            (def.validation.regex !== field.validation.regex) || 
+      if ((def.validation.regexKey !== field.validation.regexKey) ||
+            (def.validation.regex !== field.validation.regex) ||
               (def.validation.errorMessageKey !== field.validation.errorMessageKey)){
         field.validation = def.validation;
         update = true;
@@ -697,7 +697,7 @@ export class FormService {
       this.updateValidators(form, field);
     }
   }
-  
+
   private updateValidators(form, field){
     form.controls[field.key].setValidators(this.formValidatorService.getValidators(field));
     form.controls[field.key].updateValueAndValidity();
@@ -785,7 +785,7 @@ export class FormService {
     }
     return field;
   }
-  
+
   setUpBehaviorTextFromI18n(i18n: I18n, fieldBehavior: DynamicFieldBehavior[]): any {
     const repeat = (list, i18nP: I18n) => {
       list.forEach(r => {
@@ -832,5 +832,5 @@ export class FormService {
     form.controls[field.key].enable();
   }
 
-  
+
 }

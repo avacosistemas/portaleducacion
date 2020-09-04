@@ -20,8 +20,8 @@ export abstract class CrudService<E extends Entity> extends HttpService implemen
         /** GET Es from the server */
     findAll (filterEntity = null, fieldsDef = null, filterInMemory = true, page: {page: number, pageSize: number} = null): Observable<E[]> {
         const observable = new Observable<any> (obs => {
-            if (filterEntity && filterEntity !== null && 
-                fieldsDef && fieldsDef !== null){ 
+            if (filterEntity && filterEntity !== null &&
+                fieldsDef && fieldsDef !== null){
                 if (filterInMemory){
                     this.httpGet(this.baseUrl, this.httpOptions).subscribe(entities => {
                         entities = this.applyMemoryFilter(entities, filterEntity, fieldsDef);
@@ -34,7 +34,7 @@ export abstract class CrudService<E extends Entity> extends HttpService implemen
                     };
                     const params = this.getParametersToUrlAndPage(filterEntity, page);
                     if (params) {
-                        options.params = params; 
+                        options.params = params;
                     }
                     this.httpGet(this.baseUrl, options).subscribe(entities => {
                         obs.next(entities);
@@ -46,7 +46,7 @@ export abstract class CrudService<E extends Entity> extends HttpService implemen
                     };
                     const params = this.getParametersToUrl(filterEntity);
                     if (params) {
-                        options.params = params; 
+                        options.params = params;
                     }
                     this.httpGet(this.baseUrl, options).subscribe(entities => {
                         obs.next(entities);
@@ -64,7 +64,7 @@ export abstract class CrudService<E extends Entity> extends HttpService implemen
         if (filterEntity === undefined) {
             return undefined;
         }
-        const props = Object.getOwnPropertyNames(filterEntity); 
+        const props = Object.getOwnPropertyNames(filterEntity);
         let params = new HttpParams();
         if (page !== null && page !== undefined) {
             Object.getOwnPropertyNames(page).forEach( prop => {
@@ -73,7 +73,7 @@ export abstract class CrudService<E extends Entity> extends HttpService implemen
         }
         if (props && props.length > 0){
             // Initialize Params Object
-            
+
             const filter = {};
             Object.getOwnPropertyNames(filterEntity).forEach( prop => {
                 const value = filterEntity[prop];
@@ -88,14 +88,14 @@ export abstract class CrudService<E extends Entity> extends HttpService implemen
             });
 
             // return params;
-        } 
+        }
         return params;
     }
     getParametersToUrl(filterEntity): HttpParams {
         if (filterEntity === undefined) {
             return undefined;
         }
-        const props = Object.getOwnPropertyNames(filterEntity); 
+        const props = Object.getOwnPropertyNames(filterEntity);
         if (props && props.length > 0){
             // Initialize Params Object
             let params = new HttpParams();
@@ -106,7 +106,7 @@ export abstract class CrudService<E extends Entity> extends HttpService implemen
                 }
             });
             return params;
-        } 
+        }
         return undefined;
     }
 
