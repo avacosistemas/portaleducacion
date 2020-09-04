@@ -15,31 +15,26 @@ export const navigation = [
                 'icon' : 'lock',
                 'children' : [
                     {
-                        'id'   : 'parameters',
-                        'title': 'Parametros',
-                        'translate': 'NAV.PARAMETERS.TITLE',
-                        'type' : 'item',
-                        'url'  : '/' + environment.URL_PARAMETERS,
-                    },
-                    {
                       'id'   : 'permissions',
                       'title': 'Permisos',
                       'translate': 'NAV.PERMISSIONS.TITLE',
                       'type' : 'item',
+                      'icon' : 'traffic',
                       'url'  : '/' + environment.URL_PERMISSION,
                     },
-                    {
-                      'id'   : 'roles',
-                      'title': 'Roles',
-                      'translate': 'NAV.ROLES.TITLE',
-                      'type' : 'item',
-                      'url'  : '/' + environment.URL_ROLE,
-                    },
+                    // {
+                    //   'id'   : 'roles',
+                    //   'title': 'Roles',
+                    //   'translate': 'NAV.ROLES.TITLE',
+                    //   'type' : 'item',
+                    //   'url'  : '/' + environment.URL_ROLE,
+                    // },
                     {
                       'id'   : 'profiles',
                       'title': 'Perfiles',
                       'translate': 'NAV.PROFILES.TITLE',
                       'type' : 'item',
+                      'icon' : 'groups',
                       'url'  : '/' + environment.URL_PROFILE,
                     },
                     {
@@ -47,18 +42,40 @@ export const navigation = [
                       'title': 'Usuarios',
                       'translate': 'NAV.USUARIOS.TITLE',
                       'type' : 'item',
+                      'icon' : 'person',
                       'url'  : '/' + environment.URL_USER,
+                    },
+
+                ]
+            },
+
+
+            {
+                'title' : 'Configuración',
+                'translate': 'NAV.CONFIGURACION.TITLE',
+                'type' : 'collapse',
+                'icon' : 'build',
+                'children' : [
+                    {
+                        'id'   : 'parameters',
+                        'title': 'Parametros',
+                        'translate': 'NAV.PARAMETERS.TITLE',
+                        'type' : 'item',
+                        'icon' : 'list',
+                        'url'  : '/' + environment.URL_PARAMETERS,
                     },
                     {
                       'id'   : 'faqs',
                       'title': 'Faqs',
                       'translate': 'NAV.FAQS.TITLE',
                       'type' : 'item',
+                      'icon' : 'question_answer',
                       'url'  : '/' + environment.URL_FAQS,
                     }
 
                 ]
             },
+
             {
                 'id'   : 'aulas',
                 'title': 'Aulas',

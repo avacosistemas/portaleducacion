@@ -37,10 +37,6 @@ export const FAQS_GRID_DEF = {
   sortAllColumns: true,
   deleteAction: true,
   displayedColumns: [
-    'order',
-    'lang',
-    'category',
-    'subcategory',
     'question',
     'answer'
   ]

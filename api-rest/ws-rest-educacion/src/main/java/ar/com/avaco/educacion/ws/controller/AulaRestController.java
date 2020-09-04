@@ -16,11 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
-import ar.com.avaco.educacion.ws.dto.AulaAlumnoDTO;
 import ar.com.avaco.educacion.ws.dto.AulaDTO;
 import ar.com.avaco.educacion.ws.dto.AulaListadoDTO;
-import ar.com.avaco.educacion.ws.dto.AulaProfesorDTO;
 import ar.com.avaco.educacion.ws.dto.CompraAulaDTO;
+import ar.com.avaco.educacion.ws.dto.EventoBBBDTO;
 import ar.com.avaco.educacion.ws.dto.EventoClaseDTO;
 import ar.com.avaco.educacion.ws.service.AulaEPService;
 import ar.com.avaco.ws.rest.controller.AbstractDTORestController;
@@ -92,7 +91,16 @@ public class AulaRestController extends AbstractDTORestController<AulaDTO, Long,
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);	
 	}
-		
+
+	@RequestMapping(value = "/event/aula/registroEventos", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<JSONResponse> listarEventoClase() throws BusinessException {
+		List<EventoBBBDTO> list = service.listarEventos();
+		JSONResponse response = new JSONResponse();
+		response.setData(list);
+		response.setStatus(JSONResponse.OK);	
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);	
+	}
+	
 	//Service
 	@Resource(name = "aulaEPService")
 	public void setService(AulaEPService aulaEPService) {

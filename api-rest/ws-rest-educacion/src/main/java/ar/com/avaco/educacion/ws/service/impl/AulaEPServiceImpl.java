@@ -3,6 +3,7 @@ package ar.com.avaco.educacion.ws.service.impl;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,7 @@ import ar.com.avaco.educacion.ws.dto.AulaDTO;
 import ar.com.avaco.educacion.ws.dto.AulaListadoDTO;
 import ar.com.avaco.educacion.ws.dto.AulaProfesorDTO;
 import ar.com.avaco.educacion.ws.dto.CompraAulaDTO;
+import ar.com.avaco.educacion.ws.dto.EventoBBBDTO;
 import ar.com.avaco.educacion.ws.dto.EventoClaseDTO;
 import ar.com.avaco.educacion.ws.dto.eventData.EventDataBBBDTO;
 import ar.com.avaco.educacion.ws.service.AulaEPService;
@@ -200,4 +202,12 @@ public class AulaEPServiceImpl extends CRUDEPBaseService<Long, AulaDTO, Aula, Au
 		return null;
 	}
 
+	@Override
+	public List<EventoBBBDTO> listarEventos() {
+		List<AulaEventos> eventos = this.aulaEventoService.list();
+		List<EventoBBBDTO> eventosDTO = new ArrayList<>();
+		eventos.stream().sorted(Comparator.comparing(AulaEventos::getFecha)).forEach(x -> eventosDTO.add(new EventoBBBDTO(x)));;
+		return eventosDTO;
+	}
+	
 }

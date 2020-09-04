@@ -19,14 +19,18 @@ import java.util.Random;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.text.StringEscapeUtils;
-import org.w3c.dom.Document;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -773,6 +777,10 @@ public class BigBlueButtonApi {
 	// getURL() -- fetch a URL and return its contents as a String
 	//
 	public static String getURL(String url) {
+
+		
+		
+		
 		StringBuffer response = null;
 		try {
 			URL u = new URL(url);

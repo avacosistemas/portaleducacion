@@ -62,7 +62,8 @@ export const AULAS_GRID_DEF = {
     'nombreInstitucion',
     'dia',
     'horaString',
-    'estado'
+    'estado',
+    'calificacion'
   ],
   actions: [
     {
@@ -77,6 +78,18 @@ export const AULAS_GRID_DEF = {
         }
       },
       icon: 'group'
+    },
+    {
+      actionNameKey: 'aulas_grid_def_button_action_eventos',
+      actionType: 'redirect',
+      redirect: {
+        url: '/eventoAula',
+        querystring: {
+          idAula : 'id',
+          parentTitle: 'idString'
+        }
+      },
+      icon: 'notifications'
     }
   ]
 };

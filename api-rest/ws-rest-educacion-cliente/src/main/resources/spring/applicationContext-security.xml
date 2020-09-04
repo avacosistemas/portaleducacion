@@ -14,7 +14,7 @@
 
 		<intercept-url pattern="/profesor/miperfil/*" method="GET" access="isAuthenticated()" />
 		<intercept-url pattern="/profesor/miperfil/*" method="PUT" access="isAuthenticated()" />
-		<intercept-url pattern="/profesor/preguntas/*" method="GET" access="isAuthenticated()" />
+		<intercept-url pattern="/profesor/preguntas/*" method="GET" access="permitAll" />
 		<intercept-url pattern="/profesor/responder/*" method="PUT" access="isAuthenticated()" />
 		<intercept-url pattern="/profesor/misclases/*" method="GET" access="isAuthenticated()" />
 		<intercept-url pattern="/profesor/*/detalleclase/*" method="GET" access="isAuthenticated()" />

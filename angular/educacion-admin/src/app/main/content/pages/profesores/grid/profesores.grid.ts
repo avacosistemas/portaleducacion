@@ -49,6 +49,10 @@ export const PROFESORES_GRID_DEF = {
     {
       columnDef: 'estado',
       columnNameKey: 'Estado'
+    },
+    {
+      columnDef: 'calificacion',
+      columnNameKey: 'Calificacion'
     }
   ],
   sortAllColumns: true,
@@ -58,7 +62,8 @@ export const PROFESORES_GRID_DEF = {
     'username',
     'email',
     'telefonoMovil',
-    'estado'
+    'estado',
+    'calificacion'
   ],
   actions: [
     {

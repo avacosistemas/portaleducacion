@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Type;
+
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
 import ar.com.avaco.educacion.domain.entities.cliente.TipoCliente;
 
@@ -12,25 +14,29 @@ import ar.com.avaco.educacion.domain.entities.cliente.TipoCliente;
 @Table(name = "ALUMNO")
 @AttributeOverride(name = "id", column = @Column(name = "ID_ALUMNO"))
 public class Alumno extends Cliente {
-	
+
 	/** serializacion */
 	private static final long serialVersionUID = 939136778257772228L;
 
-	@OneToMany(targetEntity= HorasAlumno.class, mappedBy="alumno", cascade=CascadeType.MERGE)
-    private Set<HorasAlumno> horasDispAlumo = new HashSet<>();
-	
-	@OneToMany(targetEntity= Compra.class, mappedBy="alumno", cascade=CascadeType.MERGE)
-    private Set<Compra> compras = new HashSet<>();
-	
-	@OneToMany(targetEntity= PreguntaRespuesta.class, mappedBy="alumno", cascade=CascadeType.MERGE)
-    private Set<PreguntaRespuesta> preguntasRespuestas = new HashSet<>();
+	@OneToMany(targetEntity = HorasAlumno.class, mappedBy = "alumno", cascade = CascadeType.MERGE)
+	private Set<HorasAlumno> horasDispAlumo = new HashSet<>();
+
+	@OneToMany(targetEntity = Compra.class, mappedBy = "alumno", cascade = CascadeType.MERGE)
+	private Set<Compra> compras = new HashSet<>();
+
+	@OneToMany(targetEntity = PreguntaRespuesta.class, mappedBy = "alumno", cascade = CascadeType.MERGE)
+	private Set<PreguntaRespuesta> preguntasRespuestas = new HashSet<>();
 
 	@ManyToOne(optional = true)
-    @JoinColumn(name = "ID_INSTITUCION")
+	@JoinColumn(name = "ID_INSTITUCION")
 	private Institucion institucion;
 
 	@ManyToMany(mappedBy = "alumnos", fetch = FetchType.LAZY)
 	Set<Aula> aulas;
+
+	@Column(name = "FOTO", nullable = true)
+	@Type(type = "org.hibernate.type.BinaryType")
+	private byte foto[];
 
 	public Alumno() {
 		this.setTipoCliente(TipoCliente.ALUMNO);
@@ -76,6 +82,15 @@ public class Alumno extends Cliente {
 		this.preguntasRespuestas = preguntasRespuestas;
 	}
 
-	//TODO Agregar hashCode, equals y toString cuando se completen todos los atributos
-	
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
+	// TODO Agregar hashCode, equals y toString cuando se completen todos los
+	// atributos
+
 }

@@ -23,12 +23,16 @@ export class AuthService extends HttpService {
 
   logout() {
     this.spinnerService.getControlGlobalSpinner().show();
-    this.genericHttpService.basicPost(environment.URL_LOGOUT_API, {}).subscribe(() => {
-      this.localStorageService.remove(USER_DATA);
+    this.localStorageService.remove(USER_DATA);
       this.localStorageService.cleanUserSession();
       window.location.href = environment.URL_LOGIN;
       this.spinnerService.getControlGlobalSpinner().hide();
-    });
+    // this.genericHttpService.basicPost(environment.URL_LOGOUT_API, {}).subscribe(() => {
+    //   this.localStorageService.remove(USER_DATA);
+    //   this.localStorageService.cleanUserSession();
+    //   window.location.href = environment.URL_LOGIN;
+    //   this.spinnerService.getControlGlobalSpinner().hide();
+    // });
   }
 
   isTokenExpired(): Observable<any> {

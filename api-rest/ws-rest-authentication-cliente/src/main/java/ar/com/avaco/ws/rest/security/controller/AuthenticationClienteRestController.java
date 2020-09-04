@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.WebRequest;
 
 import ar.com.avaco.model.ClienteUserDetailsDTO;
+import ar.com.avaco.ws.rest.dto.ErrorResponse;
 import ar.com.avaco.ws.rest.dto.JwtAuthenticationRequest;
 import ar.com.avaco.ws.rest.dto.JwtAuthenticationResponse;
 import ar.com.avaco.ws.rest.security.exception.AuthenticationException;
@@ -37,10 +40,14 @@ public class AuthenticationClienteRestController {
 	private JwtTokenUtil jwtTokenUtil;
 
 	private ClienteEPPortalService clienteEPService;
-
+	
+	private static final String CHANGE_PASSWORD_REQUIRED = "CHANGE_PASSWORD_REQUIRED";
+	
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest)
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest, HttpServletRequest request)
 			throws AuthenticationException {
+		
+		request.setAttribute("userNameToAuth", authenticationRequest.getUsername());
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
 		// Reload password post-security so we can generate the token
@@ -81,6 +88,35 @@ public class AuthenticationClienteRestController {
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
 	}
 
+	@ExceptionHandler(CredentialsExpiredException.class)
+	public ResponseEntity<ErrorResponse> subhandleException(final CredentialsExpiredException ex,WebRequest wr) {
+		ex.printStackTrace();
+		
+		String tempUserName=(String) wr.getAttribute("userNameToAuth",0);
+		final UserDetails userDetails = clienteEPService.loadUserByUsername(tempUserName);
+		final String token = jwtTokenUtil.generateToken(userDetails);
+		
+        return new ResponseEntity<ErrorResponse>(getResponse(ex, CHANGE_PASSWORD_REQUIRED, token), HttpStatus.CONFLICT);
+	}
+	
+	private ErrorResponse getResponse(final Exception ex,String status, String token) {
+		ErrorResponse response = getErrorResponse(ex);
+		response.setData(new JwtAuthenticationResponse(token));
+		response.setStatus(status);
+		return response;
+	}
+
+	private ErrorResponse getErrorResponse(final Exception ex) {
+		ErrorResponse response = new ErrorResponse();
+		if(ex.getMessage() != null && !ex.getMessage().isEmpty()) {
+			response.setMessage(ex.getMessage());
+		}
+		
+		if(ex.getCause() != null) {
+			response.setError(ex.getCause().getMessage());			
+		}
+		return response;
+	}
 	/**
 	 * Authenticates the user. If something is wrong, an
 	 * {@link AuthenticationException} will be thrown
@@ -95,6 +131,8 @@ public class AuthenticationClienteRestController {
 			throw new AuthenticationException("ClienteDTO is disabled!", e);
 		} catch (BadCredentialsException e) {
 			throw new AuthenticationException("Bad credentials!", e);
+		} catch (CredentialsExpiredException e) {
+			throw new CredentialsExpiredException("Credentials Expired!", e);
 		}
 	}
 

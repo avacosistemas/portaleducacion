@@ -31,7 +31,7 @@ public class AulaAlumno extends ar.com.avaco.arc.core.domain.Entity<Long> {
 	private Alumno alumno;
 
 	@Column(nullable = true, name = "CALIFICACION")
-	private Long calificacion;
+	private Double calificacion;
 
 	@Column(nullable = true, name = "COMENTARIO")
 	private String comentario;
@@ -52,11 +52,11 @@ public class AulaAlumno extends ar.com.avaco.arc.core.domain.Entity<Long> {
 		this.alumno = alumno;
 	}
 
-	public Long getCalificacion() {
+	public Double getCalificacion() {
 		return calificacion;
 	}
 
-	public void setCalificacion(Long calificacion) {
+	public void setCalificacion(Double calificacion) {
 		this.calificacion = calificacion;
 	}
 

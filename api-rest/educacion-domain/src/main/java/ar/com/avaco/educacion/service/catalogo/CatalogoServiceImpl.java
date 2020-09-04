@@ -79,7 +79,7 @@ public class CatalogoServiceImpl implements CatalogoService {
 		
 		List<Aula> aulasByProfesor = aulaRepo.findAllByProfesoresIdIn(idProfesor);
 		
-		Integer calificacionTotal = aulasByProfesor.stream().map(aula->aula.getCalificacion()).collect(Collectors.summingInt(Integer::intValue));
+		Double calificacionTotal = aulasByProfesor.stream().map(aula->aula.getCalificacion()).collect(Collectors.summingDouble(Double::doubleValue));
 
 		double promedioCalificacion = (double) (calificacionTotal / aulasByProfesor.size());
 		

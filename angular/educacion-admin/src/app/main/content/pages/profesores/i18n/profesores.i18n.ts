@@ -50,6 +50,7 @@ export const PROFESORES_I18N_DEF = {
     profesores_grid_def_column_titulo: 'Título',
     profesores_grid_def_column_descripcion: 'Descripción',
     profesores_create_form_fields_def_field_titulo: 'Título',
-    profesores_create_form_fields_def_field_descripcion: 'Descripción'
+    profesores_create_form_fields_def_field_descripcion: 'Descripción',
+    profesores_create_form_fields_def_field_valorhora: 'Valor Hora'
   }
 };

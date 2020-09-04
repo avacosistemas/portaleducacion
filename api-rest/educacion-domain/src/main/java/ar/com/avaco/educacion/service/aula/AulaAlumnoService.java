@@ -18,5 +18,4 @@ public interface AulaAlumnoService extends NJService<Long, AulaAlumno> {
 
 	AulaAlumno getByIdAulaIdAlumno(Long idClase, Long id);
 
-
 }

@@ -20,7 +20,7 @@ public class AulaProfesorPortalDTO extends DTOEntity<Long> {
 
 	private String hora;
 
-	private Integer calificacion;
+	private Double calificacion;
 
 	private String estado;
 
@@ -88,11 +88,11 @@ public class AulaProfesorPortalDTO extends DTOEntity<Long> {
 		this.hora = hora;
 	}
 
-	public Integer getCalificacion() {
+	public Double getCalificacion() {
 		return calificacion;
 	}
 
-	public void setCalificacion(Integer calificacion) {
+	public void setCalificacion(Double calificacion) {
 		this.calificacion = calificacion;
 	}
 

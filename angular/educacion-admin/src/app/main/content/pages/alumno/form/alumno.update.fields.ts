@@ -88,5 +88,10 @@ export const ALUMNO_UPDATE_FORM_FIELDS_DEF = [
     label: 'Telefono Movil',
     type: 'string',
     controlType: 'textbox'
+  },
+  {               
+    key: 'foto',
+    labelKey: 'Foto',
+    controlType: 'file'
   }
 ];

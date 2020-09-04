@@ -13,7 +13,7 @@ export const AULAS_UPDATE_FORM_FIELDS_DEF = [
   {
     key: 'idProfesor',
     labelKey: 'aulas_create_form_fields_def_field_nombreProfesor',
-    required: false,
+    required: true,
     controlType: 'select',
     options: {
         elementLabel: 'nombreApellido',
@@ -28,7 +28,7 @@ export const AULAS_UPDATE_FORM_FIELDS_DEF = [
   {
     key: 'idMateria',
     labelKey: 'aulas_create_form_fields_def_field_nombremateria',
-    required: false,
+    required: true,
     controlType: 'select',
     options: {
         elementLabel: 'descripcionNivel',

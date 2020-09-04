@@ -24,8 +24,8 @@ import ar.com.avaco.ws.rest.dto.JSONResponse;
 @RestController
 public class MateriaProfesorRestController extends AbstractDTORestController<MateriaProfesorFullDTO, Long, MateriaProfesorEPService> {
 
-	@RequestMapping(value = "/materiasprofesor/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listByProfesor(@RequestParam("idProfesor") Long idProfesor) throws BusinessException {
+	@RequestMapping(value = "/materiasprofesor/{idProfesor}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> listByProfesor(@PathVariable("idProfesor") Long idProfesor) throws BusinessException {
 		List<MateriaProfesorFullDTO> listMateriasProfesor = this.service.listMateriasProfesor(idProfesor);
     	JSONResponse response = new JSONResponse();
 		response.setData(listMateriasProfesor);
@@ -33,6 +33,15 @@ public class MateriaProfesorRestController extends AbstractDTORestController<Mat
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/materiasprofesor/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> listByProfesorParam(@RequestParam("idProfesor") Long idProfesor) throws BusinessException {
+		List<MateriaProfesorFullDTO> listMateriasProfesor = this.service.listMateriasProfesor(idProfesor);
+    	JSONResponse response = new JSONResponse();
+		response.setData(listMateriasProfesor);
+		response.setStatus(JSONResponse.OK);
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}
+	
 	@RequestMapping(path = "/materiasprofesor/", method = RequestMethod.POST)
 	public ResponseEntity<JSONResponse> createMateriaProfesor(@RequestBody MateriaProfesorDTO materiaProfesor) throws BusinessException {
 		
@@ -41,6 +50,11 @@ public class MateriaProfesorRestController extends AbstractDTORestController<Mat
 		response.setData(newMateriaProfesorDto);
 		response.setStatus(JSONResponse.OK);	
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/materiasprofesor/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<JSONResponse> delete(@PathVariable("id") Long id) throws BusinessException {
+		return super.delete(id);
 	}
 	
 	@RequestMapping(path = "/materiasprofesor/profesor/{idProfesor}/materia/{idMateria}", method = RequestMethod.DELETE)

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.hibernate.loader.custom.Return;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,7 +48,11 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 		profesor.setEmail(profesorDto.getEmail());
 		profesor.setDescripcion(profesorDto.getDescripcion());
 		profesor.setTitulo(profesorDto.getTitulo());
-
+		
+		if (profesorDto.getFoto() != null) {
+			profesor.setFoto(profesorDto.getFoto());
+		}
+		
 		Identificacion identificacion = profesor.getIdentificacion();
 		identificacion.setNumero(profesorDto.getNumeroIdentificacion());
 		TipoIdentificacion ti = TipoIdentificacion.DNI;
@@ -56,10 +60,16 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 			ti = TipoIdentificacion.valueOf(profesorDto.getTipoIdentificacion());
 		}
 		identificacion.setTipo(ti);
+		
 
 		Contacto contacto = profesor.getContacto();
 		contacto.setTelefonoMovil(profesorDto.getTelefonoMovil());
 
+		if (StringUtils.isNotBlank(profesorDto.getValorHora())) {
+			profesor.setValorHora(Double.parseDouble(profesorDto.getValorHora()));
+		} else {
+			profesor.setValorHora(null);
+		}
 
 		profesor = service.updateProfesor(profesor);
 
@@ -121,6 +131,12 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 		
 		profesor.setTitulo(dto.getTitulo());
 		
+		if (StringUtils.isNotBlank(dto.getValorHora())) {
+			profesor.setValorHora(Double.parseDouble(dto.getValorHora()));
+		} else {
+			profesor.setValorHora(null);
+		}
+		
 		return profesor;
 	}
 
@@ -141,6 +157,12 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 		profesorDTO.setBloqueado(entity.isBloqueado());
 		profesorDTO.setHabilitado(!entity.isBloqueado());
 		profesorDTO.setEstado(entity.isBloqueado() ? "Bloqueado" : "Habilitado");
+		profesorDTO.setCalificacion(entity.getCalificacion());
+		profesorDTO.setTieneFoto(entity.getFoto() != null);
+		if (entity.getValorHora() != null && entity.getValorHora() > 0) {
+			profesorDTO.setValorHora(entity.getValorHora().toString());
+			profesorDTO.setValorHoraString("$ "  + entity.getValorHora().toString());
+		}
 		return profesorDTO;
 	}
 

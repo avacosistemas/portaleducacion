@@ -9,7 +9,7 @@ public class CalificacionDTO {
 
 	private String alumno;
 
-	private Long calificacion;
+	private Double calificacion;
 
 	private String comentarios;
 
@@ -34,11 +34,11 @@ public class CalificacionDTO {
 		this.alumno = alumno;
 	}
 
-	public Long getCalificacion() {
+	public Double getCalificacion() {
 		return calificacion;
 	}
 
-	public void setCalificacion(Long calificacion) {
+	public void setCalificacion(Double calificacion) {
 		this.calificacion = calificacion;
 	}
 

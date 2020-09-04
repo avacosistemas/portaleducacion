@@ -2,10 +2,15 @@ package ar.com.avaco.educacion.ws.service.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.OptionalDouble;
+import java.util.Set;
+import java.util.stream.DoubleStream;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import ar.com.avaco.commons.exception.BusinessException;
@@ -20,6 +25,7 @@ import ar.com.avaco.educacion.service.aula.AulaAlumnoService;
 import ar.com.avaco.educacion.service.aula.AulaService;
 import ar.com.avaco.educacion.service.comentario.ComentarioService;
 import ar.com.avaco.educacion.service.pregresp.PreguntaRespuestaService;
+import ar.com.avaco.educacion.service.profesor.ProfesorService;
 import ar.com.avaco.educacion.ws.dto.AlumnoPerfilDTO;
 import ar.com.avaco.educacion.ws.dto.AulaAlumnoPortalDTO;
 import ar.com.avaco.educacion.ws.dto.ComentarioDTO;
@@ -36,6 +42,7 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	private ComentarioService comentarioService;
 	private AulaService aulaService;
 	private AulaAlumnoService aulaAlumnoService;
+	private ProfesorService profesorService;
 
 	// Service
 	@Override
@@ -109,18 +116,44 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	}
 	
 	@Override
-	public AulaAlumnoPortalDTO getAula(Long idClase) {
-		Aula aula = aulaService.get(idClase);
-		AulaAlumnoPortalDTO apdto = new AulaAlumnoPortalDTO(aula);
+	public AulaAlumnoPortalDTO getAula(Long idClase, Long idAlumno) {
+		AulaAlumno aulaAlumno = aulaAlumnoService.getByIdAulaIdAlumno(idClase, idAlumno);
+		AulaAlumnoPortalDTO apdto = new AulaAlumnoPortalDTO(aulaAlumno);
 		return apdto;
 	}
 
 	@Override
-	public void calificarAula(Long idAula, Long id, PuntuacionDTO puntuacionDTO) {
+	public void calificarAula(Long idAula, Long id, PuntuacionDTO puntuacionDTO) throws BusinessException {
 		AulaAlumno aa = aulaAlumnoService.getByIdAulaIdAlumno(idAula, id);
-		aa.setCalificacion(puntuacionDTO.getPuntuacion());
+		
+		if (aa.getCalificacion() != null) {
+			throw new BusinessException("El aula ya cuenta con una calificación.");
+		}
+		
+		if (puntuacionDTO.getPuntuacion() == null || puntuacionDTO.getPuntuacion() > 5 || puntuacionDTO.getPuntuacion() < 1) {
+			throw new BusinessException("La calificación debe estar entre 1 y 5.");
+		}
+
+		if (StringUtils.isBlank(puntuacionDTO.getComentario()) || puntuacionDTO.getComentario().length() > 200 || puntuacionDTO.getComentario().length() < 2) {
+			throw new BusinessException("El comentario debe tener entre 2 y 200 caracteres.");
+		}
+		
+		aa.setCalificacion(puntuacionDTO.getPuntuacion().doubleValue());
 		aa.setComentario(puntuacionDTO.getComentario());
 		aulaAlumnoService.update(aa);
+
+		List<AulaAlumno> alumnos = aulaAlumnoService.listByAula(aa.getAula().getId());
+		OptionalDouble avgAula = alumnos.stream().filter(x -> x.getCalificacion() != null && x.getCalificacion() > 0D).mapToDouble(AulaAlumno::getCalificacion).average(); 
+		
+		Aula aula = aa.getAula();
+		aula.setCalificacion(avgAula.getAsDouble());
+		aulaService.update(aula);
+		
+		List<Aula> aulasProfesor = aulaService.listByProfesorId(aula.getProfesor().getId());
+		OptionalDouble avgProfesor = aulasProfesor.stream().filter(x -> x.getCalificacion() != null && x.getCalificacion() > 0D).mapToDouble(Aula::getCalificacion).average();
+		Profesor profesor = aula.getProfesor();
+		profesor.setCalificacion(avgProfesor.getAsDouble());
+		profesorService.update(profesor);
 	}
 	
 	@Override
@@ -155,4 +188,9 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 		this.aulaAlumnoService = aulaAlumnoService;
 	}
 	
+	@Resource(name = "profesorService")
+	public void setProfesorService(ProfesorService profesorService) {
+		this.profesorService = profesorService;
+	}
+
 }

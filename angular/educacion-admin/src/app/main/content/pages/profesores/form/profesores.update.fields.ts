@@ -86,6 +86,23 @@ export const PROFESORES_UPDATE_FORM_FIELDS_DEF = [
     key: 'descripcion',
     labelKey: 'profesores_create_form_fields_def_field_descripcion',
     controlType: 'textbox',
-    maxLength: 100
+    maxLength: 1000
+  },
+  {
+    key: 'valorHora',
+    labelKey: 'profesores_create_form_fields_def_field_valorhora',
+    controlType: 'number',
+    min: 0
+  },
+  {               
+    key: 'foto',
+    labelKey: 'Foto (solo jpg)',
+    controlType: 'file'
+  },
+  {               
+    key: 'tieneFoto',
+    labelKey: 'Foto Cargada',
+    controlType: 'check',
+    readonly: true
   }
 ];

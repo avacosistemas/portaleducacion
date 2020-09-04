@@ -10,7 +10,7 @@ import ar.com.avaco.ws.rest.dto.DTOEntity;
 public class AulaListadoDTO extends DTOEntity<Long> {
 
 	protected String idString;
-	
+
 	protected Long id;
 
 	protected Long idMateria;
@@ -30,7 +30,9 @@ public class AulaListadoDTO extends DTOEntity<Long> {
 	protected String hora;
 
 	protected String estado;
-	
+
+	private Double calificacion;
+
 	public AulaListadoDTO() {
 
 	}
@@ -49,6 +51,8 @@ public class AulaListadoDTO extends DTOEntity<Long> {
 		this.setNombreProfesor(aula.getProfesor() != null ? aula.getProfesor().getNombreApellido() : null);
 		this.setDia(DateUtils.toString(aula.getDia()));
 		this.setHora(aula.getHora().toString());
+		this.setCalificacion(aula.getCalificacion() > 0D ? aula.getCalificacion() : null);
+		
 		Calendar instance = Calendar.getInstance();
 		instance.setTime(aula.getDia());
 		instance.set(Calendar.HOUR, aula.getHora());
@@ -57,7 +61,7 @@ public class AulaListadoDTO extends DTOEntity<Long> {
 
 		Calendar ahora = Calendar.getInstance();
 		ahora.setTime(DateUtils.getFechaYHoraActual());
-		
+
 		if (instance.after(ahora)) {
 			this.setEstado("Pendiente");
 		} else {
@@ -97,7 +101,7 @@ public class AulaListadoDTO extends DTOEntity<Long> {
 	public String getHora() {
 		return hora;
 	}
-	
+
 	public String getHoraString() {
 		return StringUtils.leftPad(this.hora, 2, "0") + ":00 Hs";
 	}
@@ -157,5 +161,17 @@ public class AulaListadoDTO extends DTOEntity<Long> {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
+
+	public Double getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(Double calificacion) {
+		this.calificacion = calificacion;
+	}
+
+	public void setIdString(String idString) {
+		this.idString = idString;
+	}
+
 }
