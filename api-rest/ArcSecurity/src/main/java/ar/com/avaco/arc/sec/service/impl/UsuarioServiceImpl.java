@@ -138,6 +138,17 @@ public class UsuarioServiceImpl extends NJBaseService<Long, Usuario, UsuarioRepo
 	}
 
 	@Override
+	public void sendMissingPasswordById(Long id) {
+		Usuario user = getRepository().findOne(id);
+		
+		if (user != null) {
+			generateNewPassword(user);
+		} else {
+			throw new UsernameNotFoundException("No se ha podido identificar al usuario");
+		}
+	}
+	
+	@Override
 	public List<Usuario> getExternalUsersLike(String userLess, String userLike) {
 		return getRepository().getExternalUsersLike(userLess, userLike);
 	}
@@ -224,5 +235,6 @@ public class UsuarioServiceImpl extends NJBaseService<Long, Usuario, UsuarioRepo
 	public boolean isUserExistWithEmail(String email) {
 		return getRepository().isUserExistWithEmail(email);
 	}
+
 
 }

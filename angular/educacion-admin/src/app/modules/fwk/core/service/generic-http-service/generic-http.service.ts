@@ -7,7 +7,7 @@ import { WsDef, HTTP_METHODS } from '../../model/ws-def';
 
 @Injectable()
 export class GenericHttpService extends HttpService {
-    
+
     constructor(injector: Injector) {
         super(injector, '');
     }

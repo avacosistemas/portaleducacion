@@ -31,6 +31,8 @@ public interface UsuarioService extends NJService<Long, Usuario> {
 	boolean isUserExists(String username);
 	
 	void sendMissingPassword(String username);
+	
+	void sendMissingPasswordById(Long id);
 
 	UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 	

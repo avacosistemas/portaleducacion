@@ -1,5 +1,5 @@
 import { USER_SEARCH_FIELDS } from '../form/search.fields';
-import { environment, PREFIX_DOMAIN_API_AUTHENTICATION } from 'environments/environment';
+import {environment, PREFIX_DOMAIN_API_AUTHENTICATION, PREFIX_DOMAIN_API_EDUCACION} from 'environments/environment';
 import { CrudDef } from 'app/modules/fwk/core/model/component-def/crud-def';
 import { REGEX_KEY_USER } from 'app/modules/fwk/core/service/dynamic-form/form.validator.service';
 const PROFILES_COMPONENT_KEY = 'profiles';
@@ -42,6 +42,20 @@ export const USER_DEF: CrudDef = {
                         ],
             sortAllColumns: true,
             displayedColumns: ['username', 'name', 'lastname', 'email'],
+            actions: [
+              {
+                actionNameKey: 'Reset Pwd',
+                icon: 'lock_open',
+                ws: {
+                  key: 'resetPass',
+                  url: PREFIX_DOMAIN_API_AUTHENTICATION + '/password/reset/',
+                  method: 'PUT',
+                  querystring: {
+                    id : 'id'
+                  }
+                }
+              }
+            ],
             deleteColumn: { key: 'delete',
                             name: 'Eliminar'}
             },

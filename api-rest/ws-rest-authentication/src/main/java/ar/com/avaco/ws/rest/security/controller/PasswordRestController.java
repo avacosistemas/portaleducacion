@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +30,15 @@ public class PasswordRestController {
 	@RequestMapping(value = "/password/reset/", method = RequestMethod.POST)
 	public ResponseEntity<JSONResponse> reset(@RequestBody PassworResetDTO dto) throws BusinessException {
 		usuarioService.sendMissingPassword(dto.getUsername());
+		JSONResponse jsonResponse = new JSONResponse();
+		jsonResponse.setData(null);
+		jsonResponse.setStatus(JSONResponse.OK);
+		return new ResponseEntity<JSONResponse>(jsonResponse, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/password/reset/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<JSONResponse> resetById(@PathVariable("id") Long id) throws BusinessException {
+		usuarioService.sendMissingPasswordById(id);
 		JSONResponse jsonResponse = new JSONResponse();
 		jsonResponse.setData(null);
 		jsonResponse.setStatus(JSONResponse.OK);

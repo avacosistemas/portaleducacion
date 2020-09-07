@@ -96,7 +96,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
     this._existElementsToSelect = false;
     this.statustable = new StatusTable<any>();
     this.paginator._intl.itemsPerPageLabel = this.translate('itemsPerPageLabel');
-    
+
 
     if (this.hasActions()){
       const existActions = this.grid.displayedColumns.find(c => c === ACTION_COLUMN);
@@ -107,7 +107,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
         });
         this.grid.displayedColumns = displayedColumns;
       }
-      
+
     }
 
     if (this.hasGeneralActions()){
@@ -143,7 +143,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
     }
     this.initOk = true;
   }
-  
+
   hasActions(){
     return this.grid.actions || this.grid.deleteAction || this.grid.deleteColumn ? true : false;
   }
@@ -151,14 +151,14 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
     return DELETE_COLUMN;
   }
   getActionsColumnName(){
-    return ACTION_COLUMN; 
+    return ACTION_COLUMN;
   }
 
   hasGeneralActions(){
     if (this.selectable){
       return true;
     }else if (this.grid){
-      const hasDeleteAction = this.grid.deleteAction || 
+      const hasDeleteAction = this.grid.deleteAction ||
                                 this.grid.deleteColumn;
       return hasDeleteAction;
     }
@@ -175,13 +175,13 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
       this.dialogService.showGridModal(action.actionName, entity[action.gridModal.fromArrayField], action.gridModal.gridDef);
     }else if (action.confirm){
         this.actionDefService.submitAction(action, entity, this.crud.i18nCurrentCrudComponent, undefined).subscribe(r => {
-            this.crud.findAll(); 
+            this.crud.findAll();
             this.spinnerGeneralControl.hide();
             this.notificationService.notifySuccess(this.crud.translate('success_message'));
       });
     }else if (action.form){
       action.submitButtonKey = 'Guardar';
-      const data = { 
+      const data = {
                      entity: entity,
                      config: action,
                      fields: action.form,
@@ -200,7 +200,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
       });
     } else if (action.formDef){
       action.submitButtonKey = 'Guardar';
-      const data = { 
+      const data = {
         entity: entity,
         config: action,
         formDef: action.formDef,
@@ -232,9 +232,9 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
           });
       } else if (ACTION_TYPES.redirect === action.actionType){
         var url: String = action.redirect.url;
-                
+
         const queryParams: Params = this.getQueryParams(action.redirect.querystring, entity);
-        
+
         if (queryParams['externalUrl']) {
           url = queryParams['externalUrl'];
           if (!url.startsWith('http://') &&  !url.startsWith('https://')) {
@@ -243,7 +243,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
         }
 
         if (action.redirect.openTab) {
-          
+
           var queryParamsString = "";
 
           if (queryParams && queryParams != undefined) {
@@ -253,8 +253,8 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
             } else {
 
               var first = true;
-              
-              Object.getOwnPropertyNames(queryParams).forEach(param => { 
+
+              Object.getOwnPropertyNames(queryParams).forEach(param => {
                 if (param != 'externalUrl') {
                   if (!first) {
                     queryParamsString = queryParamsString + "&";
@@ -266,7 +266,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
                 }
               });
             }
-          
+
           }
 
           var win = window.open(url + queryParamsString, '_blank');
@@ -278,7 +278,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
       }else{
           this.spinnerGeneralControl.show();
           this.genericHttpService.callWs(action.ws, entity).subscribe(r => {
-            this.crud.findAll(); 
+            this.crud.findAll();
             this.notificationService.notifySuccess(this.crud.translate('success_message'));
           }, e => {}, () => {
             this.spinnerGeneralControl.hide();
@@ -311,7 +311,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
     }else{
       this.processObj(row);
     }
-    
+
   }
   private processObj(obj){
     if (this.onClickRow) {
@@ -319,7 +319,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
     } else if (this.crud) {
       let data;
       const formUpdate = this.getFormUpdate(this.crud.crudDef);
-      const formRead = this.getFormRead(this.crud.crudDef); 
+      const formRead = this.getFormRead(this.crud.crudDef);
       let nameFunc = this.crud.crudDef.name;
       if (nameFunc === undefined){
         nameFunc = '';
@@ -363,13 +363,13 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
               });
             },
           };
-          
+
           const dialogRef = this.dialog.open(FormGridModalComponent, {
             width: 'auto',
             panelClass: 'control-mat-dialog',
             data: data
           });
-          
+
           dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
           });
@@ -553,8 +553,8 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
     }
 
   }
-  
-  @Input() 
+
+  @Input()
   set tabledef(tabledef){
     this.grid = tabledef;
   }

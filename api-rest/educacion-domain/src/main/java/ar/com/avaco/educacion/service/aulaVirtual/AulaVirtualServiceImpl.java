@@ -41,15 +41,18 @@ public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaReposi
 	@Override
 	public Clase crearClase(Profesor profesor, Aula aula) throws AulaVirtualException {
 		String idMeeting;
-
-		api = new BigBlueButtonApi();
-		api.setSalt(salt);
-		api.setBigBlueButtonIP(ip);
-		api.setBigBlueButtonURL(url);
-		api.setUrlEventsCallBack(callbackEvento);
+		
+		if (api == null) {			
+			api = new BigBlueButtonApi();
+			api.setSalt(salt);
+			api.setBigBlueButtonIP(ip);
+			api.setBigBlueButtonURL(url);
+			api.setUrlEventsCallBack(callbackEvento);
+		}
 		
 		try {
-			idMeeting = api.createMeeting(aula.generatedIdAula(profesor), welcomeMessage, null, null, null, null, null);
+			String logoutUrl=null;
+			idMeeting = api.createMeeting(aula.generatedIdAula(profesor), welcomeMessage, null, null, null, null, logoutUrl);
 			String urlSala = api.getJoinMeetingURL(profesor.getUsername(), idMeeting, "mp", null, profesor.getId());
 
 			// Hook a los eventos
@@ -67,9 +70,11 @@ public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaReposi
 		throw new ServiceException("Error desconocido");
 	}
 
+	
+	
 	@Override
 	public String unirseAlumnoClase(String idClase, Alumno alumno) throws AulaVirtualException {
-		return unirseClase(idClase, alumno, "ap");
+			return unirseClase(idClase, alumno, "ap");	
 	}
 
 	@Override
@@ -78,7 +83,10 @@ public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaReposi
 	}
 
 	protected String unirseClase(String idClase, Cliente cliente, String password) throws AulaVirtualException {
-		return api.getJoinMeetingURL(cliente.getNombreApellido(), idClase, password, null, cliente.getId());
+		if (isClaseAbierta(idClase)) {
+			return api.getJoinMeetingURL(cliente.getNombreApellido(), idClase, password, null, cliente.getId());
+		}
+		throw new AulaVirtualException(new Integer(2), "El profesor aun no ha creado la clase");
 	}
 
 	@Override

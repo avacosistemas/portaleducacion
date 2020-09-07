@@ -2,6 +2,7 @@ package ar.com.avaco.ws.rest.security.controller;
 
 import javax.annotation.Resource;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +48,16 @@ public class ProfileRestController extends AbsctractRestController<Profile, Long
     
     @RequestMapping(value = "/profiles/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<JSONResponse> delete(@PathVariable("id") Long id) throws BusinessException {
-    	return super.delete(id);
+    	ResponseEntity<JSONResponse> resp;
+    	try {
+    		resp = super.delete(id);
+    	} catch(DataIntegrityViolationException e) {
+    		throw new BusinessException("No se puede borrar el Perfil porque existe una relacion con Acceso");
+    	} catch(Exception e) {
+    		throw new BusinessException("Ocurrio un error al eliminar el perfil");
+    	}
+    	
+    	return resp;
     }
     	
 	@Resource(name = "profileService")
