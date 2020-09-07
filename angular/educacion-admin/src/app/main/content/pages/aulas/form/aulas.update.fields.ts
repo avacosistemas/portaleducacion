@@ -35,7 +35,7 @@ export const AULAS_UPDATE_FORM_FIELDS_DEF = [
         elementValue: 'id',
         fromWs: {
           key: 'alumno_create_form_fields_def_field_idinstitucion',
-          url: PREFIX_DOMAIN_API_EDUCACION + '/materias'
+          url: PREFIX_DOMAIN_API_EDUCACION + '/materias/'
         }
     }
   },

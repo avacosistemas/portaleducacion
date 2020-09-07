@@ -1,9 +1,11 @@
 package ar.com.avaco.educacion.ws.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,10 +37,23 @@ public class HorarioDisponibleRestController extends AbstractDTORestController<H
 	
 	
 	@RequestMapping(value = "/horariosdisponibles", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JSONResponse> listHorariosDisponibles(@RequestParam(value= "id", required= false) Long id) {
+	public ResponseEntity<JSONResponse> listHorariosDisponibles(
+			@RequestParam(value= "id", required= false) Long id,
+			@RequestParam(value= "dia", required= false) String dia,
+			@RequestParam(value= "hora", required= false) Integer hora
+			) {
 	
 		if(id != null) {
 			List<HorarioDisponibleDTO> horariosDisponibles = this.service.listHorariosDispProfesor(id);
+			
+			if (StringUtils.isNotBlank(dia)) {
+				horariosDisponibles = horariosDisponibles.stream().filter(horario -> horario.getDia().equals(dia)).collect(Collectors.toList());
+			}
+
+			if (hora != null) {
+				horariosDisponibles = horariosDisponibles.stream().filter(horario -> horario.getHora().equals(hora)).collect(Collectors.toList());
+			}
+			
 			JSONResponse response = new JSONResponse();
 			response.setData(horariosDisponibles);
 			response.setStatus(JSONResponse.OK);	

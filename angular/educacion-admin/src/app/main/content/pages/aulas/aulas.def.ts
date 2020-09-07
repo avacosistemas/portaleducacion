@@ -27,6 +27,6 @@ export const AULAS_DEF: CrudDef = {
         url: PREFIX_DOMAIN_API_EDUCACION + '/aulas/'
     },
     dialogConfig: {
-        width: '400px'
+        width: '600px'
     }   
 };

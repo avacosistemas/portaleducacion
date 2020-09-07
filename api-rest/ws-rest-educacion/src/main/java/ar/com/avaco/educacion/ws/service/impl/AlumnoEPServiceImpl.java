@@ -177,6 +177,7 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		alumnoDTO.setBloqueado(entity.isBloqueado());
 		alumnoDTO.setHabilitado(!entity.isBloqueado());
 		alumnoDTO.setEstado(entity.isBloqueado() ? "Bloqueado" : "Habilitado");
+		alumnoDTO.setTieneFoto(entity.getFoto() != null);
 		return alumnoDTO;
 	}
 

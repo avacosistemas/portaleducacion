@@ -2,7 +2,9 @@ package ar.com.avaco.educacion.ws.service.impl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,11 +91,13 @@ public class CatalogoProfesorEPServiceImpl implements CatalogoProfesorEPService 
 	@Override
 	public List<PreguntaRespuestaDTO> getCatalogoConsulta(Long id) {
 		List<PreguntaRespuesta> entities = catalogoService.getCatalogoConsulta(id);
-		
+		entities.sort((x,y) -> Long.compare(y.getFechaPregunta().getTime(), x.getFechaPregunta().getTime()));
 		List<PreguntaRespuestaDTO> dtos = new ArrayList<PreguntaRespuestaDTO>();
 		for (PreguntaRespuesta entity : entities) {
 			dtos.add(new PreguntaRespuestaDTO(entity));
 		}
+		
+		
 		
 		return dtos;
 	

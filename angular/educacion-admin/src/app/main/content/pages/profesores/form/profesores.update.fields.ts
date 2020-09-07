@@ -102,7 +102,7 @@ export const PROFESORES_UPDATE_FORM_FIELDS_DEF = [
   {               
     key: 'tieneFoto',
     labelKey: 'Foto Cargada',
-    controlType: 'check',
-    readonly: true
+    controlType: 'checkbox',
+    disabled: true
   }
 ];

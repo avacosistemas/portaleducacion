@@ -93,5 +93,11 @@ export const ALUMNO_UPDATE_FORM_FIELDS_DEF = [
     key: 'foto',
     labelKey: 'Foto',
     controlType: 'file'
+  },
+  {               
+    key: 'tieneFoto',
+    labelKey: 'Foto Cargada',
+    controlType: 'checkbox',
+    disabled: true
   }
 ];
