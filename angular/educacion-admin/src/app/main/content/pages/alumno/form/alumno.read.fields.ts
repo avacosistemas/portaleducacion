@@ -26,7 +26,7 @@ export const ALUMNO_READ_FORM_FIELDS_DEF = [
   {
     key: 'idInstitucion',
     labelKey: 'ALUMNO_READ_FORM_FIELDS_DEF_FIELD_idinstitucion',
-    label: 'Instituci�n',
+    label: 'Institución',
     type: 'string',
     disabled: true,
     controlType: 'textbox'
@@ -42,7 +42,7 @@ export const ALUMNO_READ_FORM_FIELDS_DEF = [
   {
     key: 'tipoIdentificacion',
     labelKey: 'ALUMNO_READ_FORM_FIELDS_DEF_FIELD_tipoidentificacion',
-    label: 'Email',
+    label: 'Tipo Identificación',
     type: 'string',
     disabled: true,
     controlType: 'textbox'
@@ -50,7 +50,7 @@ export const ALUMNO_READ_FORM_FIELDS_DEF = [
   {
     key: 'numeroIdentificacion',
     labelKey: 'ALUMNO_READ_FORM_FIELDS_DEF_FIELD_numeroidentificacion',
-    label: 'Email',
+    label: 'Nro Identificación',
     type: 'string',
     disabled: true,
     controlType: 'textbox'
@@ -58,7 +58,15 @@ export const ALUMNO_READ_FORM_FIELDS_DEF = [
   {
     key: 'telefonoMovil',
     labelKey: 'ALUMNO_READ_FORM_FIELDS_DEF_FIELD_telefonomovil',
-    label: 'Email',
+    label: 'Celular',
+    type: 'string',
+    disabled: true,
+    controlType: 'textbox'
+  },
+  {
+    key: 'telefonoFijo',
+    labelKey: 'ALUMNO_READ_FORM_FIELDS_DEF_FIELD_telefonofijo',
+    label: 'Teléfono Fijo',
     type: 'string',
     disabled: true,
     controlType: 'textbox'

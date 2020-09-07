@@ -25,6 +25,24 @@ export const PROFESORES_UPDATE_FORM_FIELDS_DEF = [
     maxLength: 100
   },
   {
+    key: 'username',
+    labelKey: 'profesores_create_form_fields_def_field_username',
+    label: 'Usuario',
+    type: 'string',
+    controlType: 'textbox',
+    required:true,
+    maxLength: 100
+  },
+  {
+    key: 'email',
+    labelKey: 'profesores_create_form_fields_def_field_email',
+    label: 'Email',
+    type: 'string',
+    controlType: 'textbox',
+    required:true,
+    maxLength: 250
+  },
+  {
     key: 'tipoIdentificacion',
     labelKey: 'profesores_create_form_fields_def_field_tipoidentificacion',
     label: 'Tipo de Identificación',
@@ -50,24 +68,6 @@ export const PROFESORES_UPDATE_FORM_FIELDS_DEF = [
     maxLength: 12
   },
   {
-    key: 'username',
-    labelKey: 'profesores_create_form_fields_def_field_username',
-    label: 'Usuario',
-    type: 'string',
-    controlType: 'textbox',
-    required:true,
-    maxLength: 100
-  },
-  {
-    key: 'email',
-    labelKey: 'profesores_create_form_fields_def_field_email',
-    label: 'Email',
-    type: 'string',
-    controlType: 'textbox',
-    required:true,
-    maxLength: 250
-  },
-  {
     key: 'telefonoMovil',
     labelKey: 'profesores_create_form_fields_def_field_telefonomovil',
     label: 'Celular',
@@ -75,6 +75,21 @@ export const PROFESORES_UPDATE_FORM_FIELDS_DEF = [
     controlType: 'textbox',
     required:true,
     maxLength: 15
+  },
+  {
+    key: 'telefonoFijo',
+    labelKey: 'profesores_create_form_fields_def_field_telefonofijo',
+    label: 'Teléfono Fijo',
+    type: 'string',
+    controlType: 'textbox',
+    required:false,
+    maxLength: 15
+  },
+  {
+    key: 'valorHora',
+    labelKey: 'profesores_create_form_fields_def_field_valorhora',
+    controlType: 'number',
+    min: 0
   },
   {
     key: 'titulo',
@@ -87,12 +102,6 @@ export const PROFESORES_UPDATE_FORM_FIELDS_DEF = [
     labelKey: 'profesores_create_form_fields_def_field_descripcion',
     controlType: 'textbox',
     maxLength: 1000
-  },
-  {
-    key: 'valorHora',
-    labelKey: 'profesores_create_form_fields_def_field_valorhora',
-    controlType: 'number',
-    min: 0
   },
   {               
     key: 'foto',

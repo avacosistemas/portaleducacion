@@ -2,6 +2,7 @@ package ar.com.avaco.educacion.ws.service.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -137,7 +138,7 @@ public class ProfesorPerfilEPServiceImpl extends CRUDEPBaseService<Long, Profeso
 	public List<PreguntaRespuestaAulaDTO> listPreguntaRespuestas(Long idProfesor) {
 		List<PreguntaRespuesta> listByProfesor = preguntaRespuestaService.listByProfesor(idProfesor);
 		List<PreguntaRespuestaAulaDTO> list = new ArrayList<>();
-		listByProfesor.forEach(pr -> list.add(new PreguntaRespuestaAulaDTO(pr)));
+		listByProfesor.stream().sorted(Comparator.comparing(PreguntaRespuesta::getFechaPregunta).reversed()).forEach(pr -> list.add(new PreguntaRespuestaAulaDTO(pr)));
 		return list;
 	}
 
@@ -153,7 +154,8 @@ public class ProfesorPerfilEPServiceImpl extends CRUDEPBaseService<Long, Profeso
 	public List<AulaProfesorPortalDTO> listarMisAulas(Long id) {
 		List<Aula> aulas = aulaService.listByProfesorId(id);
 		List<AulaProfesorPortalDTO> aulasDTO = new ArrayList<>();
-		aulas.stream().forEach(x->aulasDTO.add(new AulaProfesorPortalDTO(x)));
+		Comparator<Aula> comparaAula = Comparator.comparing(Aula::getDia).thenComparing(Aula::getHora);
+		aulas.stream().sorted(comparaAula.reversed()).forEach(x->aulasDTO.add(new AulaProfesorPortalDTO(x)));
 		return aulasDTO;
 	}
 	

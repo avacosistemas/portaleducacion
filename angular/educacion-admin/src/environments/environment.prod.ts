@@ -46,7 +46,8 @@ export const environment = {
     URL_PERMISSION : 'permisos',
     URL_PROFILE : 'perfiles',
     URL_ROLE : 'roles',
-    URL_USER : 'usuarios'
+    URL_USER : 'usuarios',
+    URL_PASSWORD_UPDATE: 'password'
 
 };
 

@@ -54,5 +54,13 @@ export const PROFESORES_READ_FORM_FIELDS_DEF = [
     type: 'string',
     disabled: true,
     controlType: 'textbox'
+  },
+  {
+    key: 'telefonoFijo',
+    labelKey: 'PROFESORES_READ_FORM_FIELDS_DEF_FIELD_telefonofijo',
+    label: 'Teléfono Fijo',
+    type: 'string',
+    disabled: true,
+    controlType: 'textbox'
   }
 ];

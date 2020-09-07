@@ -43,6 +43,13 @@ export const ALUMNO_CREATE_FORM_FIELDS_DEF = [
     required: true,
     maxLength: 100,
   },
+  {
+    key: 'email',
+    labelKey: 'alumno_create_form_fields_def_field_email',
+    label: 'Email',
+    type: 'email',
+    controlType: 'email'
+  },
   
   {
     key: 'tipoIdentificacion',
@@ -70,16 +77,16 @@ export const ALUMNO_CREATE_FORM_FIELDS_DEF = [
     controlType: 'textbox'
   },
   {
-    key: 'email',
-    labelKey: 'alumno_create_form_fields_def_field_email',
-    label: 'Email',
-    type: 'email',
-    controlType: 'email'
-  },
-  {
     key: 'telefonoMovil',
     labelKey: 'alumno_create_form_fields_def_field_telefonomovil',
-    label: 'Telefono Movil',
+    label: 'Celular',
+    type: 'string',
+    controlType: 'textbox'
+  },
+  {
+    key: 'telefonoFijo',
+    labelKey: 'alumno_create_form_fields_def_field_telefonofijo',
+    label: 'Teléfono Fijo',
     type: 'string',
     controlType: 'textbox'
   },

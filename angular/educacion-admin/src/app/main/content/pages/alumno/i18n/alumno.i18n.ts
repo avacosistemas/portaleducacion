@@ -12,6 +12,7 @@ export const ALUMNO_I18N_DEF = {
     alumno_create_form_fields_def_field_tipoidentificacion: 'Tipo de Identificación',
     alumno_create_form_fields_def_field_numeroidentificacion: 'Número de Identificación',
     alumno_create_form_fields_def_field_telefonomovil: 'Celular',
+    alumno_create_form_fields_def_field_telefonofijo: 'Teléfono Fijo',
     alumno_create_form_fields_def_field_email: 'Email',
     
     alumno_update_form_fields_def_field_id: 'ID',
@@ -22,6 +23,7 @@ export const ALUMNO_I18N_DEF = {
     alumno_update_form_fields_def_field_tipoidentificacion: 'Tipo de Identificación',
     alumno_update_form_fields_def_field_numeroidentificacion: 'Número de Identificación',
     alumno_update_form_fields_def_field_telefonomovil: 'Celular',
+    alumno_update_form_fields_def_field_telefonofijo: 'Teléfono Fijo',
     alumno_update_form_fields_def_field_email: 'Email',
     
     alumno_filter_form_fields_def_field_id: 'ID',
@@ -32,6 +34,7 @@ export const ALUMNO_I18N_DEF = {
     alumno_filter_form_fields_def_field_tipoidentificacion: 'Tipo de Identificación',
     alumno_filter_form_fields_def_field_numeroidentificacion: 'Número de Identificación',
     alumno_filter_form_fields_def_field_telefonomovil: 'Celular',
+    alumno_filter_form_fields_def_field_telefonofijo: 'Teléfono Fijo',
     alumno_filter_form_fields_def_field_email: 'Email',
     
     alumno_grid_def_column_id: 'ID',
@@ -43,6 +46,7 @@ export const ALUMNO_I18N_DEF = {
     alumno_grid_def_column_tipoidentificacion: 'Tipo de Identificación',
     alumno_grid_def_column_numeroidentificacion: 'Número de Identificación',
     alumno_grid_def_column_telefonomovil: 'Celular',
+    alumno_grid_def_column_telefonofijo: 'Teléfono Fijo',
     alumno_grid_def_column_email: 'Email',
     
     alumno_grid_def_button_action_habilitar: 'Habilitar',
