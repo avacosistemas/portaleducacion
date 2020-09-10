@@ -62,6 +62,7 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		
 		Contacto contacto = alumno.getContacto();
 		contacto.setTelefonoMovil(alumnoDto.getTelefonoMovil());
+		contacto.setTelefonoFijo(alumnoDto.getTelefonoFijo());
 		alumno.setEmail(alumnoDto.getEmail());
 
 		if (alumnoDto.getIdInstitucion() != null && alumnoDto.getIdInstitucion() > 0) {
@@ -138,6 +139,7 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		
 		Contacto contacto = new Contacto();
 		contacto.setTelefonoMovil(dto.getTelefonoMovil());
+		contacto.setTelefonoFijo(dto.getTelefonoFijo());
 		contacto.setCliente(alumno);
 		alumno.setIdentificacion(id);
 		alumno.setContacto(contacto);
@@ -169,6 +171,7 @@ public class AlumnoEPServiceImpl extends CRUDEPBaseService<Long, AlumnoDTO, Alum
 		alumnoDTO.setUsername(entity.getUsername());
 		alumnoDTO.setEmail(entity.getEmail());
 		alumnoDTO.setTelefonoMovil(entity.getContacto().getTelefonoMovil());
+		alumnoDTO.setTelefonoFijo(entity.getContacto().getTelefonoFijo());
 		alumnoDTO.setNombreApellido(entity.getNombreApellido());
 		if (entity.getInstitucion() != null) {
 			alumnoDTO.setIdInstitucion(entity.getInstitucion().getId());

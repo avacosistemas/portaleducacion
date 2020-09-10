@@ -106,6 +106,7 @@ public class ProfesorPerfilEPServiceImpl extends CRUDEPBaseService<Long, Profeso
 		
 		Contacto contacto = new Contacto();
 		contacto.setTelefonoMovil(dto.getTelefonoMovil());
+		contacto.setTelefonoFijo(dto.getTelefonoFijo());
 		contacto.setCliente(profesor);
 		profesor.setContacto(contacto);
 	

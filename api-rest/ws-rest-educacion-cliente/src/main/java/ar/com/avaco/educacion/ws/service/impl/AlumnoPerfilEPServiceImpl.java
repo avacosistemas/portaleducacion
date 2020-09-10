@@ -62,7 +62,7 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	public void updateAlumno(Long id, AlumnoPerfilDTO perfil) throws BusinessException {
 		Alumno alumno = this.service.get(id);
 		alumno.setApellido(perfil.getApellido());
-		alumno.getContacto().setTelefonoFijo(perfil.getTelefonoMovil());
+		alumno.getContacto().setTelefonoFijo(perfil.getTelefonoFijo());
 		alumno.getContacto().setTelefonoMovil(perfil.getTelefonoMovil());
 		alumno.setEmail(perfil.getEmail());
 		alumno.setNombre(perfil.getNombre());

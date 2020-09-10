@@ -12,6 +12,7 @@ public class ProfesorDTO extends DTOEntity<Long> {
 	private String username;
 	private String email;
 	private String telefonoMovil;
+	private String telefonoFijo;
 
 	private byte[] foto;
 
@@ -122,6 +123,14 @@ public class ProfesorDTO extends DTOEntity<Long> {
 
 	public void setTelefonoMovil(String telefonoMovil) {
 		this.telefonoMovil = telefonoMovil;
+	}
+
+	public String getTelefonoFijo() {
+		return telefonoFijo;
+	}
+
+	public void setTelefonoFijo(String telefonoFijo) {
+		this.telefonoFijo = telefonoFijo;
 	}
 
 	public Boolean getBloqueado() {

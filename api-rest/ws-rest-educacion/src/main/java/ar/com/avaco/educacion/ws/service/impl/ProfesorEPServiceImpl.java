@@ -64,6 +64,7 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 
 		Contacto contacto = profesor.getContacto();
 		contacto.setTelefonoMovil(profesorDto.getTelefonoMovil());
+		contacto.setTelefonoFijo(profesorDto.getTelefonoFijo());
 
 		if (StringUtils.isNotBlank(profesorDto.getValorHora())) {
 			profesor.setValorHora(Double.parseDouble(profesorDto.getValorHora()));
@@ -121,6 +122,7 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 		
 		Contacto contacto = new Contacto();
 		contacto.setTelefonoMovil(dto.getTelefonoMovil());
+		contacto.setTelefonoFijo(dto.getTelefonoFijo());
 		contacto.setCliente(profesor);
 		profesor.setContacto(contacto);
 	
@@ -151,6 +153,7 @@ public class ProfesorEPServiceImpl extends CRUDEPBaseService<Long, ProfesorDTO, 
 		profesorDTO.setUsername(entity.getUsername());
 		profesorDTO.setEmail(entity.getEmail());
 		profesorDTO.setTelefonoMovil(entity.getContacto().getTelefonoMovil());
+		profesorDTO.setTelefonoFijo(entity.getContacto().getTelefonoFijo());
 		profesorDTO.setNombreApellido(entity.getNombre() + " " + entity.getApellido());
 		profesorDTO.setDescripcion(entity.getDescripcion());
 		profesorDTO.setTitulo(entity.getTitulo());
