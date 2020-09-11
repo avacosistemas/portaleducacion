@@ -98,10 +98,7 @@ export class PasswordUpdateComponent extends AbstractComponent {
         });
 
         if (this.currentUser === undefined){
-            // this.currentUser = this.authService.getUsername();
-            // this.authService.getUser().subscribe(user => {
-            //     this.currentUser = user.username;
-            // });  
+            this.currentUser = this.authService.getUserLocalStorage().username;
         }
 
 
@@ -134,15 +131,18 @@ export class PasswordUpdateComponent extends AbstractComponent {
         const currentPassword = this.resetPasswordForm.controls.currentPassword.value;
         const resetPassword = this.resetPasswordForm.controls.newPassword.value;
 
-        // this.authService.updatePassword(this.currentUser, currentPassword, resetPassword
-        //     ).subscribe(res => {
-        //         this.authService.logout();
-        //         this.router.navigate([environment.URL_LOGIN]);
-        //     }, error => {
-        //         if (error.status === 409 && error.error.status === BAD_CREDENTIAL) {
-        //             this.resetPasswordForm.controls.currentPassword.setErrors({'userCurrentPasswordInvalid' : true});
-        //         }
-        //     });
+        this.authService.updatePassword(this.currentUser, currentPassword, resetPassword
+            ).subscribe(res => {
+                this.notificationService.notifySuccess("Contraseña actualizada con éxito. Vuelva a iniciar sesión.");
+                setTimeout(() => {
+                    this.authService.logout();
+                this.router.navigate([environment.URL_LOGIN]);
+                }, 5000);
+            }, error => {
+                if (error.status === 409 && error.error.status === BAD_CREDENTIAL) {
+                    this.resetPasswordForm.controls.currentPassword.setErrors({'userCurrentPasswordInvalid' : true});
+                }
+            });
     }
 
     getCurrentPasswordErrorMessage() {

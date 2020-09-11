@@ -53,12 +53,7 @@ export class FuseToolbarComponent extends AbstractComponent
         this.setUpI18n(    {
             name: 'toolbar',
             lang: 'es',
-            dictionary: {
-                menu_text: 'sort',
-                menu_user_icon: 'account_circle',
-                menu_user_item_1: 'Mis Datos',
-                menu_user_item_4: 'Cambiar contraseña',
-                menu_user_item_5: 'Cerrar sesión',
+            dictionary: {menu_user_item_5: 'Cerrar sesión',
                 
             }
           });
@@ -146,10 +141,13 @@ export class FuseToolbarComponent extends AbstractComponent
     }
 
     getUsername(){
-        if (this.user){
-            return this.user.username;
-        }
-        return '';
+
+        return this.authService.getUserLocalStorage().username;
+
+        // if (this.user){
+        //     return this.user.username;
+        // }
+        // return '';
     }
 
     onLogout(){
@@ -157,7 +155,7 @@ export class FuseToolbarComponent extends AbstractComponent
     }
 
     goPasswordUpdate(){
-       // this.navigate(environment.URL_PASSWORD_UPDATE, undefined);
+       this.navigate(environment.URL_PASSWORD_UPDATE, undefined);
     }
 
     goUserDetails(){

@@ -7,6 +7,7 @@ import { AbstractFormComponent } from 'app/modules/fwk/core/component/abstract-f
 import { LocalStorageService } from 'app/modules/fwk/core/service/local-storage/local-storage.service';
 import { AuthService } from 'app/modules/fwk/core/service/security/auth.service';
 import { DynamicField } from 'app/modules/fwk/core/model/dynamic-form/dynamic-field';
+import { User } from 'app/modules/fwk/core/model/user';
 
 
 export const LOGIN_NAME = 'login';
@@ -114,6 +115,12 @@ export class LoginComponent extends AbstractFormComponent implements OnInit {
                     if (error.status === 401) {
                         this.loginFormErrors.userorpassinvalid = true;
                         console.log(this.loginFormErrors);
+                    }
+                    if (error.status === 409 && error.error.status === 'CHANGE_PASSWORD_REQUIRED') {
+                        let usr = new User();
+                        usr.username = user.username;
+                        this.authService.setUser(usr);
+                        this.router.navigate(['/password']);
                     }
                     control.received();
                 },

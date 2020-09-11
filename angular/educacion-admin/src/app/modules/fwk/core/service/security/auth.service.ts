@@ -6,6 +6,7 @@ import { HttpService } from '../http-service/http.service';
 import { environment } from 'environments/environment';
 import { GenericHttpService } from '../generic-http-service/generic-http.service';
 import { SpinnerService } from '../../module/spinner/service/spinner.service';
+import { UpdatePassword } from '../../model/resetpassword';
 
 
 const USER_DATA = 'user_data';
@@ -54,6 +55,7 @@ export class AuthService extends HttpService {
   login(username, password): Observable<any> {
     return new Observable((observer) => {
       this.genericHttpService.basicPost(environment.AUTHENTICATION_URL, {username, password}).subscribe(response => {
+        response.username = username;
         this.setUser(response);
         this.setToken(response.token);
         observer.next(response);
@@ -75,8 +77,17 @@ export class AuthService extends HttpService {
     this.localStorageService.save(USER_DATA, user);
   }
 
-  getUserLocalStorage(): any {
+  getUserLocalStorage(): User {
     return this.localStorageService.get(USER_DATA);
   }
+
+  updatePassword(username, currentPassword, newPassword) {
+      const upass = new UpdatePassword();
+      upass.username = username;
+      upass.password = currentPassword;
+      upass.newPassword = newPassword;
+      return this.http.post(environment.PASSWORD_UPDATE_API_URL, JSON.stringify(upass), this.httpOptions);
+  }
+
 }
 

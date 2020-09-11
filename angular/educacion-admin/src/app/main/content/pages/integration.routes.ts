@@ -18,6 +18,8 @@ import { ALUMNO_DEF } from './alumno/alumno.def';
 import { AULAS_DEF } from './aulas/aulas.def';
 import { AULA_ALUMNO_DEF } from './aula_alumno/aula_alumno.def';
 import { EVENTO_AULA_DEF } from './evento_aula/evento_aula.def';
+import { UpdatePassword } from 'app/modules/fwk/core/model/resetpassword';
+import { PasswordUpdateComponent } from '../authentication/password-update/password-update.component';
 
 
 export const ROUTES: Routes = [
@@ -100,6 +102,10 @@ export const ROUTES: Routes = [
       path: EVENTO_AULA_DEF.navigation.url.split('/')[1],
       component: IntegrationComponent,
       canActivate: [AuthGuardService]
+    },
+    {
+      path: environment.URL_PASSWORD_UPDATE,
+      component: PasswordUpdateComponent
     }
 
 

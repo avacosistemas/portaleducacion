@@ -30,6 +30,7 @@ export const environment = {
     USER_CRUD_URL :  PREFIX_DOMAIN_API_AUTHENTICATION + '/users/',
     USER_VALIDATION_ADD_URL : PREFIX_DOMAIN_API_AUTHENTICATION + '/validationAdd',
     USER_VALIDATION_EDIT_URL  : PREFIX_DOMAIN_API_AUTHENTICATION + '/validationEdit',
+    PASSWORD_UPDATE_API_URL: PREFIX_DOMAIN_API_AUTHENTICATION + '/password/update/',
 
         /* Config General URl*/
     URL_ROOT: '',

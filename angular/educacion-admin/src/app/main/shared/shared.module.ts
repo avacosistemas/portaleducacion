@@ -19,6 +19,8 @@ import { ROUTES } from 'app/main/content/pages/integration.routes';
 import { LoginComponent } from '../content/authentication/login/login.component';
 import { IntegrationModule } from '../content/integration/integration.module';
 import { IntegrationComponent } from '../content/integration/integration.component';
+import { UpdatePassword } from 'app/modules/fwk/core/model/resetpassword';
+import { PasswordUpdateModule } from '../content/authentication/password-update/password-update.module';
 
 
 
@@ -51,6 +53,7 @@ const routes = [
         DashboardModule,
         IntegrationModule,
         FwkModule,
+        PasswordUpdateModule
     ],
     exports: [
         BrowserModule,
@@ -62,7 +65,8 @@ const routes = [
         DashboardModule,
         // AVACO
         FwkModule,
-        AppRoutingModule
+        AppRoutingModule,
+        PasswordUpdateModule
     ],
     providers: [
         AppConfigService,
