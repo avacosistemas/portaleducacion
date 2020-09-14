@@ -34,9 +34,24 @@ export const MATERIAS_CREATE_FORM_FIELDS_DEF = [
         key: 'materias_create_form_fields_def_field_idnivel',
         url: PREFIX_DOMAIN_API_EDUCACION + '/niveles/'
       }
-  }
+  },
+  dependencyKey: 'idMateria'
 },
-
+{
+  key: 'idMateria',
+  labelKey: 'materias_create_form_fields_def_field_descripcion',
+  required: true,
+  controlType: 'select',
+  options: {
+      elementLabel: 'descripcion',
+      elementValue: 'id',
+      fromWs: {
+        key: 'materias_create_form_fields_def_field_descripcion',
+        url: PREFIX_DOMAIN_API_EDUCACION + '/materias/nivel/'
+      }
+  },
+  stopLoad: true
+},
   // {
   //   key: 'nivel',
   //   labelKey: 'materias_create_form_fields_def_field_idnivel',
@@ -63,15 +78,15 @@ export const MATERIAS_CREATE_FORM_FIELDS_DEF = [
   //   controlType: 'hidden'
   // },
 
-  {
-    key: 'descripcion',
-    labelKey: 'materias_create_form_fields_def_field_descripcion',
-    label: 'Descripcion',
-    type: 'string',
-    controlType: 'textbox',
-    required:true,
-    maxLenght: 100
-  }, 
+  // {
+  //   key: 'descripcion',
+  //   labelKey: 'materias_create_form_fields_def_field_descripcion',
+  //   label: 'Descripcion',
+  //   type: 'string',
+  //   controlType: 'textbox',
+  //   required:true,
+  //   maxLenght: 100
+  // }, 
 
 
 
