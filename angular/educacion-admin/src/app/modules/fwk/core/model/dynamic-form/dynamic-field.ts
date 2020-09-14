@@ -100,6 +100,8 @@ export class DynamicField<T>{
   minValueMessage?: string;
   maxValueMessage?: string;
   lengthMessage?: string;
+  stopLoad?: boolean;
+  dependencyKey?: string;
   // Deprecated
   order?: number;
   conditions?: any;
