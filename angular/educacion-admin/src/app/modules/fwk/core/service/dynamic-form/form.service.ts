@@ -304,7 +304,9 @@ export class FormService {
           });
         }
 
-       this.setUpWsDef(field, form);
+       if (!field.stopLoad) {
+         this.setUpWsDef(field, form);
+       }
        const validators = this.formValidatorService.getValidators(field);
         form.addControl(field.key, validators.length > 0 ? new FormControl(value, validators)
         : new FormControl(value));
