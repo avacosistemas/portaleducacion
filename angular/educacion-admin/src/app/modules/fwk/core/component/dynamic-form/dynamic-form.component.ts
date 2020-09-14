@@ -292,8 +292,20 @@ export class DynamicFormComponent extends AbstractComponent implements OnInit {
   }
 
   onChangeSelect(obj, event){
-    console.log(event, obj);
+    if (event.dependencyKey) {
+      this.loadDependedSelect(event.dependencyKey, obj.value);
+    }
     this.forceEmitChangeEntity();
+  }
+
+  loadDependedSelect(dependencyKey: string, id: number) {
+    const selectDepended = this.fields.find(f => f.key === dependencyKey);
+    const originalUrl = selectDepended.options.fromWs.url;
+    selectDepended.options.fromData = [];
+
+    selectDepended.options.fromWs.url = `${selectDepended.options.fromWs.url}${id}`;
+    this.formService.setUpWsDef(selectDepended,  new FormGroup({}));
+    selectDepended.options.fromWs.url = originalUrl;
   }
 
   getOptionsWidth(options: any[]){
