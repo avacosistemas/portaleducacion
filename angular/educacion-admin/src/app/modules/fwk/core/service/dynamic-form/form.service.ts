@@ -349,7 +349,7 @@ export class FormService {
     }
   }
 
-  private setUpWsDef(field, form: FormGroup){
+  public setUpWsDef(field, form: FormGroup){
     if ((field.controlType === CONTROL_TYPE.select ||
           field.controlType === CONTROL_TYPE.autocomplete ||
           field.controlType === CONTROL_TYPE.picklist) &&
