@@ -27,5 +27,10 @@ export const MATERIA_PROFESOR_GRID_DEF = {
     'descNivel',
     'descMateria'
   ],
-  deleteAction: true
+  deleteAction: true,
+  deleteTernaria: true,
+  columnsTernaria: [
+    'id', // IdProfesor
+    'idMateria'
+  ]
 };
