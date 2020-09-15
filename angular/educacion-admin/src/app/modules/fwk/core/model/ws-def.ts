@@ -6,7 +6,8 @@ export const HTTP_METHODS = {
     post: 'POST',
     put: 'PUT',
     delete: 'DELETE',
-    get: 'GET'
+    get: 'GET',
+    delete_ternaria: 'DELETE_TERNARIA'
 };
 
 export class WsDef{         
