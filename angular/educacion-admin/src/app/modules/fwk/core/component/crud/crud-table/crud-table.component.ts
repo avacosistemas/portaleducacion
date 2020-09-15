@@ -127,7 +127,8 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
           icon: 'delete',
           ws: {
             url: this.urlDelete,
-            method: 'DELETE'
+            method: this.grid.deleteTernaria ? 'DELETE_TERNARIA' : 'DELETE',
+            querystring: this.grid.columnsTernaria
           }
         }];
         if (this.grid.actions){
