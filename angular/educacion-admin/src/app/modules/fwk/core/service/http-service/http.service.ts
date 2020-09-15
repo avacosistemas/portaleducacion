@@ -112,6 +112,16 @@ export class HttpService extends BaseService {
     });
     return observable;
   }
+  
+  httpDeleteTernaria(url): Observable<any> {
+    const observable = new Observable((observer) => {
+    this.http.delete(url, this.httpOptions)
+                .subscribe(response => this.subHandleResponse(observer, response),
+                            e => this.subHandleError(observer, e),
+                            () => observer.complete());
+    });
+    return observable;
+  }
 
   multipleDelete(entities: any[]): Observable<any> {
     if (this.dummyService) {
