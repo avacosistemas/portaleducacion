@@ -28,6 +28,27 @@ export class GenericHttpService extends HttpService {
         });
         return observable;
     }
+  
+    basicDeleteTernaria(url, data, querystring): Observable<any> {
+        if (querystring && data) {
+            let qsBuilder = '';
+            let andString = '';
+            querystring.forEach(key => {
+                if (key) {
+                    qsBuilder += andString + key + '/' + data[key];
+                    andString = '/';
+                }
+            });
+            url += qsBuilder;
+        }
+
+        const observable = new Observable((observer) => {
+        this.httpDeleteTernaria(url)
+            .subscribe(response => this.subHandleResponse(observer, response), error => observer.error(error), () => observer.complete());
+        });
+        return observable;
+    }
+
 
     basicPut(url, data): Observable<any> {
         const observable = new Observable((observer) => {
