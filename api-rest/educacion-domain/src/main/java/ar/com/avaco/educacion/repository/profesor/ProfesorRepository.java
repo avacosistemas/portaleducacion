@@ -19,13 +19,13 @@ public interface ProfesorRepository extends NJRepository<Long, Profesor>, Profes
 	  @Query(value = "SELECT p.foto FROM Profesor p WHERE p.id = :id")
 	  byte[] getFotoPerfil(@Param("id") Long id);
 	  
-	  @Query(value = "SELECT p FROM Profesor p JOIN FETCH p.materias m WHERE m.id = :idMateria")
+	  @Query(value = "SELECT distinct p FROM Profesor p JOIN FETCH p.materias m WHERE m.id = :idMateria")
 	  List<Profesor> findAllCatalogoDocenteByMateria(@Param("idMateria") Long idMateria, Sort orden);
 
-	  @Query(value = "SELECT p FROM Profesor p JOIN FETCH p.materias m WHERE m.nivel.id = :idNivel")
+	  @Query(value = "SELECT distinct p FROM Profesor p JOIN FETCH p.materias m WHERE m.nivel.id = :idNivel")
 	  List<Profesor> findAllCatalogoDocenteByNivel(@Param("idNivel") Integer idNivel, Sort orden);
 
-	  @Query(value = "SELECT p FROM Profesor p JOIN FETCH p.materias")
+	  @Query(value = "SELECT distinct p FROM Profesor p JOIN FETCH p.materias")
 	  List<Profesor> findAllProfesoresOrder(Sort orden);
   
 }

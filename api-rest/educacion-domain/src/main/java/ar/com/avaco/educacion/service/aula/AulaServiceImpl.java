@@ -27,7 +27,9 @@ import ar.com.avaco.educacion.service.aulaVirtual.AulaVirtualService;
 import ar.com.avaco.educacion.service.decidir.DecidirService;
 import ar.com.avaco.educacion.service.horas.disp.HorasAlumnoService;
 import ar.com.avaco.educacion.service.materia.MateriaService;
+import ar.com.avaco.educacion.service.notificacion.NotificacionService;
 import ar.com.avaco.educacion.service.profesor.ProfesorService;
+import ar.com.avaco.utils.DateUtils;
 
 @Transactional
 @Service("aulaService")
@@ -48,6 +50,8 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 	private AulaAlumnoService aulaAlumnoService;
 	
 	private AulaEventoService aulaEventoService;
+	
+	private NotificacionService notificacionService;
 	
 	@Autowired
 	public AulaServiceImpl(MateriaService materiaService, ProfesorService profesorService, AlumnoService alumnoService, DecidirService decidirService, HorasAlumnoService horasAlumnoService, AulaVirtualService aulaVirtualService) {
@@ -141,13 +145,29 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 		if (entity==null)
 			throw new BusinessException("Aula no existe.");
 		
+		boolean cambioDia=!DateUtils.toString(aula.getDia()).equals(DateUtils.toString(entity.getDia()));
 		entity.setDia(aula.getDia());
+		boolean cambioHora=!aula.getHora().equals(entity.getHora());
 		entity.setHora(aula.getHora());
+		boolean cambioMateria = !aula.getMateria().getId().equals(entity.getMateria().getId());
 		entity.setMateria(materiaService.get(aula.getMateria().getId()));
+		boolean cambiaProfesor = !aula.getProfesor().getId().equals(entity.getProfesor().getId());
+		Profesor profesorAnterior = entity.getProfesor();
 		entity.setProfesor(aula.getProfesor());
 		entity.setInstitucion(aula.getInstitucion());
+		
+		
 		entity=getRepository().save(entity);
 				
+		if (cambioDia || cambioHora || cambioMateria) {
+			notificacionService.notificarActualizacionAula(entity);
+		}
+		
+		if (cambiaProfesor) {
+			notificacionService.notificarCambioProfesor(profesorAnterior, entity);
+		}
+		
+		
 		return getAula(aula.getId());
 	}
 
@@ -291,6 +311,11 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 	
 	public void setAulaEventoService(AulaEventoService aulaEventoService) {
 		this.aulaEventoService = aulaEventoService;
+	}
+	
+	@Resource(name = "notificacionService")
+	public void setNotificacionService(NotificacionService notificacionService) {
+		this.notificacionService = notificacionService;
 	}
 	
 }

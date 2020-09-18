@@ -51,7 +51,7 @@ public class AulaAlumnoPortalDTO extends DTOEntity<Long> {
 		Calendar ahora = Calendar.getInstance();
 		ahora.setTime(DateUtils.getFechaYHoraActual());
 
-		this.idString = "Aula" + " #" + StringUtils.leftPad(id.toString(), 5, "0");
+		this.idString = aula.getIdString();
 
 		Calendar instance = Calendar.getInstance();
 		instance.setTime(aula.getDia());

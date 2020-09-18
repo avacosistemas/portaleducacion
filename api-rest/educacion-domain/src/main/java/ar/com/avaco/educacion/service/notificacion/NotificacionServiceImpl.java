@@ -2,11 +2,15 @@ package ar.com.avaco.educacion.service.notificacion;
 
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.ListUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -17,9 +21,13 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import ar.com.avaco.arc.core.service.MailSenderSMTPService;
+import ar.com.avaco.educacion.domain.entities.Alumno;
 import ar.com.avaco.educacion.domain.entities.Aula;
+import ar.com.avaco.educacion.domain.entities.AulaAlumno;
+import ar.com.avaco.educacion.domain.entities.Profesor;
 import ar.com.avaco.educacion.domain.entities.aulaVirtual.Clase;
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
+import ar.com.avaco.utils.DateUtils;
 
 @Service("notificacionService")
 public class NotificacionServiceImpl implements NotificacionService {
@@ -104,8 +112,25 @@ public class NotificacionServiceImpl implements NotificacionService {
 	private String headerGeneral;
 
 	@Value("template/footer-general.html")
-	private String footerGeneral;	
+	private String footerGeneral;
 	
+	@Value("TechOnline - Actualización Datos del Aula")
+	private String subjectActualizarAula;
+	
+	@Value("template/bodyActualizarAula.html")
+	private String bodyActualizarAula;
+	
+	@Value("TeachOnline - Baja de Asignación de Aula")
+	private String subjectCambioProfesorAnterior;
+
+	@Value("template/bodyCambioProfesorAnterior.html")
+	private String bodyCambioProfesorAnterior;
+	
+	@Value("TeachOnline - Asignación de Aula")
+	private String subjectCambioProfesorNuevo;
+	
+	@Value("template/bodyCambioProfesorNuevo.html")
+	private String bodyCambioProfesorNuevo;	
 
 	public NotificacionServiceImpl() {
 		ve = new VelocityEngine();
@@ -268,14 +293,45 @@ public class NotificacionServiceImpl implements NotificacionService {
 				getBody(params, bodyAsignacionAlumnoAula), null);		
 	}
 	
+	@Override
+	public void notificarActualizacionAula(Aula aula) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("idAula", aula.getIdString());
+		params.put("fecha", DateUtils.toString(aula.getDia()));
+		params.put("hora", aula.getHora().toString() + " Hs.");
+		params.put("materia", aula.getMateria().getDescripcion() + aula.getMateria().getNivel().getDescripcion());
+		
+		List<String> bcc = aula.getAlumnos().stream().map(aa -> aa.getAlumno().getEmail()).collect(Collectors.toList());
+		bcc.add(aula.getProfesor().getEmail());
+		mailSenderSMTPService.sendMail(from, new String[0], bcc.toArray(new String[0]), subjectActualizarAula, getBody(params, bodyActualizarAula), null);
+				
+	}
+	
+	@Override
+	public void notificarCambioProfesor(Profesor profesorAnterior, Aula aula) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("idAula", aula.getIdString());
+		params.put("fecha", DateUtils.toString(aula.getDia()));
+		params.put("hora", aula.getHora().toString() + " Hs.");
+		params.put("materia", aula.getMateria().getDescripcion() + aula.getMateria().getNivel().getDescripcion());
+		params.put("profesor", profesorAnterior.getNombreApellido());
+		mailSenderSMTPService.sendMail(from, profesorAnterior.getEmail(), subjectCambioProfesorAnterior, getBody(params, bodyCambioProfesorAnterior), null);
+
+		params.put("profesor", aula.getProfesor().getNombreApellido());
+		mailSenderSMTPService.sendMail(from, aula.getProfesor().getEmail(), subjectCambioProfesorNuevo, getBody(params, bodyCambioProfesorNuevo), null);
+	}
 	
 	@Resource(name = "mailSenderSMTPService")
 	public void setMailSenderSMTPService(MailSenderSMTPService mailSenderSMTPService) {
 		this.mailSenderSMTPService = mailSenderSMTPService;
 	}
 
+	
+	
 	public void setFrom(String from) {
 		this.from = from;
 	}
+
+	
 
 }

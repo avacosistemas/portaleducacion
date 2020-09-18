@@ -23,5 +23,8 @@ public interface MailSenderSMTPService {
 	 * @param msg
 	 * @param archivos
 	 */
-	public void sendMail(String from, String[] to, String subject, List<String> msg, List<File> archivos);		
+	public void sendMail(String from, String[] to, String[] bccTo, String subject, String msg, List<File> archivos);
+	
+	public void sendMail(String from, String[] to, String[] bccTo, String asunto, List<String> msg, List<File> archivos);
+	
 }

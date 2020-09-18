@@ -66,9 +66,9 @@ public class PreguntaRespuestaAulaDTO extends DTOEntity<Long> {
 		this.setIdProfesor(preguntaRta.getProfesor().getId());
 		this.setPregunta(preguntaRta.getPregunta());
 		this.setRespuesta(preguntaRta.getRespuesta());
-		this.setFechaPregunta(DateUtils.toString(preguntaRta.getFechaPregunta(), DateUtils.FULL_24_HS));
+		this.setFechaPregunta(DateUtils.toString(preguntaRta.getFechaPregunta(), DateUtils.PATTERN_FULL_24_HS));
 		if (preguntaRta.getFechaRespuesta() != null) {
-			this.setFechaRespuesta(DateUtils.toString(preguntaRta.getFechaRespuesta(), DateUtils.FULL_24_HS));
+			this.setFechaRespuesta(DateUtils.toString(preguntaRta.getFechaRespuesta(), DateUtils.PATTERN_FULL_24_HS));
 		}
 		this.setNombreAlumno(preguntaRta.getAlumno().getNombreApellido());
 	}

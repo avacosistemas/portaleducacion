@@ -12,7 +12,7 @@ import java.util.Date;
 public class DateUtils {
 
 	public final static String PATTERN_yyyyMMdd = "yyyyMMdd";
-	public final static String FULL_24_HS = "dd/MM/yyyy HH:mm:ss";
+	public final static String PATTERN_FULL_24_HS = "dd/MM/yyyy HH:mm:ss";
 
 	public static Date toDate(LocalDate date) {
 		return Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());

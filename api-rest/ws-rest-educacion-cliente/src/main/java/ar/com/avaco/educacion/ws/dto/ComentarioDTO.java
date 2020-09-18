@@ -21,7 +21,7 @@ public class ComentarioDTO extends DTOEntity<Long> {
 	public ComentarioDTO(Comentario comentario) {
 		this.id = comentario.getId();
 		this.nombre = comentario.getNombre();
-		this.fechaHora = DateUtils.toString(comentario.getFecha(), DateUtils.FULL_24_HS);
+		this.fechaHora = DateUtils.toString(comentario.getFecha(), DateUtils.PATTERN_FULL_24_HS);
 		this.comentario = comentario.getComentario();
 	}
 	

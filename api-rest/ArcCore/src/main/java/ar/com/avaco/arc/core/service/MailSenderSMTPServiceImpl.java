@@ -44,7 +44,14 @@ public class MailSenderSMTPServiceImpl implements MailSenderSMTPService {
 		List<String> messages = new ArrayList<String>();
 		messages.add(msg);
 		String[] arrayTo = {to};
-		sendMail(from, arrayTo, subject, messages, archivos);
+		sendMail(from, arrayTo, null, subject, messages, archivos);
+	}
+	
+	@Override
+	public void sendMail(String from, String[] to, String[] bccTo, String subject, String msg, List<File> archivos) {
+		List<String> messages = new ArrayList<String>();
+		messages.add(msg);
+		sendMail(from, to, bccTo, subject, msg, archivos);		
 	}
 	
 	/**
@@ -57,7 +64,7 @@ public class MailSenderSMTPServiceImpl implements MailSenderSMTPService {
 	 * @param archivos List<File>
 	 */
 	@Async
-	public void sendMail(String from, String[] to, String asunto, List<String> msg, List<File> archivos){
+	public void sendMail(String from, String[] to, String[] bccTo, String asunto, List<String> msg, List<File> archivos){
 		JavaMailSenderImpl mail = (JavaMailSenderImpl) mailSender;
 		MimeMessage mimeMessage = mail.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
@@ -68,7 +75,12 @@ public class MailSenderSMTPServiceImpl implements MailSenderSMTPService {
 			if(to == null){
 				throw new MessagingException("No esta seteado el destinatario");
 			}
-			helper.setTo(to);		
+			if (to != null) {
+				helper.setTo(to);
+			}
+			if (bccTo != null) {
+				helper.setBcc(bccTo);
+			}
 			helper.setSubject(asunto);			
 			for (String body : msg) {
 				sbText.append(body + "\n<br>");
@@ -92,4 +104,6 @@ public class MailSenderSMTPServiceImpl implements MailSenderSMTPService {
 			logger.error(errorMessage , e);
 		}
 	}
+
+	
 }

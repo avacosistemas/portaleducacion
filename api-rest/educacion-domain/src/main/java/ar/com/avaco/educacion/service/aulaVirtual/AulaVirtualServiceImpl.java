@@ -34,6 +34,9 @@ public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaReposi
 
 	private BigBlueButtonApi api;
 
+	@Value("${bbb.logoutUrl}")
+	private String logoutUrl;
+
 	public AulaVirtualServiceImpl() {
 		super();
 	}
@@ -51,7 +54,6 @@ public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaReposi
 		}
 		
 		try {
-			String logoutUrl=null;
 			idMeeting = api.createMeeting(aula.generatedIdAula(profesor), welcomeMessage, null, null, null, null, logoutUrl);
 			String urlSala = api.getJoinMeetingURL(profesor.getUsername(), idMeeting, "mp", null, profesor.getId());
 

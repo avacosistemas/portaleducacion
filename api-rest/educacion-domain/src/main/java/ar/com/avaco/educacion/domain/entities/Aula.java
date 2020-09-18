@@ -19,6 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.StringUtils;
+
 @Entity
 @Table(name = "AULA")
 @SequenceGenerator(name = "AULA_SEQ", sequenceName = "AULA_SEQ", allocationSize = 1)
@@ -183,6 +185,10 @@ public class Aula extends ar.com.avaco.arc.core.domain.Entity<Long> {
 
 	public void setEventosAulas(Set<AulaEventos> eventosAulas) {
 		this.eventosAulas = eventosAulas;
+	}
+
+	public String getIdString() {
+		return "Aula" + " #" + StringUtils.leftPad(id.toString(), 5, "0");
 	}
 
 	// TODO Agregar hashCode, equals y toString cuando se completen todos los

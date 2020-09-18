@@ -1,6 +1,8 @@
 package ar.com.avaco.educacion.ws.controller;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -27,6 +29,7 @@ public class MateriaProfesorRestController extends AbstractDTORestController<Mat
 	@RequestMapping(value = "/materiasprofesor/{idProfesor}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> listByProfesor(@PathVariable("idProfesor") Long idProfesor) throws BusinessException {
 		List<MateriaProfesorFullDTO> listMateriasProfesor = this.service.listMateriasProfesor(idProfesor);
+		listMateriasProfesor = listMateriasProfesor.stream().sorted(Comparator.comparing(MateriaProfesorFullDTO::getDescMateria)).collect(Collectors.toList() );
     	JSONResponse response = new JSONResponse();
 		response.setData(listMateriasProfesor);
 		response.setStatus(JSONResponse.OK);
