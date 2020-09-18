@@ -84,6 +84,7 @@ export class GenericHttpService extends HttpService {
         switch (ws.method.toUpperCase()){
             case HTTP_METHODS.post: return this.basicPost(ws.url, data);
             case HTTP_METHODS.delete: return this.basicDelete(ws.url, data);
+            case HTTP_METHODS.delete_ternaria: return this.basicDeleteTernaria(ws.url, data, ws.querystring);
             case HTTP_METHODS.put: return this.basicPut(ws.url, data);
             case HTTP_METHODS.get: return this.basicGet(ws.url, data, ws.filter, ws.querystring);
         }
