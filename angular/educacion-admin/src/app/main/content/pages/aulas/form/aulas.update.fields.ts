@@ -23,7 +23,9 @@ export const AULAS_UPDATE_FORM_FIELDS_DEF = [
           url: PREFIX_DOMAIN_API_EDUCACION + '/profesores/'
         }
     },
-    dependencyKey: 'idMateria'
+    dependencies: {
+      parentDependencyKey: 'idMateria',
+    }
   },
 
   {
@@ -32,14 +34,17 @@ export const AULAS_UPDATE_FORM_FIELDS_DEF = [
     required: true,
     controlType: 'select',
     options: {
-        elementLabel: 'descNivel',
+        elementLabel: 'descMateria',
         elementValue: 'idMateria',
         fromWs: {
           key: 'alumno_create_form_fields_def_field_idinstitucion',
           url: PREFIX_DOMAIN_API_EDUCACION + '/materiasprofesor/'
         }
     },
-    stopLoad: true
+    dependencies: {
+      parentDependencyKey: 'idProfesor',
+      stopLoad: true
+    }
   },
 
   {

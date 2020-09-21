@@ -39,7 +39,9 @@ export const AULAS_CREATE_FORM_FIELDS_DEF = [
           url: PREFIX_DOMAIN_API_EDUCACION + '/profesores/'
         }
     },
-    dependencyKey: 'idMateria'
+    dependencies: {
+      dependencyKey: 'idMateria'
+    }
   },
 
   {
@@ -48,14 +50,16 @@ export const AULAS_CREATE_FORM_FIELDS_DEF = [
     required: true,
     controlType: 'select',
     options: {
-        elementLabel: 'descNivel',
+        elementLabel: 'descMateria',
         elementValue: 'idMateria',
         fromWs: {
           key: 'alumno_create_form_fields_def_field_idinstitucion',
           url: PREFIX_DOMAIN_API_EDUCACION + '/materiasprofesor/'
         }
     },
-    stopLoad: true
+    dependencies: {
+      stopLoad: true
+    }
   },
   
   
@@ -87,7 +91,7 @@ export const AULAS_CREATE_FORM_FIELDS_DEF = [
     type: 'string',
     controlType: 'number',
     required: true,
-    maxValue:23,
-    minValue:0
+    maxValue: 23,
+    minValue: 0
   }
 ];

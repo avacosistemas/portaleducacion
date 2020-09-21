@@ -50,7 +50,9 @@ export const MATERIA_PROFESOR_CREATE_FORM_FIELDS_DEF = [
         url: PREFIX_DOMAIN_API_EDUCACION + '/niveles/'
       }
   },
-  dependencyKey: 'idMateria'
+  dependencies: {
+    dependencyKey: 'idMateria'
+  }
 },
 {
   key: 'idMateria',
@@ -65,7 +67,9 @@ export const MATERIA_PROFESOR_CREATE_FORM_FIELDS_DEF = [
         url: PREFIX_DOMAIN_API_EDUCACION + '/materias/nivel/'
       }
   },
-  stopLoad: true
+  dependencies: {
+    stopLoad: true
+  }
 },
   // {
   //   key: 'materia',

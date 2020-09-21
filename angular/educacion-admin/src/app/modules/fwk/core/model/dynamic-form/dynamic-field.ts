@@ -100,8 +100,7 @@ export class DynamicField<T>{
   minValueMessage?: string;
   maxValueMessage?: string;
   lengthMessage?: string;
-  stopLoad?: boolean;
-  dependencyKey?: string;
+  dependencies?: Dependencies;
   // Deprecated
   order?: number;
   conditions?: any;
@@ -122,4 +121,10 @@ export class DynamicField<T>{
     this.controlType = options.controlType || '';
   }
 
+}
+
+export class Dependencies {
+  stopLoad?: boolean;
+  dependencyKey?: string;
+  parentDependencyKey?: string;
 }

@@ -29,11 +29,10 @@ import { WsDef, HTTP_METHODS } from '../../model/ws-def';
 import { GenericHttpService } from '../generic-http-service/generic-http.service';
 import { GridDef } from '../../model/component-def/grid-def';
 import { ActionDef } from '../../model/component-def/action-def';
-import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
-import { DynamicFieldConditionIf, CONDITION_COMPARE } from '../../model/dynamic-form/dynamic-field-condition-if';
+import { ActivatedRoute } from '@angular/router';
+import { DynamicFieldConditionIf } from '../../model/dynamic-form/dynamic-field-condition-if';
 import { FilterService, FILTER_TYPE } from '../filter-service/filter.service';
 import { FormDef } from '../../model/form-def';
-import { BehaviorSubject } from 'rxjs';
 
 
 const moment: any = _rollupMoment || _moment;
@@ -304,12 +303,20 @@ export class FormService {
           });
         }
 
-       if (!field.stopLoad) {
-         this.setUpWsDef(field, form);
-       }
-       const validators = this.formValidatorService.getValidators(field);
+        const validators = this.formValidatorService.getValidators(field);
         form.addControl(field.key, validators.length > 0 ? new FormControl(value, validators)
         : new FormControl(value));
+
+       if ((field.dependencies && !field.dependencies.stopLoad) || !field.dependencies) {
+          this.setUpWsDef(field, form);
+       } else if (field.dependencies && field.dependencies.stopLoad &&
+                  form.controls[field.dependencies.parentDependencyKey] &&
+                  form.controls[field.dependencies.parentDependencyKey].value) {
+          const originalUrl = field.options.fromWs.url;
+          field.options.fromWs.url = `${field.options.fromWs.url}${form.controls[field.dependencies.parentDependencyKey].value}`;
+          this.setUpWsDef(field, form);
+          field.options.fromWs.url = originalUrl;
+       }
 
         // onFieldsChanges
         if (onFieldsChanges) {
