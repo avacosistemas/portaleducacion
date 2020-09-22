@@ -24,7 +24,7 @@ export const AULAS_UPDATE_FORM_FIELDS_DEF = [
         }
     },
     dependencies: {
-      parentDependencyKey: 'idMateria',
+      dependencyKey: 'idMateria',
     }
   },
 
