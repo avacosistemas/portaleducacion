@@ -58,6 +58,8 @@ import { BackButtonComponent } from './component/back-button/backbutton.componen
 import { AppCrudComponent } from './shared/view/crud/app-crud.component';
 import { AutocompleteComponent } from './component/autocomplete/autocomplete.component';
 import { AutocompleteService } from './component/autocomplete/autocomplete.service';
+import { DpDatePickerModule } from 'ng2-date-picker';
+import { DatepickerTimeComponent } from './component/dynamic-form/datepicker-time/datepicker-time.component';
 
 @NgModule({
   imports: [CommonModule,
@@ -67,7 +69,8 @@ import { AutocompleteService } from './component/autocomplete/autocomplete.servi
             ReactiveFormsModule,
             FlexLayoutModule,
             ColorPickerModule,
-            RouterModule],
+            RouterModule,
+            DpDatePickerModule],
   entryComponents: [
                     ColorPickerComponent,
                     BackButtonComponent,
@@ -114,7 +117,8 @@ import { AutocompleteService } from './component/autocomplete/autocomplete.servi
                  FormGridModalComponent,
                  ColorPickerComponent,
                  TagsComponent,
-                 FloatComponent],
+                 FloatComponent,
+                 DatepickerTimeComponent],
 
   exports: [DynamicFormComponent,
             CrudModalComponent,
@@ -144,7 +148,8 @@ import { AutocompleteService } from './component/autocomplete/autocomplete.servi
             FormGridModalComponent,
             ColorPickerComponent,
             TagsComponent,
-            FloatComponent],
+            FloatComponent,
+            DatepickerTimeComponent],
   providers: [
               FuseConfigService,
               GenericHttpService,
