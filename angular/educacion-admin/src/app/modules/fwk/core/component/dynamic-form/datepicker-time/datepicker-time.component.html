@@ -1,0 +1,32 @@
+<!-- <div [formGroup]="parentForm">
+  <mat-form-field>
+    <input
+      matInput
+      
+      [matDatetimepicker]="datetimePicker">
+    <mat-datetimepicker-toggle [for]="datetimePicker" matSuffix></mat-datetimepicker-toggle>
+    <mat-datetimepicker
+      #datetimePicker
+      type="datetime"
+      openOnFocus="true"
+      timeInterval="5">
+    </mat-datetimepicker>
+      <mat-error matTooltip="{{getMessageErrorValidation(field)}}" *ngIf="parentForm.controls[field.key]?.invalid ">
+        {{getMessageErrorValidation(field)}}
+      </mat-error>
+    </mat-form-field>
+</div> -->
+<div [formGroup]="parentForm">
+  <mat-form-field>
+    <input matInput
+           [formControlName]="field?.key"
+           placeholder="{{field.label}}"
+           [dpDayPicker]="config"
+           mode="daytime"
+           theme="dp-material"
+           attachTo=".mat-input-wrapper" />
+      <mat-error matTooltip="{{getMessageErrorValidation(field)}}" *ngIf="parentForm.controls[field.key]?.invalid ">
+        {{getMessageErrorValidation(field)}}
+      </mat-error>
+    </mat-form-field>
+</div>
