@@ -3,6 +3,7 @@ package ar.com.avaco.educacion.service.notificacion;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,6 @@ public class NotificacionServiceImpl implements NotificacionService {
 
 	@Value("teachonline@teachonline.com.ar")
 	private String from;
-
 
 	@Value("TeachOnline - Restablecimiento de contraseña")
 	private String subjectResetoPasswordCliente;
@@ -132,11 +132,20 @@ public class NotificacionServiceImpl implements NotificacionService {
 	@Value("template/bodyCambioProfesorNuevo.html")
 	private String bodyCambioProfesorNuevo;	
 
+	@Value("avacosistemas@gmail.com")
+	private String supportMail;
+	
 	public NotificacionServiceImpl() {
 		ve = new VelocityEngine();
 		ve.setProperty(RuntimeConstants.RESOURCE_LOADER, CLASSPATH);
 		ve.setProperty(CLASSPATH_RESOURCE_LOADER_CLASS, ClasspathResourceLoader.class.getName());
 		ve.init();
+	}
+
+	public void notificarInicioServer() {
+		mailSenderSMTPService.sendMail(from, supportMail, "Inicio Server Tomcat",
+				"Se inicio el server. " + DateUtils.toString(new Date(), DateUtils.PATTERN_FULL_24_HS), null);
+		
 	}
 
 	private String getHeader() {
