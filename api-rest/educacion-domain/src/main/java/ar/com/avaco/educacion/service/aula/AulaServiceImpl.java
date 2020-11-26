@@ -152,8 +152,12 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 		boolean cambioMateria = !aula.getMateria().getId().equals(entity.getMateria().getId());
 		entity.setMateria(materiaService.get(aula.getMateria().getId()));
 		boolean cambiaProfesor = !aula.getProfesor().getId().equals(entity.getProfesor().getId());
+		
 		Profesor profesorAnterior = entity.getProfesor();
-		entity.setProfesor(aula.getProfesor());
+		
+		Profesor nuevoProfesor = profesorService.get(aula.getProfesor().getId());
+		
+		entity.setProfesor(nuevoProfesor);
 		entity.setInstitucion(aula.getInstitucion());
 		
 		

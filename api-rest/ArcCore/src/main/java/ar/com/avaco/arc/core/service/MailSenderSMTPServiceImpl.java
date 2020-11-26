@@ -51,7 +51,7 @@ public class MailSenderSMTPServiceImpl implements MailSenderSMTPService {
 	public void sendMail(String from, String[] to, String[] bccTo, String subject, String msg, List<File> archivos) {
 		List<String> messages = new ArrayList<String>();
 		messages.add(msg);
-		sendMail(from, to, bccTo, subject, msg, archivos);		
+		sendMail(from, to, bccTo, subject, messages, archivos);		
 	}
 	
 	/**

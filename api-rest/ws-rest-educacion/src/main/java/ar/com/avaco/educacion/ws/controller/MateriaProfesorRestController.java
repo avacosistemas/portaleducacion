@@ -60,7 +60,7 @@ public class MateriaProfesorRestController extends AbstractDTORestController<Mat
 		return super.delete(id);
 	}
 	
-	@RequestMapping(path = "/materiasprofesor/profesor/{idProfesor}/materia/{idMateria}", method = RequestMethod.DELETE)
+	@RequestMapping(path = "/materiasprofesor/id/{idProfesor}/idMateria/{idMateria}", method = RequestMethod.DELETE)
 	public ResponseEntity<JSONResponse> removeMateriaProfesor(@PathVariable("idProfesor") Long idProfesor, @PathVariable("idMateria") Long idMateria) throws BusinessException {
 		service.removeMateriaProfesor(idProfesor, idMateria);
 		JSONResponse response = new JSONResponse();

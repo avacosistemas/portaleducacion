@@ -303,7 +303,8 @@ public class NotificacionServiceImpl implements NotificacionService {
 		
 		List<String> bcc = aula.getAlumnos().stream().map(aa -> aa.getAlumno().getEmail()).collect(Collectors.toList());
 		bcc.add(aula.getProfesor().getEmail());
-		mailSenderSMTPService.sendMail(from, new String[0], bcc.toArray(new String[0]), subjectActualizarAula, getBody(params, bodyActualizarAula), null);
+		String[] to = {"info@teachonline.com.ar"};
+		mailSenderSMTPService.sendMail(from, to, bcc.toArray(new String[0]), subjectActualizarAula, getBody(params, bodyActualizarAula), null);
 				
 	}
 	
