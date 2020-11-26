@@ -33,5 +33,7 @@ public interface NotificacionService {
 
 	void notificarCambioProfesor(Profesor profesorAnterior, Aula entity);
 	
+	void notificarInicioServer();
+		
 
 }
