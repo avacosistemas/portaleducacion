@@ -3,9 +3,11 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
+// ENTORNO LOCAL
 // export const PREFIX_DOMAIN_API_EDUCACION =  'http://localhost:8080/ws-rest-educacion';
 // export const PREFIX_DOMAIN_API_AUTHENTICATION =  'http://localhost:8080/ws-rest-authentication';
 
+// ENTORNO PRODUCCION
 export const PREFIX_DOMAIN_API_EDUCACION =  'https://api.teachonline.com.ar/ws-rest-educacion';
 export const PREFIX_DOMAIN_API_AUTHENTICATION =  'https://api.teachonline.com.ar/ws-rest-authentication';
 
