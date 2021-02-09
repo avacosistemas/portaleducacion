@@ -22,13 +22,14 @@ public class AulaVirtualServiceBBBImplTest {
 	@Before
 	public void setUp() throws Exception {
 		aulaVirtualServiceImpl=new AulaVirtualServiceImpl();
+		aulaVirtualServiceImpl.setUrl("https://aulavirtual.teachonline.com.ar/bigbluebutton/");
+		aulaVirtualServiceImpl.setSalt("f4JzhgiFV4vW2KNutq5Oxxz630uvwvw2jY5ARsDLY8Q");
 		clase=null;
 	}
 
 	@Test
 	public void A_testCrearSala() {
-		
-		
+				
 		Materia materia=new Materia();
 		materia.setDescripcion("Amasado de la masa madre");
 		
@@ -36,6 +37,7 @@ public class AulaVirtualServiceBBBImplTest {
 		profesor.setId(new Long(543));
 		profesor.setNombre("Gluten");
 		profesor.setApellido("Morgen");
+		profesor.setUsername("profesor");
 		
 		Aula aula=new Aula();
 		aula.setMateria(materia);

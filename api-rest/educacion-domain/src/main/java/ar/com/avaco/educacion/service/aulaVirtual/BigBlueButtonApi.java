@@ -177,13 +177,22 @@ public class BigBlueButtonApi {
 			Boolean guest, Long userId) throws AulaVirtualException {
 		String base_url_join = BigBlueButtonURL + "api/join?";
 		String clientURL_param = "";// "&redirect=false";
+		String webcamQuality = "";
 		//TODO Ver porque no toma la session si proviene de otro browser para podes mantener por back el join y que solo reciba el cliente la url resuelta
 		
 		if ((clientURL != null) && !clientURL.equals("")) {
 			clientURL_param = "&redirectClient=true&clientURL=" + urlEncode(clientURL);
 		}
+		
+		if (password.equals("mp")) {
+			webcamQuality = "&userdata-bbb_preferred_camera_profile=high";
+		} else {
+			webcamQuality = "&userdata-bbb_preferred_camera_profile=low";
+		}
+		
 		String join_parameters = "meetingID=" + urlEncode(meetingID) + "&fullName=" + urlEncode(username) +  "&userID="+urlEncode(userId.toString())+ "&password="
-				+ urlEncode(password) + "&guest=" + urlEncode(guest.toString()) + clientURL_param;
+				+ urlEncode(password) + "&guest=" + urlEncode(guest.toString()) + webcamQuality + clientURL_param;
+				
 		String result=base_url_join + join_parameters + "&checksum=" + checksum("join" + join_parameters + salt);
 		return result;
 //		Document doc = null;

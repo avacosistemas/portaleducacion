@@ -123,4 +123,22 @@ public class AulaVirtualServiceImpl extends NJBaseService<Long, Aula, AulaReposi
 		this.welcomeMessage = welcomeMessage;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	
+	
 }
