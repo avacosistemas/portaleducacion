@@ -2,11 +2,8 @@ package ar.com.avaco.educacion.ws.service.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.OptionalDouble;
-import java.util.Set;
-import java.util.stream.DoubleStream;
 
 import javax.annotation.Resource;
 
@@ -27,6 +24,7 @@ import ar.com.avaco.educacion.service.comentario.ComentarioService;
 import ar.com.avaco.educacion.service.pregresp.PreguntaRespuestaService;
 import ar.com.avaco.educacion.service.profesor.ProfesorService;
 import ar.com.avaco.educacion.ws.dto.AlumnoPerfilDTO;
+import ar.com.avaco.educacion.ws.dto.AulaAbiertaInstitucionDTO;
 import ar.com.avaco.educacion.ws.dto.AulaAlumnoPortalDTO;
 import ar.com.avaco.educacion.ws.dto.ComentarioDTO;
 import ar.com.avaco.educacion.ws.dto.PreguntaDTO;
@@ -43,7 +41,8 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	private AulaService aulaService;
 	private AulaAlumnoService aulaAlumnoService;
 	private ProfesorService profesorService;
-
+	private AlumnoService alumnoService;
+	
 	// Service
 	@Override
 	@Resource(name = "alumnoService")
@@ -157,6 +156,17 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	}
 	
 	@Override
+	public List<AulaAbiertaInstitucionDTO> listarAulasAbiertesMiInstitucion(Long idAlumno) {
+		Long idInstitucion = alumnoService.get(idAlumno).getInstitucion().getId();
+		List<Aula> aulasAbiertasInstitucion = aulaService.getAulasAbiertasInstitucion(idInstitucion);
+		List<AulaAbiertaInstitucionDTO> aulasDTOS = new ArrayList<>();
+		for (Aula aula : aulasAbiertasInstitucion) {
+			aulasDTOS.add(new AulaAbiertaInstitucionDTO(aula));
+		}
+		return aulasDTOS;
+	}
+	
+	@Override
 	protected Alumno convertToEntity(AlumnoPerfilDTO dto) {
 		// TODO Auto-generated method stub
 		return null;
@@ -193,4 +203,9 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 		this.profesorService = profesorService;
 	}
 
+	@Resource(name = "alumnoService")
+	public void setAlumnoService(AlumnoService alumnoService) {
+		this.alumnoService = alumnoService;
+	}
+	
 }

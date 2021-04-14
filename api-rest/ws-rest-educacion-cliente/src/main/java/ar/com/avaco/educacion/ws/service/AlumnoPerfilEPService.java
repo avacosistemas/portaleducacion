@@ -4,6 +4,7 @@ import java.util.List;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.ws.dto.AlumnoPerfilDTO;
+import ar.com.avaco.educacion.ws.dto.AulaAbiertaInstitucionDTO;
 import ar.com.avaco.educacion.ws.dto.AulaAlumnoPortalDTO;
 import ar.com.avaco.educacion.ws.dto.ComentarioDTO;
 import ar.com.avaco.educacion.ws.dto.PreguntaDTO;
@@ -27,5 +28,7 @@ public interface AlumnoPerfilEPService extends CRUDEPService<Long, AlumnoPerfilD
 	void calificarAula(Long idClase, Long id, PuntuacionDTO puntuacionDTO) throws BusinessException;
 
 	AulaAlumnoPortalDTO getAula(Long idClase, Long idAlumno);
+
+	List<AulaAbiertaInstitucionDTO> listarAulasAbiertesMiInstitucion(Long idAlumno);
 
 }

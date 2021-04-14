@@ -311,6 +311,10 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 			throw new BusinessException(e.getMessage());
 		}
 	}
+	
+	public List<Aula> getAulasAbiertasInstitucion(Long idInstitucion) {
+		return this.getRepository().listAulasAbiertasByInstitucion(idInstitucion);
+	}
 
 	
 	public void setAulaEventoService(AulaEventoService aulaEventoService) {

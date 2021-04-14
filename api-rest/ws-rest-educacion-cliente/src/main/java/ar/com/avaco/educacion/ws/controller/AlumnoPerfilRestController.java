@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.ws.dto.AlumnoPerfilDTO;
+import ar.com.avaco.educacion.ws.dto.AulaAbiertaInstitucionDTO;
 import ar.com.avaco.educacion.ws.dto.AulaAlumnoPortalDTO;
 import ar.com.avaco.educacion.ws.dto.ComentarioDTO;
 import ar.com.avaco.educacion.ws.dto.PreguntaDTO;
@@ -84,6 +85,36 @@ public class AlumnoPerfilRestController extends AbstractDTORestController<Alumno
 			response.setStatus(JSONResponse.ERROR);
 		}
         return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/alumno/aulasabiertas/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> listarAulasAbiertas(@PathVariable("id") Long id) throws Exception {
+		Long idCliente = ClienteUtils.getClienteLogueadoId();
+		JSONResponse response = new JSONResponse();
+		if (idCliente.equals(id)) {
+			List<AulaAlumnoPortalDTO> aulas =  this.service.listarMisAulas(id);
+			response.setData(aulas);
+			response.setStatus(JSONResponse.OK);
+		} else {
+			response.setData("No es alumno o no coinciden los parametros");
+			response.setStatus(JSONResponse.ERROR);
+		}
+		return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/alumno/aulasabiertasinstitucion/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> listarAulasAbiertasInstitucion(@PathVariable("id") Long id) throws Exception {
+		Long idCliente = ClienteUtils.getClienteLogueadoId();
+		JSONResponse response = new JSONResponse();
+		if (idCliente.equals(id)) {
+			List<AulaAbiertaInstitucionDTO> aulas =  this.service.listarAulasAbiertesMiInstitucion(id);
+			response.setData(aulas);
+			response.setStatus(JSONResponse.OK);
+		} else {
+			response.setData("No es alumno o no coinciden los parametros");
+			response.setStatus(JSONResponse.ERROR);
+		}
+		return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/alumno/{idAlumno}/detalleclase/{idClase}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

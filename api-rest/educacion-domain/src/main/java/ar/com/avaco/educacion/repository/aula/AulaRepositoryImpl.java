@@ -1,5 +1,7 @@
 package ar.com.avaco.educacion.repository.aula;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,6 +11,7 @@ import org.hibernate.FetchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.w3c.dom.css.CSSUnknownRule;
 
 import ar.com.avaco.arc.core.component.bean.repository.NJBaseRepository;
 import ar.com.avaco.educacion.domain.entities.Aula;
@@ -43,6 +46,30 @@ public class AulaRepositoryImpl extends NJBaseRepository<Long, Aula> implements 
 //		criteria.setFetchMode("profesores", FetchMode.JOIN);
 //		criteria.setFetchMode("alumnos", FetchMode.JOIN); 		
 		return criteria.list();
+	}
+
+	@Override
+	public List<Aula> listAulasAbiertasByInstitucion(Long idInstitucion) {
+		
+		Integer hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+		Calendar now = Calendar.getInstance();
+		now.set(Calendar.HOUR, 0);
+		now.set(Calendar.MINUTE, 0);
+		now.set(Calendar.SECOND, 0);
+		Date nowDate = now.getTime();
+		
+		
+		Criteria criteria = getCurrentSession().createCriteria(getHandledClass());
+		criteria.add(Restrictions.ge("dia", nowDate));
+		criteria.add(Restrictions.ge("hora", hour));
+		criteria.createAlias("institucion", "institucion");
+		criteria.add(Restrictions.eq("institucion.id", idInstitucion));
+		
+		criteria.addOrder(Order.desc("fecha"));
+		criteria.addOrder(Order.desc("hora"));
+		
+		return criteria.list();
+		
 	}
 	
 

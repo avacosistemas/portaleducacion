@@ -10,4 +10,6 @@ public interface AulaRepositoryCustom {
 
 	List<Aula> listAulas();
 
+	List<Aula> listAulasAbiertasByInstitucion(Long idInstitucion);
+	
 }
