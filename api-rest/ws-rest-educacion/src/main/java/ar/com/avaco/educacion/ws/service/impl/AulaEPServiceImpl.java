@@ -194,9 +194,9 @@ public class AulaEPServiceImpl extends CRUDEPBaseService<Long, AulaDTO, Aula, Au
 		
 		if (tipo.equals("MODERATOR")) {
 			return TipoUsuario.PROFESOR;
-		} else if (tipo.equals("ATTENDEE")) {
+		} else if (tipo.equals("ATTENDEE") || tipo.equals("VIEWER") ) {
 			return TipoUsuario.ALUMNO;
-		}
+		} 
 		return null;
 	}
 
