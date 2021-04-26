@@ -104,5 +104,7 @@ public interface AulaService extends NJService<Long, Aula> {
 	List<Aula> listByProfesorId(Long id);
 
 	List<Aula> getAulasAbiertasInstitucion(Long idInstitucion);
+
+	void notificarSolicitudUnion(Long idAula, Long idAlumno);
 	
 }

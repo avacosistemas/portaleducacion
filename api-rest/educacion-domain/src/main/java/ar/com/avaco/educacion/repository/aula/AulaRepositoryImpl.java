@@ -65,7 +65,7 @@ public class AulaRepositoryImpl extends NJBaseRepository<Long, Aula> implements 
 		criteria.createAlias("institucion", "institucion");
 		criteria.add(Restrictions.eq("institucion.id", idInstitucion));
 		
-		criteria.addOrder(Order.desc("fecha"));
+		criteria.addOrder(Order.desc("dia"));
 		criteria.addOrder(Order.desc("hora"));
 		
 		return criteria.list();

@@ -316,6 +316,12 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 		return this.getRepository().listAulasAbiertasByInstitucion(idInstitucion);
 	}
 
+	@Override
+	public void notificarSolicitudUnion(Long idAula, Long idAlumno) {
+		Aula aula = this.getRepository().getAula(idAula);
+		Alumno alumno = this.alumnoService.getAlumno(idAlumno);
+		this.notificacionService.notificarSolicitudUnion(aula, alumno);
+	}
 	
 	public void setAulaEventoService(AulaEventoService aulaEventoService) {
 		this.aulaEventoService = aulaEventoService;

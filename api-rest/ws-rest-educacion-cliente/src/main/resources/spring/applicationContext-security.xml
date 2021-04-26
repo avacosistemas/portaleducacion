@@ -30,6 +30,9 @@
 		<intercept-url pattern="/alumno/*/anotaciones/*" method="GET" access="isAuthenticated()" />
 		<intercept-url pattern="/alumno/*/anotaciones/*" method="POST" access="isAuthenticated()" />
 		<intercept-url pattern="/alumno/*/puntuacion/*" method="POST" access="isAuthenticated()" />
+
+		<intercept-url pattern="/alumno/aulasabiertas/*" method="GET" access="isAuthenticated()" />
+		<intercept-url pattern="/alumno/*/aulasabiertassolicitarunirse/*" method="GET" access="isAuthenticated()" />
 		
 		<intercept-url pattern="/**" access="permitAll" />
 		<csrf disabled="true" />

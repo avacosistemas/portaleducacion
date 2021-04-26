@@ -1,5 +1,6 @@
 package ar.com.avaco.educacion.service.notificacion;
 
+import ar.com.avaco.educacion.domain.entities.Alumno;
 import ar.com.avaco.educacion.domain.entities.Aula;
 import ar.com.avaco.educacion.domain.entities.Profesor;
 import ar.com.avaco.educacion.domain.entities.aulaVirtual.Clase;
@@ -34,6 +35,7 @@ public interface NotificacionService {
 	void notificarCambioProfesor(Profesor profesorAnterior, Aula entity);
 	
 	void notificarInicioServer();
-		
+
+	void notificarSolicitudUnion(Aula aula, Alumno alumno);
 
 }

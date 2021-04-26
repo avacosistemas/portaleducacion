@@ -2,7 +2,6 @@ package ar.com.avaco.educacion.service.notificacion;
 
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.collections.ListUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -24,7 +22,6 @@ import org.springframework.stereotype.Service;
 import ar.com.avaco.arc.core.service.MailSenderSMTPService;
 import ar.com.avaco.educacion.domain.entities.Alumno;
 import ar.com.avaco.educacion.domain.entities.Aula;
-import ar.com.avaco.educacion.domain.entities.AulaAlumno;
 import ar.com.avaco.educacion.domain.entities.Profesor;
 import ar.com.avaco.educacion.domain.entities.aulaVirtual.Clase;
 import ar.com.avaco.educacion.domain.entities.cliente.Cliente;
@@ -134,6 +131,15 @@ public class NotificacionServiceImpl implements NotificacionService {
 
 	@Value("avacosistemas@gmail.com")
 	private String supportMail;
+
+	@Value("profeteachonline@gmail.com")
+	private String notificacionInterna;
+	
+	@Value("TeachOnline - Solicitud Unión Aula Abierta")
+	private String subjectSolicitudUnionAulaAbierta;
+	
+	@Value("template/bodySolicitudUnionAulaAbierta.html")
+	private String bodySolicitudUnionAulaAbierta;
 	
 	public NotificacionServiceImpl() {
 		ve = new VelocityEngine();
@@ -329,6 +335,22 @@ public class NotificacionServiceImpl implements NotificacionService {
 
 		params.put("profesor", aula.getProfesor().getNombreApellido());
 		mailSenderSMTPService.sendMail(from, aula.getProfesor().getEmail(), subjectCambioProfesorNuevo, getBody(params, bodyCambioProfesorNuevo), null);
+	}
+	
+	@Override
+	public void notificarSolicitudUnion(Aula aula, Alumno alumno) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("idAula", aula.getIdString());
+		params.put("fecha", DateUtils.toString(aula.getDia()));
+		params.put("hora", aula.getHora().toString() + " Hs.");
+		params.put("materia", aula.getMateria().getDescripcion() + aula.getMateria().getNivel().getDescripcion());
+		params.put("profesor", aula.getProfesor().getNombreApellido());
+		params.put("alumnonombre", alumno.getNombreApellido());
+		params.put("alumnodocumento", alumno.getIdentificacion().getNumero());
+		params.put("institucion", aula.getInstitucion().getNombre());
+		
+		mailSenderSMTPService.sendMail(from, notificacionInterna, subjectSolicitudUnionAulaAbierta, getBody(params, bodySolicitudUnionAulaAbierta), null);
+		
 	}
 	
 	@Resource(name = "mailSenderSMTPService")

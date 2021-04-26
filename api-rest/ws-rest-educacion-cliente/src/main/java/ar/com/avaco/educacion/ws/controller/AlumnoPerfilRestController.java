@@ -101,6 +101,20 @@ public class AlumnoPerfilRestController extends AbstractDTORestController<Alumno
 		}
 		return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/alumno/{idAlumno}/aulasabiertassolicitarunirse/{idAula}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<JSONResponse> unierseAulaAbierta(@PathVariable("idAlumno") Long idAlumno, @PathVariable("idAula") Long idAula) throws Exception {
+		Long idCliente = ClienteUtils.getClienteLogueadoId();
+		JSONResponse response = new JSONResponse();
+		if (idCliente.equals(idAlumno)) {
+			this.service.solicitarUnirse(idAula, idAlumno);
+			response.setStatus(JSONResponse.OK);
+		} else {
+			response.setData("No es alumno o no coinciden los parametros");
+			response.setStatus(JSONResponse.ERROR);
+		}
+		return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
+	}
 
 	@RequestMapping(value = "/alumno/aulasabiertasinstitucion/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<JSONResponse> listarAulasAbiertasInstitucion(@PathVariable("id") Long id) throws Exception {

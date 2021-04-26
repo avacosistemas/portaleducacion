@@ -162,7 +162,7 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 	@Enumerated(EnumType.STRING)
 	private TipoCliente tipoCliente;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_ACCESOS")
 	private AccesosCliente accesos;
 

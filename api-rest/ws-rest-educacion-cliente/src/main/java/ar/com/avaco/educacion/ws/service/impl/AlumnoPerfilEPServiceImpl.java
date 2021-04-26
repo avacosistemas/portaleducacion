@@ -110,7 +110,9 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	public List<AulaAlumnoPortalDTO> listarMisAulas(Long id) {
 		List<AulaAlumno> aulas = aulaAlumnoService.listByAlumnoId(id);
 		List<AulaAlumnoPortalDTO> aulasDTO = new ArrayList<>();
-		aulas.stream().forEach(x->aulasDTO.add(new AulaAlumnoPortalDTO(x)));
+		if (aulas !=null && !aulas.isEmpty()) {
+			aulas.stream().forEach(x->aulasDTO.add(new AulaAlumnoPortalDTO(x)));
+		}
 		return aulasDTO;
 	}
 	
@@ -164,6 +166,11 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 			aulasDTOS.add(new AulaAbiertaInstitucionDTO(aula));
 		}
 		return aulasDTOS;
+	}
+	
+	@Override
+	public void solicitarUnirse(Long idAula, Long idAlumno) {
+		this.aulaService.notificarSolicitudUnion(idAula, idAlumno);
 	}
 	
 	@Override
