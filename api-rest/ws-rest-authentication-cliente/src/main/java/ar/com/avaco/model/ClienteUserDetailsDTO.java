@@ -29,9 +29,10 @@ public class ClienteUserDetailsDTO extends UserAuthorised implements UserDetails
 	private Long id;
 	private String tipoCliente;
 
+
 	public ClienteUserDetailsDTO(Long id, String username, String nombreApellido, String email, String password,
 			Collection<? extends GrantedAuthority> authorities, boolean bloqueado, Date lastPasswordResetDate,
-			boolean aaccountNonExpired, boolean aaccountNonLocked, boolean acredentialsNonExpired, String tipoCliente) {
+			boolean aaccountNonExpired, boolean aaccountNonLocked, boolean acredentialsNonExpired, String tipoCliente, String sistemaExterno) {
 		this.setId(id);
 		this.username = username;
 		this.nombreApellido = nombreApellido;
@@ -44,6 +45,7 @@ public class ClienteUserDetailsDTO extends UserAuthorised implements UserDetails
 		this.accountNonLocked = aaccountNonLocked;
 		this.credentialsNonExpired = acredentialsNonExpired;
 		this.tipoCliente = tipoCliente;
+		this.setSistemaExterno(sistemaExterno);
 	}
 
 	public Long getId() {
@@ -121,4 +123,5 @@ public class ClienteUserDetailsDTO extends UserAuthorised implements UserDetails
 		this.tipoCliente = tipoCliente;
 	}
 
+	
 }

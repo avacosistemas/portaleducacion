@@ -15,6 +15,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -158,10 +159,10 @@ public class AuthenticationClienteRestController {
 					contacto.setCliente(alumno);
 					
 					alumno.setContacto(contacto);
-					alumno.setPassword("UNDEFINED");
+					alumno.setPassword(KeyGenerators.string().generateKey());
 					
 					alumno.setSistemaExterno(true);
-					alumno.setIdSistemaExterno(id_usuario);
+					alumno.setIdSistemaExterno("upcn");
 					
 					alumnoService.registrarAlumno(alumno);
 					

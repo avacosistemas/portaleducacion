@@ -27,6 +27,8 @@ public class UserAuthorised implements UserDetails{
 	private boolean isAccountNonLocked;
 	private boolean isCredentialsNonExpired;
 	private boolean isEnabled;
+	private String sistemaExterno;
+	
 	protected Collection<? extends GrantedAuthority> authorities;
 
 	public String getUsername() {
@@ -75,6 +77,12 @@ public class UserAuthorised implements UserDetails{
 	}
 	public void setEnabled(boolean isEnabled) {
 		this.isEnabled = isEnabled;
+	}
+	public String getSistemaExterno() {
+		return sistemaExterno;
+	}
+	public void setSistemaExterno(String sistemaExterno) {
+		this.sistemaExterno = sistemaExterno;
 	}
 	
 	

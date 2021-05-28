@@ -21,7 +21,8 @@ public final class ClienteUserDetailsFactory {
                 cliente.isAccountNonExpired(),
                 cliente.isAccountNonLocked(),
                 cliente.isCredentialsNonExpired(),
-                cliente.getTipoCliente().getLabel().toUpperCase()
+                cliente.getTipoCliente().getLabel().toUpperCase(),
+                cliente.getIdSistemaExterno()
         );
     }
 

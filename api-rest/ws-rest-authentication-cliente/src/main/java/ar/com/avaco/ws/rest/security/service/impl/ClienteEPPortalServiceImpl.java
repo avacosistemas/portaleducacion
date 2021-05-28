@@ -63,6 +63,7 @@ public class ClienteEPPortalServiceImpl implements ClienteEPPortalService {
 			throw new UsernameNotFoundException("Username " + username + " not found.");
 		}
 		UserAuthorised clienteUDDTO = ClienteUserDetailsFactory.create(cliente);
+		
 		return clienteUDDTO;
 	}
 
