@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import ar.com.avaco.arc.sec.exception.NuclearJSecurityException;
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Alumno;
 import ar.com.avaco.educacion.domain.entities.Aula;
@@ -60,6 +61,11 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	@Override
 	public void updateAlumno(Long id, AlumnoPerfilDTO perfil) throws BusinessException {
 		Alumno alumno = this.service.get(id);
+		
+		if (alumno!=null && alumno.isSistemaExterno()) {
+			throw new NuclearJSecurityException("Usuarios de sistemas sxternos no pueden modificar sus datos. Pongase en contacto con el administrador del sitio para solicitar los cambios.");
+		}
+		
 		alumno.setApellido(perfil.getApellido());
 		alumno.getContacto().setTelefonoFijo(perfil.getTelefonoFijo());
 		alumno.getContacto().setTelefonoMovil(perfil.getTelefonoMovil());

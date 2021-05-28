@@ -1,6 +1,9 @@
 package ar.com.avaco.ws.rest.security.util;
 
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.interfaces.RSAPublicKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +12,14 @@ import java.util.function.Function;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import com.auth0.jwk.Jwk;
+import com.auth0.jwk.JwkException;
+import com.auth0.jwk.JwkProvider;
+import com.auth0.jwk.UrlJwkProvider;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 
 import ar.com.avaco.arc.sec.domain.UserDetailsExtended;
 import io.jsonwebtoken.Claims;
@@ -36,6 +47,24 @@ public class JwtTokenUtil implements Serializable {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
+    public String getUsernameFromTokenWithJwk(String token, String urlJwk) {
+    	DecodedJWT jwt = JWT.decode(token);
+    	
+		try {
+			URL url=new URL(urlJwk);  
+	    	JwkProvider provider = new UrlJwkProvider(url);
+	    	Jwk jwk = provider.get(jwt.getKeyId());
+	    	Algorithm algorithm = Algorithm.RSA256((RSAPublicKey) jwk.getPublicKey(), null);
+	    	algorithm.verify(jwt);
+	    	return jwt.getClaim(CLAIM_KEY_USERNAME).asString();
+		} catch (JwkException e) {
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}   	
+		return null;
+    }
+    
     public Date getIssuedAtDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getIssuedAt);
     }
@@ -48,7 +77,7 @@ public class JwtTokenUtil implements Serializable {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
-
+    
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
             .setSigningKey(secret)

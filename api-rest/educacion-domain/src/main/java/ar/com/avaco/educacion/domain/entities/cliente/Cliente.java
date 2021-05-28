@@ -166,6 +166,13 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 	@JoinColumn(name = "ID_ACCESOS")
 	private AccesosCliente accesos;
 
+	@Column(name = "SISTEMA_EXTERNO")
+	private Boolean sistemaExterno;
+	
+	@Column(name = "ID_SISTEMA_EXTERNO")
+	private String IdSistemaExterno;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -375,6 +382,22 @@ public class Cliente extends ar.com.avaco.arc.core.domain.Entity<Long> implement
 
 	public void setTipoCliente(TipoCliente tipoCliente) {
 		this.tipoCliente = tipoCliente;
+	}
+
+	public boolean isSistemaExterno() {
+		return sistemaExterno==null?false:sistemaExterno.booleanValue();
+	}
+
+	public void setSistemaExterno(boolean sistemaExterno) {
+		this.sistemaExterno = sistemaExterno;
+	}
+
+	public String getIdSistemaExterno() {
+		return IdSistemaExterno;
+	}
+
+	public void setIdSistemaExterno(String idSistemaExterno) {
+		IdSistemaExterno = idSistemaExterno;
 	}
 	
 }

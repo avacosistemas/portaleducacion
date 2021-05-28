@@ -10,7 +10,7 @@ SELECT pg_catalog.setval('public.seg_usuario_seq', 500, true);
 SELECT pg_catalog.setval('public.word_seq', 500, false);
 --EDUCACION
 select pg_catalog.setval('public.aula_seq', 500, true);
-select pg_catalog.setval('public.aula_eventos_seq', 500, true);
+--select pg_catalog.setval('public.aula_eventos_seq', 500, true);
 select pg_catalog.setval('public.cliente_seq', 500, true);
 select pg_catalog.setval('public.comentario_seq', 500, true);
 select pg_catalog.setval('public.compra_seq', 500, true);

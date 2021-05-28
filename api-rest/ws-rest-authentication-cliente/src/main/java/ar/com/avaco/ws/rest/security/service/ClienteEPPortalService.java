@@ -9,5 +9,7 @@ public interface ClienteEPPortalService extends UserDetailsService {
 	void updatePassword(UpdatePasswordDTO updatePassword);
 
 	void sendMissingPassword(String username);
+	
+	boolean isSistemaExterno(String username);
 
 }
