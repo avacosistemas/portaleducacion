@@ -5,6 +5,7 @@ import java.util.Objects;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,7 @@ import com.google.gson.JsonParser;
 import ar.com.avaco.arc.sec.exception.NuclearJSecurityException;
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Alumno;
+import ar.com.avaco.educacion.domain.entities.Institucion;
 import ar.com.avaco.educacion.domain.entities.cliente.Contacto;
 import ar.com.avaco.educacion.domain.entities.cliente.Identificacion;
 import ar.com.avaco.educacion.domain.entities.cliente.TipoIdentificacion;
@@ -64,6 +66,9 @@ public class AuthenticationClienteRestController {
 	@Value("${upcn_jwk_url}")
 	private String upcnJwkYUrl;
 	
+	@Value("${upcn_institucion_id}")
+	private String upcnInstitucionId;
+	
 	static final String UPCN_USERNAME_PREFIX = "user_upcn_";
 	
 	private AuthenticationManager authenticationManager;
@@ -75,6 +80,8 @@ public class AuthenticationClienteRestController {
 	private AlumnoService alumnoService;
 	
 	private static final String CHANGE_PASSWORD_REQUIRED = "CHANGE_PASSWORD_REQUIRED";
+	
+	private Logger logger = Logger.getLogger(this.getClass());
 	
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest, HttpServletRequest request)
@@ -95,6 +102,8 @@ public class AuthenticationClienteRestController {
 	public ResponseEntity<?> createAuthenticationTokenFromUPCN( HttpServletRequest request)
 			throws AuthenticationException {			
 		
+		logger.info("Entrando a authUpcn");
+		
 		String code=(String) request.getParameter("code");
 		
 		String id_usuario=null;
@@ -103,19 +112,24 @@ public class AuthenticationClienteRestController {
 		String id_token=null;
 		
 		if (code!=null) {
+			logger.debug("Code: "+ code);
 			String parameters="grant_type=authorization_code&code="+HttpUtil.urlEncode(code)+"&client_id="+HttpUtil.urlEncode(upcnClientId)+
 					"&client_secret="+HttpUtil.urlEncode(upcnClientSecret)+"&redirect_uri="+HttpUtil.urlEncode(upcnUriCallBack);
+			logger.debug("Request POST url: "+ upcnUrl+"/token   - parametros:"+parameters);
 			String response=HttpUtil.postURL(upcnUrl+"/token", parameters, "application/x-www-form-urlencoded");
 			if (response!=null) {
+				logger.debug("Response POST: "+ response);
 				JsonObject jsonObject = (JsonObject )new JsonParser().parse(response);
 				access_token=jsonObject.get("access_token")!=null?jsonObject.get("access_token").getAsString():null;
 				id_token=jsonObject.get("id_token")!=null?jsonObject.get("id_token").getAsString():null;
 				id_usuario = jwtTokenUtil.getUsernameFromTokenWithJwk(id_token, upcnJwkYUrl);
 				username = UPCN_USERNAME_PREFIX + id_usuario;
 			} else {
+				logger.error("Response POST es NULL");
 				throw new AuthenticationException("Error de Autenticacion contra UPCN", null);
 			}
 		} else {
+			logger.error("Code es NULL");
 			throw new AuthenticationException("Error de Autenticacion contra UPCN", null);
 		}
 				
@@ -126,9 +140,12 @@ public class AuthenticationClienteRestController {
 		try {
 			userDetails = clienteEPService.loadUserByUsername(username);	
 		} catch (UsernameNotFoundException usernameNotFoundException) {
+			logger.debug("Creando usuario: "+ username);
 			String authorization="Bearer "+access_token;
+			logger.debug("REQUEST: "+ upcnUrl+"/me con accesstoken"+access_token);
 			String response=HttpUtil.getURL(upcnUrl+"/me", authorization);
 			if (response!=null) {
+				logger.debug("RESPONSE: "+ response);
 				JsonObject jsonObject = (JsonObject )new JsonParser().parse(response);
 				String nombreCompleto=jsonObject.get("nombre_completo")!=null?jsonObject.get("nombre_completo").getAsString():null;
 				String cuil=jsonObject.get("cuil")!=null?jsonObject.get("cuil").getAsString():null;
@@ -159,20 +176,26 @@ public class AuthenticationClienteRestController {
 					contacto.setCliente(alumno);
 					
 					alumno.setContacto(contacto);
-					alumno.setPassword(KeyGenerators.string().generateKey());
 					
+					Institucion institucion=new Institucion();
+					institucion.setId(Long.parseLong(upcnInstitucionId));
+					
+					alumno.setInstitucion(institucion);					
+					
+					alumno.setPassword(KeyGenerators.string().generateKey());				
 					alumno.setSistemaExterno(true);
 					alumno.setIdSistemaExterno("upcn");
-					
+
 					alumnoService.registrarAlumno(alumno);
 					
 					userDetails = clienteEPService.loadUserByUsername(username);
 					
-				} catch (BusinessException e) {
+				} catch (BusinessException e) {				
 					throw new AuthenticationException("No se pudo crear el usuario a partir de los datos de UPCN",e);
 				}
 				
 			} else {
+				logger.error("RESPONSE es NULL");
 				throw new AuthenticationException("Error de Autenticacion contra UPCN", null);
 			}
 		}
