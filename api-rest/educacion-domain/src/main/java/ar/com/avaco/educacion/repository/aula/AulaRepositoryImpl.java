@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -60,8 +61,10 @@ public class AulaRepositoryImpl extends NJBaseRepository<Long, Aula> implements 
 		
 		
 		Criteria criteria = getCurrentSession().createCriteria(getHandledClass());
-		criteria.add(Restrictions.ge("dia", nowDate));
-		criteria.add(Restrictions.ge("hora", hour));
+		
+		LogicalExpression hoyConHora = Restrictions.and(Restrictions.eq("dia", nowDate), Restrictions.ge("hora", hour));
+		criteria.add(Restrictions.or(hoyConHora, Restrictions.gt("dia", nowDate)));
+		
 		criteria.createAlias("institucion", "institucion");
 		criteria.add(Restrictions.eq("institucion.id", idInstitucion));
 		

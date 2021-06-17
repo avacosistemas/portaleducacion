@@ -20,5 +20,5 @@ public interface ParameterService extends NJService<Integer, Parameter>{
 	 * @throws BusinessException 
 	 */
 	public String findByKey(String key) throws BusinessException;
-	
+
 }

@@ -25,7 +25,11 @@ public class AulaAlumnoEPServiceImpl extends CRUDEPBaseService<Long, AulaAlumnoD
 		if (idAula != null) {
 			listByAula = this.getService().listByAula(idAula);
 		} else {
+			try {
 			listByAula = this.getService().list();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		List<AulaAlumnoDTO> convertToDtos = this.convertToDtos(listByAula);
 		return convertToDtos;
@@ -54,7 +58,7 @@ public class AulaAlumnoEPServiceImpl extends CRUDEPBaseService<Long, AulaAlumnoD
 	protected AulaAlumnoDTO convertToDto(AulaAlumno entity) {
 		AulaAlumnoDTO aulaAlumnoDto = new AulaAlumnoDTO();
 		aulaAlumnoDto.setIdAula(entity.getAula().getId().toString());
-		aulaAlumnoDto.setIdAlumno(entity.getId().toString());
+		aulaAlumnoDto.setIdAlumno(entity.getAlumno().getId().toString());
 		aulaAlumnoDto.setId(entity.getId());
 		aulaAlumnoDto.setNombreAlumno(entity.getAlumno().getNombreApellido());
 		aulaAlumnoDto.setComentario(entity.getComentario());

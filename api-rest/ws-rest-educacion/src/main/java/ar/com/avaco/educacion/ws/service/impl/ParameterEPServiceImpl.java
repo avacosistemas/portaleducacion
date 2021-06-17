@@ -76,6 +76,11 @@ public class ParameterEPServiceImpl extends CRUDEPBaseService<Integer, Parameter
 	}
 	
 	@Override
+	public ParameterDTO getByKey(String key) throws BusinessException {
+		return new ParameterDTO(key, this.service.findByKey(key));
+	}
+	
+	@Override
 	@Resource(name = "parameterService")
 	public void setService(ParameterService parameterService) {
 		this.service = parameterService;

@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -45,6 +46,8 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 
 	private NotificacionService notificacionService;
 
+	private Logger logger = Logger.getLogger(getClass());
+	
 	@Override
 	public Cliente registrarClientePersona(Cliente cliente) throws ErrorValidationException, BusinessException {
 		validarClienteNoVacio(cliente);
@@ -229,6 +232,8 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		}
 
 		if (!errores.isEmpty()) {
+			logger.error("Se encontraron los siguientes errores");
+			errores.values().forEach((x->logger.error(x)));
 			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
 		}
 
@@ -251,6 +256,8 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 		}
 		
 		if (!errores.isEmpty()) {
+			logger.error("Se encontraron los siguientes errores");
+			errores.values().forEach((x->logger.error(x)));
 			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
 		}
 
@@ -315,6 +322,8 @@ public class ClienteServiceImpl extends NJBaseService<Long, Cliente, ClienteRepo
 
 
 		if (!errores.isEmpty()) {
+			logger.error("Se encontraron los siguientes errores");
+			errores.values().forEach((x->logger.error(x)));
 			throw new ErrorValidationException("Se encontraron los siguientes errores", errores);
 		}
 		

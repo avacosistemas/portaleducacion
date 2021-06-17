@@ -12,6 +12,15 @@ public class ParameterDTO extends DTOEntity<Integer> {
 	
 	private String description;
 
+	public ParameterDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public ParameterDTO(String key, String value) {
+		this.key = key;
+		this.value = value;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +38,14 @@ public class ParameterController extends AbstractDTORestController<ParameterDTO,
     @RequestMapping(value = "/parameters/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JSONResponse> get(@PathVariable("id") Integer id) throws BusinessException {
     	return super.get(id);
+    }
+    
+    @RequestMapping(value = "/parameter/{key}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<JSONResponse> getByKey(@PathVariable("key") String key) throws BusinessException {
+    	JSONResponse response = new JSONResponse();
+		response.setData(this.service.getByKey(key));
+		response.setStatus(JSONResponse.OK);	
+        return new ResponseEntity<JSONResponse>(response, HttpStatus.OK);
     }
        
     //-------------------Create a Parameter--------------------------------------------------------    
