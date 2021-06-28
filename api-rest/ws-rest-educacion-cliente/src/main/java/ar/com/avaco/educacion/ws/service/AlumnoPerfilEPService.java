@@ -31,6 +31,6 @@ public interface AlumnoPerfilEPService extends CRUDEPService<Long, AlumnoPerfilD
 
 	List<AulaAbiertaInstitucionDTO> listarAulasAbiertesMiInstitucion(Long idAlumno);
 
-	void solicitarUnirse(Long idAula, Long idAlumno);
+	void solicitarUnirse(Long idAula, Long idAlumno) throws BusinessException;
 
 }

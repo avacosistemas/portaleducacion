@@ -38,7 +38,7 @@ public class NotificacionServiceImpl implements NotificacionService {
 
 	private MailSenderSMTPService mailSenderSMTPService;
 
-	@Value("teachonline@teachonline.com.ar")
+	@Value("profeteachonline@gmail.com")
 	private String from;
 
 	@Value("TeachOnline - Restablecimiento de contraseña")
@@ -140,6 +140,12 @@ public class NotificacionServiceImpl implements NotificacionService {
 	
 	@Value("template/bodySolicitudUnionAulaAbierta.html")
 	private String bodySolicitudUnionAulaAbierta;
+	
+	@Value("TeachOnline - Rechazo Unión Aula Abierta")
+	private String subjectRechazoAutomaticoSolicitudUnionAulaAbierta;
+	
+	@Value("template/bodyRechazoSolicitudUnionAulaAbierta.html")
+	private String bodyRechazoAutomaticoSolicitudUnionAulaAbierta;
 	
 	public NotificacionServiceImpl() {
 		ve = new VelocityEngine();
@@ -318,7 +324,7 @@ public class NotificacionServiceImpl implements NotificacionService {
 		
 		List<String> bcc = aula.getAlumnos().stream().map(aa -> aa.getAlumno().getEmail()).collect(Collectors.toList());
 		bcc.add(aula.getProfesor().getEmail());
-		String[] to = {"info@teachonline.com.ar"};
+		String[] to = {"profeteachonline@gmail.com"};
 		mailSenderSMTPService.sendMail(from, to, bcc.toArray(new String[0]), subjectActualizarAula, getBody(params, bodyActualizarAula), null);
 				
 	}
@@ -350,6 +356,23 @@ public class NotificacionServiceImpl implements NotificacionService {
 		params.put("institucion", aula.getInstitucion().getNombre());
 		
 		mailSenderSMTPService.sendMail(from, notificacionInterna, subjectSolicitudUnionAulaAbierta, getBody(params, bodySolicitudUnionAulaAbierta), null);
+		
+	}
+
+	@Override
+	public void notificarRechazoUnionAula(Aula aula, Alumno alumno, String motivo) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("idAula", aula.getIdString());
+		params.put("fecha", DateUtils.toString(aula.getDia()));
+		params.put("hora", aula.getHora().toString() + " Hs.");
+		params.put("materia", aula.getMateria().getDescripcion() + aula.getMateria().getNivel().getDescripcion());
+		params.put("profesor", aula.getProfesor().getNombreApellido());
+		params.put("alumnonombre", alumno.getNombreApellido());
+		params.put("alumnodocumento", alumno.getIdentificacion().getNumero());
+		params.put("institucion", aula.getInstitucion().getNombre());
+		params.put("motivo", motivo);
+		
+		mailSenderSMTPService.sendMail(from, alumno.getEmail(), subjectRechazoAutomaticoSolicitudUnionAulaAbierta, getBody(params, bodyRechazoAutomaticoSolicitudUnionAulaAbierta), null);
 		
 	}
 	

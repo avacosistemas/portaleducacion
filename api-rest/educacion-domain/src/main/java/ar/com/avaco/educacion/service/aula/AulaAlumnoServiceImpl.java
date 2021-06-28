@@ -41,12 +41,17 @@ public class AulaAlumnoServiceImpl extends NJBaseService<Long, AulaAlumno, AulaA
 	
 	@Override
 	public AulaAlumno saveAlumno(AulaAlumno aulaAlumno) throws BusinessException {
+		validarDisponibilidadAula(aulaAlumno.getAula().getId(), aulaAlumno.getAlumno().getId());
+		return super.save(aulaAlumno);
+	}
 
-		Aula aula = this.aulaService.get(aulaAlumno.getAula().getId());
-		Alumno alumno = this.alumnoService.get(aulaAlumno.getAlumno().getId());
+	@Override
+	public void validarDisponibilidadAula(Long idAula, Long idAlumno) throws BusinessException {
+		Aula aula = this.aulaService.get(idAula);
+		Alumno alumno = this.alumnoService.get(idAlumno);
 
 		if (alumno == null)
-			throw new BusinessException("El alumno id " + aulaAlumno.getAlumno().getId() + " no existe");
+			throw new BusinessException("El alumno id " + idAlumno + " no existe");
 
 		if (aula.getInstitucion() != null && !alumno.getInstitucion().getId().equals(aula.getInstitucion().getId()))
 			throw new BusinessException("El alumno no pertenece a la Institucion del aula");
@@ -72,8 +77,6 @@ public class AulaAlumnoServiceImpl extends NJBaseService<Long, AulaAlumno, AulaA
 				}
 			}
 		}
-
-		return super.save(aulaAlumno);
 	}
 
 	@Override

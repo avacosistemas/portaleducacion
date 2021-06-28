@@ -36,6 +36,8 @@ public interface NotificacionService {
 	
 	void notificarInicioServer();
 
+	void notificarRechazoUnionAula(Aula aula, Alumno alumno, String motivo);
+
 	void notificarSolicitudUnion(Aula aula, Alumno alumno);
 
 }

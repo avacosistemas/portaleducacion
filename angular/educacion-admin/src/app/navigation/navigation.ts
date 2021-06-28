@@ -85,6 +85,36 @@ export const navigation = [
                 'url'  : '/' + environment.URL_AULAS,
             },
             {
+                'title': 'Solicitudes',
+                'icon' : 'back_hand',
+                'translate': 'NAV.SOLICITUDES.TITLE',
+                'type' : 'collapse',
+                'children' : [
+                    {
+                        'id'   : 'solicitudes',
+                        'title': 'Pendientes',
+                        'icon' : 'pending_actions',
+                        'translate': 'NAV.SOLICITUDES_PENDIENTES.TITLE',
+                        'type' : 'item',
+                        'url'  : '/' + environment.URL_SOLICITUDES,
+                        'children' : [
+                        
+                        ]
+                    },
+                    {
+                        'id'   : 'solicitudes',
+                        'title': 'Finalizadas',
+                        'icon' : 'rule',
+                        'translate': 'NAV.SOLICITUDES_FINALIZADAS.TITLE',
+                        'type' : 'item',
+                        'url'  : '/' + environment.URL_SOLICITUDES_PENDIENTES,
+                        'children' : [
+                        
+                        ]
+                    }
+                ]
+            },
+            {
                 'id'   : 'profesores',
                 'title': 'Profesores',
                 'translate': 'NAV.PROFESORES.TITLE',

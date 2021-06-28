@@ -5,6 +5,7 @@
 
 // ENTORNO LOCAL
 // export const PREFIX_DOMAIN_API_EDUCACION =  'http://localhost:8080/ws-rest-educacion';
+
 // export const PREFIX_DOMAIN_API_AUTHENTICATION =  'http://localhost:8080/ws-rest-authentication';
 
 // ENTORNO PRODUCCION
@@ -47,7 +48,9 @@ export const environment = {
     URL_PROFILE : 'perfiles',
     URL_ROLE : 'roles',
     URL_USER : 'usuarios',
-    URL_PASSWORD_UPDATE: 'password'
+    URL_PASSWORD_UPDATE: 'password',
+    URL_SOLICITUDES: 'solicitudAula',
+    URL_SOLICITUDES_PENDIENTES: 'solicitudAulaFinalizada'
 
 };
 

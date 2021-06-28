@@ -20,6 +20,8 @@ import { AULA_ALUMNO_DEF } from './aula_alumno/aula_alumno.def';
 import { EVENTO_AULA_DEF } from './evento_aula/evento_aula.def';
 import { UpdatePassword } from 'app/modules/fwk/core/model/resetpassword';
 import { PasswordUpdateComponent } from '../authentication/password-update/password-update.component';
+import { AULA_SOLICITUD_DEF } from './aula_solicitud/aula_solicitud.def';
+import { AULA_SOLICITUD_FINALIZADA_DEF } from './aula_solicitud_finalizada/aula_solicitud_finalizada.def';
 
 
 export const ROUTES: Routes = [
@@ -95,6 +97,16 @@ export const ROUTES: Routes = [
     },
     {
       path: AULA_ALUMNO_DEF.navigation.url.split('/')[1],
+      component: IntegrationComponent,
+      canActivate: [AuthGuardService]
+    },
+    {
+      path: AULA_SOLICITUD_DEF.navigation.url.split('/')[1],
+      component: IntegrationComponent,
+      canActivate: [AuthGuardService]
+    },
+    {
+      path: AULA_SOLICITUD_FINALIZADA_DEF.navigation.url.split('/')[1],
       component: IntegrationComponent,
       canActivate: [AuthGuardService]
     },

@@ -6,7 +6,6 @@ import java.util.List;
 import ar.com.avaco.arc.core.component.bean.service.NJService;
 import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Aula;
-import ar.com.avaco.educacion.domain.entities.AulaEventos;
 
 public interface AulaService extends NJService<Long, Aula> {
 
@@ -105,6 +104,4 @@ public interface AulaService extends NJService<Long, Aula> {
 
 	List<Aula> getAulasAbiertasInstitucion(Long idInstitucion);
 
-	void notificarSolicitudUnion(Long idAula, Long idAlumno);
-	
 }

@@ -14,13 +14,13 @@ import ar.com.avaco.commons.exception.BusinessException;
 import ar.com.avaco.educacion.domain.entities.Alumno;
 import ar.com.avaco.educacion.domain.entities.Aula;
 import ar.com.avaco.educacion.domain.entities.AulaAlumno;
-import ar.com.avaco.educacion.domain.entities.AulaEventos;
 import ar.com.avaco.educacion.domain.entities.HorasAlumno;
 import ar.com.avaco.educacion.domain.entities.Materia;
 import ar.com.avaco.educacion.domain.entities.Profesor;
 import ar.com.avaco.educacion.domain.entities.aulaVirtual.Clase;
 import ar.com.avaco.educacion.exception.AulaVirtualException;
 import ar.com.avaco.educacion.repository.aula.AulaRepository;
+import ar.com.avaco.educacion.repository.aula.SolicitudAulaRepository;
 import ar.com.avaco.educacion.service.SolapaUtils;
 import ar.com.avaco.educacion.service.alumno.AlumnoService;
 import ar.com.avaco.educacion.service.aulaVirtual.AulaVirtualService;
@@ -52,6 +52,8 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 	private AulaEventoService aulaEventoService;
 	
 	private NotificacionService notificacionService;
+	
+	private SolicitudAulaRepository solicitudAulaRepository;
 	
 	@Autowired
 	public AulaServiceImpl(MateriaService materiaService, ProfesorService profesorService, AlumnoService alumnoService, DecidirService decidirService, HorasAlumnoService horasAlumnoService, AulaVirtualService aulaVirtualService) {
@@ -125,18 +127,6 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 		aula = this.getRepository().save(aula);		
 	}
 	
-//	@Override
-//	public void removeAulaAlumno(Long idAula, Long idAlumno) {
-//		Aula aula = this.getRepository().getOne(idAula);
-//		Alumno alumno= alumnoService.get(idAlumno);
-//
-//		aula.removeAlumno(alumno);
-//		alumno.removeAula(aula);
-//				
-//		aula = this.getRepository().save(aula);		
-//		
-//	}
-
 	@Override
 	public Aula updateAula(Aula aula) throws BusinessException {
 		validateAulaNoEmpty(aula);
@@ -316,13 +306,6 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 		return this.getRepository().listAulasAbiertasByInstitucion(idInstitucion);
 	}
 
-	@Override
-	public void notificarSolicitudUnion(Long idAula, Long idAlumno) {
-		Aula aula = this.getRepository().getAula(idAula);
-		Alumno alumno = this.alumnoService.getAlumno(idAlumno);
-		this.notificacionService.notificarSolicitudUnion(aula, alumno);
-	}
-	
 	public void setAulaEventoService(AulaEventoService aulaEventoService) {
 		this.aulaEventoService = aulaEventoService;
 	}
@@ -330,6 +313,11 @@ public class AulaServiceImpl extends NJBaseService<Long, Aula, AulaRepository> i
 	@Resource(name = "notificacionService")
 	public void setNotificacionService(NotificacionService notificacionService) {
 		this.notificacionService = notificacionService;
+	}
+	
+	@Resource(name = "solicitudAulaRepository")
+	public void setSolicitudAulaRepository(SolicitudAulaRepository solicitudAulaRepository) {
+		this.solicitudAulaRepository = solicitudAulaRepository;
 	}
 	
 }

@@ -14,7 +14,10 @@ export const locale = {
             'PROFESORES' : {'TITLE' : 'Profesores'},
             'ALUMNOS' : {'TITLE' : 'Productos'},
             'INSTITUCIONES' : {'TITLE' : 'Instituiciones'},
-            'ADMINISTRATION' : {'TITLE' : 'Menu General'}
+            'ADMINISTRATION' : {'TITLE' : 'Menu General'},
+            'SOLICITUDES' : {'TITLE' : 'Solicitudes'},
+            'SOLICITUDES_FINALIZADAS' : {'TITLE' : 'Pendientes'},
+            'SOLICITUDES_PENDIENTES' : {'TITLE' : 'Finalizadas'}
         }
     }
 };

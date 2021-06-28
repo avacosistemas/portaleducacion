@@ -15,6 +15,8 @@ import { AULAS_DEF } from './aulas/aulas.def';
 import { AULA_ALUMNO_DEF } from './aula_alumno/aula_alumno.def';
 import { PROFILE_DEF } from '../profile/component/profile.def';
 import { EVENTO_AULA_DEF } from './evento_aula/evento_aula.def';
+import { AULA_SOLICITUD_DEF } from './aula_solicitud/aula_solicitud.def';
+import { AULA_SOLICITUD_FINALIZADA_DEF } from './aula_solicitud_finalizada/aula_solicitud_finalizada.def';
 
 export const COMPONENTS: ComponentDef[] = [
   PARAMETER_DEF,
@@ -31,6 +33,8 @@ export const COMPONENTS: ComponentDef[] = [
   ALUMNO_DEF,
   AULAS_DEF,
   AULA_ALUMNO_DEF,
-  EVENTO_AULA_DEF
+  EVENTO_AULA_DEF,
+  AULA_SOLICITUD_DEF,
+  AULA_SOLICITUD_FINALIZADA_DEF
 ];
 

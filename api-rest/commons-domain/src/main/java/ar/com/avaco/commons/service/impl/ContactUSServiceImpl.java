@@ -49,7 +49,7 @@ public class ContactUSServiceImpl extends NJBaseService<Long, ContactUS, Contact
 	@Value("template/contact-us-template-system.html")
 	private String contactUSTemplateSystem;
 	
-	@Value("info@teachonline.com.ar")
+	@Value("profeteachonline@gmail.com")
 	private String contactUSFrom;
 	
 	@Resource(name = "mailSenderSMTPService")

@@ -21,6 +21,7 @@ import ar.com.avaco.educacion.domain.entities.Profesor;
 import ar.com.avaco.educacion.service.alumno.AlumnoService;
 import ar.com.avaco.educacion.service.aula.AulaAlumnoService;
 import ar.com.avaco.educacion.service.aula.AulaService;
+import ar.com.avaco.educacion.service.aula.SolicitudAulaService;
 import ar.com.avaco.educacion.service.comentario.ComentarioService;
 import ar.com.avaco.educacion.service.pregresp.PreguntaRespuestaService;
 import ar.com.avaco.educacion.service.profesor.ProfesorService;
@@ -43,6 +44,7 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	private AulaAlumnoService aulaAlumnoService;
 	private ProfesorService profesorService;
 	private AlumnoService alumnoService;
+	private SolicitudAulaService solicitudAulaService;
 	
 	// Service
 	@Override
@@ -175,8 +177,14 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	}
 	
 	@Override
-	public void solicitarUnirse(Long idAula, Long idAlumno) {
-		this.aulaService.notificarSolicitudUnion(idAula, idAlumno);
+	public void solicitarUnirse(Long idAula, Long idAlumno) throws BusinessException {
+		try {
+			this.solicitudAulaService.saveSolicitud(idAula, idAlumno);
+			this.solicitudAulaService.notificarSolicitudUnion(idAula, idAlumno);
+		} catch (BusinessException be) {
+			this.solicitudAulaService.notificarRechazoSolicitudUnion(idAula, idAlumno, be.getMessage());
+			throw be;
+		}
 	}
 	
 	@Override
@@ -219,6 +227,11 @@ public class AlumnoPerfilEPServiceImpl extends CRUDEPBaseService<Long, AlumnoPer
 	@Resource(name = "alumnoService")
 	public void setAlumnoService(AlumnoService alumnoService) {
 		this.alumnoService = alumnoService;
+	}
+	
+	@Resource(name = "solicitudAulaService")
+	public void setSolicitudAulaService(SolicitudAulaService solicitudAulaService) {
+		this.solicitudAulaService = solicitudAulaService;
 	}
 	
 }

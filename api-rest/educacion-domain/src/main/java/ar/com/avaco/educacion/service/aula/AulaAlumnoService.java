@@ -18,4 +18,6 @@ public interface AulaAlumnoService extends NJService<Long, AulaAlumno> {
 
 	AulaAlumno getByIdAulaIdAlumno(Long idClase, Long id);
 
+	void validarDisponibilidadAula(Long idAula, Long idAlumno) throws BusinessException;
+
 }
