@@ -10,18 +10,22 @@ import { navigation } from '../../../../../navigation/navigation';
 import { ComponentDef } from '../../model/component-def/component-def';
 import { ToolbarComponentDef } from '../../model/component-def/toolbar-comp-def';
 import { componentFactoryName } from '@angular/compiler';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ComponentDefService{
   charged = {};
   originalComps: any;
   copyComps: any;
+  componentDefObs = new Subject<any>();
+  componentDefObs$ = this.componentDefObs.asObservable();
   constructor(private i18nService: I18nService,
               private localStorageService: LocalStorageService,
               private formService: FormService) {
   }
 
   create(componentDef){
+    this.componentDefObs.next(componentDef);
     this.getByName(componentDef.name).subscribe(r => {
         if (r === null || r === undefined){
             COMPONENTS.push(componentDef);

@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { AfterViewInit, Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 import { FuseConfigService } from '@fuse/services/config.service';
@@ -15,6 +15,8 @@ import { MatDialog } from '@angular/material';
 import { GenericHttpService } from '../../modules/fwk/core/service/generic-http-service/generic-http.service';
 import { LocalStorageService } from '../../modules/fwk/core/service/local-storage/local-storage.service';
 import { HTTP_METHODS } from '../../modules/fwk/core/model/ws-def';
+import { CrudComponent } from 'app/modules/fwk/core/component/crud/crud.component';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector   : 'fuse-toolbar',
@@ -23,7 +25,7 @@ import { HTTP_METHODS } from '../../modules/fwk/core/model/ws-def';
     encapsulation: ViewEncapsulation.None
 })
 
-export class FuseToolbarComponent extends AbstractComponent
+export class FuseToolbarComponent extends CrudComponent implements OnInit, OnDestroy
 {
 
     userStatusOptions: any[];
@@ -37,23 +39,32 @@ export class FuseToolbarComponent extends AbstractComponent
     user: User;
     userDetailUrl: string;
     spinnerControl: any;
+    componentDegSubscription: Subscription;
     constructor(
-        private dialog: MatDialog,
-        private dialogService: DialogService,
+        dialog: MatDialog,
+        dialogService: DialogService,
         private spinnerService: SpinnerService,
-        private genericHttpService: GenericHttpService,
-        private localStorage: LocalStorageService,
+        genericHttpService: GenericHttpService,
+        localStorage: LocalStorageService,
         private sidebarService: FuseSidebarService,
         private translateFuse: TranslateService,
         private authService: AuthService,
-        injector: Injector
+        injector: Injector,
+        configService: FuseConfigService,
+        activatedRoute: ActivatedRoute
     )
     {
-        super(injector);
+        // super(injector);
+        super(configService, dialog, localStorage, injector);
         this.setUpI18n(    {
             name: 'toolbar',
             lang: 'es',
-            dictionary: {menu_user_item_5: 'Cerrar sesión',
+            dictionary: {
+                menu_text: 'sort',
+                menu_user_icon: 'account_circle',
+                menu_user_item_1: 'Mis Datos',
+                menu_user_item_4: 'Cambiar contraseña',
+                menu_user_item_5: 'Cerrar sesión',
                 
             }
           });
@@ -113,10 +124,21 @@ export class FuseToolbarComponent extends AbstractComponent
         });
         this.urls = environment;
         this.spinnerControl = this.spinnerService.getControlGlobalSpinner();
-	this.user = new User();
+        this.user = new User();
         // this.authService.subscribeChangeUser((user) => {
         //     this.user = user;
         // });
+        this.componentDegSubscription = this.componentDefService.componentDefObs$.subscribe(data => {
+            console.log(data);
+            this.componentDefService.getByName(data.name).subscribe(
+                def => {
+                  if (def === null){
+                    return;
+                  }
+                    this.setUpCRUDDef(def); 
+                }
+            );
+        });
     }
 
     toggleSidebarOpened(key)
@@ -130,6 +152,9 @@ export class FuseToolbarComponent extends AbstractComponent
         console.log(value);
     }
 
+    ngOnDestroy() {
+        this.componentDegSubscription.unsubscribe();
+    }
 
     setLanguage(lang)
     {
@@ -141,21 +166,14 @@ export class FuseToolbarComponent extends AbstractComponent
     }
 
     getUsername(){
-
-        return this.authService.getUserLocalStorage().username;
-
-        // if (this.user){
-        //     return this.user.username;
-        // }
-        // return '';
+        if (this.user){
+            return this.user.username;
+        }
+        return '';
     }
 
     onLogout(){
         this.authService.logout();
-    }
-
-    goPasswordUpdate(){
-       this.navigate(environment.URL_PASSWORD_UPDATE, undefined);
     }
 
     goUserDetails(){
@@ -167,7 +185,7 @@ export class FuseToolbarComponent extends AbstractComponent
         this.spinnerControl.show();
         this.componentDefService.getByName('usuario_user_detail_definition').subscribe(componentDef => {
             if (componentDef.ws){
-                const wsDef = this.localStorage.clone(componentDef.ws);
+                const wsDef = localStorage.clone(componentDef.ws);
                 wsDef.method = HTTP_METHODS.get;
                 this.genericHttpService.callWs(wsDef).subscribe(userdata => {      
                     console.log(userdata);              
@@ -185,6 +203,18 @@ export class FuseToolbarComponent extends AbstractComponent
     getI18nName(): string {
         return 'toolbar';
     }
-    onInit() {
+    // onInit() {
+    // }
+    getParentTitle(){
+        var title = '';
+        this.activatedRoute.queryParams.subscribe(params => {
+           if (params && params.parentTitle) {
+            title = params.parentTitle;
+           }
+        });
+        return title ? " - " + title : '';
     }
+    goPasswordUpdate(){
+        this.navigate(environment.URL_PASSWORD_UPDATE, undefined);
+     }
 }

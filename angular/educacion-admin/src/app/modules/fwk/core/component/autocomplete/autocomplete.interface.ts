@@ -54,5 +54,6 @@ export interface ApiAutocompleteOptions {
     url?: string;
     // Data default si no hay config de api
     fromData?: any [];
+    defaultShow?: number;
  }
  

@@ -7,6 +7,7 @@ import { MatButton } from '@angular/material';
 import { DialogService } from '../../../service/dialog-service/dialog.service';
 import { LocalStorageService } from '../../../service/local-storage/local-storage.service';
 import { FormService } from '../../../service/dynamic-form/form.service';
+import { CrudDef } from '../../../model/component-def/crud-def';
 
 
 const SEARCH_COMPONENT = 'search-component';
@@ -38,6 +39,7 @@ export class SearchComponent extends AbstractComponent implements OnInit {
   firstSubmitForced: boolean;
   @Input()
   fields: DynamicField<any>[];
+  @Input() crudDef: CrudDef;
   cacheFields: DynamicField<any>[];
   @Output()
   onChangeSearchEntity =  new EventEmitter(true);
@@ -46,7 +48,7 @@ export class SearchComponent extends AbstractComponent implements OnInit {
   @ViewChild('ngformElement')
   ngFormElement: NgForm;
   dialogService: DialogService;
-  generalField: DynamicField<any>;
+  generalField: DynamicField<any>[];
   generalFields: DynamicField<any>[];
   localStorageService: LocalStorageService;
   fieldsOptions: DynamicField<any>[];
@@ -69,9 +71,7 @@ export class SearchComponent extends AbstractComponent implements OnInit {
     this.resetCacheFields();
     this.generalField = this.getGeneralField(this.cacheFields);
     if (this.generalField != undefined) {
-      this.generalFields = [
-        this.generalField
-      ];
+      this.generalFields = this.generalField;
     } else {
       this.generalFields = undefined;
     }
@@ -88,9 +88,10 @@ export class SearchComponent extends AbstractComponent implements OnInit {
     }
     this.entity = this.formService.getEntityFromFields(this.cacheFields);
     if (this.forceFirstSubmit != null && this.forceFirstSubmit && this.firstSubmitForced === undefined) {
-      setTimeout(() => {
-        this.onSubmitSearch();
-      }, 1);
+      if (!this.crudDef.cancelInitSearch || this.userChangeOptions())
+        setTimeout(() => {
+          this.onSubmitSearch();
+        }, 1);
     }
   }
 
@@ -106,19 +107,21 @@ export class SearchComponent extends AbstractComponent implements OnInit {
         }
         return false;
     });
-    let field;
+    let fieldx;
     if (filtered && filtered.length > 0){
-      field = filtered[0];
+      fieldx = filtered[0];
     }else{
-      field = fields[0];
-      if (field != undefined) {
-        if (field.options === undefined){
-          field.options = {};
+      // field = fields[0];
+      fields.forEach(field => {
+        if (field !== undefined) {
+          if (field.options === undefined){
+            field.options = {};
+          }
+          field.options.baseFilter = true;
         }
-        field.options.baseFilter = true;
-      }
+      });
     }
-    return field;
+    return fields;
   }
 
   onChangeEntity(entity){

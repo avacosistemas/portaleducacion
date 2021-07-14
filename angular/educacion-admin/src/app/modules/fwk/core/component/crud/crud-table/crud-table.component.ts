@@ -7,14 +7,12 @@ import { EventEmitter } from '@angular/core';
 
 import { Injector } from '@angular/core';
 import { AbstractComponent } from '../../abstract-component.component';
-import { TableDef } from '../../../model/table-def';
 import { CrudModalComponent } from '../crud-modal/crud-modal.component';
 import { GenericHttpService } from '../../../service/generic-http-service/generic-http.service';
 import { BasicModalComponent } from '../basic-modal/basic-modal.component';
 import { LocalStorageService } from '../../../service/local-storage/local-storage.service';
 import { SpinnerService } from '../../../module/spinner/service/spinner.service';
 import { ACTION_TYPES } from '../../../model/component-def/action-def';
-import { HTTP_METHODS } from '../../../model/ws-def';
 import { FileService } from '../../../service/file/file.service';
 import { CrudDef } from '../../../model/component-def/crud-def';
 import { FormDef } from '../../../model/form-def';
@@ -24,10 +22,9 @@ import { GridDef } from '../../../model/component-def/grid-def';
 import { ExpressionService } from '../../../service/expression-service/expression.service';
 import { FormGridModalComponent } from '../../form-grid-dialog/form-grid.dialog.component';
 import { ActionDefService } from '../../../service/action-def-service/action-def.service';
-import { DisplayCondition } from '../../../model/component-def/display-condition';
 import { DynamicFieldConditionIf } from '../../../model/dynamic-form/dynamic-field-condition-if';
 import { Params } from '@angular/router';
-import { PARAMETERS } from '@angular/core/src/util/decorators';
+import { FilterService } from '../../../service/filter-service/filter.service';
 
 const ACTION_COLUMN = '_action';
 const DELETE_COLUMN = 'delete';
@@ -51,6 +48,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @Output() status =  new EventEmitter(true);
+  @Output() onChangePagination = new EventEmitter();
   genericHttpService: GenericHttpService;
   selectedRowIndex: number;
   _selects: boolean;
@@ -65,8 +63,14 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
   private expressionService: ExpressionService;
   private actionDefService: ActionDefService;
   initOk: boolean;
+  // Paginador
+  public pageSize = 10;
+  public currentPage = 0;
+  public totalSize = 0;
   @Input() selectable: boolean;
-  constructor(private  dialog: MatDialog, public injector: Injector) {
+  constructor(private  dialog: MatDialog,
+              public injector: Injector,
+              private filterService: FilterService) {
     super(injector);
     this.setUpI18n({
       name: 'crud_table',
@@ -96,7 +100,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
     this._existElementsToSelect = false;
     this.statustable = new StatusTable<any>();
     this.paginator._intl.itemsPerPageLabel = this.translate('itemsPerPageLabel');
-
+    
 
     if (this.hasActions()){
       const existActions = this.grid.displayedColumns.find(c => c === ACTION_COLUMN);
@@ -107,7 +111,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
         });
         this.grid.displayedColumns = displayedColumns;
       }
-
+      
     }
 
     if (this.hasGeneralActions()){
@@ -144,7 +148,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
     }
     this.initOk = true;
   }
-
+  
   hasActions(){
     return this.grid.actions || this.grid.deleteAction || this.grid.deleteColumn ? true : false;
   }
@@ -152,14 +156,14 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
     return DELETE_COLUMN;
   }
   getActionsColumnName(){
-    return ACTION_COLUMN;
+    return ACTION_COLUMN; 
   }
 
   hasGeneralActions(){
     if (this.selectable){
       return true;
     }else if (this.grid){
-      const hasDeleteAction = this.grid.deleteAction ||
+      const hasDeleteAction = this.grid.deleteAction || 
                                 this.grid.deleteColumn;
       return hasDeleteAction;
     }
@@ -176,13 +180,13 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
       this.dialogService.showGridModal(action.actionName, entity[action.gridModal.fromArrayField], action.gridModal.gridDef);
     }else if (action.confirm){
         this.actionDefService.submitAction(action, entity, this.crud.i18nCurrentCrudComponent, undefined).subscribe(r => {
-            this.crud.findAll();
+            this.crud.findAll(); 
             this.spinnerGeneralControl.hide();
             this.notificationService.notifySuccess(this.crud.translate('success_message'));
       });
     }else if (action.form){
       action.submitButtonKey = 'Guardar';
-      const data = {
+      const data = { 
                      entity: entity,
                      config: action,
                      fields: action.form,
@@ -201,7 +205,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
       });
     } else if (action.formDef){
       action.submitButtonKey = 'Guardar';
-      const data = {
+      const data = { 
         entity: entity,
         config: action,
         formDef: action.formDef,
@@ -233,9 +237,9 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
           });
       } else if (ACTION_TYPES.redirect === action.actionType){
         var url: String = action.redirect.url;
-
+                
         const queryParams: Params = this.getQueryParams(action.redirect.querystring, entity);
-
+        
         if (queryParams['externalUrl']) {
           url = queryParams['externalUrl'];
           if (!url.startsWith('http://') &&  !url.startsWith('https://')) {
@@ -244,7 +248,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
         }
 
         if (action.redirect.openTab) {
-
+          
           var queryParamsString = "";
 
           if (queryParams && queryParams != undefined) {
@@ -254,8 +258,8 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
             } else {
 
               var first = true;
-
-              Object.getOwnPropertyNames(queryParams).forEach(param => {
+              
+              Object.getOwnPropertyNames(queryParams).forEach(param => { 
                 if (param != 'externalUrl') {
                   if (!first) {
                     queryParamsString = queryParamsString + "&";
@@ -267,7 +271,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
                 }
               });
             }
-
+          
           }
 
           var win = window.open(url + queryParamsString, '_blank');
@@ -279,7 +283,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
       }else{
           this.spinnerGeneralControl.show();
           this.genericHttpService.callWs(action.ws, entity).subscribe(r => {
-            this.crud.findAll();
+            this.crud.findAll(); 
             this.notificationService.notifySuccess(this.crud.translate('success_message'));
           }, e => {}, () => {
             this.spinnerGeneralControl.hide();
@@ -312,7 +316,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
     }else{
       this.processObj(row);
     }
-
+    
   }
   private processObj(obj){
     if (this.onClickRow) {
@@ -320,7 +324,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
     } else if (this.crud) {
       let data;
       const formUpdate = this.getFormUpdate(this.crud.crudDef);
-      const formRead = this.getFormRead(this.crud.crudDef);
+      const formRead = this.getFormRead(this.crud.crudDef); 
       let nameFunc = this.crud.crudDef.name;
       if (nameFunc === undefined){
         nameFunc = '';
@@ -364,14 +368,15 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
               });
             },
           };
-
+          
           const dialogRef = this.dialog.open(FormGridModalComponent, {
             width: 'auto',
             panelClass: 'control-mat-dialog',
             data: data
           });
-
+          
           dialogRef.afterClosed().subscribe(result => {
+            this.crud.findAll();
             console.log('The dialog was closed');
           });
         }
@@ -390,6 +395,7 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
         data: data
       });
       dialogRef.afterClosed().subscribe(result => {
+        this.crud.findAll();
         console.log('The dialog was closed');
       });
     }
@@ -472,7 +478,11 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
         this.status.emit(statustable);
       });
       setTimeout(() => {
-        this._datasource.paginator = this.paginator;
+        if (this.crud.crudDef.serverPagination) {
+          this.totalSize = this.filterService.totalReg;
+        } else {
+          this._datasource.paginator = this.paginator;
+        }
         this._datasource.sort = this.sort;
       }, 1);
 
@@ -554,8 +564,8 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
     }
 
   }
-
-  @Input()
+  
+  @Input() 
   set tabledef(tabledef){
     this.grid = tabledef;
   }
@@ -567,6 +577,12 @@ export class CrudTableComponent extends AbstractComponent implements OnInit {
 
   getI18nName(): string {
     return 'crud_table';
+  }
+
+  onPageFired(event){
+    this.crud.crudDef.pagination.page = event.pageIndex;
+    this.crud.crudDef.pagination.pageSize = event.pageSize;
+    this.onChangePagination.emit();
   }
 }
 

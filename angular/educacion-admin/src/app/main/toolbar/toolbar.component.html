@@ -5,7 +5,20 @@
             <button mat-button style="display:none" class="toggle-button-navbar mat-icon-button"  (click)="toggleSidebarOpened('navbar')" id="hide_button_nav_left">
                     <mat-icon>{{translate('menu_text')}}</mat-icon>
             </button>
-            <img class="logo-img" src="">		
+            <img class="logo-img" src="">	
+
+            <!-- APP TITLE -->
+            <div class="content-logo">
+                
+                <span class="logo-text h1">
+                    {{translate('page_title')}}{{getParentTitle()}}
+                </span>
+            </div>
+
+            <div style="display: inherit;">
+                <back-button *ngIf='crudDef?.backButton'></back-button>
+            </div>
+
             <div id="myDropdownOnline" class="dropdown-content">
                 <div class="dropdown-content_1">
                     <div class="dropdown-content_2"></div>
@@ -35,7 +48,7 @@
                         </div>
                     
                     <div class="user_menu  user_menu_responsive">
-                        <div (click)="goPasswordUpdate()"><span class="user_menu_icon icon-user_newpass"></span><span>Actualizar Contraseña</span></div>
+                            <div (click)="goPasswordUpdate()"><span class="user_menu_icon icon-user_newpass"></span><span>Actualizar Contraseña</span></div>
                             <div (click)="onLogout()" class="user_off" name="logout-button"><span name="logout-button" class="user_menu_icon icon-user_off"></span><span name="logout-button" style="padding:0px">{{translate('menu_user_item_5')}}</span></div>
                     </div>
                 </div>

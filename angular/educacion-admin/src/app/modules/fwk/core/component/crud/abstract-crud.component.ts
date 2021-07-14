@@ -246,8 +246,8 @@ export  abstract class AbstractCrudComponent<E extends Entity, Service extends C
       let page: {page: number, pageSize: number};
       if (this.crudDef.filterInMemory == false && this.crudDef.serverPagination == true) {
         page = {
-          page: 1,
-          pageSize: 10
+          page:  this.crudDef.pagination.page,
+          pageSize: this.crudDef.pagination.pageSize
         };
       }
       this.spinnerControl.show();
@@ -350,6 +350,9 @@ export  abstract class AbstractCrudComponent<E extends Entity, Service extends C
 
   filterSearchEntity(filterEntity){
     this.filterEntity = filterEntity;
+    if (this.crudDef.pagination) {
+      this.crudDef.pagination.page = 0;
+    }
     this.findAll();
   }
 

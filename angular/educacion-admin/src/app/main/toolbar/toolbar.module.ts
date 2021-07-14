@@ -6,10 +6,12 @@ import { FuseSharedModule } from '@fuse/shared.module';
 
 import { FuseToolbarComponent } from 'app/main/toolbar/toolbar.component';
 import { FuseSearchBarModule, FuseShortcutsModule } from '@fuse/components';
+import { BackButtonComponent } from 'app/modules/fwk/core/component/back-button/backbutton.component';
 
 @NgModule({
     declarations: [
-        FuseToolbarComponent
+        FuseToolbarComponent,
+        BackButtonComponent
     ],
     imports     : [
         RouterModule,
@@ -22,11 +24,12 @@ import { FuseSearchBarModule, FuseShortcutsModule } from '@fuse/components';
 
         FuseSharedModule,
         FuseSearchBarModule,
-        FuseShortcutsModule
+        FuseShortcutsModule,
     ],
     exports     : [
         FuseToolbarComponent
-    ]
+    ],
+    entryComponents: [BackButtonComponent]
 })
 export class FuseToolbarModule
 {

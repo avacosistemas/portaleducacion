@@ -15,7 +15,7 @@
                             [crud]="this"
                             [urlDelete]="crudDef.ws.url"
                             (status)="statusChanged($event)"
-                            >
+                            (onChangePagination)='findAll()'>
       </app-crud-table>
     </div>
   </mat-card-content>

@@ -112,7 +112,7 @@ export class HttpService extends BaseService {
     });
     return observable;
   }
-  
+
   httpDeleteTernaria(url): Observable<any> {
     const observable = new Observable((observer) => {
     this.http.delete(url, this.httpOptions)
@@ -156,6 +156,7 @@ export class HttpService extends BaseService {
         if (response.ok === false){
           this.subHandleError(observer, response);
         } else if (data) {
+            this.handlePaginator(response);
             observer.next(data);
         } else {
             observer.next(response);
@@ -206,5 +207,11 @@ export class HttpService extends BaseService {
         url = url + '?';
       }
       return url.concat(param).concat('=').concat(value);
+  }
+
+  handlePaginator(response: any) {
+    if (response.page) {
+      this.filterService.totalReg = response.page.totalReg;
+    }
   }
 }

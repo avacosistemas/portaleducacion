@@ -6,8 +6,10 @@ export const PASSWORD: any = 'password';
 export const HIDDEN: any = 'hidden';
 export const NUMBER = 'number';
 export const AUTOCOMPLETE: any = 'autocomplete';
+export const AUTOCOMPLETE_DESPLEGABLE: any = 'autocomplete-desplegable';
 export const SELECT: any = 'select';
 export const DATEPICKER: any = 'datepicker';
+export const DATETIMEPICKER: any = 'datetimepicker';
 export const CHECKBOX: any = 'checkbox';
 export const TEXTAREA: any = 'textarea';
 export const PICKLIST: any = 'pick-list';
@@ -29,8 +31,10 @@ export const CONTROL_TYPE = {
   number : NUMBER,
   float : FLOAT,
   autocomplete  : AUTOCOMPLETE,
+  autocomplete_desplegable: AUTOCOMPLETE_DESPLEGABLE,
   select : SELECT,
   datepicker : DATEPICKER,
+  datetimepicker : DATETIMEPICKER,
   checkbox : CHECKBOX,
   textarea : TEXTAREA,
   picklist : PICKLIST,
@@ -53,8 +57,10 @@ export enum ControlTypeEnum {
   number = 'NUMBER',
   float = 'FLOAT',
   autocomplete  = 'AUTOCOMPLETE',
+  autocomplete_desplegable  = 'AUTOCOMPLETE-DESPLEGABLE',
   select = 'SELECT',
   datepicker = 'DATEPICKER',
+  datetimepicker = 'DATETIMEPICKER',
   checkbox = 'CHECKBOX',
   textarea = 'TEXTAREA',
   picklist = 'PICKLIST',
@@ -87,6 +93,7 @@ export class DynamicField<T>{
   required?: boolean;
   disabled?: boolean;
   options?: any;
+  apiOptions?: any;
   maxLength?: any;
   minLength?: any;
   minValue?: any;
@@ -122,7 +129,6 @@ export class DynamicField<T>{
   }
 
 }
-
 export class Dependencies {
   stopLoad?: boolean;
   dependencyKey?: string;

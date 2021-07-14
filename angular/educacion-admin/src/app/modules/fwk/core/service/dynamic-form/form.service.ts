@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { DynamicField, HIDDEN, AUTOCOMPLETE, NUMBER, TEXTBOX, DATEPICKER, SELECT, EMAIL, CONTROL_TYPE, ControlTypeEnum } from '../../model/dynamic-form/dynamic-field';
-
-import { AbstractControl } from '@angular/forms/src/model';
-import { ValidatorFn } from '@angular/forms/src/directives/validators';
-import { String, StringBuilder } from 'typescript-string-operations';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {MatDatepicker} from '@angular/material/datepicker';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DynamicField, HIDDEN, AUTOCOMPLETE, NUMBER, TEXTBOX, DATEPICKER, SELECT, EMAIL, CONTROL_TYPE, AUTOCOMPLETE_DESPLEGABLE } from '../../model/dynamic-form/dynamic-field';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -17,13 +11,11 @@ import 'rxjs/add/operator/switchMap';
 // the `default as` syntax.
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
-import {defaultFormat as _rollupMoment, Moment} from 'moment';
-import { Observer } from 'rxjs/Observer';
+import {defaultFormat as _rollupMoment} from 'moment';
 import { Observable } from 'rxjs/Observable';
 import { I18nService } from '../i18n-service/i18n.service';
 import { I18n } from '../../model/i18n';
-import { environment } from 'environments/environment';
-import { FormValidatorService, MY_FORMATS } from './form.validator.service';
+import { FormValidatorService } from './form.validator.service';
 import { DynamicFieldBehavior } from '../../model/dynamic-form/dynamic-field-behavior';
 import { WsDef, HTTP_METHODS } from '../../model/ws-def';
 import { GenericHttpService } from '../generic-http-service/generic-http.service';
@@ -111,7 +103,7 @@ export class FormService {
         if (action.actionType === 'notification'){
           if (action.input.messageKey){
             action.input.message = i18n.translate(action.input.messageKey);
-          }
+          } 
           if (action.input.modalNameKey){
             action.input.modalName = i18n.translate(action.input.modalNameKey);
           }
@@ -125,7 +117,7 @@ export class FormService {
         if (action.gridModal){
           this.setUpGridFromI18n(i18n, action.gridModal.gridDef);
         }
-
+        
         if (action.confirm && typeof action.confirm === 'object'){
           if (action.confirm.messageKey) {
             action.confirm.message = i18n.translate(action.confirm.messageKey);
@@ -201,7 +193,7 @@ export class FormService {
         }
         this.setUpPickListTextFromI18n(i18n, element);
         this.setUpDisclaimerTextFromI18n(i18n, element);
-      });
+      }); 
     }
   }
   setUpDisclaimerTextFromI18n(i18n: I18n, element: any): any {
@@ -260,11 +252,11 @@ export class FormService {
       if (existField === undefined || !existField){
         console.warn('el tipo de campo -> ' + field.controlType + ' no se encuentra implementado en el fwk');
         return false;
-      }
+      }  
       return true;
     });
     fields.forEach(field => {
-
+        
         if (field.options === undefined) {
           field.options = {};
         }
@@ -275,14 +267,14 @@ export class FormService {
           // this.disabledInputDatePicker(field);
         }
 
-        if (field.controlType === 'autocomplete' && field.options.fromData === undefined) {
+        if ((field.controlType === 'autocomplete' || field.controlType === 'autocomplete-desplegable') && field.options.fromData === undefined) {
           field.options.fromData  = [];
         }
 
         if (field.controlType === 'checkbox' && (field.value === undefined || field.value === null)) {
           field.value = false;
         }
-
+      
         const value = {
           value: field.value !== undefined ? field.value : '',
           disabled: field.disabled
@@ -303,11 +295,12 @@ export class FormService {
           });
         }
 
-        const validators = this.formValidatorService.getValidators(field);
+       this.setUpWsDef(field, form);
+       const validators = this.formValidatorService.getValidators(field);
         form.addControl(field.key, validators.length > 0 ? new FormControl(value, validators)
         : new FormControl(value));
 
-       if ((field.dependencies && !field.dependencies.stopLoad) || !field.dependencies) {
+        if ((field.dependencies && !field.dependencies.stopLoad) || !field.dependencies) {
           this.setUpWsDef(field, form);
        } else if (field.dependencies && field.dependencies.stopLoad &&
                   form.controls[field.dependencies.parentDependencyKey] &&
@@ -356,14 +349,15 @@ export class FormService {
     }
   }
 
-  public setUpWsDef(field, form: FormGroup){
-    if ((field.controlType === CONTROL_TYPE.select ||
-          field.controlType === CONTROL_TYPE.autocomplete ||
+  private setUpWsDef(field, form: FormGroup){
+    if ((field.controlType === CONTROL_TYPE.select || 
+          field.controlType === CONTROL_TYPE.autocomplete || 
+          field.controlType === CONTROL_TYPE.autocomplete_desplegable || 
           field.controlType === CONTROL_TYPE.picklist) &&
             field.options.fromWs) {
       const fromWs: WsDef = field.options.fromWs;
       fromWs.method = HTTP_METHODS.get;
-      if (fromWs.querystring && fromWs.url.indexOf('?') < 0) {
+      if (fromWs.querystring) {
         let querystring = '';
         let andString = '';
         Object.keys(fromWs.querystring).forEach(key => {
@@ -372,7 +366,7 @@ export class FormService {
             andString = '&';
           }
         });
-        fromWs.url += querystring === '' ? '' : '?' +  querystring;
+        fromWs.url += querystring === '' ? '' : querystring;
       }
       this.genericHttpService.callWs(fromWs).subscribe(r => {
         field.options.fromData = r;
@@ -445,6 +439,7 @@ export class FormService {
       setValues: function(observable: Observable<any>) { service.setValues(observable, field); },
       changeToRequired: function() { service.changeToRequired(form, field); },
       changeToAutoComplete : function () { service.changeFieldToAutocomplete(form, field); },
+      changeToAutoCompleteDesplegable : function () { service.changeFieldToAutocompleteDesplegable(form, field); },
       changeFieldToSelect : function () {service.changeFieldToSelect(form, field); },
       changeFieldToNumber: function () {service.changeFieldToNumber(form, field); },
       changeFieldToTextbox: function () {service.changeFieldToTextbox (form, field); },
@@ -469,9 +464,9 @@ export class FormService {
           entity[element.key] = false;
         }
         if (element.controlType === 'datepicker' && entity[element.key] && entity[element.key].format !== undefined) {
-
+          
         }
-        if (element.controlType === 'number' &&
+        if (element.controlType === 'number' && 
             (entity[element.key] !== '' && entity[element.key] !== undefined && entity[element.key] !== null)){
           entity[element.key] = Number(entity[element.key]);
           element.value = Number(element.value);
@@ -508,10 +503,10 @@ export class FormService {
         }
         if (element.controlType === 'float' && element.options) {
             const delim = element.options.delim ? element.options.delim : ',';
-            const outputDelim = element.options.outputFormatDelim ? element.options.outputFormatDelim : '.';
+            const outputDelim = element.options.outputFormatDelim ? element.options.outputFormatDelim : '.'; 
             entity[element.key] =  entity[element.key].replace(delim, outputDelim);
         }
-        if (element.controlType === 'number' &&
+        if (element.controlType === 'number' && 
             (entity[element.key] !== '' && entity[element.key] !== undefined && entity[element.key] !== null)){
           entity[element.key] = Number(entity[element.key]);
           element.value = Number(element.value);
@@ -602,7 +597,7 @@ export class FormService {
 
     });
   }
-
+  
   // Customs Validators
   private hideField(form: FormGroup, field) {
     if (field.controlType !== HIDDEN) {
@@ -634,7 +629,7 @@ export class FormService {
       this.updateValidators(form, field);
     }
   }
-
+  
   private changeRemoveLengths(form, field){
     if (field.length || field.minLength || field.maxLength){
       field.length = undefined;
@@ -682,8 +677,8 @@ export class FormService {
           (def.validation === undefined && field.validation !== undefined)){
       field.validation = def.validation;
     }else if (def.validation !== undefined &&  field.validation !== undefined) {
-      if ((def.validation.regexKey !== field.validation.regexKey) ||
-            (def.validation.regex !== field.validation.regex) ||
+      if ((def.validation.regexKey !== field.validation.regexKey) || 
+            (def.validation.regex !== field.validation.regex) || 
               (def.validation.errorMessageKey !== field.validation.errorMessageKey)){
         field.validation = def.validation;
         update = true;
@@ -706,7 +701,7 @@ export class FormService {
       this.updateValidators(form, field);
     }
   }
-
+  
   private updateValidators(form, field){
     form.controls[field.key].setValidators(this.formValidatorService.getValidators(field));
     form.controls[field.key].updateValueAndValidity();
@@ -743,6 +738,15 @@ export class FormService {
       this.enabled(form, field);
       this.setUndefinedField(form, field);
       field.controlType = AUTOCOMPLETE;
+    }
+    return field;
+  }
+
+  private changeFieldToAutocompleteDesplegable(form, field) {
+    if (field.controlType !== AUTOCOMPLETE_DESPLEGABLE) {
+      this.enabled(form, field);
+      this.setUndefinedField(form, field);
+      field.controlType = AUTOCOMPLETE_DESPLEGABLE;
     }
     return field;
   }
@@ -794,7 +798,7 @@ export class FormService {
     }
     return field;
   }
-
+  
   setUpBehaviorTextFromI18n(i18n: I18n, fieldBehavior: DynamicFieldBehavior[]): any {
     const repeat = (list, i18nP: I18n) => {
       list.forEach(r => {
@@ -841,5 +845,5 @@ export class FormService {
     form.controls[field.key].enable();
   }
 
-
+  
 }

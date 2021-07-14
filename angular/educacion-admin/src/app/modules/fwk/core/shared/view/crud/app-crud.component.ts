@@ -39,4 +39,8 @@ export class AppCrudComponent extends CrudComponent implements OnInit, OnDestroy
       return " - " + this.filterEntity['parentTitle'];
     } return "";
   }
+
+  goToLink(url: string){
+    window.open(url, "_blank");
+  }
 }

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { FormGroup } from '@angular/forms';
 import { ApiAutocompleteConfiguration } from '../../component/autocomplete/autocomplete.interface';
 import { GenericHttpService } from '../../service/generic-http-service/generic-http.service';
+import { take } from 'rxjs/operators';
 
 @Injectable()
 export class AutocompleteService {
@@ -21,10 +22,15 @@ export class AutocompleteService {
                 if (index > 0){
                   url += '&';
                 }
-                url += `${prop}=${filter[prop]}`;
+                if (filter[prop]) {
+                  url += `${prop}=${filter[prop]}`;
+                } else {
+                  url += `${prop}=`;
+                }
               });
             }
-            this.httpService.basicGet(url, undefined, undefined, undefined).subscribe(r => {
+            this.httpService.basicGet(url, undefined, undefined, undefined)
+            .subscribe(r => {
               obs.next(r);
             });
           } else {

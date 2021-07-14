@@ -11,7 +11,7 @@
       <mat-error *ngIf="formGroup.get(name).errors?.selectOrCleanField">{{config.options.selectElementOrCleanField}}</mat-error>
   </mat-form-field>
   <mat-autocomplete  
-    (optionSelected)="onChangeSelect($event, config)" 
+      (optionSelected)="onChangeSelect($event, config)" 
       #auto="matAutocomplete" 
         md-select-on-match='true' 
           [displayWith]="displayWith()">

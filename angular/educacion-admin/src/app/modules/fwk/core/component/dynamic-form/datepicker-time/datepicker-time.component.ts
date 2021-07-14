@@ -3,8 +3,7 @@ import { DynamicFieldFormComponent } from '../dynamic-field-form/dynamic-field-f
 
 @Component({
   selector: 'app-datepicker-time',
-  templateUrl: './datepicker-time.component.html',
-  styleUrls: ['./datepicker-time.component.scss'],
+  templateUrl: './datepicker-time.component.html'
 })
 export class DatepickerTimeComponent extends DynamicFieldFormComponent implements OnInit  {
 
@@ -24,7 +23,7 @@ export class DatepickerTimeComponent extends DynamicFieldFormComponent implement
     showNearMonthDays: true,
     showWeekNumbers: false,
     enableMonthSelector: true,
-    format: 'YYYY-MM-DD HH:mm',
+    format: 'DD/MM/YYYY HH:mm',
     yearFormat: 'YYYY',
     showGoToCurrent: true,
     dayBtnFormat: 'DD',
@@ -33,7 +32,7 @@ export class DatepickerTimeComponent extends DynamicFieldFormComponent implement
     hours24Format: 'HH',
     meridiemFormat: 'A',
     minutesFormat: 'mm',
-    minutesInterval: 30,
+    minutesInterval: 1,
     secondsFormat: 'ss',
     secondsInterval: 1,
     showSeconds: false,
@@ -42,13 +41,19 @@ export class DatepickerTimeComponent extends DynamicFieldFormComponent implement
     multipleYearsNavigateBy: 10,
     showMultipleYearsNavigation: true,
     locale: 'es-AR',
-    // min:'2017-08-29 15:50',
-    // minTime:'2017-08-29 15:50'
   };
 
   ngOnInit() {
-    if (!this.parentForm.controls[this.field.key].value) {
-      this.parentForm.controls[this.field.key].patchValue(new Date().toJSON().split('T')[0] + ' 00:00');
+    // if (this.parentForm && this.parentForm.controls[this.field.key] && !this.parentForm.controls[this.field.key].value) {
+    //   const date = new Date();
+    //   const dateFormat = ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear();
+    //   this.parentForm.controls[this.field.key].patchValue(dateFormat + ' 00:00:00');
+    // }
+  }
+
+  remove(){
+    if (this.parentForm.value) {
+      this.formService.patchField(this.field.key,  undefined, this.parentForm);
     }
   }
 }

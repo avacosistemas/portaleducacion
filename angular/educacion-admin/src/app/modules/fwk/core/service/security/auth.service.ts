@@ -24,16 +24,12 @@ export class AuthService extends HttpService {
 
   logout() {
     this.spinnerService.getControlGlobalSpinner().show();
-    this.localStorageService.remove(USER_DATA);
+    this.genericHttpService.basicPost(environment.URL_LOGOUT_API, {}).subscribe(() => {
+      this.localStorageService.remove(USER_DATA);
       this.localStorageService.cleanUserSession();
       window.location.href = environment.URL_LOGIN;
       this.spinnerService.getControlGlobalSpinner().hide();
-    // this.genericHttpService.basicPost(environment.URL_LOGOUT_API, {}).subscribe(() => {
-    //   this.localStorageService.remove(USER_DATA);
-    //   this.localStorageService.cleanUserSession();
-    //   window.location.href = environment.URL_LOGIN;
-    //   this.spinnerService.getControlGlobalSpinner().hide();
-    // });
+    });
   }
 
   isTokenExpired(): Observable<any> {
@@ -82,12 +78,11 @@ export class AuthService extends HttpService {
   }
 
   updatePassword(username, currentPassword, newPassword) {
-      const upass = new UpdatePassword();
-      upass.username = username;
-      upass.password = currentPassword;
-      upass.newPassword = newPassword;
-      return this.http.post(environment.PASSWORD_UPDATE_API_URL, JSON.stringify(upass), this.httpOptions);
-  }
-
+    const upass = new UpdatePassword();
+    upass.username = username;
+    upass.password = currentPassword;
+    upass.newPassword = newPassword;
+    return this.http.post(environment.PASSWORD_UPDATE_API_URL, JSON.stringify(upass), this.httpOptions);
+}
 }
 

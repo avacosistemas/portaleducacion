@@ -1366,3 +1366,19 @@ cursor: pointer;
 	height: 100%;
 	background-color: rgba(0,0,0,0.1);
 }
+.content-logo {
+    display: inline;
+    padding: 9px 0px 9px 12px;
+    position: fixed;
+    width: 100%;
+    .logo-text {
+        color: black;
+        // margin: 2%;
+        font-weight: bold;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 600px;
+        display: inherit;
+    }
+}
