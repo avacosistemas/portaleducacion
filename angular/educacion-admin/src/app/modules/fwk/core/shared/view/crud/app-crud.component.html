@@ -1,29 +1,32 @@
 <div id="products" class="page-layout carded fullwidth inner-scroll component-{{name}}">
 
     <!-- TOP BACKGROUND -->
-    <div class="top-bg mat-accent-bg"></div>
+    <div class="top-bg mat-accent-bg">
+    </div>
     <!-- / TOP BACKGROUND -->
 
     <!-- CENTER -->
-    <div class="center">
-      <!-- HEADER -->
-        <div class="header mat-accent-bg"
-              fxLayout="column" fxLayoutAlign="center center"
-              fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
 
+    <!-- HEADER -->
+    <div class="center">
+        <div class="2header mat-accent-bg"
+                    fxLayout="column" fxLayoutAlign="center center"
+                    fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="baseline">
             <!-- APP TITLE -->
-            <div class="logo my-12 m-sm-0"
+            <!-- <div class="logo my-12 m-sm-0"
                   fxLayout="row" fxLayoutAlign="start center">
-                <back-button *ngIf='crudDef && crudDef.backButton' style= "margin-right: 10px;"></back-button>
-                
-                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    {{translate('page_title')}}{{getParentTitle()}}
-                </span>
-            </div>
-            <app-search *ngIf='crudDef.forms.filter' [fields]='crudDef.forms.filter' (onChangeSearchEntity)='filterSearchEntity($event)' [forceFirstSubmit]='true'></app-search>
-            <a *ngIf="crudDef.openLink" mat-raised-button class="mat-white-bg my-12 mt-sm-0" target="_blank" [href]="crudDef.openLink">Panel Mailer</a>
-            <div class="header-buttons">
+                <back-button *ngIf='crudDef.backButton' style= "margin-right: 10px;"></back-button>
+            </div> -->
+            <app-search *ngIf='crudDef.forms.filter' [fields]='crudDef.forms.filter' (onChangeSearchEntity)='filterSearchEntity($event)' [forceFirstSubmit]='true' [crudDef]="crudDef"></app-search>
+    
+            <div class="header-buttons content-buttons">
                 <!-- / APP TITLE -->
+                <button mat-icon-button
+                        *ngIf="crudDef.openLink"
+                        (click)="goToLink(crudDef.openLink)"
+                        class="icon-button_style- mat-mini-fab mat-accent ng-tns-c20-4 ng-star-inserted btn-add" title='Panel Mailer'>
+                    <mat-icon aria-label="icon">mail</mat-icon>  
+                </button>
                 
                 <button 
                     *ngIf="crudDef.exportCsv"
@@ -32,12 +35,12 @@
                     (click)="exportCsv()">
                     <mat-icon aria-label="icon">print</mat-icon>
                 </button>
-                
-                <button mat-raised-button
+
+                <button mat-icon-button
                         *ngIf="showAddButton()"
                         (click)="openAddDialog()"
-                        class="mat-white-bg my-12 mt-sm-0">
-                    <span>{{translate('add_button')}}</span>
+                        class="icon-button_style- mat-mini-fab mat-accent ng-tns-c20-4 ng-star-inserted btn-add" title='Agregar'>
+                    <mat-icon aria-label="icon">add</mat-icon>  
                 </button>
             </div>
 
@@ -54,7 +57,7 @@
                                 [selectable]="crudDef.crudActions"
                                 [urlDelete]="crudDef.ws.url"
                                 (status)="statusChanged($event)"
-                                >
+                                (onChangePagination)='findAll()'>
                 </app-crud-table>
         </div>
             <!-- / CONTENT CARD -->

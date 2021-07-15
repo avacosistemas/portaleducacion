@@ -46,7 +46,8 @@ export const environment = {
     URL_PROFILE : 'perfiles',
     URL_ROLE : 'roles',
     URL_USER : 'usuarios',
-    URL_PASSWORD_UPDATE: 'password'
+    URL_PASSWORD_UPDATE: 'password',
+    AUTOCOMPLETE_WAITING_TIME: 700
 
 };
 

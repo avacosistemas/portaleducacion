@@ -50,7 +50,8 @@ export const environment = {
     URL_USER : 'usuarios',
     URL_PASSWORD_UPDATE: 'password',
     URL_SOLICITUDES: 'solicitudAula',
-    URL_SOLICITUDES_PENDIENTES: 'solicitudAulaFinalizada'
+    URL_SOLICITUDES_PENDIENTES: 'solicitudAulaFinalizada',
+    AUTOCOMPLETE_WAITING_TIME: 700
 
 };
 
